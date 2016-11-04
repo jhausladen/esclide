@@ -1,0 +1,342 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"arm_fft_bin_example_f32.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.bss
+  18              		.align	2
+  19              	testOutput:
+  20 0000 00000000 		.space	4096
+  20      00000000 
+  20      00000000 
+  20      00000000 
+  20      00000000 
+  21              		.global	fftSize
+  22              		.data
+  23              		.align	2
+  26              	fftSize:
+  27 0000 00040000 		.word	1024
+  28              		.global	ifftFlag
+  29              		.bss
+  30              		.align	2
+  33              	ifftFlag:
+  34 1000 00000000 		.space	4
+  35              		.global	doBitReverse
+  36              		.data
+  37              		.align	2
+  40              	doBitReverse:
+  41 0004 01000000 		.word	1
+  42              		.global	refIndex
+  43              		.align	2
+  46              	refIndex:
+  47 0008 D5000000 		.word	213
+  48              		.global	testIndex
+  49              		.bss
+  50              		.align	2
+  53              	testIndex:
+  54 1004 00000000 		.space	4
+  55              		.section	.text.main,"ax",%progbits
+  56              		.align	2
+  57              		.global	main
+  58              		.code	16
+  59              		.thumb_func
+  61              	main:
+  62              	.LFB81:
+  63              		.file 1 "../arm_fft_bin_example_f32.c"
+   1:../arm_fft_bin_example_f32.c **** /* ---------------------------------------------------------------------- 
+   2:../arm_fft_bin_example_f32.c **** * Copyright (C) 2010 ARM Limited. All rights reserved.   
+   3:../arm_fft_bin_example_f32.c **** *  
+   4:../arm_fft_bin_example_f32.c **** * $Date:        29. November 2010  
+   5:../arm_fft_bin_example_f32.c **** * $Revision: 	V1.0.3  
+   6:../arm_fft_bin_example_f32.c **** *  
+   7:../arm_fft_bin_example_f32.c **** * Project: 	    CMSIS DSP Library  
+   8:../arm_fft_bin_example_f32.c **** * Title:	    arm_fft_bin_example_f32.c		  
+   9:../arm_fft_bin_example_f32.c **** *  
+  10:../arm_fft_bin_example_f32.c **** * Description:	Example code demonstrating calculation of Max energy bin of  
+  11:../arm_fft_bin_example_f32.c **** *				frequency domain of input signal. 
+  12:../arm_fft_bin_example_f32.c **** * 
+  13:../arm_fft_bin_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3  
+  14:../arm_fft_bin_example_f32.c **** *
+  15:../arm_fft_bin_example_f32.c **** *
+  16:../arm_fft_bin_example_f32.c **** * Version 1.0.3 2010/11/29 
+  17:../arm_fft_bin_example_f32.c **** *    Re-organized the CMSIS folders and updated documentation. 
+  18:../arm_fft_bin_example_f32.c **** * 
+  19:../arm_fft_bin_example_f32.c **** * Version 1.0.1 2010/10/05 KK 
+  20:../arm_fft_bin_example_f32.c **** *    Production release and review comments incorporated.  
+  21:../arm_fft_bin_example_f32.c **** *
+  22:../arm_fft_bin_example_f32.c **** * Version 1.0.0 2010/09/20 KK
+  23:../arm_fft_bin_example_f32.c **** *    Production release and review comments incorporated.
+  24:../arm_fft_bin_example_f32.c **** * ------------------------------------------------------------------- */ 
+  25:../arm_fft_bin_example_f32.c ****  
+  26:../arm_fft_bin_example_f32.c **** /** 
+  27:../arm_fft_bin_example_f32.c ****  * @ingroup groupExamples 
+  28:../arm_fft_bin_example_f32.c ****  */ 
+  29:../arm_fft_bin_example_f32.c ****  
+  30:../arm_fft_bin_example_f32.c **** /**    
+  31:../arm_fft_bin_example_f32.c ****  * @defgroup FrequencyBin Frequency Bin Example    
+  32:../arm_fft_bin_example_f32.c ****  * 
+  33:../arm_fft_bin_example_f32.c ****  * \par Description
+  34:../arm_fft_bin_example_f32.c ****  * \par
+  35:../arm_fft_bin_example_f32.c ****  * Demonstrates the calculation of the maximum energy bin in the frequency 
+  36:../arm_fft_bin_example_f32.c ****  * domain of the input signal with the use of Complex FFT, Complex 
+  37:../arm_fft_bin_example_f32.c ****  * Magnitude, and Maximum functions. 
+  38:../arm_fft_bin_example_f32.c ****  * 
+  39:../arm_fft_bin_example_f32.c ****  * \par Algorithm:
+  40:../arm_fft_bin_example_f32.c ****  * \par
+  41:../arm_fft_bin_example_f32.c ****  * The input test signal contains a 10 kHz signal with uniformly distributed white noise.  
+  42:../arm_fft_bin_example_f32.c ****  * Calculating the FFT of the input signal will give us the maximum energy of the 
+  43:../arm_fft_bin_example_f32.c ****  * bin corresponding to the input frequency of 10 kHz.  
+  44:../arm_fft_bin_example_f32.c ****  * 
+  45:../arm_fft_bin_example_f32.c ****  * \par Block Diagram:
+  46:../arm_fft_bin_example_f32.c ****  * \image html FFTBin.gif "Block Diagram"
+  47:../arm_fft_bin_example_f32.c ****  * \par
+  48:../arm_fft_bin_example_f32.c ****  * The figure below shows the time domain signal of 10 kHz signal with 
+  49:../arm_fft_bin_example_f32.c ****  * uniformly distributed white noise, and the next figure shows the input
+  50:../arm_fft_bin_example_f32.c ****  * in the frequency domain. The bin with maximum energy corresponds to 10 kHz signal. 
+  51:../arm_fft_bin_example_f32.c ****  * \par
+  52:../arm_fft_bin_example_f32.c ****  * \image html FFTBinInput.gif "Input signal in Time domain" 
+  53:../arm_fft_bin_example_f32.c ****  * \image html FFTBinOutput.gif "Input signal in Frequency domain"
+  54:../arm_fft_bin_example_f32.c ****  *
+  55:../arm_fft_bin_example_f32.c ****  * \par Variables Description:
+  56:../arm_fft_bin_example_f32.c ****  * \par
+  57:../arm_fft_bin_example_f32.c ****  * \li \c testInput_f32_10khz points to the input data
+  58:../arm_fft_bin_example_f32.c ****  * \li \c testOutput points to the output data
+  59:../arm_fft_bin_example_f32.c ****  * \li \c fftSize length of FFT
+  60:../arm_fft_bin_example_f32.c ****  * \li \c ifftFlag flag for the selection of CFFT/CIFFT
+  61:../arm_fft_bin_example_f32.c ****  * \li \c doBitReverse Flag for selection of normal order or bit reversed order
+  62:../arm_fft_bin_example_f32.c ****  * \li \c refIndex reference index value at which maximum energy of bin ocuurs
+  63:../arm_fft_bin_example_f32.c ****  * \li \c testIndex calculated index value at which maximum energy of bin ocuurs
+  64:../arm_fft_bin_example_f32.c ****  * 
+  65:../arm_fft_bin_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  66:../arm_fft_bin_example_f32.c ****  * \par
+  67:../arm_fft_bin_example_f32.c ****  * - arm_cfft_radix4_init_f32()
+  68:../arm_fft_bin_example_f32.c ****  * - arm_cfft_radix4_f32()
+  69:../arm_fft_bin_example_f32.c ****  * - arm_cmplx_mag_f32()
+  70:../arm_fft_bin_example_f32.c ****  * - arm_max_f32()
+  71:../arm_fft_bin_example_f32.c ****  *
+  72:../arm_fft_bin_example_f32.c ****  * <b> Refer  </b> 
+  73:../arm_fft_bin_example_f32.c ****  * \link arm_fft_bin_example_f32.c \endlink
+  74:../arm_fft_bin_example_f32.c ****  * 
+  75:../arm_fft_bin_example_f32.c ****  */ 
+  76:../arm_fft_bin_example_f32.c ****  
+  77:../arm_fft_bin_example_f32.c ****  
+  78:../arm_fft_bin_example_f32.c **** /** \example arm_fft_bin_example_f32.c 
+  79:../arm_fft_bin_example_f32.c ****   */  
+  80:../arm_fft_bin_example_f32.c **** 
+  81:../arm_fft_bin_example_f32.c ****      
+  82:../arm_fft_bin_example_f32.c **** #include "arm_math.h" 
+  83:../arm_fft_bin_example_f32.c ****  
+  84:../arm_fft_bin_example_f32.c **** #define TEST_LENGTH_SAMPLES 2048 
+  85:../arm_fft_bin_example_f32.c ****  
+  86:../arm_fft_bin_example_f32.c **** /* ------------------------------------------------------------------- 
+  87:../arm_fft_bin_example_f32.c **** * External Input and Output buffer Declarations for FFT Bin Example 
+  88:../arm_fft_bin_example_f32.c **** * ------------------------------------------------------------------- */ 
+  89:../arm_fft_bin_example_f32.c **** extern float32_t testInput_f32_10khz[TEST_LENGTH_SAMPLES]; 
+  90:../arm_fft_bin_example_f32.c **** static float32_t testOutput[TEST_LENGTH_SAMPLES/2]; 
+  91:../arm_fft_bin_example_f32.c ****  
+  92:../arm_fft_bin_example_f32.c **** /* ------------------------------------------------------------------ 
+  93:../arm_fft_bin_example_f32.c **** * Global variables for FFT Bin Example 
+  94:../arm_fft_bin_example_f32.c **** * ------------------------------------------------------------------- */ 
+  95:../arm_fft_bin_example_f32.c **** uint32_t fftSize = 1024; 
+  96:../arm_fft_bin_example_f32.c **** uint32_t ifftFlag = 0; 
+  97:../arm_fft_bin_example_f32.c **** uint32_t doBitReverse = 1; 
+  98:../arm_fft_bin_example_f32.c ****  
+  99:../arm_fft_bin_example_f32.c **** /* Reference index at which max energy of bin ocuurs */ 
+ 100:../arm_fft_bin_example_f32.c **** uint32_t refIndex = 213, testIndex = 0; 
+ 101:../arm_fft_bin_example_f32.c ****  
+ 102:../arm_fft_bin_example_f32.c **** /* ---------------------------------------------------------------------- 
+ 103:../arm_fft_bin_example_f32.c **** * Max magnitude FFT Bin test 
+ 104:../arm_fft_bin_example_f32.c **** * ------------------------------------------------------------------- */ 
+ 105:../arm_fft_bin_example_f32.c ****  
+ 106:../arm_fft_bin_example_f32.c **** int main(void)
+ 107:../arm_fft_bin_example_f32.c **** { 
+  64              		.loc 1 107 0
+  65              		.cfi_startproc
+  66 0000 90B5     		push	{r4, r7, lr}
+  67              	.LCFI0:
+  68              		.cfi_def_cfa_offset 12
+  69              		.cfi_offset 4, -12
+  70              		.cfi_offset 7, -8
+  71              		.cfi_offset 14, -4
+  72 0002 89B0     		sub	sp, sp, #36
+  73              	.LCFI1:
+  74              		.cfi_def_cfa_offset 48
+  75 0004 00AF     		add	r7, sp, #0
+  76              	.LCFI2:
+  77              		.cfi_def_cfa_register 7
+ 108:../arm_fft_bin_example_f32.c ****    
+ 109:../arm_fft_bin_example_f32.c **** 	arm_status status; 
+ 110:../arm_fft_bin_example_f32.c **** 	arm_cfft_radix4_instance_f32 S; 
+ 111:../arm_fft_bin_example_f32.c **** 	float32_t maxValue; 
+ 112:../arm_fft_bin_example_f32.c **** 	 
+ 113:../arm_fft_bin_example_f32.c **** 	status = ARM_MATH_SUCCESS; 
+  78              		.loc 1 113 0
+  79 0006 3B1C     		mov	r3, r7
+  80 0008 1F33     		add	r3, r3, #31
+  81 000a 0022     		mov	r2, #0
+  82 000c 1A70     		strb	r2, [r3]
+ 114:../arm_fft_bin_example_f32.c **** 	 
+ 115:../arm_fft_bin_example_f32.c **** 	/* Initialize the CFFT/CIFFT module */  
+ 116:../arm_fft_bin_example_f32.c **** 	status = arm_cfft_radix4_init_f32(&S, fftSize,  
+  83              		.loc 1 116 0
+  84 000e 1D4B     		ldr	r3, .L5
+  85 0010 1B68     		ldr	r3, [r3]
+  86 0012 99B2     		uxth	r1, r3
+  87 0014 1C4B     		ldr	r3, .L5+4
+  88 0016 1B68     		ldr	r3, [r3]
+  89 0018 DAB2     		uxtb	r2, r3
+  90 001a 1C4B     		ldr	r3, .L5+8
+  91 001c 1B68     		ldr	r3, [r3]
+  92 001e DBB2     		uxtb	r3, r3
+  93 0020 3C1C     		mov	r4, r7
+  94 0022 1F34     		add	r4, r4, #31
+  95 0024 381C     		mov	r0, r7
+  96 0026 0830     		add	r0, r0, #8
+  97 0028 FFF7FEFF 		bl	arm_cfft_radix4_init_f32
+  98 002c 031C     		mov	r3, r0
+  99 002e 2370     		strb	r3, [r4]
+ 117:../arm_fft_bin_example_f32.c **** 	  								ifftFlag, doBitReverse); 
+ 118:../arm_fft_bin_example_f32.c **** 	 
+ 119:../arm_fft_bin_example_f32.c **** 	/* Process the data through the CFFT/CIFFT module */ 
+ 120:../arm_fft_bin_example_f32.c **** 	arm_cfft_radix4_f32(&S, testInput_f32_10khz); 
+ 100              		.loc 1 120 0
+ 101 0030 3A1C     		mov	r2, r7
+ 102 0032 0832     		add	r2, r2, #8
+ 103 0034 164B     		ldr	r3, .L5+12
+ 104 0036 101C     		mov	r0, r2
+ 105 0038 191C     		mov	r1, r3
+ 106 003a FFF7FEFF 		bl	arm_cfft_radix4_f32
+ 121:../arm_fft_bin_example_f32.c **** 	 
+ 122:../arm_fft_bin_example_f32.c **** 	 
+ 123:../arm_fft_bin_example_f32.c **** 	/* Process the data through the Complex Magnitude Module for  
+ 124:../arm_fft_bin_example_f32.c **** 	calculating the magnitude at each bin */ 
+ 125:../arm_fft_bin_example_f32.c **** 	arm_cmplx_mag_f32(testInput_f32_10khz, testOutput,  
+ 107              		.loc 1 125 0
+ 108 003e 114B     		ldr	r3, .L5
+ 109 0040 1B68     		ldr	r3, [r3]
+ 110 0042 1349     		ldr	r1, .L5+12
+ 111 0044 134A     		ldr	r2, .L5+16
+ 112 0046 081C     		mov	r0, r1
+ 113 0048 111C     		mov	r1, r2
+ 114 004a 1A1C     		mov	r2, r3
+ 115 004c FFF7FEFF 		bl	arm_cmplx_mag_f32
+ 126:../arm_fft_bin_example_f32.c **** 	  				fftSize);  
+ 127:../arm_fft_bin_example_f32.c **** 	 
+ 128:../arm_fft_bin_example_f32.c **** 	/* Calculates maxValue and returns corresponding BIN value */ 
+ 129:../arm_fft_bin_example_f32.c **** 	arm_max_f32(testOutput, fftSize, &maxValue, &testIndex); 
+ 116              		.loc 1 129 0
+ 117 0050 0C4B     		ldr	r3, .L5
+ 118 0052 1968     		ldr	r1, [r3]
+ 119 0054 0F48     		ldr	r0, .L5+16
+ 120 0056 3A1D     		add	r2, r7, #4
+ 121 0058 0F4B     		ldr	r3, .L5+20
+ 122 005a FFF7FEFF 		bl	arm_max_f32
+ 130:../arm_fft_bin_example_f32.c **** 	 
+ 131:../arm_fft_bin_example_f32.c **** 	if(testIndex !=  refIndex) 
+ 123              		.loc 1 131 0
+ 124 005e 0E4B     		ldr	r3, .L5+20
+ 125 0060 1A68     		ldr	r2, [r3]
+ 126 0062 0E4B     		ldr	r3, .L5+24
+ 127 0064 1B68     		ldr	r3, [r3]
+ 128 0066 9A42     		cmp	r2, r3
+ 129 0068 03D0     		beq	.L2
+ 132:../arm_fft_bin_example_f32.c **** 	{ 
+ 133:../arm_fft_bin_example_f32.c **** 		status = ARM_MATH_TEST_FAILURE; 
+ 130              		.loc 1 133 0
+ 131 006a 3B1C     		mov	r3, r7
+ 132 006c 1F33     		add	r3, r3, #31
+ 133 006e FA22     		mov	r2, #250
+ 134 0070 1A70     		strb	r2, [r3]
+ 135              	.L2:
+ 134:../arm_fft_bin_example_f32.c **** 	} 
+ 135:../arm_fft_bin_example_f32.c **** 	 
+ 136:../arm_fft_bin_example_f32.c **** 	/* ---------------------------------------------------------------------- 
+ 137:../arm_fft_bin_example_f32.c **** 	** Loop here if the signals fail the PASS check. 
+ 138:../arm_fft_bin_example_f32.c **** 	** This denotes a test failure 
+ 139:../arm_fft_bin_example_f32.c **** 	** ------------------------------------------------------------------- */ 
+ 140:../arm_fft_bin_example_f32.c **** 	 
+ 141:../arm_fft_bin_example_f32.c **** 	if( status != ARM_MATH_SUCCESS) 
+ 136              		.loc 1 141 0
+ 137 0072 3B1C     		mov	r3, r7
+ 138 0074 1F33     		add	r3, r3, #31
+ 139 0076 1B78     		ldrb	r3, [r3]
+ 140 0078 5BB2     		sxtb	r3, r3
+ 141 007a 002B     		cmp	r3, #0
+ 142 007c 00D0     		beq	.L3
+ 143              	.L4:
+ 142:../arm_fft_bin_example_f32.c **** 	{ 
+ 143:../arm_fft_bin_example_f32.c **** 		while(1); 
+ 144              		.loc 1 143 0 discriminator 1
+ 145 007e FEE7     		b	.L4
+ 146              	.L3:
+ 144:../arm_fft_bin_example_f32.c **** 	} 
+ 145:../arm_fft_bin_example_f32.c **** 
+ 146:../arm_fft_bin_example_f32.c ****     while(1);                             /* main function does not return */
+ 147              		.loc 1 146 0 discriminator 1
+ 148 0080 FEE7     		b	.L3
+ 149              	.L6:
+ 150 0082 C046     		.align	2
+ 151              	.L5:
+ 152 0084 00000000 		.word	fftSize
+ 153 0088 00000000 		.word	ifftFlag
+ 154 008c 00000000 		.word	doBitReverse
+ 155 0090 00000000 		.word	testInput_f32_10khz
+ 156 0094 00000000 		.word	testOutput
+ 157 0098 00000000 		.word	testIndex
+ 158 009c 00000000 		.word	refIndex
+ 159              		.cfi_endproc
+ 160              	.LFE81:
+ 162              		.text
+ 163              	.Letext0:
+ 164              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 165              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_fft_bin_example_f32.c
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:18     .bss:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:19     .bss:00000000 testOutput
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:26     .data:00000000 fftSize
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:23     .data:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:33     .bss:00001000 ifftFlag
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:40     .data:00000004 doBitReverse
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:46     .data:00000008 refIndex
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:53     .bss:00001004 testIndex
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:56     .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:61     .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\cc5RnElz.s:152    .text.main:00000084 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.e2c96d5a5488b60ca900a5e0ea7772ef
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.arm_math.h.275.48de47ab2bd311f0657ea6a8c1abb55a
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.297.1d5f7b8b87e168258299acd0bbe0005e
+
+UNDEFINED SYMBOLS
+arm_cfft_radix4_init_f32
+arm_cfft_radix4_f32
+arm_cmplx_mag_f32
+arm_max_f32
+testInput_f32_10khz

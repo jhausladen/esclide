@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/websocket-api-9.2.1.v20140609"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jetty-alpn-client-9.2.1.v20140609"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/controlsfx-8.0.6"/>
+	<classpathentry kind="output" path="out/production/DebugControlService"/>
+</classpath>

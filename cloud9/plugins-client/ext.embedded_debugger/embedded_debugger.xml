@@ -1,0 +1,66 @@
+<a:application xmlns:a="http://ajax.org/2005/aml">
+    <a:tab id="tabEmbeddedDebugButtons" skin="dockbar" visible="false">
+        <a:page id="pgEmbeddedDebugNav" render="runtime">
+            <a:hbox padding="3" edge="4 3 5">
+                <div class="expand-panel-bg"></div>
+                <a:button id="btnEmbeddedResume" tooltip="Resume"
+                  icon     = "play.png"
+                  skin     = "c9-sidepanelsbutton"
+                  command  = "embeddedresume"/>
+                <a:button id="btnEmbeddedSuspend" tooltip="Suspend"
+                  skin     = "c9-sidepanelsbutton"
+                  icon     = "pause.png"
+                  command  = "embeddedsuspend"/>
+                <a:divider skin="c9-divider" />
+                <a:button id="btnEmbeddedStepOver" tooltip="Step Over"
+                  icon     = "step.png"
+                  skin     = "c9-sidepanelsbutton"
+                  command  = "embeddedstepover" />
+                <a:button id="btnEmbeddedStepInto" tooltip="Step Into"
+                  icon     = "stepinto.png" 
+                  skin     = "c9-sidepanelsbutton"
+                  command  = "embeddedstepinto"/>
+                <a:button id="btnEmbeddedStepOut" tooltip="Step Out"
+                  icon     = "stepback.png" 
+                  skin     = "c9-sidepanelsbutton"
+                  command  = "embeddedstepout" />
+                <a:divider skin="c9-divider" />
+                <a:button id="btnStop" tooltip="Stop"
+                  icon     = "stop.png" 
+                  skin     = "c9-sidepanelsbutton"
+                  command  = "embeddedstop" />
+            </a:hbox>
+        </a:page>
+    </a:tab>
+    <a:tab id="tabEmbeddedDebug" skin="docktab" visible="false" activepage="0" buttons="close">
+        <a:page id="dbgEmbeddedVariable" caption="Variables" render="runtime">
+            
+            <a:textbox id="tbAddDebugVariables" 
+                onkeydown  = "if(event.keyCode == 13)require('ext/embedded_debugger/embedded_debugger').addEmbeddedDebugVariable();"/>
+            <a:model id="mdlEmbeddedDebug">
+                <data>
+                </data>
+            </a:model>
+            <a:datagrid id="dgEmbeddedVars"
+              anchors    = "25 0 0 0" 
+              border     = "0"
+              class      = "noscrollbar"
+              scrollbar  = "sbShared 20 2 2"
+              options    = "size|move"
+              model      = "mdlEmbeddedDebug"
+              prerender  = "false"
+              caching    = "false"
+              loading-message = "Calculating..."
+              onkeydown  = "if(event.keyCode == 46)require('ext/embedded_debugger/embedded_debugger').removeEmbeddedDebugVariable();">
+                <!--model      = "[{dbg.activeframe}::vars]" Darüber-->
+                <a:actions />
+                <a:each match="[globals|item|embeddedvars]" sort="[@name]">
+                    <a:column caption="Variable" value="[@name]" width="40%" icon="debugger/genericvariable_obj.gif" tree="true" />
+                    <a:column caption="Value" value="[@value]" width="60%" />
+                    <!--<a:column caption="Type" value="[@type]" width="50"/>-->
+                </a:each>
+            </a:datagrid>
+            
+        </a:page>
+    </a:tab>
+</a:application>

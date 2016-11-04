@@ -1,0 +1,2195 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"math_helper.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	__aeabi_fmul
+  18              		.global	__aeabi_fadd
+  19              		.global	__aeabi_fsub
+  20              		.global	__aeabi_fdiv
+  21              		.global	__aeabi_f2d
+  22              		.global	__aeabi_dmul
+  23              		.global	__aeabi_d2f
+  24              		.section	.text.arm_snr_f32,"ax",%progbits
+  25              		.align	2
+  26              		.global	arm_snr_f32
+  27              		.code	16
+  28              		.thumb_func
+  30              	arm_snr_f32:
+  31              	.LFB81:
+  32              		.file 1 "../Common/Source/math_helper.c"
+   1:../Common/Source/math_helper.c **** /* ----------------------------------------------------------------------
+   2:../Common/Source/math_helper.c **** * Copyright (C) 2010 ARM Limited. All rights reserved.  
+   3:../Common/Source/math_helper.c **** *  
+   4:../Common/Source/math_helper.c **** * $Date:        29. November 2010  
+   5:../Common/Source/math_helper.c **** * $Revision: 	V1.0.3  
+   6:../Common/Source/math_helper.c **** *  
+   7:../Common/Source/math_helper.c **** * Project: 	    CMSIS DSP Library 
+   8:../Common/Source/math_helper.c **** *
+   9:../Common/Source/math_helper.c **** * Title:	    math_helper.c
+  10:../Common/Source/math_helper.c **** *
+  11:../Common/Source/math_helper.c **** * Description:	Definition of all helper functions required.  
+  12:../Common/Source/math_helper.c **** *  
+  13:../Common/Source/math_helper.c **** * Target Processor: Cortex-M4/Cortex-M3
+  14:../Common/Source/math_helper.c **** *  
+  15:../Common/Source/math_helper.c **** * Version 1.0.3 2010/11/29 
+  16:../Common/Source/math_helper.c **** *    Re-organized the CMSIS folders and updated documentation.  
+  17:../Common/Source/math_helper.c **** *   
+  18:../Common/Source/math_helper.c **** * Version 1.0.2 2010/11/11  
+  19:../Common/Source/math_helper.c **** *    Documentation updated.   
+  20:../Common/Source/math_helper.c **** *  
+  21:../Common/Source/math_helper.c **** * Version 1.0.1 2010/10/05   
+  22:../Common/Source/math_helper.c **** *    Production release and review comments incorporated.  
+  23:../Common/Source/math_helper.c **** *  
+  24:../Common/Source/math_helper.c **** * Version 1.0.0 2010/09/20   
+  25:../Common/Source/math_helper.c **** *    Production release and review comments incorporated.  
+  26:../Common/Source/math_helper.c **** *  
+  27:../Common/Source/math_helper.c **** * Version 0.0.7  2010/06/10   
+  28:../Common/Source/math_helper.c **** *    Misra-C changes done 
+  29:../Common/Source/math_helper.c **** * -------------------------------------------------------------------- */
+  30:../Common/Source/math_helper.c **** 
+  31:../Common/Source/math_helper.c **** /* ----------------------------------------------------------------------
+  32:../Common/Source/math_helper.c **** *		Include standard header files  
+  33:../Common/Source/math_helper.c **** * -------------------------------------------------------------------- */
+  34:../Common/Source/math_helper.c **** #include<math.h>
+  35:../Common/Source/math_helper.c **** 
+  36:../Common/Source/math_helper.c **** /* ----------------------------------------------------------------------
+  37:../Common/Source/math_helper.c **** *		Include project header files  
+  38:../Common/Source/math_helper.c **** * -------------------------------------------------------------------- */
+  39:../Common/Source/math_helper.c **** #include "math_helper.h"
+  40:../Common/Source/math_helper.c **** 
+  41:../Common/Source/math_helper.c **** /** 
+  42:../Common/Source/math_helper.c ****  * @brief  Caluclation of SNR
+  43:../Common/Source/math_helper.c ****  * @param  float* 	Pointer to the reference buffer
+  44:../Common/Source/math_helper.c ****  * @param  float*	Pointer to the test buffer
+  45:../Common/Source/math_helper.c ****  * @param  uint32_t	total number of samples
+  46:../Common/Source/math_helper.c ****  * @return float	SNR
+  47:../Common/Source/math_helper.c ****  * The function Caluclates signal to noise ratio for the reference output 
+  48:../Common/Source/math_helper.c ****  * and test output 
+  49:../Common/Source/math_helper.c ****  */
+  50:../Common/Source/math_helper.c **** 
+  51:../Common/Source/math_helper.c **** float arm_snr_f32(float *pRef, float *pTest, uint32_t buffSize)
+  52:../Common/Source/math_helper.c **** {
+  33              		.loc 1 52 0
+  34              		.cfi_startproc
+  35 0000 90B5     		push	{r4, r7, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 12
+  38              		.cfi_offset 4, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 8BB0     		sub	sp, sp, #44
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 56
+  44 0004 00AF     		add	r7, sp, #0
+  45              	.LCFI2:
+  46              		.cfi_def_cfa_register 7
+  47 0006 F860     		str	r0, [r7, #12]
+  48 0008 B960     		str	r1, [r7, #8]
+  49 000a 7A60     		str	r2, [r7, #4]
+  53:../Common/Source/math_helper.c ****   float EnergySignal = 0.0, EnergyError = 0.0;
+  50              		.loc 1 53 0
+  51 000c 0023     		mov	r3, #0
+  52 000e 7B62     		str	r3, [r7, #36]
+  53 0010 0023     		mov	r3, #0
+  54 0012 3B61     		str	r3, [r7, #16]
+  54:../Common/Source/math_helper.c ****   uint32_t i;
+  55:../Common/Source/math_helper.c ****   float SNR;
+  56:../Common/Source/math_helper.c ****   int temp;
+  57:../Common/Source/math_helper.c ****   int *test;
+  58:../Common/Source/math_helper.c **** 
+  59:../Common/Source/math_helper.c ****   for (i = 0; i < buffSize; i++)
+  55              		.loc 1 59 0
+  56 0014 0023     		mov	r3, #0
+  57 0016 3B62     		str	r3, [r7, #32]
+  58 0018 5FE0     		b	.L2
+  59              	.L6:
+  60:../Common/Source/math_helper.c ****     {
+  61:../Common/Source/math_helper.c ****  	  /* Checking for a NAN value in pRef array */
+  62:../Common/Source/math_helper.c **** 	  test =   (int *)(&pRef[i]);
+  60              		.loc 1 62 0
+  61 001a 3B6A     		ldr	r3, [r7, #32]
+  62 001c 9B00     		lsl	r3, r3, #2
+  63 001e FA68     		ldr	r2, [r7, #12]
+  64 0020 D318     		add	r3, r2, r3
+  65 0022 FB61     		str	r3, [r7, #28]
+  63:../Common/Source/math_helper.c ****       temp =  *test;
+  66              		.loc 1 63 0
+  67 0024 FB69     		ldr	r3, [r7, #28]
+  68 0026 1B68     		ldr	r3, [r3]
+  69 0028 BB61     		str	r3, [r7, #24]
+  64:../Common/Source/math_helper.c **** 
+  65:../Common/Source/math_helper.c **** 	  if(temp == 0x7FC00000)
+  70              		.loc 1 65 0
+  71 002a BA69     		ldr	r2, [r7, #24]
+  72 002c 484B     		ldr	r3, .L9+8
+  73 002e 9A42     		cmp	r2, r3
+  74 0030 01D1     		bne	.L3
+  66:../Common/Source/math_helper.c **** 	  {
+  67:../Common/Source/math_helper.c **** 	  		return(0);
+  75              		.loc 1 67 0
+  76 0032 0023     		mov	r3, #0
+  77 0034 81E0     		b	.L8
+  78              	.L3:
+  68:../Common/Source/math_helper.c **** 	  }
+  69:../Common/Source/math_helper.c **** 
+  70:../Common/Source/math_helper.c **** 	  /* Checking for a NAN value in pTest array */
+  71:../Common/Source/math_helper.c **** 	  test =   (int *)(&pTest[i]);
+  79              		.loc 1 71 0
+  80 0036 3B6A     		ldr	r3, [r7, #32]
+  81 0038 9B00     		lsl	r3, r3, #2
+  82 003a BA68     		ldr	r2, [r7, #8]
+  83 003c D318     		add	r3, r2, r3
+  84 003e FB61     		str	r3, [r7, #28]
+  72:../Common/Source/math_helper.c ****       temp =  *test;
+  85              		.loc 1 72 0
+  86 0040 FB69     		ldr	r3, [r7, #28]
+  87 0042 1B68     		ldr	r3, [r3]
+  88 0044 BB61     		str	r3, [r7, #24]
+  73:../Common/Source/math_helper.c **** 
+  74:../Common/Source/math_helper.c **** 	  if(temp == 0x7FC00000)
+  89              		.loc 1 74 0
+  90 0046 BA69     		ldr	r2, [r7, #24]
+  91 0048 414B     		ldr	r3, .L9+8
+  92 004a 9A42     		cmp	r2, r3
+  93 004c 01D1     		bne	.L5
+  75:../Common/Source/math_helper.c **** 	  {
+  76:../Common/Source/math_helper.c **** 	  		return(0);
+  94              		.loc 1 76 0
+  95 004e 0023     		mov	r3, #0
+  96 0050 73E0     		b	.L8
+  97              	.L5:
+  77:../Common/Source/math_helper.c **** 	  }
+  78:../Common/Source/math_helper.c ****       EnergySignal += pRef[i] * pRef[i];
+  98              		.loc 1 78 0
+  99 0052 3B6A     		ldr	r3, [r7, #32]
+ 100 0054 9B00     		lsl	r3, r3, #2
+ 101 0056 FA68     		ldr	r2, [r7, #12]
+ 102 0058 D318     		add	r3, r2, r3
+ 103 005a 1A68     		ldr	r2, [r3]
+ 104 005c 3B6A     		ldr	r3, [r7, #32]
+ 105 005e 9B00     		lsl	r3, r3, #2
+ 106 0060 F968     		ldr	r1, [r7, #12]
+ 107 0062 CB18     		add	r3, r1, r3
+ 108 0064 1B68     		ldr	r3, [r3]
+ 109 0066 101C     		add	r0, r2, #0
+ 110 0068 191C     		add	r1, r3, #0
+ 111 006a FFF7FEFF 		bl	__aeabi_fmul
+ 112 006e 031C     		add	r3, r0, #0
+ 113 0070 786A     		ldr	r0, [r7, #36]
+ 114 0072 191C     		add	r1, r3, #0
+ 115 0074 FFF7FEFF 		bl	__aeabi_fadd
+ 116 0078 031C     		add	r3, r0, #0
+ 117 007a 7B62     		str	r3, [r7, #36]
+  79:../Common/Source/math_helper.c ****       EnergyError += (pRef[i] - pTest[i]) * (pRef[i] - pTest[i]); 
+ 118              		.loc 1 79 0
+ 119 007c 3B6A     		ldr	r3, [r7, #32]
+ 120 007e 9B00     		lsl	r3, r3, #2
+ 121 0080 FA68     		ldr	r2, [r7, #12]
+ 122 0082 D318     		add	r3, r2, r3
+ 123 0084 1A68     		ldr	r2, [r3]
+ 124 0086 3B6A     		ldr	r3, [r7, #32]
+ 125 0088 9B00     		lsl	r3, r3, #2
+ 126 008a B968     		ldr	r1, [r7, #8]
+ 127 008c CB18     		add	r3, r1, r3
+ 128 008e 1B68     		ldr	r3, [r3]
+ 129 0090 101C     		add	r0, r2, #0
+ 130 0092 191C     		add	r1, r3, #0
+ 131 0094 FFF7FEFF 		bl	__aeabi_fsub
+ 132 0098 031C     		add	r3, r0, #0
+ 133 009a 1C1C     		add	r4, r3, #0
+ 134 009c 3B6A     		ldr	r3, [r7, #32]
+ 135 009e 9B00     		lsl	r3, r3, #2
+ 136 00a0 FA68     		ldr	r2, [r7, #12]
+ 137 00a2 D318     		add	r3, r2, r3
+ 138 00a4 1A68     		ldr	r2, [r3]
+ 139 00a6 3B6A     		ldr	r3, [r7, #32]
+ 140 00a8 9B00     		lsl	r3, r3, #2
+ 141 00aa B968     		ldr	r1, [r7, #8]
+ 142 00ac CB18     		add	r3, r1, r3
+ 143 00ae 1B68     		ldr	r3, [r3]
+ 144 00b0 101C     		add	r0, r2, #0
+ 145 00b2 191C     		add	r1, r3, #0
+ 146 00b4 FFF7FEFF 		bl	__aeabi_fsub
+ 147 00b8 031C     		add	r3, r0, #0
+ 148 00ba 201C     		add	r0, r4, #0
+ 149 00bc 191C     		add	r1, r3, #0
+ 150 00be FFF7FEFF 		bl	__aeabi_fmul
+ 151 00c2 031C     		add	r3, r0, #0
+ 152 00c4 1A1C     		add	r2, r3, #0
+ 153 00c6 3B69     		ldr	r3, [r7, #16]
+ 154 00c8 101C     		add	r0, r2, #0
+ 155 00ca 191C     		add	r1, r3, #0
+ 156 00cc FFF7FEFF 		bl	__aeabi_fadd
+ 157 00d0 031C     		add	r3, r0, #0
+ 158 00d2 3B61     		str	r3, [r7, #16]
+  59:../Common/Source/math_helper.c ****   for (i = 0; i < buffSize; i++)
+ 159              		.loc 1 59 0
+ 160 00d4 3B6A     		ldr	r3, [r7, #32]
+ 161 00d6 0133     		add	r3, r3, #1
+ 162 00d8 3B62     		str	r3, [r7, #32]
+ 163              	.L2:
+  59:../Common/Source/math_helper.c ****   for (i = 0; i < buffSize; i++)
+ 164              		.loc 1 59 0 is_stmt 0 discriminator 1
+ 165 00da 3A6A     		ldr	r2, [r7, #32]
+ 166 00dc 7B68     		ldr	r3, [r7, #4]
+ 167 00de 9A42     		cmp	r2, r3
+ 168 00e0 9BD3     		bcc	.L6
+  80:../Common/Source/math_helper.c ****     }
+  81:../Common/Source/math_helper.c **** 
+  82:../Common/Source/math_helper.c **** 	/* Checking for a NAN value in EnergyError */
+  83:../Common/Source/math_helper.c **** 	test =   (int *)(&EnergyError);
+ 169              		.loc 1 83 0 is_stmt 1
+ 170 00e2 3B1C     		mov	r3, r7
+ 171 00e4 1033     		add	r3, r3, #16
+ 172 00e6 FB61     		str	r3, [r7, #28]
+  84:../Common/Source/math_helper.c ****     temp =  *test;
+ 173              		.loc 1 84 0
+ 174 00e8 FB69     		ldr	r3, [r7, #28]
+ 175 00ea 1B68     		ldr	r3, [r3]
+ 176 00ec BB61     		str	r3, [r7, #24]
+  85:../Common/Source/math_helper.c **** 
+  86:../Common/Source/math_helper.c ****     if(temp == 0x7FC00000)
+ 177              		.loc 1 86 0
+ 178 00ee BA69     		ldr	r2, [r7, #24]
+ 179 00f0 174B     		ldr	r3, .L9+8
+ 180 00f2 9A42     		cmp	r2, r3
+ 181 00f4 01D1     		bne	.L7
+  87:../Common/Source/math_helper.c ****     {
+  88:../Common/Source/math_helper.c ****   		return(0);
+ 182              		.loc 1 88 0
+ 183 00f6 0023     		mov	r3, #0
+ 184 00f8 1FE0     		b	.L8
+ 185              	.L7:
+  89:../Common/Source/math_helper.c ****     }
+  90:../Common/Source/math_helper.c **** 	
+  91:../Common/Source/math_helper.c **** 
+  92:../Common/Source/math_helper.c ****   SNR = 10 * log10 (EnergySignal / EnergyError);
+ 186              		.loc 1 92 0
+ 187 00fa 3B69     		ldr	r3, [r7, #16]
+ 188 00fc 786A     		ldr	r0, [r7, #36]
+ 189 00fe 191C     		add	r1, r3, #0
+ 190 0100 FFF7FEFF 		bl	__aeabi_fdiv
+ 191 0104 031C     		add	r3, r0, #0
+ 192 0106 181C     		add	r0, r3, #0
+ 193 0108 FFF7FEFF 		bl	__aeabi_f2d
+ 194 010c 031C     		mov	r3, r0
+ 195 010e 0C1C     		mov	r4, r1
+ 196 0110 181C     		mov	r0, r3
+ 197 0112 211C     		mov	r1, r4
+ 198 0114 FFF7FEFF 		bl	log10
+ 199 0118 031C     		mov	r3, r0
+ 200 011a 0C1C     		mov	r4, r1
+ 201 011c 181C     		mov	r0, r3
+ 202 011e 211C     		mov	r1, r4
+ 203 0120 0A4B     		ldr	r3, .L9+4
+ 204 0122 094A     		ldr	r2, .L9
+ 205 0124 FFF7FEFF 		bl	__aeabi_dmul
+ 206 0128 031C     		mov	r3, r0
+ 207 012a 0C1C     		mov	r4, r1
+ 208 012c 181C     		mov	r0, r3
+ 209 012e 211C     		mov	r1, r4
+ 210 0130 FFF7FEFF 		bl	__aeabi_d2f
+ 211 0134 031C     		add	r3, r0, #0
+ 212 0136 7B61     		str	r3, [r7, #20]
+  93:../Common/Source/math_helper.c **** 
+  94:../Common/Source/math_helper.c ****   return (SNR);
+ 213              		.loc 1 94 0
+ 214 0138 7B69     		ldr	r3, [r7, #20]
+ 215              	.L8:
+  95:../Common/Source/math_helper.c **** 
+  96:../Common/Source/math_helper.c **** }
+ 216              		.loc 1 96 0
+ 217 013a 181C     		add	r0, r3, #0
+ 218 013c BD46     		mov	sp, r7
+ 219 013e 0BB0     		add	sp, sp, #44
+ 220              		@ sp needed for prologue
+ 221 0140 90BD     		pop	{r4, r7, pc}
+ 222              	.L10:
+ 223 0142 C046C046 		.align	3
+ 223      C046
+ 224              	.L9:
+ 225 0148 00000000 		.word	0
+ 226 014c 00002440 		.word	1076101120
+ 227 0150 0000C07F 		.word	2143289344
+ 228              		.cfi_endproc
+ 229              	.LFE81:
+ 231 0154 C046C046 		.section	.text.arm_provide_guard_bits_q15,"ax",%progbits
+ 232              		.align	2
+ 233              		.global	arm_provide_guard_bits_q15
+ 234              		.code	16
+ 235              		.thumb_func
+ 237              	arm_provide_guard_bits_q15:
+ 238              	.LFB82:
+  97:../Common/Source/math_helper.c **** 
+  98:../Common/Source/math_helper.c **** 
+  99:../Common/Source/math_helper.c **** /** 
+ 100:../Common/Source/math_helper.c ****  * @brief  Provide guard bits for Input buffer
+ 101:../Common/Source/math_helper.c ****  * @param  q15_t* 	    Pointer to input buffer
+ 102:../Common/Source/math_helper.c ****  * @param  uint32_t 	blockSize
+ 103:../Common/Source/math_helper.c ****  * @param  uint32_t 	guard_bits
+ 104:../Common/Source/math_helper.c ****  * @return none
+ 105:../Common/Source/math_helper.c ****  * The function Provides the guard bits for the buffer 
+ 106:../Common/Source/math_helper.c ****  * to avoid overflow 
+ 107:../Common/Source/math_helper.c ****  */
+ 108:../Common/Source/math_helper.c **** 
+ 109:../Common/Source/math_helper.c **** void arm_provide_guard_bits_q15 (q15_t * input_buf, uint32_t blockSize,
+ 110:../Common/Source/math_helper.c ****                             uint32_t guard_bits)
+ 111:../Common/Source/math_helper.c **** {
+ 239              		.loc 1 111 0
+ 240              		.cfi_startproc
+ 241 0000 80B5     		push	{r7, lr}
+ 242              	.LCFI3:
+ 243              		.cfi_def_cfa_offset 8
+ 244              		.cfi_offset 7, -8
+ 245              		.cfi_offset 14, -4
+ 246 0002 86B0     		sub	sp, sp, #24
+ 247              	.LCFI4:
+ 248              		.cfi_def_cfa_offset 32
+ 249 0004 00AF     		add	r7, sp, #0
+ 250              	.LCFI5:
+ 251              		.cfi_def_cfa_register 7
+ 252 0006 F860     		str	r0, [r7, #12]
+ 253 0008 B960     		str	r1, [r7, #8]
+ 254 000a 7A60     		str	r2, [r7, #4]
+ 112:../Common/Source/math_helper.c ****   uint32_t i;
+ 113:../Common/Source/math_helper.c **** 
+ 114:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 255              		.loc 1 114 0
+ 256 000c 0023     		mov	r3, #0
+ 257 000e 7B61     		str	r3, [r7, #20]
+ 258 0010 12E0     		b	.L12
+ 259              	.L13:
+ 115:../Common/Source/math_helper.c ****     {
+ 116:../Common/Source/math_helper.c ****       input_buf[i] = input_buf[i] >> guard_bits;
+ 260              		.loc 1 116 0 discriminator 2
+ 261 0012 7B69     		ldr	r3, [r7, #20]
+ 262 0014 5B00     		lsl	r3, r3, #1
+ 263 0016 FA68     		ldr	r2, [r7, #12]
+ 264 0018 D318     		add	r3, r2, r3
+ 265 001a 7A69     		ldr	r2, [r7, #20]
+ 266 001c 5200     		lsl	r2, r2, #1
+ 267 001e F968     		ldr	r1, [r7, #12]
+ 268 0020 8A18     		add	r2, r1, r2
+ 269 0022 1288     		ldrh	r2, [r2]
+ 270 0024 11B2     		sxth	r1, r2
+ 271 0026 7A68     		ldr	r2, [r7, #4]
+ 272 0028 081C     		mov	r0, r1
+ 273 002a 1041     		asr	r0, r0, r2
+ 274 002c 021C     		mov	r2, r0
+ 275 002e 92B2     		uxth	r2, r2
+ 276 0030 1A80     		strh	r2, [r3]
+ 114:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 277              		.loc 1 114 0 discriminator 2
+ 278 0032 7B69     		ldr	r3, [r7, #20]
+ 279 0034 0133     		add	r3, r3, #1
+ 280 0036 7B61     		str	r3, [r7, #20]
+ 281              	.L12:
+ 114:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 282              		.loc 1 114 0 is_stmt 0 discriminator 1
+ 283 0038 7A69     		ldr	r2, [r7, #20]
+ 284 003a BB68     		ldr	r3, [r7, #8]
+ 285 003c 9A42     		cmp	r2, r3
+ 286 003e E8D3     		bcc	.L13
+ 117:../Common/Source/math_helper.c ****     }
+ 118:../Common/Source/math_helper.c **** }
+ 287              		.loc 1 118 0 is_stmt 1
+ 288 0040 BD46     		mov	sp, r7
+ 289 0042 06B0     		add	sp, sp, #24
+ 290              		@ sp needed for prologue
+ 291 0044 80BD     		pop	{r7, pc}
+ 292              		.cfi_endproc
+ 293              	.LFE82:
+ 295              		.global	__aeabi_f2iz
+ 296              		.global	__aeabi_i2d
+ 297              		.global	__aeabi_fcmpgt
+ 298              		.global	__aeabi_dadd
+ 299              		.global	__aeabi_d2iz
+ 300              		.global	__aeabi_fcmpeq
+ 301 0046 C046     		.section	.text.arm_float_to_q12_20,"ax",%progbits
+ 302              		.align	2
+ 303              		.global	arm_float_to_q12_20
+ 304              		.code	16
+ 305              		.thumb_func
+ 307              	arm_float_to_q12_20:
+ 308              	.LFB83:
+ 119:../Common/Source/math_helper.c **** 
+ 120:../Common/Source/math_helper.c **** /** 
+ 121:../Common/Source/math_helper.c ****  * @brief  Converts float to fixed in q12.20 format
+ 122:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 123:../Common/Source/math_helper.c ****  * @return none
+ 124:../Common/Source/math_helper.c ****  * The function converts floating point values to fixed point(q12.20) values 
+ 125:../Common/Source/math_helper.c ****  */
+ 126:../Common/Source/math_helper.c **** 
+ 127:../Common/Source/math_helper.c **** void arm_float_to_q12_20(float *pIn, q31_t * pOut, uint32_t numSamples)
+ 128:../Common/Source/math_helper.c **** {
+ 309              		.loc 1 128 0
+ 310              		.cfi_startproc
+ 311 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 312              	.LCFI6:
+ 313              		.cfi_def_cfa_offset 20
+ 314              		.cfi_offset 4, -20
+ 315              		.cfi_offset 5, -16
+ 316              		.cfi_offset 6, -12
+ 317              		.cfi_offset 7, -8
+ 318              		.cfi_offset 14, -4
+ 319 0002 4746     		mov	r7, r8
+ 320 0004 80B4     		push	{r7}
+ 321              	.LCFI7:
+ 322              		.cfi_def_cfa_offset 24
+ 323              		.cfi_offset 8, -24
+ 324 0006 86B0     		sub	sp, sp, #24
+ 325              	.LCFI8:
+ 326              		.cfi_def_cfa_offset 48
+ 327 0008 00AF     		add	r7, sp, #0
+ 328              	.LCFI9:
+ 329              		.cfi_def_cfa_register 7
+ 330 000a F860     		str	r0, [r7, #12]
+ 331 000c B960     		str	r1, [r7, #8]
+ 332 000e 7A60     		str	r2, [r7, #4]
+ 129:../Common/Source/math_helper.c ****   uint32_t i;
+ 130:../Common/Source/math_helper.c **** 
+ 131:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 333              		.loc 1 131 0
+ 334 0010 0023     		mov	r3, #0
+ 335 0012 7B61     		str	r3, [r7, #20]
+ 336 0014 58E0     		b	.L15
+ 337              	.L21:
+ 132:../Common/Source/math_helper.c ****     {
+ 133:../Common/Source/math_helper.c **** 	  /* 1048576.0f corresponds to pow(2, 20) */
+ 134:../Common/Source/math_helper.c ****       pOut[i] = (q31_t) (pIn[i] * 1048576.0f);
+ 338              		.loc 1 134 0
+ 339 0016 7B69     		ldr	r3, [r7, #20]
+ 340 0018 9B00     		lsl	r3, r3, #2
+ 341 001a BA68     		ldr	r2, [r7, #8]
+ 342 001c D418     		add	r4, r2, r3
+ 343 001e 7B69     		ldr	r3, [r7, #20]
+ 344 0020 9B00     		lsl	r3, r3, #2
+ 345 0022 FA68     		ldr	r2, [r7, #12]
+ 346 0024 D318     		add	r3, r2, r3
+ 347 0026 1B68     		ldr	r3, [r3]
+ 348 0028 181C     		add	r0, r3, #0
+ 349 002a 9321     		mov	r1, #147
+ 350 002c C905     		lsl	r1, r1, #23
+ 351 002e FFF7FEFF 		bl	__aeabi_fmul
+ 352 0032 031C     		add	r3, r0, #0
+ 353 0034 181C     		add	r0, r3, #0
+ 354 0036 FFF7FEFF 		bl	__aeabi_f2iz
+ 355 003a 031C     		mov	r3, r0
+ 356 003c 2360     		str	r3, [r4]
+ 135:../Common/Source/math_helper.c **** 
+ 136:../Common/Source/math_helper.c ****       pOut[i] += pIn[i] > 0 ? 0.5 : -0.5;
+ 357              		.loc 1 136 0
+ 358 003e 7B69     		ldr	r3, [r7, #20]
+ 359 0040 9B00     		lsl	r3, r3, #2
+ 360 0042 BA68     		ldr	r2, [r7, #8]
+ 361 0044 D218     		add	r2, r2, r3
+ 362 0046 9046     		mov	r8, r2
+ 363 0048 7B69     		ldr	r3, [r7, #20]
+ 364 004a 9B00     		lsl	r3, r3, #2
+ 365 004c BA68     		ldr	r2, [r7, #8]
+ 366 004e D318     		add	r3, r2, r3
+ 367 0050 1B68     		ldr	r3, [r3]
+ 368 0052 181C     		mov	r0, r3
+ 369 0054 FFF7FEFF 		bl	__aeabi_i2d
+ 370 0058 051C     		mov	r5, r0
+ 371 005a 0E1C     		mov	r6, r1
+ 372 005c 7B69     		ldr	r3, [r7, #20]
+ 373 005e 9B00     		lsl	r3, r3, #2
+ 374 0060 FA68     		ldr	r2, [r7, #12]
+ 375 0062 D318     		add	r3, r2, r3
+ 376 0064 1B68     		ldr	r3, [r3]
+ 377 0066 181C     		add	r0, r3, #0
+ 378 0068 0021     		mov	r1, #0
+ 379 006a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 380 006e 031C     		mov	r3, r0
+ 381 0070 002B     		cmp	r3, #0
+ 382 0072 02D0     		beq	.L24
+ 383              	.L22:
+ 384              		.loc 1 136 0 is_stmt 0 discriminator 1
+ 385 0074 1B4C     		ldr	r4, .L25+4
+ 386 0076 1A4B     		ldr	r3, .L25
+ 387 0078 01E0     		b	.L18
+ 388              	.L24:
+ 389              		.loc 1 136 0 discriminator 2
+ 390 007a 1B4B     		ldr	r3, .L25+8
+ 391 007c 1B4C     		ldr	r4, .L25+12
+ 392              	.L18:
+ 393              		.loc 1 136 0 discriminator 3
+ 394 007e 281C     		mov	r0, r5
+ 395 0080 311C     		mov	r1, r6
+ 396 0082 1A1C     		mov	r2, r3
+ 397 0084 231C     		mov	r3, r4
+ 398 0086 FFF7FEFF 		bl	__aeabi_dadd
+ 399 008a 031C     		mov	r3, r0
+ 400 008c 0C1C     		mov	r4, r1
+ 401 008e 181C     		mov	r0, r3
+ 402 0090 211C     		mov	r1, r4
+ 403 0092 FFF7FEFF 		bl	__aeabi_d2iz
+ 404 0096 031C     		mov	r3, r0
+ 405 0098 4246     		mov	r2, r8
+ 406 009a 1360     		str	r3, [r2]
+ 137:../Common/Source/math_helper.c **** 
+ 138:../Common/Source/math_helper.c ****       if (pIn[i] == (float) 1.0)
+ 407              		.loc 1 138 0 is_stmt 1 discriminator 3
+ 408 009c 7B69     		ldr	r3, [r7, #20]
+ 409 009e 9B00     		lsl	r3, r3, #2
+ 410 00a0 FA68     		ldr	r2, [r7, #12]
+ 411 00a2 D318     		add	r3, r2, r3
+ 412 00a4 1B68     		ldr	r3, [r3]
+ 413 00a6 181C     		add	r0, r3, #0
+ 414 00a8 FE21     		mov	r1, #254
+ 415 00aa 8905     		lsl	r1, r1, #22
+ 416 00ac FFF7FEFF 		bl	__aeabi_fcmpeq
+ 417 00b0 031C     		mov	r3, r0
+ 418 00b2 002B     		cmp	r3, #0
+ 419 00b4 05D0     		beq	.L19
+ 420              	.L23:
+ 139:../Common/Source/math_helper.c ****         {
+ 140:../Common/Source/math_helper.c ****           pOut[i] = 0x000FFFFF;
+ 421              		.loc 1 140 0
+ 422 00b6 7B69     		ldr	r3, [r7, #20]
+ 423 00b8 9B00     		lsl	r3, r3, #2
+ 424 00ba BA68     		ldr	r2, [r7, #8]
+ 425 00bc D318     		add	r3, r2, r3
+ 426 00be 0C4A     		ldr	r2, .L25+16
+ 427 00c0 1A60     		str	r2, [r3]
+ 428              	.L19:
+ 131:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 429              		.loc 1 131 0
+ 430 00c2 7B69     		ldr	r3, [r7, #20]
+ 431 00c4 0133     		add	r3, r3, #1
+ 432 00c6 7B61     		str	r3, [r7, #20]
+ 433              	.L15:
+ 131:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 434              		.loc 1 131 0 is_stmt 0 discriminator 1
+ 435 00c8 7A69     		ldr	r2, [r7, #20]
+ 436 00ca 7B68     		ldr	r3, [r7, #4]
+ 437 00cc 9A42     		cmp	r2, r3
+ 438 00ce A2D3     		bcc	.L21
+ 141:../Common/Source/math_helper.c ****         }
+ 142:../Common/Source/math_helper.c ****     }
+ 143:../Common/Source/math_helper.c **** }
+ 439              		.loc 1 143 0 is_stmt 1
+ 440 00d0 BD46     		mov	sp, r7
+ 441 00d2 06B0     		add	sp, sp, #24
+ 442              		@ sp needed for prologue
+ 443 00d4 04BC     		pop	{r2}
+ 444 00d6 9046     		mov	r8, r2
+ 445 00d8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 446              	.L26:
+ 447 00da C046C046 		.align	3
+ 447      C046
+ 448              	.L25:
+ 449 00e0 00000000 		.word	0
+ 450 00e4 0000E03F 		.word	1071644672
+ 451 00e8 00000000 		.word	0
+ 452 00ec 0000E0BF 		.word	-1075838976
+ 453 00f0 FFFF0F00 		.word	1048575
+ 454              		.cfi_endproc
+ 455              	.LFE83:
+ 457 00f4 C046C046 		.section	.text.arm_compare_fixed_q15,"ax",%progbits
+ 458              		.align	2
+ 459              		.global	arm_compare_fixed_q15
+ 460              		.code	16
+ 461              		.thumb_func
+ 463              	arm_compare_fixed_q15:
+ 464              	.LFB84:
+ 144:../Common/Source/math_helper.c **** 
+ 145:../Common/Source/math_helper.c **** /** 
+ 146:../Common/Source/math_helper.c ****  * @brief  Compare MATLAB Reference Output and ARM Test output
+ 147:../Common/Source/math_helper.c ****  * @param  q15_t* 	Pointer to Ref buffer
+ 148:../Common/Source/math_helper.c ****  * @param  q15_t* 	Pointer to Test buffer
+ 149:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 150:../Common/Source/math_helper.c ****  * @return none 
+ 151:../Common/Source/math_helper.c ****  */
+ 152:../Common/Source/math_helper.c **** 
+ 153:../Common/Source/math_helper.c **** uint32_t arm_compare_fixed_q15(q15_t *pIn, q15_t * pOut, uint32_t numSamples)
+ 154:../Common/Source/math_helper.c **** {
+ 465              		.loc 1 154 0
+ 466              		.cfi_startproc
+ 467 0000 80B5     		push	{r7, lr}
+ 468              	.LCFI10:
+ 469              		.cfi_def_cfa_offset 8
+ 470              		.cfi_offset 7, -8
+ 471              		.cfi_offset 14, -4
+ 472 0002 88B0     		sub	sp, sp, #32
+ 473              	.LCFI11:
+ 474              		.cfi_def_cfa_offset 40
+ 475 0004 00AF     		add	r7, sp, #0
+ 476              	.LCFI12:
+ 477              		.cfi_def_cfa_register 7
+ 478 0006 F860     		str	r0, [r7, #12]
+ 479 0008 B960     		str	r1, [r7, #8]
+ 480 000a 7A60     		str	r2, [r7, #4]
+ 155:../Common/Source/math_helper.c ****   uint32_t i; 
+ 156:../Common/Source/math_helper.c ****   int32_t diff, diffCrnt = 0;
+ 481              		.loc 1 156 0
+ 482 000c 0023     		mov	r3, #0
+ 483 000e 7B61     		str	r3, [r7, #20]
+ 157:../Common/Source/math_helper.c ****   uint32_t maxDiff = 0;
+ 484              		.loc 1 157 0
+ 485 0010 0023     		mov	r3, #0
+ 486 0012 BB61     		str	r3, [r7, #24]
+ 158:../Common/Source/math_helper.c **** 
+ 159:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 487              		.loc 1 159 0
+ 488 0014 0023     		mov	r3, #0
+ 489 0016 FB61     		str	r3, [r7, #28]
+ 490 0018 1BE0     		b	.L28
+ 491              	.L30:
+ 160:../Common/Source/math_helper.c ****   {
+ 161:../Common/Source/math_helper.c ****   	diff = pIn[i] - pOut[i];
+ 492              		.loc 1 161 0
+ 493 001a FB69     		ldr	r3, [r7, #28]
+ 494 001c 5B00     		lsl	r3, r3, #1
+ 495 001e FA68     		ldr	r2, [r7, #12]
+ 496 0020 D318     		add	r3, r2, r3
+ 497 0022 1B88     		ldrh	r3, [r3]
+ 498 0024 1AB2     		sxth	r2, r3
+ 499 0026 FB69     		ldr	r3, [r7, #28]
+ 500 0028 5B00     		lsl	r3, r3, #1
+ 501 002a B968     		ldr	r1, [r7, #8]
+ 502 002c CB18     		add	r3, r1, r3
+ 503 002e 1B88     		ldrh	r3, [r3]
+ 504 0030 1BB2     		sxth	r3, r3
+ 505 0032 D31A     		sub	r3, r2, r3
+ 506 0034 3B61     		str	r3, [r7, #16]
+ 162:../Common/Source/math_helper.c ****   	diffCrnt = (diff > 0) ? diff : -diff;
+ 507              		.loc 1 162 0
+ 508 0036 3B69     		ldr	r3, [r7, #16]
+ 509 0038 DA17     		asr	r2, r3, #31
+ 510 003a 9B18     		add	r3, r3, r2
+ 511 003c 5340     		eor	r3, r2
+ 512 003e 7B61     		str	r3, [r7, #20]
+ 163:../Common/Source/math_helper.c **** 
+ 164:../Common/Source/math_helper.c **** 	if(diffCrnt > maxDiff)
+ 513              		.loc 1 164 0
+ 514 0040 7A69     		ldr	r2, [r7, #20]
+ 515 0042 BB69     		ldr	r3, [r7, #24]
+ 516 0044 9A42     		cmp	r2, r3
+ 517 0046 01D9     		bls	.L29
+ 165:../Common/Source/math_helper.c **** 	{
+ 166:../Common/Source/math_helper.c **** 		maxDiff = diffCrnt;
+ 518              		.loc 1 166 0
+ 519 0048 7B69     		ldr	r3, [r7, #20]
+ 520 004a BB61     		str	r3, [r7, #24]
+ 521              	.L29:
+ 159:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 522              		.loc 1 159 0
+ 523 004c FB69     		ldr	r3, [r7, #28]
+ 524 004e 0133     		add	r3, r3, #1
+ 525 0050 FB61     		str	r3, [r7, #28]
+ 526              	.L28:
+ 159:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 527              		.loc 1 159 0 is_stmt 0 discriminator 1
+ 528 0052 FA69     		ldr	r2, [r7, #28]
+ 529 0054 7B68     		ldr	r3, [r7, #4]
+ 530 0056 9A42     		cmp	r2, r3
+ 531 0058 DFD3     		bcc	.L30
+ 167:../Common/Source/math_helper.c **** 	}	
+ 168:../Common/Source/math_helper.c ****   }
+ 169:../Common/Source/math_helper.c **** 
+ 170:../Common/Source/math_helper.c ****   return(maxDiff);
+ 532              		.loc 1 170 0 is_stmt 1
+ 533 005a BB69     		ldr	r3, [r7, #24]
+ 171:../Common/Source/math_helper.c **** }
+ 534              		.loc 1 171 0
+ 535 005c 181C     		mov	r0, r3
+ 536 005e BD46     		mov	sp, r7
+ 537 0060 08B0     		add	sp, sp, #32
+ 538              		@ sp needed for prologue
+ 539 0062 80BD     		pop	{r7, pc}
+ 540              		.cfi_endproc
+ 541              	.LFE84:
+ 543              		.section	.text.arm_compare_fixed_q31,"ax",%progbits
+ 544              		.align	2
+ 545              		.global	arm_compare_fixed_q31
+ 546              		.code	16
+ 547              		.thumb_func
+ 549              	arm_compare_fixed_q31:
+ 550              	.LFB85:
+ 172:../Common/Source/math_helper.c **** 
+ 173:../Common/Source/math_helper.c **** /** 
+ 174:../Common/Source/math_helper.c ****  * @brief  Compare MATLAB Reference Output and ARM Test output
+ 175:../Common/Source/math_helper.c ****  * @param  q31_t* 	Pointer to Ref buffer
+ 176:../Common/Source/math_helper.c ****  * @param  q31_t* 	Pointer to Test buffer
+ 177:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 178:../Common/Source/math_helper.c ****  * @return none 
+ 179:../Common/Source/math_helper.c ****  */
+ 180:../Common/Source/math_helper.c **** 
+ 181:../Common/Source/math_helper.c **** uint32_t arm_compare_fixed_q31(q31_t *pIn, q31_t * pOut, uint32_t numSamples)
+ 182:../Common/Source/math_helper.c **** {
+ 551              		.loc 1 182 0
+ 552              		.cfi_startproc
+ 553 0000 80B5     		push	{r7, lr}
+ 554              	.LCFI13:
+ 555              		.cfi_def_cfa_offset 8
+ 556              		.cfi_offset 7, -8
+ 557              		.cfi_offset 14, -4
+ 558 0002 88B0     		sub	sp, sp, #32
+ 559              	.LCFI14:
+ 560              		.cfi_def_cfa_offset 40
+ 561 0004 00AF     		add	r7, sp, #0
+ 562              	.LCFI15:
+ 563              		.cfi_def_cfa_register 7
+ 564 0006 F860     		str	r0, [r7, #12]
+ 565 0008 B960     		str	r1, [r7, #8]
+ 566 000a 7A60     		str	r2, [r7, #4]
+ 183:../Common/Source/math_helper.c ****   uint32_t i; 
+ 184:../Common/Source/math_helper.c ****   int32_t diff, diffCrnt = 0;
+ 567              		.loc 1 184 0
+ 568 000c 0023     		mov	r3, #0
+ 569 000e 7B61     		str	r3, [r7, #20]
+ 185:../Common/Source/math_helper.c ****   uint32_t maxDiff = 0;
+ 570              		.loc 1 185 0
+ 571 0010 0023     		mov	r3, #0
+ 572 0012 BB61     		str	r3, [r7, #24]
+ 186:../Common/Source/math_helper.c **** 
+ 187:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 573              		.loc 1 187 0
+ 574 0014 0023     		mov	r3, #0
+ 575 0016 FB61     		str	r3, [r7, #28]
+ 576 0018 19E0     		b	.L33
+ 577              	.L35:
+ 188:../Common/Source/math_helper.c ****   {
+ 189:../Common/Source/math_helper.c ****   	diff = pIn[i] - pOut[i];
+ 578              		.loc 1 189 0
+ 579 001a FB69     		ldr	r3, [r7, #28]
+ 580 001c 9B00     		lsl	r3, r3, #2
+ 581 001e FA68     		ldr	r2, [r7, #12]
+ 582 0020 D318     		add	r3, r2, r3
+ 583 0022 1A68     		ldr	r2, [r3]
+ 584 0024 FB69     		ldr	r3, [r7, #28]
+ 585 0026 9B00     		lsl	r3, r3, #2
+ 586 0028 B968     		ldr	r1, [r7, #8]
+ 587 002a CB18     		add	r3, r1, r3
+ 588 002c 1B68     		ldr	r3, [r3]
+ 589 002e D31A     		sub	r3, r2, r3
+ 590 0030 3B61     		str	r3, [r7, #16]
+ 190:../Common/Source/math_helper.c ****   	diffCrnt = (diff > 0) ? diff : -diff;
+ 591              		.loc 1 190 0
+ 592 0032 3B69     		ldr	r3, [r7, #16]
+ 593 0034 DA17     		asr	r2, r3, #31
+ 594 0036 9B18     		add	r3, r3, r2
+ 595 0038 5340     		eor	r3, r2
+ 596 003a 7B61     		str	r3, [r7, #20]
+ 191:../Common/Source/math_helper.c **** 
+ 192:../Common/Source/math_helper.c **** 	if(diffCrnt > maxDiff)
+ 597              		.loc 1 192 0
+ 598 003c 7A69     		ldr	r2, [r7, #20]
+ 599 003e BB69     		ldr	r3, [r7, #24]
+ 600 0040 9A42     		cmp	r2, r3
+ 601 0042 01D9     		bls	.L34
+ 193:../Common/Source/math_helper.c **** 	{
+ 194:../Common/Source/math_helper.c **** 		maxDiff = diffCrnt;
+ 602              		.loc 1 194 0
+ 603 0044 7B69     		ldr	r3, [r7, #20]
+ 604 0046 BB61     		str	r3, [r7, #24]
+ 605              	.L34:
+ 187:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 606              		.loc 1 187 0
+ 607 0048 FB69     		ldr	r3, [r7, #28]
+ 608 004a 0133     		add	r3, r3, #1
+ 609 004c FB61     		str	r3, [r7, #28]
+ 610              	.L33:
+ 187:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 611              		.loc 1 187 0 is_stmt 0 discriminator 1
+ 612 004e FA69     		ldr	r2, [r7, #28]
+ 613 0050 7B68     		ldr	r3, [r7, #4]
+ 614 0052 9A42     		cmp	r2, r3
+ 615 0054 E1D3     		bcc	.L35
+ 195:../Common/Source/math_helper.c **** 	}
+ 196:../Common/Source/math_helper.c ****   }
+ 197:../Common/Source/math_helper.c **** 
+ 198:../Common/Source/math_helper.c ****   return(maxDiff);
+ 616              		.loc 1 198 0 is_stmt 1
+ 617 0056 BB69     		ldr	r3, [r7, #24]
+ 199:../Common/Source/math_helper.c **** }
+ 618              		.loc 1 199 0
+ 619 0058 181C     		mov	r0, r3
+ 620 005a BD46     		mov	sp, r7
+ 621 005c 08B0     		add	sp, sp, #32
+ 622              		@ sp needed for prologue
+ 623 005e 80BD     		pop	{r7, pc}
+ 624              		.cfi_endproc
+ 625              	.LFE85:
+ 627              		.section	.text.arm_provide_guard_bits_q31,"ax",%progbits
+ 628              		.align	2
+ 629              		.global	arm_provide_guard_bits_q31
+ 630              		.code	16
+ 631              		.thumb_func
+ 633              	arm_provide_guard_bits_q31:
+ 634              	.LFB86:
+ 200:../Common/Source/math_helper.c **** 
+ 201:../Common/Source/math_helper.c **** /** 
+ 202:../Common/Source/math_helper.c ****  * @brief  Provide guard bits for Input buffer
+ 203:../Common/Source/math_helper.c ****  * @param  q31_t* 	Pointer to input buffer
+ 204:../Common/Source/math_helper.c ****  * @param  uint32_t 	blockSize
+ 205:../Common/Source/math_helper.c ****  * @param  uint32_t 	guard_bits
+ 206:../Common/Source/math_helper.c ****  * @return none
+ 207:../Common/Source/math_helper.c ****  * The function Provides the guard bits for the buffer 
+ 208:../Common/Source/math_helper.c ****  * to avoid overflow 
+ 209:../Common/Source/math_helper.c ****  */
+ 210:../Common/Source/math_helper.c **** 
+ 211:../Common/Source/math_helper.c **** void arm_provide_guard_bits_q31 (q31_t * input_buf, 
+ 212:../Common/Source/math_helper.c **** 								 uint32_t blockSize,
+ 213:../Common/Source/math_helper.c ****                                  uint32_t guard_bits)
+ 214:../Common/Source/math_helper.c **** {
+ 635              		.loc 1 214 0
+ 636              		.cfi_startproc
+ 637 0000 80B5     		push	{r7, lr}
+ 638              	.LCFI16:
+ 639              		.cfi_def_cfa_offset 8
+ 640              		.cfi_offset 7, -8
+ 641              		.cfi_offset 14, -4
+ 642 0002 86B0     		sub	sp, sp, #24
+ 643              	.LCFI17:
+ 644              		.cfi_def_cfa_offset 32
+ 645 0004 00AF     		add	r7, sp, #0
+ 646              	.LCFI18:
+ 647              		.cfi_def_cfa_register 7
+ 648 0006 F860     		str	r0, [r7, #12]
+ 649 0008 B960     		str	r1, [r7, #8]
+ 650 000a 7A60     		str	r2, [r7, #4]
+ 215:../Common/Source/math_helper.c ****   uint32_t i;
+ 216:../Common/Source/math_helper.c **** 
+ 217:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 651              		.loc 1 217 0
+ 652 000c 0023     		mov	r3, #0
+ 653 000e 7B61     		str	r3, [r7, #20]
+ 654 0010 10E0     		b	.L38
+ 655              	.L39:
+ 218:../Common/Source/math_helper.c ****     {
+ 219:../Common/Source/math_helper.c ****       input_buf[i] = input_buf[i] >> guard_bits;
+ 656              		.loc 1 219 0 discriminator 2
+ 657 0012 7B69     		ldr	r3, [r7, #20]
+ 658 0014 9B00     		lsl	r3, r3, #2
+ 659 0016 FA68     		ldr	r2, [r7, #12]
+ 660 0018 D318     		add	r3, r2, r3
+ 661 001a 7A69     		ldr	r2, [r7, #20]
+ 662 001c 9200     		lsl	r2, r2, #2
+ 663 001e F968     		ldr	r1, [r7, #12]
+ 664 0020 8A18     		add	r2, r1, r2
+ 665 0022 1168     		ldr	r1, [r2]
+ 666 0024 7A68     		ldr	r2, [r7, #4]
+ 667 0026 081C     		mov	r0, r1
+ 668 0028 1041     		asr	r0, r0, r2
+ 669 002a 021C     		mov	r2, r0
+ 670 002c 1A60     		str	r2, [r3]
+ 217:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 671              		.loc 1 217 0 discriminator 2
+ 672 002e 7B69     		ldr	r3, [r7, #20]
+ 673 0030 0133     		add	r3, r3, #1
+ 674 0032 7B61     		str	r3, [r7, #20]
+ 675              	.L38:
+ 217:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 676              		.loc 1 217 0 is_stmt 0 discriminator 1
+ 677 0034 7A69     		ldr	r2, [r7, #20]
+ 678 0036 BB68     		ldr	r3, [r7, #8]
+ 679 0038 9A42     		cmp	r2, r3
+ 680 003a EAD3     		bcc	.L39
+ 220:../Common/Source/math_helper.c ****     }
+ 221:../Common/Source/math_helper.c **** }
+ 681              		.loc 1 221 0 is_stmt 1
+ 682 003c BD46     		mov	sp, r7
+ 683 003e 06B0     		add	sp, sp, #24
+ 684              		@ sp needed for prologue
+ 685 0040 80BD     		pop	{r7, pc}
+ 686              		.cfi_endproc
+ 687              	.LFE86:
+ 689 0042 C046     		.section	.text.arm_provide_guard_bits_q7,"ax",%progbits
+ 690              		.align	2
+ 691              		.global	arm_provide_guard_bits_q7
+ 692              		.code	16
+ 693              		.thumb_func
+ 695              	arm_provide_guard_bits_q7:
+ 696              	.LFB87:
+ 222:../Common/Source/math_helper.c **** 
+ 223:../Common/Source/math_helper.c **** /** 
+ 224:../Common/Source/math_helper.c ****  * @brief  Provide guard bits for Input buffer
+ 225:../Common/Source/math_helper.c ****  * @param  q31_t* 	Pointer to input buffer
+ 226:../Common/Source/math_helper.c ****  * @param  uint32_t 	blockSize
+ 227:../Common/Source/math_helper.c ****  * @param  uint32_t 	guard_bits
+ 228:../Common/Source/math_helper.c ****  * @return none
+ 229:../Common/Source/math_helper.c ****  * The function Provides the guard bits for the buffer 
+ 230:../Common/Source/math_helper.c ****  * to avoid overflow 
+ 231:../Common/Source/math_helper.c ****  */
+ 232:../Common/Source/math_helper.c **** 
+ 233:../Common/Source/math_helper.c **** void arm_provide_guard_bits_q7 (q7_t * input_buf, 
+ 234:../Common/Source/math_helper.c **** 								uint32_t blockSize,
+ 235:../Common/Source/math_helper.c ****                                 uint32_t guard_bits)
+ 236:../Common/Source/math_helper.c **** {
+ 697              		.loc 1 236 0
+ 698              		.cfi_startproc
+ 699 0000 80B5     		push	{r7, lr}
+ 700              	.LCFI19:
+ 701              		.cfi_def_cfa_offset 8
+ 702              		.cfi_offset 7, -8
+ 703              		.cfi_offset 14, -4
+ 704 0002 86B0     		sub	sp, sp, #24
+ 705              	.LCFI20:
+ 706              		.cfi_def_cfa_offset 32
+ 707 0004 00AF     		add	r7, sp, #0
+ 708              	.LCFI21:
+ 709              		.cfi_def_cfa_register 7
+ 710 0006 F860     		str	r0, [r7, #12]
+ 711 0008 B960     		str	r1, [r7, #8]
+ 712 000a 7A60     		str	r2, [r7, #4]
+ 237:../Common/Source/math_helper.c ****   uint32_t i;
+ 238:../Common/Source/math_helper.c **** 
+ 239:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 713              		.loc 1 239 0
+ 714 000c 0023     		mov	r3, #0
+ 715 000e 7B61     		str	r3, [r7, #20]
+ 716 0010 10E0     		b	.L41
+ 717              	.L42:
+ 240:../Common/Source/math_helper.c ****     {
+ 241:../Common/Source/math_helper.c ****       input_buf[i] = input_buf[i] >> guard_bits;
+ 718              		.loc 1 241 0 discriminator 2
+ 719 0012 FA68     		ldr	r2, [r7, #12]
+ 720 0014 7B69     		ldr	r3, [r7, #20]
+ 721 0016 D318     		add	r3, r2, r3
+ 722 0018 F968     		ldr	r1, [r7, #12]
+ 723 001a 7A69     		ldr	r2, [r7, #20]
+ 724 001c 8A18     		add	r2, r1, r2
+ 725 001e 1278     		ldrb	r2, [r2]
+ 726 0020 51B2     		sxtb	r1, r2
+ 727 0022 7A68     		ldr	r2, [r7, #4]
+ 728 0024 081C     		mov	r0, r1
+ 729 0026 1041     		asr	r0, r0, r2
+ 730 0028 021C     		mov	r2, r0
+ 731 002a D2B2     		uxtb	r2, r2
+ 732 002c 1A70     		strb	r2, [r3]
+ 239:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 733              		.loc 1 239 0 discriminator 2
+ 734 002e 7B69     		ldr	r3, [r7, #20]
+ 735 0030 0133     		add	r3, r3, #1
+ 736 0032 7B61     		str	r3, [r7, #20]
+ 737              	.L41:
+ 239:../Common/Source/math_helper.c ****   for (i = 0; i < blockSize; i++)
+ 738              		.loc 1 239 0 is_stmt 0 discriminator 1
+ 739 0034 7A69     		ldr	r2, [r7, #20]
+ 740 0036 BB68     		ldr	r3, [r7, #8]
+ 741 0038 9A42     		cmp	r2, r3
+ 742 003a EAD3     		bcc	.L42
+ 242:../Common/Source/math_helper.c ****     }
+ 243:../Common/Source/math_helper.c **** }
+ 743              		.loc 1 243 0 is_stmt 1
+ 744 003c BD46     		mov	sp, r7
+ 745 003e 06B0     		add	sp, sp, #24
+ 746              		@ sp needed for prologue
+ 747 0040 80BD     		pop	{r7, pc}
+ 748              		.cfi_endproc
+ 749              	.LFE87:
+ 751 0042 C046     		.section	.text.arm_calc_guard_bits,"ax",%progbits
+ 752              		.align	2
+ 753              		.global	arm_calc_guard_bits
+ 754              		.code	16
+ 755              		.thumb_func
+ 757              	arm_calc_guard_bits:
+ 758              	.LFB88:
+ 244:../Common/Source/math_helper.c **** 
+ 245:../Common/Source/math_helper.c **** 
+ 246:../Common/Source/math_helper.c **** 
+ 247:../Common/Source/math_helper.c **** /** 
+ 248:../Common/Source/math_helper.c ****  * @brief  Caluclates number of guard bits 
+ 249:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of additions
+ 250:../Common/Source/math_helper.c ****  * @return none
+ 251:../Common/Source/math_helper.c ****  * The function Caluclates the number of guard bits  
+ 252:../Common/Source/math_helper.c ****  * depending on the numtaps 
+ 253:../Common/Source/math_helper.c ****  */
+ 254:../Common/Source/math_helper.c **** 
+ 255:../Common/Source/math_helper.c **** uint32_t arm_calc_guard_bits (uint32_t num_adds)
+ 256:../Common/Source/math_helper.c **** {
+ 759              		.loc 1 256 0
+ 760              		.cfi_startproc
+ 761 0000 80B5     		push	{r7, lr}
+ 762              	.LCFI22:
+ 763              		.cfi_def_cfa_offset 8
+ 764              		.cfi_offset 7, -8
+ 765              		.cfi_offset 14, -4
+ 766 0002 84B0     		sub	sp, sp, #16
+ 767              	.LCFI23:
+ 768              		.cfi_def_cfa_offset 24
+ 769 0004 00AF     		add	r7, sp, #0
+ 770              	.LCFI24:
+ 771              		.cfi_def_cfa_register 7
+ 772 0006 7860     		str	r0, [r7, #4]
+ 257:../Common/Source/math_helper.c ****   uint32_t i = 1, j = 0;
+ 773              		.loc 1 257 0
+ 774 0008 0123     		mov	r3, #1
+ 775 000a FB60     		str	r3, [r7, #12]
+ 776 000c 0023     		mov	r3, #0
+ 777 000e BB60     		str	r3, [r7, #8]
+ 258:../Common/Source/math_helper.c **** 
+ 259:../Common/Source/math_helper.c ****   if (num_adds == 1)
+ 778              		.loc 1 259 0
+ 779 0010 7B68     		ldr	r3, [r7, #4]
+ 780 0012 012B     		cmp	r3, #1
+ 781 0014 07D1     		bne	.L46
+ 260:../Common/Source/math_helper.c ****     {
+ 261:../Common/Source/math_helper.c ****       return (0);
+ 782              		.loc 1 261 0
+ 783 0016 0023     		mov	r3, #0
+ 784 0018 0AE0     		b	.L45
+ 785              	.L47:
+ 262:../Common/Source/math_helper.c ****     }
+ 263:../Common/Source/math_helper.c **** 
+ 264:../Common/Source/math_helper.c ****   while (i < num_adds)
+ 265:../Common/Source/math_helper.c ****     {
+ 266:../Common/Source/math_helper.c ****       i = i * 2;
+ 786              		.loc 1 266 0
+ 787 001a FB68     		ldr	r3, [r7, #12]
+ 788 001c 5B00     		lsl	r3, r3, #1
+ 789 001e FB60     		str	r3, [r7, #12]
+ 267:../Common/Source/math_helper.c ****       j++;
+ 790              		.loc 1 267 0
+ 791 0020 BB68     		ldr	r3, [r7, #8]
+ 792 0022 0133     		add	r3, r3, #1
+ 793 0024 BB60     		str	r3, [r7, #8]
+ 794              	.L46:
+ 264:../Common/Source/math_helper.c ****   while (i < num_adds)
+ 795              		.loc 1 264 0 discriminator 1
+ 796 0026 FA68     		ldr	r2, [r7, #12]
+ 797 0028 7B68     		ldr	r3, [r7, #4]
+ 798 002a 9A42     		cmp	r2, r3
+ 799 002c F5D3     		bcc	.L47
+ 268:../Common/Source/math_helper.c ****     }
+ 269:../Common/Source/math_helper.c **** 
+ 270:../Common/Source/math_helper.c ****   return (j);
+ 800              		.loc 1 270 0
+ 801 002e BB68     		ldr	r3, [r7, #8]
+ 802              	.L45:
+ 271:../Common/Source/math_helper.c **** }
+ 803              		.loc 1 271 0
+ 804 0030 181C     		mov	r0, r3
+ 805 0032 BD46     		mov	sp, r7
+ 806 0034 04B0     		add	sp, sp, #16
+ 807              		@ sp needed for prologue
+ 808 0036 80BD     		pop	{r7, pc}
+ 809              		.cfi_endproc
+ 810              	.LFE88:
+ 812              		.global	__aeabi_ui2f
+ 813              		.section	.text.arm_apply_guard_bits,"ax",%progbits
+ 814              		.align	2
+ 815              		.global	arm_apply_guard_bits
+ 816              		.code	16
+ 817              		.thumb_func
+ 819              	arm_apply_guard_bits:
+ 820              	.LFB89:
+ 272:../Common/Source/math_helper.c **** 
+ 273:../Common/Source/math_helper.c **** /** 
+ 274:../Common/Source/math_helper.c ****  * @brief  Converts Q15 to floating-point
+ 275:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 276:../Common/Source/math_helper.c ****  * @return none
+ 277:../Common/Source/math_helper.c ****  */
+ 278:../Common/Source/math_helper.c **** 
+ 279:../Common/Source/math_helper.c **** void arm_apply_guard_bits (float32_t * pIn, 
+ 280:../Common/Source/math_helper.c **** 						   uint32_t numSamples, 
+ 281:../Common/Source/math_helper.c **** 						   uint32_t guard_bits)
+ 282:../Common/Source/math_helper.c **** {
+ 821              		.loc 1 282 0
+ 822              		.cfi_startproc
+ 823 0000 B0B5     		push	{r4, r5, r7, lr}
+ 824              	.LCFI25:
+ 825              		.cfi_def_cfa_offset 16
+ 826              		.cfi_offset 4, -16
+ 827              		.cfi_offset 5, -12
+ 828              		.cfi_offset 7, -8
+ 829              		.cfi_offset 14, -4
+ 830 0002 86B0     		sub	sp, sp, #24
+ 831              	.LCFI26:
+ 832              		.cfi_def_cfa_offset 40
+ 833 0004 00AF     		add	r7, sp, #0
+ 834              	.LCFI27:
+ 835              		.cfi_def_cfa_register 7
+ 836 0006 F860     		str	r0, [r7, #12]
+ 837 0008 B960     		str	r1, [r7, #8]
+ 838 000a 7A60     		str	r2, [r7, #4]
+ 283:../Common/Source/math_helper.c ****   uint32_t i;
+ 284:../Common/Source/math_helper.c **** 
+ 285:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 839              		.loc 1 285 0
+ 840 000c 0023     		mov	r3, #0
+ 841 000e 7B61     		str	r3, [r7, #20]
+ 842 0010 1AE0     		b	.L49
+ 843              	.L50:
+ 286:../Common/Source/math_helper.c ****     {
+ 287:../Common/Source/math_helper.c ****       pIn[i] = pIn[i] * arm_calc_2pow(guard_bits);
+ 844              		.loc 1 287 0 discriminator 2
+ 845 0012 7B69     		ldr	r3, [r7, #20]
+ 846 0014 9B00     		lsl	r3, r3, #2
+ 847 0016 FA68     		ldr	r2, [r7, #12]
+ 848 0018 D418     		add	r4, r2, r3
+ 849 001a 7B69     		ldr	r3, [r7, #20]
+ 850 001c 9B00     		lsl	r3, r3, #2
+ 851 001e FA68     		ldr	r2, [r7, #12]
+ 852 0020 D318     		add	r3, r2, r3
+ 853 0022 1D68     		ldr	r5, [r3]
+ 854 0024 7B68     		ldr	r3, [r7, #4]
+ 855 0026 181C     		mov	r0, r3
+ 856 0028 FFF7FEFF 		bl	arm_calc_2pow
+ 857 002c 031C     		mov	r3, r0
+ 858 002e 181C     		mov	r0, r3
+ 859 0030 FFF7FEFF 		bl	__aeabi_ui2f
+ 860 0034 031C     		add	r3, r0, #0
+ 861 0036 281C     		add	r0, r5, #0
+ 862 0038 191C     		add	r1, r3, #0
+ 863 003a FFF7FEFF 		bl	__aeabi_fmul
+ 864 003e 031C     		add	r3, r0, #0
+ 865 0040 2360     		str	r3, [r4]
+ 285:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 866              		.loc 1 285 0 discriminator 2
+ 867 0042 7B69     		ldr	r3, [r7, #20]
+ 868 0044 0133     		add	r3, r3, #1
+ 869 0046 7B61     		str	r3, [r7, #20]
+ 870              	.L49:
+ 285:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 871              		.loc 1 285 0 is_stmt 0 discriminator 1
+ 872 0048 7A69     		ldr	r2, [r7, #20]
+ 873 004a BB68     		ldr	r3, [r7, #8]
+ 874 004c 9A42     		cmp	r2, r3
+ 875 004e E0D3     		bcc	.L50
+ 288:../Common/Source/math_helper.c ****     }
+ 289:../Common/Source/math_helper.c **** }
+ 876              		.loc 1 289 0 is_stmt 1
+ 877 0050 BD46     		mov	sp, r7
+ 878 0052 06B0     		add	sp, sp, #24
+ 879              		@ sp needed for prologue
+ 880 0054 B0BD     		pop	{r4, r5, r7, pc}
+ 881              		.cfi_endproc
+ 882              	.LFE89:
+ 884 0056 C046     		.section	.text.arm_calc_2pow,"ax",%progbits
+ 885              		.align	2
+ 886              		.global	arm_calc_2pow
+ 887              		.code	16
+ 888              		.thumb_func
+ 890              	arm_calc_2pow:
+ 891              	.LFB90:
+ 290:../Common/Source/math_helper.c **** 
+ 291:../Common/Source/math_helper.c **** /** 
+ 292:../Common/Source/math_helper.c ****  * @brief  Calculates pow(2, numShifts)
+ 293:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of shifts
+ 294:../Common/Source/math_helper.c ****  * @return pow(2, numShifts)
+ 295:../Common/Source/math_helper.c ****  */
+ 296:../Common/Source/math_helper.c **** uint32_t arm_calc_2pow(uint32_t numShifts)
+ 297:../Common/Source/math_helper.c **** {
+ 892              		.loc 1 297 0
+ 893              		.cfi_startproc
+ 894 0000 80B5     		push	{r7, lr}
+ 895              	.LCFI28:
+ 896              		.cfi_def_cfa_offset 8
+ 897              		.cfi_offset 7, -8
+ 898              		.cfi_offset 14, -4
+ 899 0002 84B0     		sub	sp, sp, #16
+ 900              	.LCFI29:
+ 901              		.cfi_def_cfa_offset 24
+ 902 0004 00AF     		add	r7, sp, #0
+ 903              	.LCFI30:
+ 904              		.cfi_def_cfa_register 7
+ 905 0006 7860     		str	r0, [r7, #4]
+ 298:../Common/Source/math_helper.c **** 
+ 299:../Common/Source/math_helper.c ****   uint32_t i, val = 1;
+ 906              		.loc 1 299 0
+ 907 0008 0123     		mov	r3, #1
+ 908 000a BB60     		str	r3, [r7, #8]
+ 300:../Common/Source/math_helper.c **** 
+ 301:../Common/Source/math_helper.c ****   for (i = 0; i < numShifts; i++)
+ 909              		.loc 1 301 0
+ 910 000c 0023     		mov	r3, #0
+ 911 000e FB60     		str	r3, [r7, #12]
+ 912 0010 05E0     		b	.L52
+ 913              	.L53:
+ 302:../Common/Source/math_helper.c ****     {
+ 303:../Common/Source/math_helper.c ****       val = val * 2;
+ 914              		.loc 1 303 0 discriminator 2
+ 915 0012 BB68     		ldr	r3, [r7, #8]
+ 916 0014 5B00     		lsl	r3, r3, #1
+ 917 0016 BB60     		str	r3, [r7, #8]
+ 301:../Common/Source/math_helper.c ****   for (i = 0; i < numShifts; i++)
+ 918              		.loc 1 301 0 discriminator 2
+ 919 0018 FB68     		ldr	r3, [r7, #12]
+ 920 001a 0133     		add	r3, r3, #1
+ 921 001c FB60     		str	r3, [r7, #12]
+ 922              	.L52:
+ 301:../Common/Source/math_helper.c ****   for (i = 0; i < numShifts; i++)
+ 923              		.loc 1 301 0 is_stmt 0 discriminator 1
+ 924 001e FA68     		ldr	r2, [r7, #12]
+ 925 0020 7B68     		ldr	r3, [r7, #4]
+ 926 0022 9A42     		cmp	r2, r3
+ 927 0024 F5D3     		bcc	.L53
+ 304:../Common/Source/math_helper.c ****     }	
+ 305:../Common/Source/math_helper.c **** 
+ 306:../Common/Source/math_helper.c ****   return(val);
+ 928              		.loc 1 306 0 is_stmt 1
+ 929 0026 BB68     		ldr	r3, [r7, #8]
+ 307:../Common/Source/math_helper.c **** }
+ 930              		.loc 1 307 0
+ 931 0028 181C     		mov	r0, r3
+ 932 002a BD46     		mov	sp, r7
+ 933 002c 04B0     		add	sp, sp, #16
+ 934              		@ sp needed for prologue
+ 935 002e 80BD     		pop	{r7, pc}
+ 936              		.cfi_endproc
+ 937              	.LFE90:
+ 939              		.section	.text.arm_float_to_q14,"ax",%progbits
+ 940              		.align	2
+ 941              		.global	arm_float_to_q14
+ 942              		.code	16
+ 943              		.thumb_func
+ 945              	arm_float_to_q14:
+ 946              	.LFB91:
+ 308:../Common/Source/math_helper.c **** 
+ 309:../Common/Source/math_helper.c **** 
+ 310:../Common/Source/math_helper.c **** 
+ 311:../Common/Source/math_helper.c **** /** 
+ 312:../Common/Source/math_helper.c ****  * @brief  Converts float to fixed q14 
+ 313:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 314:../Common/Source/math_helper.c ****  * @return none
+ 315:../Common/Source/math_helper.c ****  * The function converts floating point values to fixed point values 
+ 316:../Common/Source/math_helper.c ****  */
+ 317:../Common/Source/math_helper.c **** 
+ 318:../Common/Source/math_helper.c **** void arm_float_to_q14 (float *pIn, q15_t * pOut, 
+ 319:../Common/Source/math_helper.c ****                        uint32_t numSamples)
+ 320:../Common/Source/math_helper.c **** {
+ 947              		.loc 1 320 0
+ 948              		.cfi_startproc
+ 949 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 950              	.LCFI31:
+ 951              		.cfi_def_cfa_offset 20
+ 952              		.cfi_offset 4, -20
+ 953              		.cfi_offset 5, -16
+ 954              		.cfi_offset 6, -12
+ 955              		.cfi_offset 7, -8
+ 956              		.cfi_offset 14, -4
+ 957 0002 4746     		mov	r7, r8
+ 958 0004 80B4     		push	{r7}
+ 959              	.LCFI32:
+ 960              		.cfi_def_cfa_offset 24
+ 961              		.cfi_offset 8, -24
+ 962 0006 86B0     		sub	sp, sp, #24
+ 963              	.LCFI33:
+ 964              		.cfi_def_cfa_offset 48
+ 965 0008 00AF     		add	r7, sp, #0
+ 966              	.LCFI34:
+ 967              		.cfi_def_cfa_register 7
+ 968 000a F860     		str	r0, [r7, #12]
+ 969 000c B960     		str	r1, [r7, #8]
+ 970 000e 7A60     		str	r2, [r7, #4]
+ 321:../Common/Source/math_helper.c ****   uint32_t i;
+ 322:../Common/Source/math_helper.c **** 
+ 323:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 971              		.loc 1 323 0
+ 972 0010 0023     		mov	r3, #0
+ 973 0012 7B61     		str	r3, [r7, #20]
+ 974 0014 5BE0     		b	.L56
+ 975              	.L62:
+ 324:../Common/Source/math_helper.c ****     {
+ 325:../Common/Source/math_helper.c **** 	  /* 16384.0f corresponds to pow(2, 14) */
+ 326:../Common/Source/math_helper.c ****       pOut[i] = (q15_t) (pIn[i] * 16384.0f);
+ 976              		.loc 1 326 0
+ 977 0016 7B69     		ldr	r3, [r7, #20]
+ 978 0018 5B00     		lsl	r3, r3, #1
+ 979 001a BA68     		ldr	r2, [r7, #8]
+ 980 001c D418     		add	r4, r2, r3
+ 981 001e 7B69     		ldr	r3, [r7, #20]
+ 982 0020 9B00     		lsl	r3, r3, #2
+ 983 0022 FA68     		ldr	r2, [r7, #12]
+ 984 0024 D318     		add	r3, r2, r3
+ 985 0026 1B68     		ldr	r3, [r3]
+ 986 0028 181C     		add	r0, r3, #0
+ 987 002a 8D21     		mov	r1, #141
+ 988 002c C905     		lsl	r1, r1, #23
+ 989 002e FFF7FEFF 		bl	__aeabi_fmul
+ 990 0032 031C     		add	r3, r0, #0
+ 991 0034 181C     		add	r0, r3, #0
+ 992 0036 FFF7FEFF 		bl	__aeabi_f2iz
+ 993 003a 031C     		mov	r3, r0
+ 994 003c 9BB2     		uxth	r3, r3
+ 995 003e 2380     		strh	r3, [r4]
+ 327:../Common/Source/math_helper.c **** 
+ 328:../Common/Source/math_helper.c ****       pOut[i] += pIn[i] > 0 ? 0.5 : -0.5;
+ 996              		.loc 1 328 0
+ 997 0040 7B69     		ldr	r3, [r7, #20]
+ 998 0042 5B00     		lsl	r3, r3, #1
+ 999 0044 BA68     		ldr	r2, [r7, #8]
+ 1000 0046 D218     		add	r2, r2, r3
+ 1001 0048 9046     		mov	r8, r2
+ 1002 004a 7B69     		ldr	r3, [r7, #20]
+ 1003 004c 5B00     		lsl	r3, r3, #1
+ 1004 004e BA68     		ldr	r2, [r7, #8]
+ 1005 0050 D318     		add	r3, r2, r3
+ 1006 0052 1B88     		ldrh	r3, [r3]
+ 1007 0054 1BB2     		sxth	r3, r3
+ 1008 0056 181C     		mov	r0, r3
+ 1009 0058 FFF7FEFF 		bl	__aeabi_i2d
+ 1010 005c 051C     		mov	r5, r0
+ 1011 005e 0E1C     		mov	r6, r1
+ 1012 0060 7B69     		ldr	r3, [r7, #20]
+ 1013 0062 9B00     		lsl	r3, r3, #2
+ 1014 0064 FA68     		ldr	r2, [r7, #12]
+ 1015 0066 D318     		add	r3, r2, r3
+ 1016 0068 1B68     		ldr	r3, [r3]
+ 1017 006a 181C     		add	r0, r3, #0
+ 1018 006c 0021     		mov	r1, #0
+ 1019 006e FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1020 0072 031C     		mov	r3, r0
+ 1021 0074 002B     		cmp	r3, #0
+ 1022 0076 02D0     		beq	.L65
+ 1023              	.L63:
+ 1024              		.loc 1 328 0 is_stmt 0 discriminator 1
+ 1025 0078 1A4C     		ldr	r4, .L66+4
+ 1026 007a 194B     		ldr	r3, .L66
+ 1027 007c 01E0     		b	.L59
+ 1028              	.L65:
+ 1029              		.loc 1 328 0 discriminator 2
+ 1030 007e 1A4B     		ldr	r3, .L66+8
+ 1031 0080 1A4C     		ldr	r4, .L66+12
+ 1032              	.L59:
+ 1033              		.loc 1 328 0 discriminator 3
+ 1034 0082 281C     		mov	r0, r5
+ 1035 0084 311C     		mov	r1, r6
+ 1036 0086 1A1C     		mov	r2, r3
+ 1037 0088 231C     		mov	r3, r4
+ 1038 008a FFF7FEFF 		bl	__aeabi_dadd
+ 1039 008e 031C     		mov	r3, r0
+ 1040 0090 0C1C     		mov	r4, r1
+ 1041 0092 181C     		mov	r0, r3
+ 1042 0094 211C     		mov	r1, r4
+ 1043 0096 FFF7FEFF 		bl	__aeabi_d2iz
+ 1044 009a 031C     		mov	r3, r0
+ 1045 009c 9BB2     		uxth	r3, r3
+ 1046 009e 4246     		mov	r2, r8
+ 1047 00a0 1380     		strh	r3, [r2]
+ 329:../Common/Source/math_helper.c **** 
+ 330:../Common/Source/math_helper.c ****       if (pIn[i] == (float) 2.0)
+ 1048              		.loc 1 330 0 is_stmt 1 discriminator 3
+ 1049 00a2 7B69     		ldr	r3, [r7, #20]
+ 1050 00a4 9B00     		lsl	r3, r3, #2
+ 1051 00a6 FA68     		ldr	r2, [r7, #12]
+ 1052 00a8 D318     		add	r3, r2, r3
+ 1053 00aa 1B68     		ldr	r3, [r3]
+ 1054 00ac 181C     		add	r0, r3, #0
+ 1055 00ae 8021     		mov	r1, #128
+ 1056 00b0 C905     		lsl	r1, r1, #23
+ 1057 00b2 FFF7FEFF 		bl	__aeabi_fcmpeq
+ 1058 00b6 031C     		mov	r3, r0
+ 1059 00b8 002B     		cmp	r3, #0
+ 1060 00ba 05D0     		beq	.L60
+ 1061              	.L64:
+ 331:../Common/Source/math_helper.c ****         {
+ 332:../Common/Source/math_helper.c ****           pOut[i] = 0x7FFF;
+ 1062              		.loc 1 332 0
+ 1063 00bc 7B69     		ldr	r3, [r7, #20]
+ 1064 00be 5B00     		lsl	r3, r3, #1
+ 1065 00c0 BA68     		ldr	r2, [r7, #8]
+ 1066 00c2 D318     		add	r3, r2, r3
+ 1067 00c4 0A4A     		ldr	r2, .L66+16
+ 1068 00c6 1A80     		strh	r2, [r3]
+ 1069              	.L60:
+ 323:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1070              		.loc 1 323 0
+ 1071 00c8 7B69     		ldr	r3, [r7, #20]
+ 1072 00ca 0133     		add	r3, r3, #1
+ 1073 00cc 7B61     		str	r3, [r7, #20]
+ 1074              	.L56:
+ 323:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1075              		.loc 1 323 0 is_stmt 0 discriminator 1
+ 1076 00ce 7A69     		ldr	r2, [r7, #20]
+ 1077 00d0 7B68     		ldr	r3, [r7, #4]
+ 1078 00d2 9A42     		cmp	r2, r3
+ 1079 00d4 9FD3     		bcc	.L62
+ 333:../Common/Source/math_helper.c ****         }
+ 334:../Common/Source/math_helper.c **** 
+ 335:../Common/Source/math_helper.c ****     }
+ 336:../Common/Source/math_helper.c **** 
+ 337:../Common/Source/math_helper.c **** }
+ 1080              		.loc 1 337 0 is_stmt 1
+ 1081 00d6 BD46     		mov	sp, r7
+ 1082 00d8 06B0     		add	sp, sp, #24
+ 1083              		@ sp needed for prologue
+ 1084 00da 04BC     		pop	{r2}
+ 1085 00dc 9046     		mov	r8, r2
+ 1086 00de F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1087              	.L67:
+ 1088              		.align	3
+ 1089              	.L66:
+ 1090 00e0 00000000 		.word	0
+ 1091 00e4 0000E03F 		.word	1071644672
+ 1092 00e8 00000000 		.word	0
+ 1093 00ec 0000E0BF 		.word	-1075838976
+ 1094 00f0 FF7F0000 		.word	32767
+ 1095              		.cfi_endproc
+ 1096              	.LFE91:
+ 1098 00f4 C046C046 		.section	.text.arm_float_to_q30,"ax",%progbits
+ 1099              		.align	2
+ 1100              		.global	arm_float_to_q30
+ 1101              		.code	16
+ 1102              		.thumb_func
+ 1104              	arm_float_to_q30:
+ 1105              	.LFB92:
+ 338:../Common/Source/math_helper.c **** 
+ 339:../Common/Source/math_helper.c ****  
+ 340:../Common/Source/math_helper.c **** /** 
+ 341:../Common/Source/math_helper.c ****  * @brief  Converts float to fixed q30 format
+ 342:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 343:../Common/Source/math_helper.c ****  * @return none
+ 344:../Common/Source/math_helper.c ****  * The function converts floating point values to fixed point values 
+ 345:../Common/Source/math_helper.c ****  */
+ 346:../Common/Source/math_helper.c **** 
+ 347:../Common/Source/math_helper.c **** void arm_float_to_q30 (float *pIn, q31_t * pOut, 
+ 348:../Common/Source/math_helper.c **** 					   uint32_t numSamples)
+ 349:../Common/Source/math_helper.c **** {
+ 1106              		.loc 1 349 0
+ 1107              		.cfi_startproc
+ 1108 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1109              	.LCFI35:
+ 1110              		.cfi_def_cfa_offset 20
+ 1111              		.cfi_offset 4, -20
+ 1112              		.cfi_offset 5, -16
+ 1113              		.cfi_offset 6, -12
+ 1114              		.cfi_offset 7, -8
+ 1115              		.cfi_offset 14, -4
+ 1116 0002 4746     		mov	r7, r8
+ 1117 0004 80B4     		push	{r7}
+ 1118              	.LCFI36:
+ 1119              		.cfi_def_cfa_offset 24
+ 1120              		.cfi_offset 8, -24
+ 1121 0006 86B0     		sub	sp, sp, #24
+ 1122              	.LCFI37:
+ 1123              		.cfi_def_cfa_offset 48
+ 1124 0008 00AF     		add	r7, sp, #0
+ 1125              	.LCFI38:
+ 1126              		.cfi_def_cfa_register 7
+ 1127 000a F860     		str	r0, [r7, #12]
+ 1128 000c B960     		str	r1, [r7, #8]
+ 1129 000e 7A60     		str	r2, [r7, #4]
+ 350:../Common/Source/math_helper.c ****   uint32_t i;
+ 351:../Common/Source/math_helper.c **** 
+ 352:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1130              		.loc 1 352 0
+ 1131 0010 0023     		mov	r3, #0
+ 1132 0012 7B61     		str	r3, [r7, #20]
+ 1133 0014 58E0     		b	.L69
+ 1134              	.L75:
+ 353:../Common/Source/math_helper.c ****     {
+ 354:../Common/Source/math_helper.c **** 	  /* 1073741824.0f corresponds to pow(2, 30) */
+ 355:../Common/Source/math_helper.c ****       pOut[i] = (q31_t) (pIn[i] * 1073741824.0f);
+ 1135              		.loc 1 355 0
+ 1136 0016 7B69     		ldr	r3, [r7, #20]
+ 1137 0018 9B00     		lsl	r3, r3, #2
+ 1138 001a BA68     		ldr	r2, [r7, #8]
+ 1139 001c D418     		add	r4, r2, r3
+ 1140 001e 7B69     		ldr	r3, [r7, #20]
+ 1141 0020 9B00     		lsl	r3, r3, #2
+ 1142 0022 FA68     		ldr	r2, [r7, #12]
+ 1143 0024 D318     		add	r3, r2, r3
+ 1144 0026 1B68     		ldr	r3, [r3]
+ 1145 0028 181C     		add	r0, r3, #0
+ 1146 002a 9D21     		mov	r1, #157
+ 1147 002c C905     		lsl	r1, r1, #23
+ 1148 002e FFF7FEFF 		bl	__aeabi_fmul
+ 1149 0032 031C     		add	r3, r0, #0
+ 1150 0034 181C     		add	r0, r3, #0
+ 1151 0036 FFF7FEFF 		bl	__aeabi_f2iz
+ 1152 003a 031C     		mov	r3, r0
+ 1153 003c 2360     		str	r3, [r4]
+ 356:../Common/Source/math_helper.c **** 
+ 357:../Common/Source/math_helper.c ****       pOut[i] += pIn[i] > 0 ? 0.5 : -0.5;
+ 1154              		.loc 1 357 0
+ 1155 003e 7B69     		ldr	r3, [r7, #20]
+ 1156 0040 9B00     		lsl	r3, r3, #2
+ 1157 0042 BA68     		ldr	r2, [r7, #8]
+ 1158 0044 D218     		add	r2, r2, r3
+ 1159 0046 9046     		mov	r8, r2
+ 1160 0048 7B69     		ldr	r3, [r7, #20]
+ 1161 004a 9B00     		lsl	r3, r3, #2
+ 1162 004c BA68     		ldr	r2, [r7, #8]
+ 1163 004e D318     		add	r3, r2, r3
+ 1164 0050 1B68     		ldr	r3, [r3]
+ 1165 0052 181C     		mov	r0, r3
+ 1166 0054 FFF7FEFF 		bl	__aeabi_i2d
+ 1167 0058 051C     		mov	r5, r0
+ 1168 005a 0E1C     		mov	r6, r1
+ 1169 005c 7B69     		ldr	r3, [r7, #20]
+ 1170 005e 9B00     		lsl	r3, r3, #2
+ 1171 0060 FA68     		ldr	r2, [r7, #12]
+ 1172 0062 D318     		add	r3, r2, r3
+ 1173 0064 1B68     		ldr	r3, [r3]
+ 1174 0066 181C     		add	r0, r3, #0
+ 1175 0068 0021     		mov	r1, #0
+ 1176 006a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1177 006e 031C     		mov	r3, r0
+ 1178 0070 002B     		cmp	r3, #0
+ 1179 0072 02D0     		beq	.L78
+ 1180              	.L76:
+ 1181              		.loc 1 357 0 is_stmt 0 discriminator 1
+ 1182 0074 1B4C     		ldr	r4, .L79+4
+ 1183 0076 1A4B     		ldr	r3, .L79
+ 1184 0078 01E0     		b	.L72
+ 1185              	.L78:
+ 1186              		.loc 1 357 0 discriminator 2
+ 1187 007a 1B4B     		ldr	r3, .L79+8
+ 1188 007c 1B4C     		ldr	r4, .L79+12
+ 1189              	.L72:
+ 1190              		.loc 1 357 0 discriminator 3
+ 1191 007e 281C     		mov	r0, r5
+ 1192 0080 311C     		mov	r1, r6
+ 1193 0082 1A1C     		mov	r2, r3
+ 1194 0084 231C     		mov	r3, r4
+ 1195 0086 FFF7FEFF 		bl	__aeabi_dadd
+ 1196 008a 031C     		mov	r3, r0
+ 1197 008c 0C1C     		mov	r4, r1
+ 1198 008e 181C     		mov	r0, r3
+ 1199 0090 211C     		mov	r1, r4
+ 1200 0092 FFF7FEFF 		bl	__aeabi_d2iz
+ 1201 0096 031C     		mov	r3, r0
+ 1202 0098 4246     		mov	r2, r8
+ 1203 009a 1360     		str	r3, [r2]
+ 358:../Common/Source/math_helper.c **** 
+ 359:../Common/Source/math_helper.c ****       if (pIn[i] == (float) 2.0)
+ 1204              		.loc 1 359 0 is_stmt 1 discriminator 3
+ 1205 009c 7B69     		ldr	r3, [r7, #20]
+ 1206 009e 9B00     		lsl	r3, r3, #2
+ 1207 00a0 FA68     		ldr	r2, [r7, #12]
+ 1208 00a2 D318     		add	r3, r2, r3
+ 1209 00a4 1B68     		ldr	r3, [r3]
+ 1210 00a6 181C     		add	r0, r3, #0
+ 1211 00a8 8021     		mov	r1, #128
+ 1212 00aa C905     		lsl	r1, r1, #23
+ 1213 00ac FFF7FEFF 		bl	__aeabi_fcmpeq
+ 1214 00b0 031C     		mov	r3, r0
+ 1215 00b2 002B     		cmp	r3, #0
+ 1216 00b4 05D0     		beq	.L73
+ 1217              	.L77:
+ 360:../Common/Source/math_helper.c ****         {
+ 361:../Common/Source/math_helper.c ****           pOut[i] = 0x7FFFFFFF;
+ 1218              		.loc 1 361 0
+ 1219 00b6 7B69     		ldr	r3, [r7, #20]
+ 1220 00b8 9B00     		lsl	r3, r3, #2
+ 1221 00ba BA68     		ldr	r2, [r7, #8]
+ 1222 00bc D318     		add	r3, r2, r3
+ 1223 00be 0C4A     		ldr	r2, .L79+16
+ 1224 00c0 1A60     		str	r2, [r3]
+ 1225              	.L73:
+ 352:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1226              		.loc 1 352 0
+ 1227 00c2 7B69     		ldr	r3, [r7, #20]
+ 1228 00c4 0133     		add	r3, r3, #1
+ 1229 00c6 7B61     		str	r3, [r7, #20]
+ 1230              	.L69:
+ 352:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1231              		.loc 1 352 0 is_stmt 0 discriminator 1
+ 1232 00c8 7A69     		ldr	r2, [r7, #20]
+ 1233 00ca 7B68     		ldr	r3, [r7, #4]
+ 1234 00cc 9A42     		cmp	r2, r3
+ 1235 00ce A2D3     		bcc	.L75
+ 362:../Common/Source/math_helper.c ****         }
+ 363:../Common/Source/math_helper.c ****     }
+ 364:../Common/Source/math_helper.c **** }
+ 1236              		.loc 1 364 0 is_stmt 1
+ 1237 00d0 BD46     		mov	sp, r7
+ 1238 00d2 06B0     		add	sp, sp, #24
+ 1239              		@ sp needed for prologue
+ 1240 00d4 04BC     		pop	{r2}
+ 1241 00d6 9046     		mov	r8, r2
+ 1242 00d8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1243              	.L80:
+ 1244 00da C046C046 		.align	3
+ 1244      C046
+ 1245              	.L79:
+ 1246 00e0 00000000 		.word	0
+ 1247 00e4 0000E03F 		.word	1071644672
+ 1248 00e8 00000000 		.word	0
+ 1249 00ec 0000E0BF 		.word	-1075838976
+ 1250 00f0 FFFFFF7F 		.word	2147483647
+ 1251              		.cfi_endproc
+ 1252              	.LFE92:
+ 1254 00f4 C046C046 		.section	.text.arm_float_to_q29,"ax",%progbits
+ 1255              		.align	2
+ 1256              		.global	arm_float_to_q29
+ 1257              		.code	16
+ 1258              		.thumb_func
+ 1260              	arm_float_to_q29:
+ 1261              	.LFB93:
+ 365:../Common/Source/math_helper.c **** 
+ 366:../Common/Source/math_helper.c **** /** 
+ 367:../Common/Source/math_helper.c ****  * @brief  Converts float to fixed q30 format
+ 368:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 369:../Common/Source/math_helper.c ****  * @return none
+ 370:../Common/Source/math_helper.c ****  * The function converts floating point values to fixed point values 
+ 371:../Common/Source/math_helper.c ****  */
+ 372:../Common/Source/math_helper.c **** 
+ 373:../Common/Source/math_helper.c **** void arm_float_to_q29 (float *pIn, q31_t * pOut, 
+ 374:../Common/Source/math_helper.c **** 					   uint32_t numSamples)
+ 375:../Common/Source/math_helper.c **** {
+ 1262              		.loc 1 375 0
+ 1263              		.cfi_startproc
+ 1264 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1265              	.LCFI39:
+ 1266              		.cfi_def_cfa_offset 20
+ 1267              		.cfi_offset 4, -20
+ 1268              		.cfi_offset 5, -16
+ 1269              		.cfi_offset 6, -12
+ 1270              		.cfi_offset 7, -8
+ 1271              		.cfi_offset 14, -4
+ 1272 0002 4746     		mov	r7, r8
+ 1273 0004 80B4     		push	{r7}
+ 1274              	.LCFI40:
+ 1275              		.cfi_def_cfa_offset 24
+ 1276              		.cfi_offset 8, -24
+ 1277 0006 86B0     		sub	sp, sp, #24
+ 1278              	.LCFI41:
+ 1279              		.cfi_def_cfa_offset 48
+ 1280 0008 00AF     		add	r7, sp, #0
+ 1281              	.LCFI42:
+ 1282              		.cfi_def_cfa_register 7
+ 1283 000a F860     		str	r0, [r7, #12]
+ 1284 000c B960     		str	r1, [r7, #8]
+ 1285 000e 7A60     		str	r2, [r7, #4]
+ 376:../Common/Source/math_helper.c ****   uint32_t i;
+ 377:../Common/Source/math_helper.c **** 
+ 378:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1286              		.loc 1 378 0
+ 1287 0010 0023     		mov	r3, #0
+ 1288 0012 7B61     		str	r3, [r7, #20]
+ 1289 0014 58E0     		b	.L82
+ 1290              	.L88:
+ 379:../Common/Source/math_helper.c ****     {
+ 380:../Common/Source/math_helper.c **** 	  /* 1073741824.0f corresponds to pow(2, 30) */
+ 381:../Common/Source/math_helper.c ****       pOut[i] = (q31_t) (pIn[i] * 536870912.0f);
+ 1291              		.loc 1 381 0
+ 1292 0016 7B69     		ldr	r3, [r7, #20]
+ 1293 0018 9B00     		lsl	r3, r3, #2
+ 1294 001a BA68     		ldr	r2, [r7, #8]
+ 1295 001c D418     		add	r4, r2, r3
+ 1296 001e 7B69     		ldr	r3, [r7, #20]
+ 1297 0020 9B00     		lsl	r3, r3, #2
+ 1298 0022 FA68     		ldr	r2, [r7, #12]
+ 1299 0024 D318     		add	r3, r2, r3
+ 1300 0026 1B68     		ldr	r3, [r3]
+ 1301 0028 181C     		add	r0, r3, #0
+ 1302 002a 9C21     		mov	r1, #156
+ 1303 002c C905     		lsl	r1, r1, #23
+ 1304 002e FFF7FEFF 		bl	__aeabi_fmul
+ 1305 0032 031C     		add	r3, r0, #0
+ 1306 0034 181C     		add	r0, r3, #0
+ 1307 0036 FFF7FEFF 		bl	__aeabi_f2iz
+ 1308 003a 031C     		mov	r3, r0
+ 1309 003c 2360     		str	r3, [r4]
+ 382:../Common/Source/math_helper.c **** 
+ 383:../Common/Source/math_helper.c ****       pOut[i] += pIn[i] > 0 ? 0.5 : -0.5;
+ 1310              		.loc 1 383 0
+ 1311 003e 7B69     		ldr	r3, [r7, #20]
+ 1312 0040 9B00     		lsl	r3, r3, #2
+ 1313 0042 BA68     		ldr	r2, [r7, #8]
+ 1314 0044 D218     		add	r2, r2, r3
+ 1315 0046 9046     		mov	r8, r2
+ 1316 0048 7B69     		ldr	r3, [r7, #20]
+ 1317 004a 9B00     		lsl	r3, r3, #2
+ 1318 004c BA68     		ldr	r2, [r7, #8]
+ 1319 004e D318     		add	r3, r2, r3
+ 1320 0050 1B68     		ldr	r3, [r3]
+ 1321 0052 181C     		mov	r0, r3
+ 1322 0054 FFF7FEFF 		bl	__aeabi_i2d
+ 1323 0058 051C     		mov	r5, r0
+ 1324 005a 0E1C     		mov	r6, r1
+ 1325 005c 7B69     		ldr	r3, [r7, #20]
+ 1326 005e 9B00     		lsl	r3, r3, #2
+ 1327 0060 FA68     		ldr	r2, [r7, #12]
+ 1328 0062 D318     		add	r3, r2, r3
+ 1329 0064 1B68     		ldr	r3, [r3]
+ 1330 0066 181C     		add	r0, r3, #0
+ 1331 0068 0021     		mov	r1, #0
+ 1332 006a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1333 006e 031C     		mov	r3, r0
+ 1334 0070 002B     		cmp	r3, #0
+ 1335 0072 02D0     		beq	.L91
+ 1336              	.L89:
+ 1337              		.loc 1 383 0 is_stmt 0 discriminator 1
+ 1338 0074 1B4C     		ldr	r4, .L92+4
+ 1339 0076 1A4B     		ldr	r3, .L92
+ 1340 0078 01E0     		b	.L85
+ 1341              	.L91:
+ 1342              		.loc 1 383 0 discriminator 2
+ 1343 007a 1B4B     		ldr	r3, .L92+8
+ 1344 007c 1B4C     		ldr	r4, .L92+12
+ 1345              	.L85:
+ 1346              		.loc 1 383 0 discriminator 3
+ 1347 007e 281C     		mov	r0, r5
+ 1348 0080 311C     		mov	r1, r6
+ 1349 0082 1A1C     		mov	r2, r3
+ 1350 0084 231C     		mov	r3, r4
+ 1351 0086 FFF7FEFF 		bl	__aeabi_dadd
+ 1352 008a 031C     		mov	r3, r0
+ 1353 008c 0C1C     		mov	r4, r1
+ 1354 008e 181C     		mov	r0, r3
+ 1355 0090 211C     		mov	r1, r4
+ 1356 0092 FFF7FEFF 		bl	__aeabi_d2iz
+ 1357 0096 031C     		mov	r3, r0
+ 1358 0098 4246     		mov	r2, r8
+ 1359 009a 1360     		str	r3, [r2]
+ 384:../Common/Source/math_helper.c **** 
+ 385:../Common/Source/math_helper.c ****       if (pIn[i] == (float) 4.0)
+ 1360              		.loc 1 385 0 is_stmt 1 discriminator 3
+ 1361 009c 7B69     		ldr	r3, [r7, #20]
+ 1362 009e 9B00     		lsl	r3, r3, #2
+ 1363 00a0 FA68     		ldr	r2, [r7, #12]
+ 1364 00a2 D318     		add	r3, r2, r3
+ 1365 00a4 1B68     		ldr	r3, [r3]
+ 1366 00a6 181C     		add	r0, r3, #0
+ 1367 00a8 8121     		mov	r1, #129
+ 1368 00aa C905     		lsl	r1, r1, #23
+ 1369 00ac FFF7FEFF 		bl	__aeabi_fcmpeq
+ 1370 00b0 031C     		mov	r3, r0
+ 1371 00b2 002B     		cmp	r3, #0
+ 1372 00b4 05D0     		beq	.L86
+ 1373              	.L90:
+ 386:../Common/Source/math_helper.c ****         {
+ 387:../Common/Source/math_helper.c ****           pOut[i] = 0x7FFFFFFF;
+ 1374              		.loc 1 387 0
+ 1375 00b6 7B69     		ldr	r3, [r7, #20]
+ 1376 00b8 9B00     		lsl	r3, r3, #2
+ 1377 00ba BA68     		ldr	r2, [r7, #8]
+ 1378 00bc D318     		add	r3, r2, r3
+ 1379 00be 0C4A     		ldr	r2, .L92+16
+ 1380 00c0 1A60     		str	r2, [r3]
+ 1381              	.L86:
+ 378:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1382              		.loc 1 378 0
+ 1383 00c2 7B69     		ldr	r3, [r7, #20]
+ 1384 00c4 0133     		add	r3, r3, #1
+ 1385 00c6 7B61     		str	r3, [r7, #20]
+ 1386              	.L82:
+ 378:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1387              		.loc 1 378 0 is_stmt 0 discriminator 1
+ 1388 00c8 7A69     		ldr	r2, [r7, #20]
+ 1389 00ca 7B68     		ldr	r3, [r7, #4]
+ 1390 00cc 9A42     		cmp	r2, r3
+ 1391 00ce A2D3     		bcc	.L88
+ 388:../Common/Source/math_helper.c ****         }
+ 389:../Common/Source/math_helper.c ****     }
+ 390:../Common/Source/math_helper.c **** }
+ 1392              		.loc 1 390 0 is_stmt 1
+ 1393 00d0 BD46     		mov	sp, r7
+ 1394 00d2 06B0     		add	sp, sp, #24
+ 1395              		@ sp needed for prologue
+ 1396 00d4 04BC     		pop	{r2}
+ 1397 00d6 9046     		mov	r8, r2
+ 1398 00d8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1399              	.L93:
+ 1400 00da C046C046 		.align	3
+ 1400      C046
+ 1401              	.L92:
+ 1402 00e0 00000000 		.word	0
+ 1403 00e4 0000E03F 		.word	1071644672
+ 1404 00e8 00000000 		.word	0
+ 1405 00ec 0000E0BF 		.word	-1075838976
+ 1406 00f0 FFFFFF7F 		.word	2147483647
+ 1407              		.cfi_endproc
+ 1408              	.LFE93:
+ 1410 00f4 C046C046 		.section	.text.arm_float_to_q28,"ax",%progbits
+ 1411              		.align	2
+ 1412              		.global	arm_float_to_q28
+ 1413              		.code	16
+ 1414              		.thumb_func
+ 1416              	arm_float_to_q28:
+ 1417              	.LFB94:
+ 391:../Common/Source/math_helper.c **** 
+ 392:../Common/Source/math_helper.c **** 
+ 393:../Common/Source/math_helper.c **** /** 
+ 394:../Common/Source/math_helper.c ****  * @brief  Converts float to fixed q28 format
+ 395:../Common/Source/math_helper.c ****  * @param  uint32_t 	number of samples in the buffer
+ 396:../Common/Source/math_helper.c ****  * @return none
+ 397:../Common/Source/math_helper.c ****  * The function converts floating point values to fixed point values 
+ 398:../Common/Source/math_helper.c ****  */
+ 399:../Common/Source/math_helper.c **** 
+ 400:../Common/Source/math_helper.c **** void arm_float_to_q28 (float *pIn, q31_t * pOut, 
+ 401:../Common/Source/math_helper.c ****                        uint32_t numSamples)
+ 402:../Common/Source/math_helper.c **** {
+ 1418              		.loc 1 402 0
+ 1419              		.cfi_startproc
+ 1420 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1421              	.LCFI43:
+ 1422              		.cfi_def_cfa_offset 20
+ 1423              		.cfi_offset 4, -20
+ 1424              		.cfi_offset 5, -16
+ 1425              		.cfi_offset 6, -12
+ 1426              		.cfi_offset 7, -8
+ 1427              		.cfi_offset 14, -4
+ 1428 0002 4746     		mov	r7, r8
+ 1429 0004 80B4     		push	{r7}
+ 1430              	.LCFI44:
+ 1431              		.cfi_def_cfa_offset 24
+ 1432              		.cfi_offset 8, -24
+ 1433 0006 86B0     		sub	sp, sp, #24
+ 1434              	.LCFI45:
+ 1435              		.cfi_def_cfa_offset 48
+ 1436 0008 00AF     		add	r7, sp, #0
+ 1437              	.LCFI46:
+ 1438              		.cfi_def_cfa_register 7
+ 1439 000a F860     		str	r0, [r7, #12]
+ 1440 000c B960     		str	r1, [r7, #8]
+ 1441 000e 7A60     		str	r2, [r7, #4]
+ 403:../Common/Source/math_helper.c ****   uint32_t i;
+ 404:../Common/Source/math_helper.c **** 
+ 405:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1442              		.loc 1 405 0
+ 1443 0010 0023     		mov	r3, #0
+ 1444 0012 7B61     		str	r3, [r7, #20]
+ 1445 0014 58E0     		b	.L95
+ 1446              	.L101:
+ 406:../Common/Source/math_helper.c ****     {
+ 407:../Common/Source/math_helper.c **** 	/* 268435456.0f corresponds to pow(2, 28) */
+ 408:../Common/Source/math_helper.c ****       pOut[i] = (q31_t) (pIn[i] * 268435456.0f);
+ 1447              		.loc 1 408 0
+ 1448 0016 7B69     		ldr	r3, [r7, #20]
+ 1449 0018 9B00     		lsl	r3, r3, #2
+ 1450 001a BA68     		ldr	r2, [r7, #8]
+ 1451 001c D418     		add	r4, r2, r3
+ 1452 001e 7B69     		ldr	r3, [r7, #20]
+ 1453 0020 9B00     		lsl	r3, r3, #2
+ 1454 0022 FA68     		ldr	r2, [r7, #12]
+ 1455 0024 D318     		add	r3, r2, r3
+ 1456 0026 1B68     		ldr	r3, [r3]
+ 1457 0028 181C     		add	r0, r3, #0
+ 1458 002a 9B21     		mov	r1, #155
+ 1459 002c C905     		lsl	r1, r1, #23
+ 1460 002e FFF7FEFF 		bl	__aeabi_fmul
+ 1461 0032 031C     		add	r3, r0, #0
+ 1462 0034 181C     		add	r0, r3, #0
+ 1463 0036 FFF7FEFF 		bl	__aeabi_f2iz
+ 1464 003a 031C     		mov	r3, r0
+ 1465 003c 2360     		str	r3, [r4]
+ 409:../Common/Source/math_helper.c **** 
+ 410:../Common/Source/math_helper.c ****       pOut[i] += pIn[i] > 0 ? 0.5 : -0.5;
+ 1466              		.loc 1 410 0
+ 1467 003e 7B69     		ldr	r3, [r7, #20]
+ 1468 0040 9B00     		lsl	r3, r3, #2
+ 1469 0042 BA68     		ldr	r2, [r7, #8]
+ 1470 0044 D218     		add	r2, r2, r3
+ 1471 0046 9046     		mov	r8, r2
+ 1472 0048 7B69     		ldr	r3, [r7, #20]
+ 1473 004a 9B00     		lsl	r3, r3, #2
+ 1474 004c BA68     		ldr	r2, [r7, #8]
+ 1475 004e D318     		add	r3, r2, r3
+ 1476 0050 1B68     		ldr	r3, [r3]
+ 1477 0052 181C     		mov	r0, r3
+ 1478 0054 FFF7FEFF 		bl	__aeabi_i2d
+ 1479 0058 051C     		mov	r5, r0
+ 1480 005a 0E1C     		mov	r6, r1
+ 1481 005c 7B69     		ldr	r3, [r7, #20]
+ 1482 005e 9B00     		lsl	r3, r3, #2
+ 1483 0060 FA68     		ldr	r2, [r7, #12]
+ 1484 0062 D318     		add	r3, r2, r3
+ 1485 0064 1B68     		ldr	r3, [r3]
+ 1486 0066 181C     		add	r0, r3, #0
+ 1487 0068 0021     		mov	r1, #0
+ 1488 006a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1489 006e 031C     		mov	r3, r0
+ 1490 0070 002B     		cmp	r3, #0
+ 1491 0072 02D0     		beq	.L104
+ 1492              	.L102:
+ 1493              		.loc 1 410 0 is_stmt 0 discriminator 1
+ 1494 0074 1B4C     		ldr	r4, .L105+4
+ 1495 0076 1A4B     		ldr	r3, .L105
+ 1496 0078 01E0     		b	.L98
+ 1497              	.L104:
+ 1498              		.loc 1 410 0 discriminator 2
+ 1499 007a 1B4B     		ldr	r3, .L105+8
+ 1500 007c 1B4C     		ldr	r4, .L105+12
+ 1501              	.L98:
+ 1502              		.loc 1 410 0 discriminator 3
+ 1503 007e 281C     		mov	r0, r5
+ 1504 0080 311C     		mov	r1, r6
+ 1505 0082 1A1C     		mov	r2, r3
+ 1506 0084 231C     		mov	r3, r4
+ 1507 0086 FFF7FEFF 		bl	__aeabi_dadd
+ 1508 008a 031C     		mov	r3, r0
+ 1509 008c 0C1C     		mov	r4, r1
+ 1510 008e 181C     		mov	r0, r3
+ 1511 0090 211C     		mov	r1, r4
+ 1512 0092 FFF7FEFF 		bl	__aeabi_d2iz
+ 1513 0096 031C     		mov	r3, r0
+ 1514 0098 4246     		mov	r2, r8
+ 1515 009a 1360     		str	r3, [r2]
+ 411:../Common/Source/math_helper.c **** 
+ 412:../Common/Source/math_helper.c ****       if (pIn[i] == (float) 8.0)
+ 1516              		.loc 1 412 0 is_stmt 1 discriminator 3
+ 1517 009c 7B69     		ldr	r3, [r7, #20]
+ 1518 009e 9B00     		lsl	r3, r3, #2
+ 1519 00a0 FA68     		ldr	r2, [r7, #12]
+ 1520 00a2 D318     		add	r3, r2, r3
+ 1521 00a4 1B68     		ldr	r3, [r3]
+ 1522 00a6 181C     		add	r0, r3, #0
+ 1523 00a8 8221     		mov	r1, #130
+ 1524 00aa C905     		lsl	r1, r1, #23
+ 1525 00ac FFF7FEFF 		bl	__aeabi_fcmpeq
+ 1526 00b0 031C     		mov	r3, r0
+ 1527 00b2 002B     		cmp	r3, #0
+ 1528 00b4 05D0     		beq	.L99
+ 1529              	.L103:
+ 413:../Common/Source/math_helper.c ****         {
+ 414:../Common/Source/math_helper.c ****           pOut[i] = 0x7FFFFFFF;
+ 1530              		.loc 1 414 0
+ 1531 00b6 7B69     		ldr	r3, [r7, #20]
+ 1532 00b8 9B00     		lsl	r3, r3, #2
+ 1533 00ba BA68     		ldr	r2, [r7, #8]
+ 1534 00bc D318     		add	r3, r2, r3
+ 1535 00be 0C4A     		ldr	r2, .L105+16
+ 1536 00c0 1A60     		str	r2, [r3]
+ 1537              	.L99:
+ 405:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1538              		.loc 1 405 0
+ 1539 00c2 7B69     		ldr	r3, [r7, #20]
+ 1540 00c4 0133     		add	r3, r3, #1
+ 1541 00c6 7B61     		str	r3, [r7, #20]
+ 1542              	.L95:
+ 405:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1543              		.loc 1 405 0 is_stmt 0 discriminator 1
+ 1544 00c8 7A69     		ldr	r2, [r7, #20]
+ 1545 00ca 7B68     		ldr	r3, [r7, #4]
+ 1546 00cc 9A42     		cmp	r2, r3
+ 1547 00ce A2D3     		bcc	.L101
+ 415:../Common/Source/math_helper.c ****         }
+ 416:../Common/Source/math_helper.c ****     }
+ 417:../Common/Source/math_helper.c **** }
+ 1548              		.loc 1 417 0 is_stmt 1
+ 1549 00d0 BD46     		mov	sp, r7
+ 1550 00d2 06B0     		add	sp, sp, #24
+ 1551              		@ sp needed for prologue
+ 1552 00d4 04BC     		pop	{r2}
+ 1553 00d6 9046     		mov	r8, r2
+ 1554 00d8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1555              	.L106:
+ 1556 00da C046C046 		.align	3
+ 1556      C046
+ 1557              	.L105:
+ 1558 00e0 00000000 		.word	0
+ 1559 00e4 0000E03F 		.word	1071644672
+ 1560 00e8 00000000 		.word	0
+ 1561 00ec 0000E0BF 		.word	-1075838976
+ 1562 00f0 FFFFFF7F 		.word	2147483647
+ 1563              		.cfi_endproc
+ 1564              	.LFE94:
+ 1566              		.global	__aeabi_fcmplt
+ 1567 00f4 C046C046 		.section	.text.arm_clip_f32,"ax",%progbits
+ 1568              		.align	2
+ 1569              		.global	arm_clip_f32
+ 1570              		.code	16
+ 1571              		.thumb_func
+ 1573              	arm_clip_f32:
+ 1574              	.LFB95:
+ 418:../Common/Source/math_helper.c **** 
+ 419:../Common/Source/math_helper.c **** /** 
+ 420:../Common/Source/math_helper.c ****  * @brief  Clip the float values to +/- 1 
+ 421:../Common/Source/math_helper.c ****  * @param  pIn 	input buffer
+ 422:../Common/Source/math_helper.c ****  * @param  numSamples 	number of samples in the buffer
+ 423:../Common/Source/math_helper.c ****  * @return none
+ 424:../Common/Source/math_helper.c ****  * The function converts floating point values to fixed point values 
+ 425:../Common/Source/math_helper.c ****  */
+ 426:../Common/Source/math_helper.c **** 
+ 427:../Common/Source/math_helper.c **** void arm_clip_f32 (float *pIn, uint32_t numSamples)
+ 428:../Common/Source/math_helper.c **** {
+ 1575              		.loc 1 428 0
+ 1576              		.cfi_startproc
+ 1577 0000 80B5     		push	{r7, lr}
+ 1578              	.LCFI47:
+ 1579              		.cfi_def_cfa_offset 8
+ 1580              		.cfi_offset 7, -8
+ 1581              		.cfi_offset 14, -4
+ 1582 0002 84B0     		sub	sp, sp, #16
+ 1583              	.LCFI48:
+ 1584              		.cfi_def_cfa_offset 24
+ 1585 0004 00AF     		add	r7, sp, #0
+ 1586              	.LCFI49:
+ 1587              		.cfi_def_cfa_register 7
+ 1588 0006 7860     		str	r0, [r7, #4]
+ 1589 0008 3960     		str	r1, [r7]
+ 429:../Common/Source/math_helper.c ****   uint32_t i;
+ 430:../Common/Source/math_helper.c **** 
+ 431:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1590              		.loc 1 431 0
+ 1591 000a 0023     		mov	r3, #0
+ 1592 000c FB60     		str	r3, [r7, #12]
+ 1593 000e 29E0     		b	.L108
+ 1594              	.L113:
+ 432:../Common/Source/math_helper.c ****     {
+ 433:../Common/Source/math_helper.c ****       if(pIn[i] > 1.0f)
+ 1595              		.loc 1 433 0
+ 1596 0010 FB68     		ldr	r3, [r7, #12]
+ 1597 0012 9B00     		lsl	r3, r3, #2
+ 1598 0014 7A68     		ldr	r2, [r7, #4]
+ 1599 0016 D318     		add	r3, r2, r3
+ 1600 0018 1B68     		ldr	r3, [r3]
+ 1601 001a 181C     		add	r0, r3, #0
+ 1602 001c FE21     		mov	r1, #254
+ 1603 001e 8905     		lsl	r1, r1, #22
+ 1604 0020 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 1605 0024 031C     		mov	r3, r0
+ 1606 0026 002B     		cmp	r3, #0
+ 1607 0028 07D0     		beq	.L116
+ 1608              	.L114:
+ 434:../Common/Source/math_helper.c **** 	  {
+ 435:../Common/Source/math_helper.c **** 	    pIn[i] = 1.0;
+ 1609              		.loc 1 435 0
+ 1610 002a FB68     		ldr	r3, [r7, #12]
+ 1611 002c 9B00     		lsl	r3, r3, #2
+ 1612 002e 7A68     		ldr	r2, [r7, #4]
+ 1613 0030 D318     		add	r3, r2, r3
+ 1614 0032 FE22     		mov	r2, #254
+ 1615 0034 9205     		lsl	r2, r2, #22
+ 1616 0036 1A60     		str	r2, [r3]
+ 1617 0038 11E0     		b	.L111
+ 1618              	.L116:
+ 436:../Common/Source/math_helper.c **** 	  }
+ 437:../Common/Source/math_helper.c **** 	  else if( pIn[i] < -1.0f)
+ 1619              		.loc 1 437 0
+ 1620 003a FB68     		ldr	r3, [r7, #12]
+ 1621 003c 9B00     		lsl	r3, r3, #2
+ 1622 003e 7A68     		ldr	r2, [r7, #4]
+ 1623 0040 D318     		add	r3, r2, r3
+ 1624 0042 1B68     		ldr	r3, [r3]
+ 1625 0044 181C     		add	r0, r3, #0
+ 1626 0046 0B49     		ldr	r1, .L117
+ 1627 0048 FFF7FEFF 		bl	__aeabi_fcmplt
+ 1628 004c 031C     		mov	r3, r0
+ 1629 004e 002B     		cmp	r3, #0
+ 1630 0050 05D0     		beq	.L111
+ 1631              	.L115:
+ 438:../Common/Source/math_helper.c **** 	  {
+ 439:../Common/Source/math_helper.c **** 	    pIn[i] = -1.0;
+ 1632              		.loc 1 439 0
+ 1633 0052 FB68     		ldr	r3, [r7, #12]
+ 1634 0054 9B00     		lsl	r3, r3, #2
+ 1635 0056 7A68     		ldr	r2, [r7, #4]
+ 1636 0058 D318     		add	r3, r2, r3
+ 1637 005a 064A     		ldr	r2, .L117
+ 1638 005c 1A60     		str	r2, [r3]
+ 1639              	.L111:
+ 431:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1640              		.loc 1 431 0
+ 1641 005e FB68     		ldr	r3, [r7, #12]
+ 1642 0060 0133     		add	r3, r3, #1
+ 1643 0062 FB60     		str	r3, [r7, #12]
+ 1644              	.L108:
+ 431:../Common/Source/math_helper.c ****   for (i = 0; i < numSamples; i++)
+ 1645              		.loc 1 431 0 is_stmt 0 discriminator 1
+ 1646 0064 FA68     		ldr	r2, [r7, #12]
+ 1647 0066 3B68     		ldr	r3, [r7]
+ 1648 0068 9A42     		cmp	r2, r3
+ 1649 006a D1D3     		bcc	.L113
+ 440:../Common/Source/math_helper.c **** 	  }
+ 441:../Common/Source/math_helper.c **** 	       
+ 442:../Common/Source/math_helper.c ****     }
+ 443:../Common/Source/math_helper.c **** }
+ 1650              		.loc 1 443 0 is_stmt 1
+ 1651 006c BD46     		mov	sp, r7
+ 1652 006e 04B0     		add	sp, sp, #16
+ 1653              		@ sp needed for prologue
+ 1654 0070 80BD     		pop	{r7, pc}
+ 1655              	.L118:
+ 1656 0072 C046     		.align	2
+ 1657              	.L117:
+ 1658 0074 000080BF 		.word	-1082130432
+ 1659              		.cfi_endproc
+ 1660              	.LFE95:
+ 1662              		.text
+ 1663              	.Letext0:
+ 1664              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 1665              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 math_helper.c
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:25     .text.arm_snr_f32:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:30     .text.arm_snr_f32:00000000 arm_snr_f32
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:225    .text.arm_snr_f32:00000148 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:232    .text.arm_provide_guard_bits_q15:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:237    .text.arm_provide_guard_bits_q15:00000000 arm_provide_guard_bits_q15
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:302    .text.arm_float_to_q12_20:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:307    .text.arm_float_to_q12_20:00000000 arm_float_to_q12_20
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:449    .text.arm_float_to_q12_20:000000e0 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:458    .text.arm_compare_fixed_q15:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:463    .text.arm_compare_fixed_q15:00000000 arm_compare_fixed_q15
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:544    .text.arm_compare_fixed_q31:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:549    .text.arm_compare_fixed_q31:00000000 arm_compare_fixed_q31
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:628    .text.arm_provide_guard_bits_q31:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:633    .text.arm_provide_guard_bits_q31:00000000 arm_provide_guard_bits_q31
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:690    .text.arm_provide_guard_bits_q7:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:695    .text.arm_provide_guard_bits_q7:00000000 arm_provide_guard_bits_q7
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:752    .text.arm_calc_guard_bits:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:757    .text.arm_calc_guard_bits:00000000 arm_calc_guard_bits
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:814    .text.arm_apply_guard_bits:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:819    .text.arm_apply_guard_bits:00000000 arm_apply_guard_bits
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:890    .text.arm_calc_2pow:00000000 arm_calc_2pow
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:885    .text.arm_calc_2pow:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:940    .text.arm_float_to_q14:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:945    .text.arm_float_to_q14:00000000 arm_float_to_q14
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1090   .text.arm_float_to_q14:000000e0 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1099   .text.arm_float_to_q30:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1104   .text.arm_float_to_q30:00000000 arm_float_to_q30
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1246   .text.arm_float_to_q30:000000e0 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1255   .text.arm_float_to_q29:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1260   .text.arm_float_to_q29:00000000 arm_float_to_q29
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1402   .text.arm_float_to_q29:000000e0 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1411   .text.arm_float_to_q28:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1416   .text.arm_float_to_q28:00000000 arm_float_to_q28
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1558   .text.arm_float_to_q28:000000e0 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1568   .text.arm_clip_f32:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1573   .text.arm_clip_f32:00000000 arm_clip_f32
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1658   .text.arm_clip_f32:00000074 $d
+                     .debug_frame:00000010 $d
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:231    .text.arm_snr_f32:00000154 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:457    .text.arm_float_to_q12_20:000000f4 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1098   .text.arm_float_to_q14:000000f4 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1254   .text.arm_float_to_q30:000000f4 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1410   .text.arm_float_to_q29:000000f4 $t
+C:\Users\wangguan\AppData\Local\Temp\ccFkN8Pr.s:1567   .text.arm_float_to_q28:000000f4 $t
+                           .group:00000000 wm4.1.e2c96d5a5488b60ca900a5e0ea7772ef
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.arm_math.h.275.48de47ab2bd311f0657ea6a8c1abb55a
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.arm_math.h.297.1d5f7b8b87e168258299acd0bbe0005e
+
+UNDEFINED SYMBOLS
+__aeabi_fmul
+__aeabi_fadd
+__aeabi_fsub
+__aeabi_fdiv
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_d2f
+log10
+__aeabi_f2iz
+__aeabi_i2d
+__aeabi_fcmpgt
+__aeabi_dadd
+__aeabi_d2iz
+__aeabi_fcmpeq
+__aeabi_ui2f
+__aeabi_fcmplt

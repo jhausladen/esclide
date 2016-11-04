@@ -1,0 +1,83 @@
+# This is a quite generic makefile that can be used with any C project that does not require a complex layout (subdirectories).
+# However, all source files need to reside in a subdirectory named "src/".
+#
+# Copyright (C) 2015 Stefan Tauner
+# This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+
+
+# TARGET defines the name of the binary that should be produced.
+# The example below uses the name of the directory the makefile resides in.
+# This and some other features below allow you to use the same makefile for multiple projects!
+TARGET = a.out
+
+# The BUILDDIR variables specifies where the output files should be stored. This includes the executable binary and temporary work files if needed.
+# "make clean" deletes the build directory completely, so setting the wrong path here can have severe consequences, beware.
+# It will be created automatically by the compile rules below through the use of an order-only prerequisite (i.e., " | $(BUILDDIR)")
+BUILDDIR = ./bin
+
+# List of C source files (e.g., all files in the directory ending with '.c')
+SOURCES = $(wildcard src/*.c)
+SRCDIR = $(dir $(lastword $(SOURCES)))
+DEPDIR = $(BUILDDIR)/$(SRCDIR)
+
+# Create a list of object files derived from the source files above.
+OBJS := $(addprefix $(BUILDDIR)/,$(SOURCES:.c=.o))
+
+# List of include directories, i.e., paths where the preprocessor/compiler looks for header files.
+INC_DIRS =  ./src
+
+# CFLAGS contains various options for the compiler, for example to enable warnings or special features (e.g., POSIX functions).
+CFLAGS += -std=c99 -Wall -Wextra -Wno-unused-parameter -D_XOPEN_SOURCE=700
+
+# LDFLAGS specifies options for the linker, e.g., which libraries should be linked (e.g., the POSIX realtime (rt) library).
+LDFLAGS += -lrt
+
+# Use the INC_DIRS variable to create the respective option strings for the compiler (i.e., prefixing every directory with -I).
+CFLAGS += $(addprefix -I, $(INC_DIRS))
+
+# Flags required for the automatic handling of dependencies.
+# These flags make the compiler generate so-called dependency files that actually contain make recipes tracking dependencies from #include statements.
+# Those files can then be included into the makefile to make these generated rules available (see next recipe).
+CFLAGS += -MT $@ -MD -MP
+
+# To help the debugger understand the produced binary we instruct the compiler to include debug symbols (e.g., function names and locations)
+CFLAGS += -g
+
+# Include dependency information from the dependency files
+-include $(addprefix $(BUILDDIR)/,$(SOURCES:.c=.d))
+
+# Create a pattern rule with an empty recipe, so that make won't fail if a dependency file doesn't exist.
+$(DEPDIR)/%.d: ;
+
+# A generic recipe that uses wildcards in the name and prerequisites to compile any C file into a respective object file.
+# Such recipes are called pattern rules.
+$(BUILDDIR)/%.o: %.c $(DEPDIR)/%.d | $(DEPDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Below is the linker recipe that takes the object files and links them together to form the final executable.
+$(BUILDDIR)/$(TARGET): $(OBJS) | $(BUILDDIR)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+# "make all" is a widely used idiom to build everything the author deems necessary/useful in most use cases.
+# In our case this simply builds our target binary in the output directory.
+all: $(BUILDDIR)/$(TARGET)
+
+# Make sure the build directory exists
+$(BUILDDIR) $(DEPDIR):
+	mkdir -p $@
+
+# The clean target deletes the build directory completely.
+clean:
+	rm -rf $(BUILDDIR)
+
+# Usually the default target is the first one from the top (that gets executed when you simply execute "make").
+# This can be overridden with by setting the variable below
+.DEFAULT_GOAL := all
+
+# A PHONY target is one that is not really the name of a file but just the name for a recipe to be executed when you make an explicit request (e.g., make clean)
+.PHONY: all clean
+
+# Disable implicit suffix rules (for performance and profit)
+.SUFFIXES:

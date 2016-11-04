@@ -1,0 +1,17 @@
+System_LibcStubs.c:57:27:_open	24	static
+System_LibcStubs.c:67:27:_lseek	24	static
+System_LibcStubs.c:78:27:_read	24	static
+System_LibcStubs.c:88:27:_write	24	static
+System_LibcStubs.c:96:27:_close	4	static
+System_LibcStubs.c:104:27:_fstat	16	static
+System_LibcStubs.c:115:27:_link	16	static
+System_LibcStubs.c:126:27:_unlink	16	static
+System_LibcStubs.c:136:29:_sbrk	32	static
+System_LibcStubs.c:185:27:_times	16	static
+System_LibcStubs.c:192:27:_wait	16	static
+System_LibcStubs.c:200:27:_kill	16	static
+System_LibcStubs.c:210:27:_fork	4	static
+System_LibcStubs.c:218:27:_getpid	4	static
+unistd.h:17:6:_exit	16	static
+System_LibcStubs.c:233:28:_init	4	static
+System_LibcStubs.c:243:27:_isatty	16	static

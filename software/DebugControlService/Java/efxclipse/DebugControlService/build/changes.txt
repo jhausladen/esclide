@@ -1,0 +1,14 @@
+
+	   <path id="fxant">
+			<filelist>
+				<file name="${java.home}\..\lib\ant-javafx.jar"/> (May be an absolute path)
+				<file name="${java.home}\lib\jfxrt.jar"/>
+				<file name="${basedir}"/>
+			</filelist>
+		</path>
+
+		<fx:application id="fxApplication"
+			name="DebugControlService"
+			mainClass="at.embsys.sat.Main"
+			version="1.0"
+		/>

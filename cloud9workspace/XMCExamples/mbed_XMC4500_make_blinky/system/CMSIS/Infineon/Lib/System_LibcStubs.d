@@ -1,0 +1,22 @@
+system/CMSIS/Infineon/Lib/System_LibcStubs.o: \
+ system/CMSIS/Infineon/Lib/System_LibcStubs.c \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/stat.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/_ansi.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/newlib.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/config.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/machine/ieeefp.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/features.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/time.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/_ansi.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/reent.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/lib/gcc/arm-none-eabi/4.8.4/include/stddef.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/_types.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/machine/_types.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/machine/_default_types.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/lock.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/machine/time.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/types.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/machine/types.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/times.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/unistd.h \
+ /home/juergen/GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/arm-none-eabi/include/sys/unistd.h

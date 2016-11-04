@@ -1,0 +1,42 @@
+.c9Version {
+    position: absolute;
+    top: 195px;
+    left: 135px;
+    color: black;
+    font-size: 12px;
+    padding-left: 12px;
+}
+
+/*.c9Legal {
+    position: absolute;
+    top: 60px;
+    left: 225px;
+    display:none;
+}
+
+.c9Staff {
+    position: absolute;
+    top: 170px;
+    left: 92px;
+    color: #000000;
+    font-size: 11px;
+    width: 390px;
+    line-height: 16px;
+}
+
+.c9StaffHeader {
+    text-transform:uppercase;
+    color: #dddddd;
+    font-size: 10px;
+    position: absolute;
+    top: 140px;
+    left: 170px;
+}*/
+
+.c9Copyright {
+    position: absolute;
+    bottom: 55px;
+    left: 135px;
+    font-size: 10px;
+    color: #000000;
+}

@@ -1,0 +1,14 @@
+{
+    "name": "ext.archiver",
+    "version": "0.0.1",
+    "main": "archiver.js",
+    "private": true,
+    "plugin": {
+        "provides": [
+            "ext.archiver"
+        ],
+        "consumes": [
+            "client-plugins"
+        ]
+    }
+}

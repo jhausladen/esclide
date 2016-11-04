@@ -1,0 +1,3 @@
+arm_sin_cos_example_f32.o
+Startup/startup_XMC4500.o
+Startup/system_XMC4500.o

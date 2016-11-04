@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="websocket-api-9.2.1.v20140609">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jetty-distribution-9.2.3.v20140905/lib/websocket/websocket-api-9.2.3.v20140905.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jetty-distribution-9.2.3.v20140905/lib/websocket/websocket-client-9.2.3.v20140905.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jetty-distribution-9.2.3.v20140905/lib/websocket/websocket-common-9.2.3.v20140905.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jetty-distribution-9.2.3.v20140905/lib/websocket/websocket-server-9.2.3.v20140905.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jetty-distribution-9.2.3.v20140905/lib/websocket/websocket-servlet-9.2.3.v20140905.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

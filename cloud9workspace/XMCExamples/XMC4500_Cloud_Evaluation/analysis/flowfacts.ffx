@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<flowfacts>
+
+   <function name="bubblesort">
+      <loop offset="0x7c" maxcount="63"/>
+         <loop offset="0x68" maxcount="63"/>
+   </function>
+
+   <function name="GetADCValues">
+      <loop offset="0x40" maxcount="64"/>
+   </function>
+
+   <function name="ADC_Read_Blocking">
+      <loop offset="0x12" maxcount="20"/>
+   </function>
+
+   <function name="main">
+      <loop offset="0x3c" maxcount="64"/>
+      <loop offset="0x66" maxcount="0"/>
+   </function>
+
+   <function name="mean">
+      <loop offset="0x2e" maxcount="64"/>
+   </function>
+
+   <function name="fib">
+      <loop offset="0x2e" maxcount="19"/>
+   </function>
+
+   <function name="processData">
+      <loop offset="0x1c" maxcount="4095"/>
+   </function>
+
+</flowfacts>

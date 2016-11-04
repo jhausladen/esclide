@@ -1,0 +1,14 @@
+{
+    "name": "ext.embedded_analysis",
+    "version": "0.0.1",
+    "main": "embedded_analysis.js",
+    "private": true,
+    "plugin": {
+        "provides": [
+            "ext.embedded_analysis"
+        ],
+        "consumes": [
+            "client-plugins"
+        ]
+    }
+}

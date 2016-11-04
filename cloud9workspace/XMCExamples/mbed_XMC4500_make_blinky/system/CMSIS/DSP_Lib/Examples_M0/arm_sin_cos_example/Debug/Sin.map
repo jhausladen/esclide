@@ -1,0 +1,792 @@
+Archive member included because of file (symbol)
+
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+                              arm_sin_cos_example_f32.o (arm_cos_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+                              arm_sin_cos_example_f32.o (arm_sin_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+                              arm_sin_cos_example_f32.o (arm_add_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+                              arm_sin_cos_example_f32.o (arm_mult_f32)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o)
+                              Startup/system_XMC1300.o (__aeabi_uidiv)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_dvmd_tls.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o) (__aeabi_fcmplt)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_fixunssfsi.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o) (__aeabi_f2uiz)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o) (__aeabi_fadd)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(eqsf2.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o) (__eqsf2)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(gesf2.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o) (__gesf2)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(lesf2.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o) (__lesf2)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o) (__aeabi_fmul)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(subsf3.o)
+                              arm_sin_cos_example_f32.o (__aeabi_fsub)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(fixsfsi.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o) (__aeabi_f2iz)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(floatsisf.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o) (__aeabi_i2f)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_clzsi2.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o) (__clzsi2)
+
+Allocating common symbols
+Common symbol       size              file
+
+cosOutput           0x4               arm_sin_cos_example_f32.o
+SystemCoreClock     0x4               Startup/system_XMC1300.o
+cosSquareOutput     0x4               arm_sin_cos_example_f32.o
+testOutput          0x4               arm_sin_cos_example_f32.o
+sinSquareOutput     0x4               arm_sin_cos_example_f32.o
+status              0x1               arm_sin_cos_example_f32.o
+sinOutput           0x4               arm_sin_cos_example_f32.o
+
+Discarded input sections
+
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 arm_sin_cos_example_f32.o
+ .comment       0x00000000       0x71 arm_sin_cos_example_f32.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 Startup/system_XMC1300.o
+ .debug_macro   0x00000000      0x7f0 Startup/system_XMC1300.o
+ .debug_macro   0x00000000       0x3a Startup/system_XMC1300.o
+ .debug_macro   0x00000000       0x10 Startup/system_XMC1300.o
+ .debug_macro   0x00000000       0x2e Startup/system_XMC1300.o
+ .debug_macro   0x00000000       0xa3 Startup/system_XMC1300.o
+ .debug_macro   0x00000000       0x3a Startup/system_XMC1300.o
+ .debug_macro   0x00000000       0x1f Startup/system_XMC1300.o
+ .comment       0x00000000       0x71 Startup/system_XMC1300.o
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x1f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00000000       0xb3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000      0x7fc C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x1f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x00000000       0xb3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000      0x7fc C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x1f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x00000000       0xb3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000      0x7fc C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x1f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_macro   0x00000000       0xb3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x10001000         0x00032000         xr
+SRAM             0x20000000         0x00004000         !xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD arm_sin_cos_example_f32.o
+LOAD Startup/startup_XMC1300.o
+LOAD Startup/system_XMC1300.o
+LOAD C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a
+START GROUP
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv6-m\libg.a
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv6-m\libc.a
+END GROUP
+START GROUP
+LOAD C:\DAVE-3.1\eclipse\/../CMSIS/Infineon/Lib\libxmclibcstubs.a
+END GROUP
+                0x00000800                stack_size = 0x800
+
+.text           0x10001000     0x13c4
+                0x10001000                sText = .
+ *(.Xmc1300.reset)
+ .Xmc1300.reset
+                0x10001000       0x34 Startup/startup_XMC1300.o
+                0x10001000                __Xmc1300_interrupt_vector_cortex_m
+                0x10001018                __Xmc1300_reset_cortex_m
+ *(.Xmc1300.postreset)
+ .Xmc1300.postreset
+                0x10001034       0x90 Startup/startup_XMC1300.o
+ *(.XmcStartup)
+ .XmcStartup    0x100010c4        0x8 Startup/startup_XMC1300.o
+                0x100010c4                AllowClkInitByStartup
+                0x100010c8                SystemInit_DAVE3
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text          0x100010cc        0x0 arm_sin_cos_example_f32.o
+ .text.main     0x100010cc       0xdc arm_sin_cos_example_f32.o
+                0x100010cc                main
+ .text          0x100011a8       0x44 Startup/startup_XMC1300.o
+                0x100011a8                NMI_Handler
+                0x100011aa                HardFault_Handler
+                0x100011ac                SVC_Handler
+                0x100011ae                PendSV_Handler
+                0x100011b0                SysTick_Handler
+                0x100011b2                SCU_0_IRQHandler
+                0x100011b4                SCU_1_IRQHandler
+                0x100011b6                SCU_2_IRQHandler
+                0x100011b8                ERU0_0_IRQHandler
+                0x100011ba                ERU0_1_IRQHandler
+                0x100011bc                ERU0_2_IRQHandler
+                0x100011be                ERU0_3_IRQHandler
+                0x100011c0                MATH0_0_IRQHandler
+                0x100011c2                VADC0_C0_0_IRQHandler
+                0x100011c4                VADC0_C0_1_IRQHandler
+                0x100011c6                VADC0_G0_0_IRQHandler
+                0x100011c8                VADC0_G0_1_IRQHandler
+                0x100011ca                VADC0_G1_0_IRQHandler
+                0x100011cc                VADC0_G1_1_IRQHandler
+                0x100011ce                CCU40_0_IRQHandler
+                0x100011d0                CCU40_1_IRQHandler
+                0x100011d2                CCU40_2_IRQHandler
+                0x100011d4                CCU40_3_IRQHandler
+                0x100011d6                CCU80_0_IRQHandler
+                0x100011d8                CCU80_1_IRQHandler
+                0x100011da                POSIF0_0_IRQHandler
+                0x100011dc                POSIF0_1_IRQHandler
+                0x100011de                USIC0_0_IRQHandler
+                0x100011e0                USIC0_1_IRQHandler
+                0x100011e2                USIC0_2_IRQHandler
+                0x100011e4                USIC0_3_IRQHandler
+                0x100011e6                USIC0_4_IRQHandler
+                0x100011e8                USIC0_5_IRQHandler
+                0x100011ea                BCCU0_0_IRQHandler
+ .text          0x100011ec        0x0 Startup/system_XMC1300.o
+ .text.SystemInit
+                0x100011ec        0xc Startup/system_XMC1300.o
+                0x100011ec                SystemInit
+ .text.SystemCoreClockUpdate
+                0x100011f8       0x84 Startup/system_XMC1300.o
+                0x100011f8                SystemCoreClockUpdate
+ .text          0x1000127c        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .text.arm_cos_f32
+                0x1000127c      0x154 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+                0x1000127c                arm_cos_f32
+ .text          0x100013d0        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .text.arm_sin_f32
+                0x100013d0      0x154 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+                0x100013d0                arm_sin_f32
+ .text          0x10001524        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .text.arm_add_f32
+                0x10001524       0x84 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+                0x10001524                arm_add_f32
+ .text          0x100015a8        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .text.arm_mult_f32
+                0x100015a8       0x84 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+                0x100015a8                arm_mult_f32
+ .text          0x1000162c       0x9c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o)
+                0x1000162c                __aeabi_uidiv
+                0x1000162c                __udivsi3
+                0x100016b4                __aeabi_uidivmod
+ .text          0x100016c8        0x4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_dvmd_tls.o)
+                0x100016c8                __aeabi_idiv0
+                0x100016c8                __aeabi_ldiv0
+ .text          0x100016cc       0x74 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o)
+                0x100016cc                __aeabi_cfrcmple
+                0x100016d4                __aeabi_cfcmpeq
+                0x100016d4                __aeabi_cfcmple
+                0x100016e4                __aeabi_fcmpeq
+                0x100016f0                __aeabi_fcmplt
+                0x10001704                __aeabi_fcmple
+                0x10001718                __aeabi_fcmpgt
+                0x1000172c                __aeabi_fcmpge
+ .text          0x10001740       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_fixunssfsi.o)
+                0x10001740                __fixunssfsi
+                0x10001740                __aeabi_f2uiz
+ .text          0x10001770      0x3ac c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o)
+                0x10001770                __aeabi_fadd
+ .text          0x10001b1c       0x50 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(eqsf2.o)
+                0x10001b1c                __eqsf2
+                0x10001b1c                __nesf2
+ .text          0x10001b6c       0x90 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(gesf2.o)
+                0x10001b6c                __gesf2
+                0x10001b6c                __gtsf2
+ .text          0x10001bfc       0x90 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(lesf2.o)
+                0x10001bfc                __ltsf2
+                0x10001bfc                __lesf2
+ .text          0x10001c8c      0x260 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+                0x10001c8c                __aeabi_fmul
+ .text          0x10001eec      0x3b4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(subsf3.o)
+                0x10001eec                __aeabi_fsub
+ .text          0x100022a0       0x40 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(fixsfsi.o)
+                0x100022a0                __aeabi_f2iz
+ .text          0x100022e0       0xa8 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(floatsisf.o)
+                0x100022e0                __aeabi_i2f
+ .text          0x10002388       0x3c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_clzsi2.o)
+                0x10002388                __clzsi2
+ *(.glue*)
+ .glue_7        0x00000000        0x0 linker stubs
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.v4*)
+ .v4_bx         0x00000000        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+ *(.init)
+                0x100023c4                __preinit_array_start = .
+ *(.preinit_array)
+                0x100023c4                __preinit_array_end = .
+                0x100023c4                __init_array_start = .
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x100023c4                __init_array_end = .
+ *crtbegin.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *crtend.o(.ctors)
+ *(.fini)
+                0x100023c4                __fini_array_start = .
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x100023c4                __fini_array_end = .
+ *crtbegin.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *crtend.o(.dtors)
+                0x100023c4                __extab_start = .
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ .ARM.extab.Xmc1300.reset
+                0x100023c4        0x0 Startup/startup_XMC1300.o
+ .ARM.extab.Xmc1300.postreset
+                0x100023c4        0x0 Startup/startup_XMC1300.o
+                0x100023c4                . = ALIGN (0x4)
+                0x100023c4                __extab_end = ABSOLUTE (.)
+
+.iplt           0x100023c4        0x0
+ .iplt          0x00000000        0x0 arm_sin_cos_example_f32.o
+
+.ARM.exidx      0x100023c4       0x10
+                0x100023c4                __exidx_start = .
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx.Xmc1300.reset
+                0x100023c4        0x8 Startup/startup_XMC1300.o
+ .ARM.exidx.Xmc1300.postreset
+                0x100023cc        0x8 Startup/startup_XMC1300.o
+                0x100023d4                . = ALIGN (0x4)
+                0x100023d4                __exidx_end = ABSOLUTE (.)
+
+.rodata         0x100023d4      0x8e0
+ *(.rodata .rodata.*)
+ .rodata        0x100023d4       0x84 arm_sin_cos_example_f32.o
+                0x100023d4                testInput_f32
+                0x10002454                testRefOutput_f32
+ .rodata        0x10002458      0x410 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .rodata        0x10002868      0x40c C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .rodata        0x10002c74       0x40 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+ *(.gnu.linkonce.r*)
+                0x10002cc0                . = ALIGN (0x10)
+                0x10002cc0                eROData = .
+                0x10002cc0                VeneerLoadAddr = ABSOLUTE (eROData)
+
+.VENEER_Code    0x2000000c      0x138 load address 0x10002cc0
+                0x2000000c                VeneerStart = .
+ *(.XmcVeneerCode)
+ .XmcVeneerCode
+                0x2000000c      0x138 Startup/startup_XMC1300.o
+                0x2000000c                HardFault_Veneer
+                0x2000002c                SVC_Veneer
+                0x20000038                PendSV_Veneer
+                0x2000003c                SysTick_Veneer
+                0x20000040                SCU_0_Veneer
+                0x20000044                SCU_1_Veneer
+                0x20000048                SCU_2_Veneer
+                0x2000004c                SCU_3_Veneer
+                0x20000050                SCU_4_Veneer
+                0x20000054                SCU_5_Veneer
+                0x20000058                SCU_6_Veneer
+                0x2000005c                MATH_Veneer
+                0x20000064                USIC0_0_Veneer
+                0x20000068                USIC0_1_Veneer
+                0x2000006c                USIC0_2_Veneer
+                0x20000070                USIC0_3_Veneer
+                0x20000074                USIC0_4_Veneer
+                0x20000078                USIC0_5_Veneer
+                0x2000007c                VADC0_C0_0_Veneer
+                0x20000080                VADC0_C0_1_Veneer
+                0x20000084                VADC0_G0_0_Veneer
+                0x20000088                VADC0_G0_1_Veneer
+                0x2000008c                VADC0_G1_0_Veneer
+                0x20000090                VADC0_G1_1_Veneer
+                0x20000094                CCU40_0_Veneer
+                0x20000098                CCU40_1_Veneer
+                0x2000009c                CCU40_2_Veneer
+                0x200000a0                CCU40_3_Veneer
+                0x200000a4                CCU80_0_Veneer
+                0x200000a8                CCU80_1_Veneer
+                0x200000ac                POSIF0_0_Veneer
+                0x200000b0                POSIF0_1_Veneer
+                0x200000bc                BCCU0_0_Veneer
+                0x20000144                . = ALIGN (0x4)
+                0x20000144                VeneerEnd = .
+                0x00000138                VeneerSize = (ABSOLUTE (VeneerEnd) - ABSOLUTE (VeneerStart))
+
+.rel.dyn        0x20000144        0x0 load address 0x10002df8
+ .rel.iplt      0x00000000        0x0 arm_sin_cos_example_f32.o
+
+.GUARD_Band     0x20000144        0xc load address 0x00000000
+                0x20000147                . = (. + 0x3)
+ *fill*         0x20000144        0x3 00
+                0x20000150                . = ALIGN (0x10)
+ *fill*         0x20000147        0x9 00
+                0x20000150                Guard_Band_End = .
+
+Stack           0x20000150      0x800 load address 0x00000000
+                0x20000950                . = (. + stack_size)
+ *fill*         0x20000150      0x800 00
+                0x20000950                __Xmc1300_stack = .
+
+.bss            0x20000950       0x1c
+                0x20000950                __Xmc1300_sBSS = .
+ *(.bss)
+ .bss           0x20000950        0x0 arm_sin_cos_example_f32.o
+ .bss           0x20000950        0x0 Startup/startup_XMC1300.o
+ .bss           0x20000950        0x0 Startup/system_XMC1300.o
+ .bss           0x20000950        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .bss           0x20000950        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .bss           0x20000950        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .bss           0x20000950        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_dvmd_tls.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_fixunssfsi.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(eqsf2.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(gesf2.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(lesf2.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(subsf3.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(fixsfsi.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(floatsisf.o)
+ .bss           0x20000950        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_clzsi2.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x20000950       0x18 arm_sin_cos_example_f32.o
+                0x20000950                cosOutput
+                0x20000954                cosSquareOutput
+                0x20000958                testOutput
+                0x2000095c                sinSquareOutput
+                0x20000960                status
+                0x20000964                sinOutput
+ COMMON         0x20000968        0x4 Startup/system_XMC1300.o
+                0x20000968                SystemCoreClock
+ *(.gnu.linkonce.b*)
+                0x2000096c                __Xmc1300_eBSS = ALIGN (0x4)
+                0x0000001c                __Xmc1300_BSS_Size = (__Xmc1300_eBSS - __Xmc1300_sBSS)
+                0x10002df8                DataLoadAddr = (eROData + VeneerSize)
+
+.data           0x20000970        0x4 load address 0x10002df8
+                0x20000970                __Xmc1300_sData = .
+ *(.data)
+ .data          0x20000970        0x4 arm_sin_cos_example_f32.o
+                0x20000970                blockSize
+ .data          0x20000974        0x0 Startup/startup_XMC1300.o
+ .data          0x20000974        0x0 Startup/system_XMC1300.o
+ .data          0x20000974        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .data          0x20000974        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .data          0x20000974        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .data          0x20000974        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_dvmd_tls.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_fixunssfsi.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(eqsf2.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(gesf2.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(lesf2.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(subsf3.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(fixsfsi.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(floatsisf.o)
+ .data          0x20000974        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_clzsi2.o)
+ *(.data*)
+ *(*.data)
+ *(.gnu.linkonce.d*)
+                0x20000974                __Xmc1300_eData = ALIGN (0x4)
+                0x00000004                __Xmc1300_Data_Size = (__Xmc1300_eData - __Xmc1300_sData)
+                0x20000978                __Xmc1300_heap_start = ALIGN (0x8)
+                0x20004000                __Xmc1300_heap_end = (ORIGIN (SRAM) + 0x4000)
+                0x20000978                Heap_Bank1_Start = __Xmc1300_heap_start
+                0x00003688                Heap_Bank1_Size = (__Xmc1300_heap_end - __Xmc1300_heap_start)
+
+.igot.plt       0x20000974        0x0 load address 0x10002dfc
+ .igot.plt      0x00000000        0x0 arm_sin_cos_example_f32.o
+
+/DISCARD/
+ *(.comment)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x108
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 arm_sin_cos_example_f32.o
+ .debug_aranges
+                0x00000020       0x40 Startup/startup_XMC1300.o
+ .debug_aranges
+                0x00000060       0x28 Startup/system_XMC1300.o
+ .debug_aranges
+                0x00000088       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_aranges
+                0x000000a8       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_aranges
+                0x000000c8       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_aranges
+                0x000000e8       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_info     0x00000000      0xb11
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x1ee arm_sin_cos_example_f32.o
+ .debug_info    0x000001ee       0x81 Startup/startup_XMC1300.o
+ .debug_info    0x0000026f      0x1c2 Startup/system_XMC1300.o
+ .debug_info    0x00000431      0x25a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_info    0x0000068b      0x25a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_info    0x000008e5      0x116 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_info    0x000009fb      0x116 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+.debug_abbrev   0x00000000      0x457
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0xc3 arm_sin_cos_example_f32.o
+ .debug_abbrev  0x000000c3       0x12 Startup/startup_XMC1300.o
+ .debug_abbrev  0x000000d5       0xce Startup/system_XMC1300.o
+ .debug_abbrev  0x000001a3       0xd2 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_abbrev  0x00000275       0xd2 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_abbrev  0x00000347       0x88 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_abbrev  0x000003cf       0x88 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+.debug_line     0x00000000     0x1369
+ *(.debug_line)
+ .debug_line    0x00000000      0x2ec arm_sin_cos_example_f32.o
+ .debug_line    0x000002ec      0x16b Startup/startup_XMC1300.o
+ .debug_line    0x00000457      0x2ec Startup/system_XMC1300.o
+ .debug_line    0x00000743      0x31f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_line    0x00000a62      0x31f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_line    0x00000d81      0x2f3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_line    0x00001074      0x2f5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+.debug_frame    0x00000000      0x340
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x30 arm_sin_cos_example_f32.o
+ .debug_frame   0x00000030       0x4c Startup/system_XMC1300.o
+ .debug_frame   0x0000007c       0x44 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_frame   0x000000c0       0x44 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_frame   0x00000104       0x40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_frame   0x00000144       0x40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .debug_frame   0x00000184       0x20 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o)
+ .debug_frame   0x000001a4       0x28 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_fixunssfsi.o)
+ .debug_frame   0x000001cc       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o)
+ .debug_frame   0x000001fc       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(eqsf2.o)
+ .debug_frame   0x00000228       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(gesf2.o)
+ .debug_frame   0x00000258       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(lesf2.o)
+ .debug_frame   0x00000288       0x3c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+ .debug_frame   0x000002c4       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(subsf3.o)
+ .debug_frame   0x000002f4       0x20 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(fixsfsi.o)
+ .debug_frame   0x00000314       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(floatsisf.o)
+
+.debug_str      0x00000000    0x374da
+ *(.debug_str)
+ .debug_str     0x00000000     0x563e arm_sin_cos_example_f32.o
+                               0x57d3 (size before relaxing)
+ .debug_str     0x0000563e    0x31cac Startup/system_XMC1300.o
+                              0x34ce4 (size before relaxing)
+ .debug_str     0x000372ea      0x122 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+                               0x575b (size before relaxing)
+ .debug_str     0x0003740c       0x46 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+                               0x575b (size before relaxing)
+ .debug_str     0x00037452       0x4f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+                               0x56f2 (size before relaxing)
+ .debug_str     0x000374a1       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+                               0x56f4 (size before relaxing)
+
+.debug_loc      0x00000000      0xa48
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x38 arm_sin_cos_example_f32.o
+ .debug_loc     0x00000038       0x64 Startup/system_XMC1300.o
+ .debug_loc     0x0000009c      0x3db C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_loc     0x00000477      0x3db C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_loc     0x00000852       0xfb C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_loc     0x0000094d       0xfb C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_ranges   0x00000000       0xa0
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x10 arm_sin_cos_example_f32.o
+ .debug_ranges  0x00000010       0x38 Startup/startup_XMC1300.o
+ .debug_ranges  0x00000048       0x18 Startup/system_XMC1300.o
+ .debug_ranges  0x00000060       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_ranges  0x00000070       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_ranges  0x00000080       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_ranges  0x00000090       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.build_attributes
+                0x00000000      0x34b
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x31 arm_sin_cos_example_f32.o
+ .ARM.attributes
+                0x00000031       0x21 Startup/startup_XMC1300.o
+ .ARM.attributes
+                0x00000052       0x31 Startup/system_XMC1300.o
+ .ARM.attributes
+                0x00000083       0x31 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .ARM.attributes
+                0x000000b4       0x31 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .ARM.attributes
+                0x000000e5       0x31 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .ARM.attributes
+                0x00000116       0x31 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)
+ .ARM.attributes
+                0x00000147       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000165       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000183       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_arm_cmpsf2.o)
+ .ARM.attributes
+                0x000001a1       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_fixunssfsi.o)
+ .ARM.attributes
+                0x000001cd       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(addsf3.o)
+ .ARM.attributes
+                0x000001f9       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(eqsf2.o)
+ .ARM.attributes
+                0x00000225       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(gesf2.o)
+ .ARM.attributes
+                0x00000251       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(lesf2.o)
+ .ARM.attributes
+                0x0000027d       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(mulsf3.o)
+ .ARM.attributes
+                0x000002a9       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(subsf3.o)
+ .ARM.attributes
+                0x000002d5       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(fixsfsi.o)
+ .ARM.attributes
+                0x00000301       0x2c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(floatsisf.o)
+ .ARM.attributes
+                0x0000032d       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv6-m\libgcc.a(_clzsi2.o)
+OUTPUT(Sin.elf elf32-littlearm)
+
+.debug_macro    0x00000000     0xa770
+ .debug_macro   0x00000000      0x112 arm_sin_cos_example_f32.o
+ .debug_macro   0x00000112      0x7f0 arm_sin_cos_example_f32.o
+ .debug_macro   0x00000902       0x3a arm_sin_cos_example_f32.o
+ .debug_macro   0x0000093c       0x10 arm_sin_cos_example_f32.o
+ .debug_macro   0x0000094c       0x2e arm_sin_cos_example_f32.o
+ .debug_macro   0x0000097a       0xa3 arm_sin_cos_example_f32.o
+ .debug_macro   0x00000a1d       0x3a arm_sin_cos_example_f32.o
+ .debug_macro   0x00000a57       0x52 arm_sin_cos_example_f32.o
+ .debug_macro   0x00000aa9       0x19 arm_sin_cos_example_f32.o
+ .debug_macro   0x00000ac2      0x16d arm_sin_cos_example_f32.o
+ .debug_macro   0x00000c2f      0x1da arm_sin_cos_example_f32.o
+ .debug_macro   0x00000e09       0x12 arm_sin_cos_example_f32.o
+ .debug_macro   0x00000e1b       0x3a arm_sin_cos_example_f32.o
+ .debug_macro   0x00000e55      0x214 arm_sin_cos_example_f32.o
+ .debug_macro   0x00001069       0x1f arm_sin_cos_example_f32.o
+ .debug_macro   0x00001088       0x12 arm_sin_cos_example_f32.o
+ .debug_macro   0x0000109a       0x10 arm_sin_cos_example_f32.o
+ .debug_macro   0x000010aa       0x89 arm_sin_cos_example_f32.o
+ .debug_macro   0x00001133       0x22 arm_sin_cos_example_f32.o
+ .debug_macro   0x00001155       0xb3 arm_sin_cos_example_f32.o
+ .debug_macro   0x00001208       0xcf Startup/system_XMC1300.o
+ .debug_macro   0x000012d7      0x20e Startup/system_XMC1300.o
+ .debug_macro   0x000014e5       0x36 Startup/system_XMC1300.o
+ .debug_macro   0x0000151b       0x22 Startup/system_XMC1300.o
+ .debug_macro   0x0000153d      0x242 Startup/system_XMC1300.o
+ .debug_macro   0x0000177f     0x83a5 Startup/system_XMC1300.o
+ .debug_macro   0x00009b24      0x114 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x00009c38      0x7fc C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_cos_f32.o)
+ .debug_macro   0x0000a434      0x114 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_sin_f32.o)
+ .debug_macro   0x0000a548      0x114 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_add_f32.o)
+ .debug_macro   0x0000a65c      0x114 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM0l_math.a(arm_mult_f32.o)

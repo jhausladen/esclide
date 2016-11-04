@@ -1,0 +1,520 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"arm_signal_converge_example_f32.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	firStateF32,256,4
+  20              		.comm	LPF_instance,12,4
+  21              		.comm	lmsStateF32,256,4
+  22              		.comm	errOutput,6144,4
+  23              		.comm	lmsNorm_instance,24,4
+  24              		.comm	wire1,128,4
+  25              		.comm	wire2,128,4
+  26              		.comm	wire3,128,4
+  27              		.comm	err_signal,128,4
+  28              		.section	.text.main,"ax",%progbits
+  29              		.align	2
+  30              		.global	main
+  31              		.thumb
+  32              		.thumb_func
+  34              	main:
+  35              	.LFB128:
+  36              		.file 1 "../arm_signal_converge_example_f32.c"
+   1:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_signal_converge_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_signal_converge_example_f32.c **** *
+   4:../arm_signal_converge_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_signal_converge_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_signal_converge_example_f32.c **** *
+   7:../arm_signal_converge_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_signal_converge_example_f32.c **** * Title:         arm_signal_converge_example_f32.c
+   9:../arm_signal_converge_example_f32.c **** *
+  10:../arm_signal_converge_example_f32.c **** * Description:   Example code demonstrating convergence of an adaptive
+  11:../arm_signal_converge_example_f32.c **** *                filter.
+  12:../arm_signal_converge_example_f32.c **** *
+  13:../arm_signal_converge_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  14:../arm_signal_converge_example_f32.c **** *
+  15:../arm_signal_converge_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  16:../arm_signal_converge_example_f32.c **** * modification, are permitted provided that the following conditions
+  17:../arm_signal_converge_example_f32.c **** * are met:
+  18:../arm_signal_converge_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  19:../arm_signal_converge_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  20:../arm_signal_converge_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  21:../arm_signal_converge_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  22:../arm_signal_converge_example_f32.c **** *     the documentation and/or other materials provided with the
+  23:../arm_signal_converge_example_f32.c **** *     distribution.
+  24:../arm_signal_converge_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  25:../arm_signal_converge_example_f32.c **** *     may be used to endorse or promote products derived from this
+  26:../arm_signal_converge_example_f32.c **** *     software without specific prior written permission.
+  27:../arm_signal_converge_example_f32.c **** *
+  28:../arm_signal_converge_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  29:../arm_signal_converge_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  30:../arm_signal_converge_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  31:../arm_signal_converge_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  32:../arm_signal_converge_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  33:../arm_signal_converge_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  34:../arm_signal_converge_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  35:../arm_signal_converge_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  36:../arm_signal_converge_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  37:../arm_signal_converge_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  38:../arm_signal_converge_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  39:../arm_signal_converge_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  40:../arm_signal_converge_example_f32.c ****  * -------------------------------------------------------------------- */
+  41:../arm_signal_converge_example_f32.c **** 
+  42:../arm_signal_converge_example_f32.c **** /**
+  43:../arm_signal_converge_example_f32.c ****  * @ingroup groupExamples
+  44:../arm_signal_converge_example_f32.c ****  */
+  45:../arm_signal_converge_example_f32.c **** 
+  46:../arm_signal_converge_example_f32.c **** /**
+  47:../arm_signal_converge_example_f32.c ****  * @defgroup SignalConvergence Signal Convergence Example
+  48:../arm_signal_converge_example_f32.c ****  *
+  49:../arm_signal_converge_example_f32.c ****  * \par Description:
+  50:../arm_signal_converge_example_f32.c ****  * \par
+  51:../arm_signal_converge_example_f32.c ****  * Demonstrates the ability of an adaptive filter to "learn" the transfer function of
+  52:../arm_signal_converge_example_f32.c ****  * a FIR lowpass filter using the Normalized LMS Filter, Finite Impulse
+  53:../arm_signal_converge_example_f32.c ****  * Response (FIR) Filter, and Basic Math Functions.
+  54:../arm_signal_converge_example_f32.c ****  *
+  55:../arm_signal_converge_example_f32.c ****  * \par Algorithm:
+  56:../arm_signal_converge_example_f32.c ****  * \par
+  57:../arm_signal_converge_example_f32.c ****  * The figure below illustrates the signal flow in this example. Uniformly distributed white
+  58:../arm_signal_converge_example_f32.c ****  * noise is passed through an FIR lowpass filter. The output of the FIR filter serves as the
+  59:../arm_signal_converge_example_f32.c ****  * reference input of the adaptive filter (normalized LMS filter). The white noise is input
+  60:../arm_signal_converge_example_f32.c ****  * to the adaptive filter. The adaptive filter learns the transfer function of the FIR filter.
+  61:../arm_signal_converge_example_f32.c ****  * The filter outputs two signals: (1) the output of the internal adaptive FIR filter, and
+  62:../arm_signal_converge_example_f32.c ****  * (2) the error signal which is the difference between the adaptive filter and the reference
+  63:../arm_signal_converge_example_f32.c ****  * output of the FIR filter. Over time as the adaptive filter learns the transfer function
+  64:../arm_signal_converge_example_f32.c ****  * of the FIR filter, the first output approaches the reference output of the FIR filter,
+  65:../arm_signal_converge_example_f32.c ****  * and the error signal approaches zero.
+  66:../arm_signal_converge_example_f32.c ****  * \par
+  67:../arm_signal_converge_example_f32.c ****  * The adaptive filter converges properly even if the input signal has a large dynamic
+  68:../arm_signal_converge_example_f32.c ****  * range (i.e., varies from small to large values). The coefficients of the adaptive filter
+  69:../arm_signal_converge_example_f32.c ****  * are initially zero, and then converge over 1536 samples. The internal function test_signal_conve
+  70:../arm_signal_converge_example_f32.c ****  * implements the stopping condition. The function checks if all of the values of the error signal 
+  71:../arm_signal_converge_example_f32.c ****  * magnitude below a threshold DELTA.
+  72:../arm_signal_converge_example_f32.c ****  *
+  73:../arm_signal_converge_example_f32.c ****  * \par Block Diagram:
+  74:../arm_signal_converge_example_f32.c ****  * \par
+  75:../arm_signal_converge_example_f32.c ****  * \image html SignalFlow.gif
+  76:../arm_signal_converge_example_f32.c ****  *
+  77:../arm_signal_converge_example_f32.c ****  *
+  78:../arm_signal_converge_example_f32.c ****  * \par Variables Description:
+  79:../arm_signal_converge_example_f32.c ****  * \par
+  80:../arm_signal_converge_example_f32.c ****  * \li \c testInput_f32 points to the input data
+  81:../arm_signal_converge_example_f32.c ****  * \li \c firStateF32 points to FIR state buffer
+  82:../arm_signal_converge_example_f32.c ****  * \li \c lmsStateF32 points to Normalised Least mean square FIR filter state buffer
+  83:../arm_signal_converge_example_f32.c ****  * \li \c FIRCoeff_f32 points to coefficient buffer
+  84:../arm_signal_converge_example_f32.c ****  * \li \c lmsNormCoeff_f32 points to Normalised Least mean square FIR filter coefficient buffer
+  85:../arm_signal_converge_example_f32.c ****  * \li \c wire1, wir2, wire3 temporary buffers
+  86:../arm_signal_converge_example_f32.c ****  * \li \c errOutput, err_signal temporary error buffers
+  87:../arm_signal_converge_example_f32.c ****  *
+  88:../arm_signal_converge_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  89:../arm_signal_converge_example_f32.c ****  * \par
+  90:../arm_signal_converge_example_f32.c ****  * - arm_lms_norm_init_f32()
+  91:../arm_signal_converge_example_f32.c ****  * - arm_fir_init_f32()
+  92:../arm_signal_converge_example_f32.c ****  * - arm_fir_f32()
+  93:../arm_signal_converge_example_f32.c ****  * - arm_lms_norm_f32()
+  94:../arm_signal_converge_example_f32.c ****  * - arm_scale_f32()
+  95:../arm_signal_converge_example_f32.c ****  * - arm_abs_f32()
+  96:../arm_signal_converge_example_f32.c ****  * - arm_sub_f32()
+  97:../arm_signal_converge_example_f32.c ****  * - arm_min_f32()
+  98:../arm_signal_converge_example_f32.c ****  * - arm_copy_f32()
+  99:../arm_signal_converge_example_f32.c ****  *
+ 100:../arm_signal_converge_example_f32.c ****  * <b> Refer  </b>
+ 101:../arm_signal_converge_example_f32.c ****  * \link arm_signal_converge_example_f32.c \endlink
+ 102:../arm_signal_converge_example_f32.c ****  *
+ 103:../arm_signal_converge_example_f32.c ****  */
+ 104:../arm_signal_converge_example_f32.c **** 
+ 105:../arm_signal_converge_example_f32.c **** 
+ 106:../arm_signal_converge_example_f32.c **** /** \example arm_signal_converge_example_f32.c
+ 107:../arm_signal_converge_example_f32.c ****   */
+ 108:../arm_signal_converge_example_f32.c **** 
+ 109:../arm_signal_converge_example_f32.c **** #include "arm_math.h"
+ 110:../arm_signal_converge_example_f32.c **** #include "math_helper.h"
+ 111:../arm_signal_converge_example_f32.c **** 
+ 112:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 113:../arm_signal_converge_example_f32.c **** ** Global defines for the simulation
+ 114:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 115:../arm_signal_converge_example_f32.c **** 
+ 116:../arm_signal_converge_example_f32.c **** #define TEST_LENGTH_SAMPLES 1536
+ 117:../arm_signal_converge_example_f32.c **** #define NUMTAPS               32
+ 118:../arm_signal_converge_example_f32.c **** #define BLOCKSIZE             32
+ 119:../arm_signal_converge_example_f32.c **** #define DELTA_ERROR         0.000001f
+ 120:../arm_signal_converge_example_f32.c **** #define DELTA_COEFF         0.0001f
+ 121:../arm_signal_converge_example_f32.c **** #define MU                  0.5f
+ 122:../arm_signal_converge_example_f32.c **** 
+ 123:../arm_signal_converge_example_f32.c **** #define NUMFRAMES (TEST_LENGTH_SAMPLES / BLOCKSIZE)
+ 124:../arm_signal_converge_example_f32.c **** 
+ 125:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 126:../arm_signal_converge_example_f32.c **** * Declare FIR state buffers and structure
+ 127:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 128:../arm_signal_converge_example_f32.c **** 
+ 129:../arm_signal_converge_example_f32.c **** float32_t firStateF32[NUMTAPS + BLOCKSIZE];
+ 130:../arm_signal_converge_example_f32.c **** arm_fir_instance_f32 LPF_instance;
+ 131:../arm_signal_converge_example_f32.c **** 
+ 132:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 133:../arm_signal_converge_example_f32.c **** * Declare LMSNorm state buffers and structure
+ 134:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 135:../arm_signal_converge_example_f32.c **** 
+ 136:../arm_signal_converge_example_f32.c **** float32_t lmsStateF32[NUMTAPS + BLOCKSIZE];
+ 137:../arm_signal_converge_example_f32.c **** float32_t errOutput[TEST_LENGTH_SAMPLES];
+ 138:../arm_signal_converge_example_f32.c **** arm_lms_norm_instance_f32 lmsNorm_instance;
+ 139:../arm_signal_converge_example_f32.c **** 
+ 140:../arm_signal_converge_example_f32.c **** 
+ 141:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 142:../arm_signal_converge_example_f32.c **** * Function Declarations for Signal Convergence Example
+ 143:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 144:../arm_signal_converge_example_f32.c **** 
+ 145:../arm_signal_converge_example_f32.c **** arm_status test_signal_converge_example( void );
+ 146:../arm_signal_converge_example_f32.c **** 
+ 147:../arm_signal_converge_example_f32.c **** 
+ 148:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 149:../arm_signal_converge_example_f32.c **** * Internal functions
+ 150:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 151:../arm_signal_converge_example_f32.c **** arm_status test_signal_converge(float32_t* err_signal,
+ 152:../arm_signal_converge_example_f32.c ****                         uint32_t blockSize);
+ 153:../arm_signal_converge_example_f32.c **** 
+ 154:../arm_signal_converge_example_f32.c **** void getinput(float32_t* input,
+ 155:../arm_signal_converge_example_f32.c ****      uint32_t fr_cnt,
+ 156:../arm_signal_converge_example_f32.c ****           uint32_t blockSize);
+ 157:../arm_signal_converge_example_f32.c **** 
+ 158:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 159:../arm_signal_converge_example_f32.c **** * External Declarations for FIR F32 module Test
+ 160:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 161:../arm_signal_converge_example_f32.c **** extern float32_t testInput_f32[TEST_LENGTH_SAMPLES];
+ 162:../arm_signal_converge_example_f32.c **** extern float32_t lmsNormCoeff_f32[32];
+ 163:../arm_signal_converge_example_f32.c **** extern const float32_t FIRCoeff_f32[32];
+ 164:../arm_signal_converge_example_f32.c **** extern arm_lms_norm_instance_f32 lmsNorm_instance;
+ 165:../arm_signal_converge_example_f32.c **** 
+ 166:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 167:../arm_signal_converge_example_f32.c **** * Declare I/O buffers
+ 168:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 169:../arm_signal_converge_example_f32.c **** 
+ 170:../arm_signal_converge_example_f32.c **** float32_t wire1[BLOCKSIZE];
+ 171:../arm_signal_converge_example_f32.c **** float32_t wire2[BLOCKSIZE];
+ 172:../arm_signal_converge_example_f32.c **** float32_t wire3[BLOCKSIZE];
+ 173:../arm_signal_converge_example_f32.c **** float32_t err_signal[BLOCKSIZE];
+ 174:../arm_signal_converge_example_f32.c **** 
+ 175:../arm_signal_converge_example_f32.c **** /* ----------------------------------------------------------------------
+ 176:../arm_signal_converge_example_f32.c **** * Signal converge test
+ 177:../arm_signal_converge_example_f32.c **** * ------------------------------------------------------------------- */
+ 178:../arm_signal_converge_example_f32.c **** 
+ 179:../arm_signal_converge_example_f32.c **** int32_t main(void)
+ 180:../arm_signal_converge_example_f32.c **** {
+  37              		.loc 1 180 0
+  38              		.cfi_startproc
+  39              		@ args = 0, pretend = 0, frame = 16
+  40              		@ frame_needed = 1, uses_anonymous_args = 0
+  41 0000 80B5     		push	{r7, lr}
+  42              	.LCFI0:
+  43              		.cfi_def_cfa_offset 8
+  44              		.cfi_offset 7, -8
+  45              		.cfi_offset 14, -4
+  46 0002 86B0     		sub	sp, sp, #24
+  47              	.LCFI1:
+  48              		.cfi_def_cfa_offset 32
+  49 0004 02AF     		add	r7, sp, #8
+  50              	.LCFI2:
+  51              		.cfi_def_cfa 7, 24
+ 181:../arm_signal_converge_example_f32.c ****   uint32_t i;
+ 182:../arm_signal_converge_example_f32.c ****   arm_status status;
+ 183:../arm_signal_converge_example_f32.c ****   uint32_t index;
+ 184:../arm_signal_converge_example_f32.c ****   float32_t minValue;
+ 185:../arm_signal_converge_example_f32.c **** 
+ 186:../arm_signal_converge_example_f32.c ****   /* Initialize the LMSNorm data structure */
+ 187:../arm_signal_converge_example_f32.c ****   arm_lms_norm_init_f32(&lmsNorm_instance, NUMTAPS, lmsNormCoeff_f32, lmsStateF32, MU, BLOCKSIZE);
+  52              		.loc 1 187 0
+  53 0006 4FF07C53 		mov	r3, #1056964608
+  54 000a 0093     		str	r3, [sp, #0]	@ float
+  55 000c 4FF02003 		mov	r3, #32
+  56 0010 0193     		str	r3, [sp, #4]
+  57 0012 40F20000 		movw	r0, #:lower16:lmsNorm_instance
+  58 0016 C0F20000 		movt	r0, #:upper16:lmsNorm_instance
+  59 001a 4FF02001 		mov	r1, #32
+  60 001e 40F20002 		movw	r2, #:lower16:lmsNormCoeff_f32
+  61 0022 C0F20002 		movt	r2, #:upper16:lmsNormCoeff_f32
+  62 0026 40F20003 		movw	r3, #:lower16:lmsStateF32
+  63 002a C0F20003 		movt	r3, #:upper16:lmsStateF32
+  64 002e FFF7FEFF 		bl	arm_lms_norm_init_f32
+ 188:../arm_signal_converge_example_f32.c **** 
+ 189:../arm_signal_converge_example_f32.c ****   /* Initialize the FIR data structure */
+ 190:../arm_signal_converge_example_f32.c ****   arm_fir_init_f32(&LPF_instance, NUMTAPS, (float32_t *)FIRCoeff_f32, firStateF32, BLOCKSIZE);
+  65              		.loc 1 190 0
+  66 0032 4FF02003 		mov	r3, #32
+  67 0036 0093     		str	r3, [sp, #0]
+  68 0038 40F20000 		movw	r0, #:lower16:LPF_instance
+  69 003c C0F20000 		movt	r0, #:upper16:LPF_instance
+  70 0040 4FF02001 		mov	r1, #32
+  71 0044 40F20002 		movw	r2, #:lower16:FIRCoeff_f32
+  72 0048 C0F20002 		movt	r2, #:upper16:FIRCoeff_f32
+  73 004c 40F20003 		movw	r3, #:lower16:firStateF32
+  74 0050 C0F20003 		movt	r3, #:upper16:firStateF32
+  75 0054 FFF7FEFF 		bl	arm_fir_init_f32
+ 191:../arm_signal_converge_example_f32.c **** 
+ 192:../arm_signal_converge_example_f32.c ****   /* ----------------------------------------------------------------------
+ 193:../arm_signal_converge_example_f32.c ****   * Loop over the frames of data and execute each of the processing
+ 194:../arm_signal_converge_example_f32.c ****   * functions in the system.
+ 195:../arm_signal_converge_example_f32.c ****   * ------------------------------------------------------------------- */
+ 196:../arm_signal_converge_example_f32.c **** 
+ 197:../arm_signal_converge_example_f32.c ****   for(i=0; i < NUMFRAMES; i++)
+  76              		.loc 1 197 0
+  77 0058 4FF00003 		mov	r3, #0
+  78 005c FB60     		str	r3, [r7, #12]
+  79 005e 4EE0     		b	.L2
+  80              	.L3:
+ 198:../arm_signal_converge_example_f32.c ****   {
+ 199:../arm_signal_converge_example_f32.c ****     /* Read the input data - uniformly distributed random noise - into wire1 */
+ 200:../arm_signal_converge_example_f32.c ****     arm_copy_f32(testInput_f32 + (i * BLOCKSIZE), wire1, BLOCKSIZE);
+  81              		.loc 1 200 0 discriminator 2
+  82 0060 FB68     		ldr	r3, [r7, #12]
+  83 0062 4FEAC312 		lsl	r2, r3, #7
+  84 0066 40F20003 		movw	r3, #:lower16:testInput_f32
+  85 006a C0F20003 		movt	r3, #:upper16:testInput_f32
+  86 006e D318     		adds	r3, r2, r3
+  87 0070 1846     		mov	r0, r3
+  88 0072 40F20001 		movw	r1, #:lower16:wire1
+  89 0076 C0F20001 		movt	r1, #:upper16:wire1
+  90 007a 4FF02002 		mov	r2, #32
+  91 007e FFF7FEFF 		bl	arm_copy_f32
+ 201:../arm_signal_converge_example_f32.c **** 
+ 202:../arm_signal_converge_example_f32.c ****     /* Execute the FIR processing function.  Input wire1 and output wire2 */
+ 203:../arm_signal_converge_example_f32.c ****     arm_fir_f32(&LPF_instance, wire1, wire2, BLOCKSIZE);
+  92              		.loc 1 203 0 discriminator 2
+  93 0082 40F20000 		movw	r0, #:lower16:LPF_instance
+  94 0086 C0F20000 		movt	r0, #:upper16:LPF_instance
+  95 008a 40F20001 		movw	r1, #:lower16:wire1
+  96 008e C0F20001 		movt	r1, #:upper16:wire1
+  97 0092 40F20002 		movw	r2, #:lower16:wire2
+  98 0096 C0F20002 		movt	r2, #:upper16:wire2
+  99 009a 4FF02003 		mov	r3, #32
+ 100 009e FFF7FEFF 		bl	arm_fir_f32
+ 204:../arm_signal_converge_example_f32.c **** 
+ 205:../arm_signal_converge_example_f32.c ****     /* Execute the LMS Norm processing function*/
+ 206:../arm_signal_converge_example_f32.c **** 
+ 207:../arm_signal_converge_example_f32.c ****     arm_lms_norm_f32(&lmsNorm_instance, /* LMSNorm instance */
+ 101              		.loc 1 207 0 discriminator 2
+ 102 00a2 40F20003 		movw	r3, #:lower16:err_signal
+ 103 00a6 C0F20003 		movt	r3, #:upper16:err_signal
+ 104 00aa 0093     		str	r3, [sp, #0]
+ 105 00ac 4FF02003 		mov	r3, #32
+ 106 00b0 0193     		str	r3, [sp, #4]
+ 107 00b2 40F20000 		movw	r0, #:lower16:lmsNorm_instance
+ 108 00b6 C0F20000 		movt	r0, #:upper16:lmsNorm_instance
+ 109 00ba 40F20001 		movw	r1, #:lower16:wire1
+ 110 00be C0F20001 		movt	r1, #:upper16:wire1
+ 111 00c2 40F20002 		movw	r2, #:lower16:wire2
+ 112 00c6 C0F20002 		movt	r2, #:upper16:wire2
+ 113 00ca 40F20003 		movw	r3, #:lower16:wire3
+ 114 00ce C0F20003 		movt	r3, #:upper16:wire3
+ 115 00d2 FFF7FEFF 		bl	arm_lms_norm_f32
+ 208:../arm_signal_converge_example_f32.c ****          wire1,                         /* Input signal */
+ 209:../arm_signal_converge_example_f32.c ****          wire2,                         /* Reference Signal */
+ 210:../arm_signal_converge_example_f32.c ****          wire3,                         /* Converged Signal */
+ 211:../arm_signal_converge_example_f32.c ****          err_signal,                    /* Error Signal, this will become small as the signal conve
+ 212:../arm_signal_converge_example_f32.c ****          BLOCKSIZE);                    /* BlockSize */
+ 213:../arm_signal_converge_example_f32.c **** 
+ 214:../arm_signal_converge_example_f32.c ****     /* apply overall gain */
+ 215:../arm_signal_converge_example_f32.c ****     arm_scale_f32(wire3, 5, wire3, BLOCKSIZE);   /* in-place buffer */
+ 116              		.loc 1 215 0 discriminator 2
+ 117 00d6 40F20000 		movw	r0, #:lower16:wire3
+ 118 00da C0F20000 		movt	r0, #:upper16:wire3
+ 119 00de 4FF00001 		mov	r1, #0
+ 120 00e2 C4F2A001 		movt	r1, 16544
+ 121 00e6 40F20002 		movw	r2, #:lower16:wire3
+ 122 00ea C0F20002 		movt	r2, #:upper16:wire3
+ 123 00ee 4FF02003 		mov	r3, #32
+ 124 00f2 FFF7FEFF 		bl	arm_scale_f32
+ 197:../arm_signal_converge_example_f32.c ****   for(i=0; i < NUMFRAMES; i++)
+ 125              		.loc 1 197 0 discriminator 2
+ 126 00f6 FB68     		ldr	r3, [r7, #12]
+ 127 00f8 03F10103 		add	r3, r3, #1
+ 128 00fc FB60     		str	r3, [r7, #12]
+ 129              	.L2:
+ 197:../arm_signal_converge_example_f32.c ****   for(i=0; i < NUMFRAMES; i++)
+ 130              		.loc 1 197 0 is_stmt 0 discriminator 1
+ 131 00fe FB68     		ldr	r3, [r7, #12]
+ 132 0100 2F2B     		cmp	r3, #47
+ 133 0102 ADD9     		bls	.L3
+ 216:../arm_signal_converge_example_f32.c ****   }
+ 217:../arm_signal_converge_example_f32.c **** 
+ 218:../arm_signal_converge_example_f32.c ****   status = ARM_MATH_SUCCESS;
+ 134              		.loc 1 218 0 is_stmt 1
+ 135 0104 4FF00003 		mov	r3, #0
+ 136 0108 FB72     		strb	r3, [r7, #11]
+ 219:../arm_signal_converge_example_f32.c **** 
+ 220:../arm_signal_converge_example_f32.c ****   /* -------------------------------------------------------------------------------
+ 221:../arm_signal_converge_example_f32.c ****   * Test whether the error signal has reached towards 0.
+ 222:../arm_signal_converge_example_f32.c ****   * ----------------------------------------------------------------------------- */
+ 223:../arm_signal_converge_example_f32.c **** 
+ 224:../arm_signal_converge_example_f32.c ****   arm_abs_f32(err_signal, err_signal, BLOCKSIZE);
+ 137              		.loc 1 224 0
+ 138 010a 40F20000 		movw	r0, #:lower16:err_signal
+ 139 010e C0F20000 		movt	r0, #:upper16:err_signal
+ 140 0112 40F20001 		movw	r1, #:lower16:err_signal
+ 141 0116 C0F20001 		movt	r1, #:upper16:err_signal
+ 142 011a 4FF02002 		mov	r2, #32
+ 143 011e FFF7FEFF 		bl	arm_abs_f32
+ 225:../arm_signal_converge_example_f32.c ****   arm_min_f32(err_signal, BLOCKSIZE, &minValue, &index);
+ 144              		.loc 1 225 0
+ 145 0122 3A46     		mov	r2, r7
+ 146 0124 07F10403 		add	r3, r7, #4
+ 147 0128 40F20000 		movw	r0, #:lower16:err_signal
+ 148 012c C0F20000 		movt	r0, #:upper16:err_signal
+ 149 0130 4FF02001 		mov	r1, #32
+ 150 0134 FFF7FEFF 		bl	arm_min_f32
+ 226:../arm_signal_converge_example_f32.c **** 
+ 227:../arm_signal_converge_example_f32.c ****   if (minValue > DELTA_ERROR)
+ 151              		.loc 1 227 0
+ 152 0138 97ED007A 		flds	s14, [r7, #0]
+ 153 013c DFED217A 		flds	s15, .L12
+ 154 0140 B4EEE77A 		fcmpes	s14, s15
+ 155 0144 F1EE10FA 		fmstat
+ 156 0148 02DD     		ble	.L4
+ 157              	.L10:
+ 228:../arm_signal_converge_example_f32.c ****   {
+ 229:../arm_signal_converge_example_f32.c ****     status = ARM_MATH_TEST_FAILURE;
+ 158              		.loc 1 229 0
+ 159 014a 4FF0FA03 		mov	r3, #250
+ 160 014e FB72     		strb	r3, [r7, #11]
+ 161              	.L4:
+ 230:../arm_signal_converge_example_f32.c ****   }
+ 231:../arm_signal_converge_example_f32.c **** 
+ 232:../arm_signal_converge_example_f32.c ****   /* ----------------------------------------------------------------------
+ 233:../arm_signal_converge_example_f32.c ****   * Test whether the filter coefficients have converged.
+ 234:../arm_signal_converge_example_f32.c ****   * ------------------------------------------------------------------- */
+ 235:../arm_signal_converge_example_f32.c **** 
+ 236:../arm_signal_converge_example_f32.c ****   arm_sub_f32((float32_t *)FIRCoeff_f32, lmsNormCoeff_f32, lmsNormCoeff_f32, NUMTAPS);
+ 162              		.loc 1 236 0
+ 163 0150 40F20000 		movw	r0, #:lower16:FIRCoeff_f32
+ 164 0154 C0F20000 		movt	r0, #:upper16:FIRCoeff_f32
+ 165 0158 40F20001 		movw	r1, #:lower16:lmsNormCoeff_f32
+ 166 015c C0F20001 		movt	r1, #:upper16:lmsNormCoeff_f32
+ 167 0160 40F20002 		movw	r2, #:lower16:lmsNormCoeff_f32
+ 168 0164 C0F20002 		movt	r2, #:upper16:lmsNormCoeff_f32
+ 169 0168 4FF02003 		mov	r3, #32
+ 170 016c FFF7FEFF 		bl	arm_sub_f32
+ 237:../arm_signal_converge_example_f32.c **** 
+ 238:../arm_signal_converge_example_f32.c ****   arm_abs_f32(lmsNormCoeff_f32, lmsNormCoeff_f32, NUMTAPS);
+ 171              		.loc 1 238 0
+ 172 0170 40F20000 		movw	r0, #:lower16:lmsNormCoeff_f32
+ 173 0174 C0F20000 		movt	r0, #:upper16:lmsNormCoeff_f32
+ 174 0178 40F20001 		movw	r1, #:lower16:lmsNormCoeff_f32
+ 175 017c C0F20001 		movt	r1, #:upper16:lmsNormCoeff_f32
+ 176 0180 4FF02002 		mov	r2, #32
+ 177 0184 FFF7FEFF 		bl	arm_abs_f32
+ 239:../arm_signal_converge_example_f32.c ****   arm_min_f32(lmsNormCoeff_f32, NUMTAPS, &minValue, &index);
+ 178              		.loc 1 239 0
+ 179 0188 3A46     		mov	r2, r7
+ 180 018a 07F10403 		add	r3, r7, #4
+ 181 018e 40F20000 		movw	r0, #:lower16:lmsNormCoeff_f32
+ 182 0192 C0F20000 		movt	r0, #:upper16:lmsNormCoeff_f32
+ 183 0196 4FF02001 		mov	r1, #32
+ 184 019a FFF7FEFF 		bl	arm_min_f32
+ 240:../arm_signal_converge_example_f32.c **** 
+ 241:../arm_signal_converge_example_f32.c ****   if (minValue > DELTA_COEFF)
+ 185              		.loc 1 241 0
+ 186 019e 97ED007A 		flds	s14, [r7, #0]
+ 187 01a2 DFED097A 		flds	s15, .L12+4
+ 188 01a6 B4EEE77A 		fcmpes	s14, s15
+ 189 01aa F1EE10FA 		fmstat
+ 190 01ae 02DD     		ble	.L6
+ 191              	.L11:
+ 242:../arm_signal_converge_example_f32.c ****   {
+ 243:../arm_signal_converge_example_f32.c ****     status = ARM_MATH_TEST_FAILURE;
+ 192              		.loc 1 243 0
+ 193 01b0 4FF0FA03 		mov	r3, #250
+ 194 01b4 FB72     		strb	r3, [r7, #11]
+ 195              	.L6:
+ 244:../arm_signal_converge_example_f32.c ****   }
+ 245:../arm_signal_converge_example_f32.c **** 
+ 246:../arm_signal_converge_example_f32.c ****   /* ----------------------------------------------------------------------
+ 247:../arm_signal_converge_example_f32.c ****   * Loop here if the signals did not pass the convergence check.
+ 248:../arm_signal_converge_example_f32.c ****   * This denotes a test failure
+ 249:../arm_signal_converge_example_f32.c ****   * ------------------------------------------------------------------- */
+ 250:../arm_signal_converge_example_f32.c **** 
+ 251:../arm_signal_converge_example_f32.c ****   if( status != ARM_MATH_SUCCESS)
+ 196              		.loc 1 251 0
+ 197 01b6 97F90B30 		ldrsb	r3, [r7, #11]
+ 198 01ba 002B     		cmp	r3, #0
+ 199 01bc 00D0     		beq	.L8
+ 200              	.L9:
+ 252:../arm_signal_converge_example_f32.c ****   {
+ 253:../arm_signal_converge_example_f32.c ****     while(1);
+ 201              		.loc 1 253 0 discriminator 1
+ 202 01be FEE7     		b	.L9
+ 203              	.L8:
+ 254:../arm_signal_converge_example_f32.c ****   }
+ 255:../arm_signal_converge_example_f32.c **** 
+ 256:../arm_signal_converge_example_f32.c ****   while(1);                             /* main function does not return */
+ 204              		.loc 1 256 0 discriminator 1
+ 205 01c0 FEE7     		b	.L8
+ 206              	.L13:
+ 207 01c2 00BF     		.align	2
+ 208              	.L12:
+ 209 01c4 BD378635 		.word	897988541
+ 210 01c8 17B7D138 		.word	953267991
+ 211              		.cfi_endproc
+ 212              	.LFE128:
+ 214              		.text
+ 215              	.Letext0:
+ 216              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 217              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_signal_converge_example_f32.c
+                            *COM*:00000100 firStateF32
+                            *COM*:0000000c LPF_instance
+                            *COM*:00000100 lmsStateF32
+                            *COM*:00001800 errOutput
+                            *COM*:00000018 lmsNorm_instance
+                            *COM*:00000080 wire1
+                            *COM*:00000080 wire2
+                            *COM*:00000080 wire3
+                            *COM*:00000080 err_signal
+C:\Users\wangguan\AppData\Local\Temp\ccsDVUT1.s:29     .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccsDVUT1.s:34     .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\ccsDVUT1.s:209    .text.main:000001c4 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.9aeeb49319d52ce18428457f37cb413c
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm4.h.47.5b17071cb0e0984e786cc7d50cfa4aef
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.297.9b8078faaef2b2639f9d65032d7e0d70
+
+UNDEFINED SYMBOLS
+lmsNormCoeff_f32
+arm_lms_norm_init_f32
+FIRCoeff_f32
+arm_fir_init_f32
+testInput_f32
+arm_copy_f32
+arm_fir_f32
+arm_lms_norm_f32
+arm_scale_f32
+arm_abs_f32
+arm_min_f32
+arm_sub_f32

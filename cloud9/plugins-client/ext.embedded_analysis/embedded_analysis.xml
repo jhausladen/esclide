@@ -1,0 +1,152 @@
+<a:application xmlns:a="http://ajax.org/2005/aml">
+  <a:window
+      id        = "winConfigEmbeddedAnalysis"
+      title     = "Configure Analysis"
+      icon      = ""
+      center    = "true"
+      resizable = "true"
+      buttons   = "close"
+      modal     = "false"
+      skin      = "bk-window"
+      width     = "350"
+      height    = "550"
+      kbclose   = "true"
+      draggable = "true">
+        <a:vbox id="vbEmbeddedAnalysis">
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="sources" class="tgDesc modal_text" value="Sources:"/>
+                <a:textbox id = "txtBoxSources"/>
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="includes" class="tgDesc modal_text" value="Includes:"/>
+                <a:textbox id = "txtBoxIncludes"/>
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="flowfacts" class="tgDesc modal_text" value="Flowfacts:"/>
+                <a:textbox id = "txtBoxFlowfacts"/>
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="script" class="tgDesc modal_text" value="Script:"/>
+                <a:model id="mdlScripts">
+                    <data>
+                    </data>
+                </a:model>
+                <a:dropdown id="ddScripts"
+                      skin2       = "black_dropdown"
+                      margin     = "3 0 0 4"
+                      width      = "120"
+                      model      = "mdlScripts"
+                      default   = "default"
+                      each      = "[element]"
+                      caption   = "[@caption]"
+                      eachvalue = "[@value]" />
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="functions" class="tgDesc modal_text" value="Functions:"/>
+                <a:vbox>
+                  <a:textbox id = "txtBoxFunctions"
+                  onkeydown  = "if(event.keyCode == 13)require('ext/embedded_analysis/embedded_analysis').addFunction();"/>
+                  <a:model id="mdlEmbeddedAnalysis">
+                      <data>
+                      </data>
+                  </a:model>
+                  <a:datagrid id="dgFunctions"
+                    anchors    = "25 0 0 0" 
+                    border     = "0"
+                    width      = "200"
+                    height     = "100"
+                    class      = "noscrollbar"
+                    scrollbar  = "sbShared 20 2 2"
+                    options    = "size|move"
+                    model      = "mdlEmbeddedAnalysis"
+                    prerender  = "false"
+                    caching    = "false"
+                    loading-message = "Getting..."
+                    onkeydown  = "if(event.keyCode == 46)require('ext/embedded_analysis/embedded_analysis').removeFunction();"
+                    empty-message = "No functions to analyse">
+                      <!--model      = "[{dbg.activeframe}::vars]" Darüber-->
+                      <a:actions />
+                      <a:each match="[globals|item|embeddedfunctions]" sort="[@name]">
+                          <a:column caption="Function" value="[@name]" width="100%" tree="true" />
+                          <!--<a:column caption="Value" value="[@value]" width="60%" icon="debugger/genericvariable_obj.gif"/>-->
+                          <!--<a:column caption="Type" value="[@type]" width="50"/>-->
+                      </a:each>
+                  </a:datagrid>
+                </a:vbox> 
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="options" class="tgDesc modal_text" value="Options:"/>
+                <a:vbox>
+                  <a:checkbox id="chkDisplayWCET" value="1" label="Display WCET" skin="checkbox_grey" margin  = "4 0 0" width="120"/>
+                  <a:checkbox id="chkDisplayStack" value="1" label="Display Stack" skin="checkbox_grey" margin  = "4 0 0" width="120"/>
+                  <a:checkbox id="chksoaricfg" value="1" label="Show only analysis results in CFG" skin="checkbox_grey" margin  = "4 0 0" width="200"/>
+                  <a:checkbox id="chkDisplayBBS" visible="false" value="1" label="Display basic block statistic" skin="checkbox_grey" margin  = "4 0 0" width="150"/>
+                  <a:checkbox id="chkCreateCFG" visible="false" value="1" label="Create CFG" skin="checkbox_grey" margin  = "4 0 0" width="120"/> 
+                </a:vbox> 
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="bbstatistic" class="tgDesc modal_text" value="BB Statistic:"/>
+                <a:radiobutton id="rbBBStatisticOff" margin="3 0 0 0"
+                  group  = "grpBBStatistic"
+                  skin   = "radio_grey"
+                  value  = "off"
+                  label  = "Off"
+                  selected = "true" />
+                  <a:radiobutton id="rbBBStatisticNormal" margin="3 0 0 0"
+                  group  = "grpBBStatistic"
+                  skin   = "radio_grey"
+                  value  = "normal"
+                  label  = "Normal" />
+                  <a:radiobutton id="rbBBStatisticAdvanced" margin="3 0 0 0"
+                  group  = "grpBBStatistic"
+                  skin   = "radio_grey"
+                  value  = "advanced"
+                  label  = "Advanced" />
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:text id="cfgOutput" class="tgDesc modal_text" value="CFG Output:"/>
+                <a:model id="mdlCfgOutput">
+                    <data>
+                        <element caption="dot(interactive)" value="dot(interactive)" />
+                        <element caption="dot" value="dot" />
+                        <element caption="png" value="png" />
+                        <element caption="off" value="off" />      
+                    </data>
+                </a:model>
+                <a:dropdown id="ddcfgOutput"
+                      skin2       = "black_dropdown"
+                      margin     = "3 0 0 4"
+                      width      = "120"
+                      model      = "mdlCfgOutput"
+                      default   = "default"
+                      each      = "[element]"
+                      caption   = "[@caption]"
+                      eachvalue = "[@value]" />
+            </a:hbox>
+        </a:vbox>
+    </a:window>
+    <a:window
+      id        = "winEmbeddedAnalysis"
+      title     = "Embedded Analysis Window"
+      center    = "true"
+      modal     = "false"
+      buttons   = "close"
+      skin      = "bk-window"
+      kbclose   = "true"
+      class     = "relative"
+      width     = "450">
+        <a:vbox>
+            <a:hbox padding="5" edge="10">
+                <a:text id="errormsgembeddedanalysis" class="tgDesc modal_text" value="Error Message Dialog"/>
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:button 
+                  caption = "Close" 
+                  skin    = "btn-default-css3"
+                  onclick = "
+                   require('ext/embedded_analysis/embedded_analysis').closeEmbeddedAnalysisWindow();"
+                 />
+            </a:hbox>
+        </a:vbox>
+    </a:window>
+</a:application>

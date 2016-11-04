@@ -1,0 +1,26 @@
+<a:application xmlns:a="http://ajax.org/2005/aml">
+    <a:window
+      id        = "winExporter"
+      title     = "Exporter Window"
+      center    = "true"
+      modal     = "false"
+      buttons   = "close"
+      skin      = "bk-window"
+      kbclose   = "true"
+      class     = "relative"
+      width     = "450">
+        <a:vbox>
+            <a:hbox padding="5" edge="10">
+                <a:text id="errormsgexporter" class="tgDesc modal_text" value="Error Message Dialog"/>
+            </a:hbox>
+            <a:hbox pack="end" padding="5" edge="6 10 10">
+                <a:button 
+                  caption = "Close" 
+                  skin    = "btn-default-css3"
+                  onclick = "
+                   require('ext/exporter/exporter').closeExporterWindow();"
+                 />
+            </a:hbox>
+        </a:vbox>
+    </a:window>
+</a:application>

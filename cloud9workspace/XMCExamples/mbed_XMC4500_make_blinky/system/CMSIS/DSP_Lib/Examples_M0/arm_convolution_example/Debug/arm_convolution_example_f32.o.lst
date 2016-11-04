@@ -1,0 +1,761 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"arm_convolution_example_f32.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	Ak,512,4
+  18              		.comm	Bk,512,4
+  19              		.comm	AxB,1024,4
+  20              		.global	testInputA_f32
+  21              		.data
+  22              		.align	2
+  25              	testInputA_f32:
+  26 0000 62154FBF 		.word	-1085336222
+  27 0004 44BEAD3F 		.word	1068351044
+  28 0008 7426973F 		.word	1066870388
+  29 000c CC2901BF 		.word	-1090442804
+  30 0010 179EE13F 		.word	1071750679
+  31 0014 7C0A34BF 		.word	-1087108484
+  32 0018 2F36D93F 		.word	1071199791
+  33 001c BEDD1E3F 		.word	1058987454
+  34 0020 20B81ABE 		.word	-1105545184
+  35 0024 0248CDBD 		.word	-1110620158
+  36 0028 6D545FBF 		.word	-1084271507
+  37 002c E8A1CEBE 		.word	-1093754392
+  38 0030 0C5A5CBF 		.word	-1084466676
+  39 0034 70EAC3BE 		.word	-1094456720
+  40 0038 03B386BF 		.word	-1081691389
+  41 003c 0E30033E 		.word	1040396302
+  42 0040 E37125BF 		.word	-1088065053
+  43 0044 C7F38B3F 		.word	1066136519
+  44 0048 80630DC0 		.word	-1072864384
+  45 004c 7383F13E 		.word	1056015219
+  46 0050 795BD13E 		.word	1053907833
+  47 0054 3814A23F 		.word	1067586616
+  48 0058 0B27193F 		.word	1058613003
+  49 005c 44A2963F 		.word	1066836548
+  50 0060 984D50BE 		.word	-1102033512
+  51 0064 E9B85A3E 		.word	1046132969
+  52 0068 501A5ABF 		.word	-1084614064
+  53 006c 1E15EFBE 		.word	-1091627746
+  54 0070 E6EBB23C 		.word	1018358758
+  55 0074 9AED32BF 		.word	-1087181414
+  56 0078 C2A61ABF 		.word	-1088772414
+  57 007c 2B6EEC3E 		.word	1055682091
+  58 0080 9AEDA2BE 		.word	-1096618598
+  59 0084 FE48713F 		.word	1064388862
+  60 0088 9CDC133F 		.word	1058266268
+  61 008c 28D2D53E 		.word	1054200360
+  62 0090 AF5A1D3F 		.word	1058888367
+  63 0094 444D103F 		.word	1058032964
+  64 0098 F4C4A5BF 		.word	-1079655180
+  65 009c 25B243BF 		.word	-1086082523
+  66 00a0 FCC2733F 		.word	1064551164
+  67 00a4 F9F55BBF 		.word	-1084492295
+  68 00a8 8E591EBF 		.word	-1088530034
+  69 00ac CB2F11C0 		.word	-1072615477
+  70 00b0 AEF49ABF 		.word	-1080363858
+  71 00b4 FEF2D33F 		.word	1070854910
+  72 00b8 5B2428C0 		.word	-1071111077
+  73 00bc 1A877EBF 		.word	-1082226918
+  74 00c0 4DF6AFBF 		.word	-1078987187
+  75 00c4 6C06B03E 		.word	1051723372
+  76 00c8 F0DED13C 		.word	1020387056
+  77 00cc 191E9D3F 		.word	1067261465
+  78 00d0 854135BF 		.word	-1087028859
+  79 00d4 FF098E3D 		.word	1032718847
+  80 00d8 6E30ECBF 		.word	-1075040146
+  81 00dc CB12C9BF 		.word	-1077341493
+  82 00e0 925D813F 		.word	1065442706
+  83 00e4 B0AAE6BF 		.word	-1075402064
+  84 00e8 B9A6D03F 		.word	1070638777
+  85 00ec 999EA43F 		.word	1067753113
+  86 00f0 4BEA24BE 		.word	-1104876981
+  87 00f4 E0D770BF 		.word	-1083123744
+  88 00f8 6265BC3E 		.word	1052534114
+  89 00fc D674953E 		.word	1049982166
+  90              		.global	testInputB_f32
+  91              		.align	2
+  94              	testInputB_f32:
+  95 0100 89086F3F 		.word	1064241289
+  96 0104 4B06403D 		.word	1027606091
+  97 0108 1782A83F 		.word	1068007959
+  98 010c C16EE03E 		.word	1054895809
+  99 0110 4C55AA3E 		.word	1051350348
+ 100 0114 99120640 		.word	1074139801
+ 101 0118 BE17033F 		.word	1057167294
+ 102 011c AF98113D 		.word	1024563375
+ 103 0120 3A76503D 		.word	1028683322
+ 104 0124 F58014C0 		.word	-1072398091
+ 105 0128 94C22C3E 		.word	1043120788
+ 106 012c 984DEABF 		.word	-1075163752
+ 107 0130 48C1E3BE 		.word	-1092370104
+ 108 0134 3C6A80BF 		.word	-1082103236
+ 109 0138 FE0F08BF 		.word	-1089990658
+ 110 013c FBCBAEBF 		.word	-1079063557
+ 111 0140 6C261FBE 		.word	-1105254804
+ 112 0144 1AF841BF 		.word	-1086195686
+ 113 0148 601FDDBE 		.word	-1092804768
+ 114 014c 1D92C2BE 		.word	-1094544867
+ 115 0150 0D1BC53D 		.word	1036327693
+ 116 0154 3E2232BF 		.word	-1087233474
+ 117 0158 CB100F3F 		.word	1057951947
+ 118 015c 3011D3BF 		.word	-1076686544
+ 119 0160 E4DCA63C 		.word	1017568484
+ 120 0164 B62DBABE 		.word	-1095094858
+ 121 0168 001C633F 		.word	1063459840
+ 122 016c E272583F 		.word	1062761186
+ 123 0170 647781BE 		.word	-1098811548
+ 124 0174 CC29A9BE 		.word	-1096209972
+ 125 0178 E272A23F 		.word	1067610850
+ 126 017c 61FD8DBF 		.word	-1081213599
+ 127 0180 719183BF 		.word	-1081896591
+ 128 0184 DB330B3E 		.word	1040921563
+ 129 0188 6B0BEF3D 		.word	1039076203
+ 130 018c 653896BE 		.word	-1097451419
+ 131 0190 37C6ACBF 		.word	-1079196105
+ 132 0194 5A102A3E 		.word	1042944090
+ 133 0198 0B5D4DBF 		.word	-1085448949
+ 134 019c AC1DBD3E 		.word	1052581292
+ 135 01a0 EEED76BF 		.word	-1082724882
+ 136 01a4 530611C0 		.word	-1072626093
+ 137 01a8 D02BEE3E 		.word	1055796176
+ 138 01ac 7CB6263F 		.word	1059501692
+ 139 01b0 3D9EA6BE 		.word	-1096376771
+ 140 01b4 27F7A33E 		.word	1050933031
+ 141 01b8 E4BF48BF 		.word	-1085751324
+ 142 01bc 3A5714BF 		.word	-1089185990
+ 143 01c0 DE3ABF3D 		.word	1035942622
+ 144 01c4 BBD21A3F 		.word	1058722491
+ 145 01c8 948745BD 		.word	-1119516780
+ 146 01cc 00AAC03E 		.word	1052813824
+ 147 01d0 5FF0C9BE 		.word	-1094061985
+ 148 01d4 BC03143F 		.word	1058276284
+ 149 01d8 0BEC9BBF 		.word	-1080300533
+ 150 01dc E693B1BF 		.word	-1078881306
+ 151 01e0 3145313F 		.word	1060193585
+ 152 01e4 AE9C21BF 		.word	-1088316242
+ 153 01e8 F2CF1C3E 		.word	1042075634
+ 154 01ec 5C9223BF 		.word	-1088187812
+ 155 01f0 6DAE223F 		.word	1059237485
+ 156 01f4 977078BF 		.word	-1082625897
+ 157 01f8 61C2AA3F 		.word	1068155489
+ 158 01fc F415E4BD 		.word	-1109125644
+ 159              		.global	testRefOutput_f32
+ 160              		.section	.rodata
+ 161              		.align	2
+ 164              	testRefOutput_f32:
+ 165 0000 40A651BF 		.word	-1085168064
+ 166 0004 BB5F9D3F 		.word	1067278267
+ 167 0008 349E08BF 		.word	-1089954252
+ 168 000c 1420823F 		.word	1065492500
+ 169 0010 3D0AAF3E 		.word	1051658813
+ 170 0014 1459FBBF 		.word	-1074046700
+ 171 0018 BB7CA540 		.word	1084587195
+ 172 001c 18985E40 		.word	1079941144
+ 173 0020 3BB9F340 		.word	1089714491
+ 174 0024 90BFD440 		.word	1087684496
+ 175 0028 8848F53E 		.word	1056262280
+ 176 002c A660E53F 		.word	1071997094
+ 177 0030 EDD5A5BF 		.word	-1079650835
+ 178 0034 8654EEC0 		.word	-1058122618
+ 179 0038 78B4A13E 		.word	1050784888
+ 180 003c E5842AC1 		.word	-1054178075
+ 181 0040 28F11EC0 		.word	-1071714008
+ 182 0044 8BC6D0C0 		.word	-1060059509
+ 183 0048 CD2DECC0 		.word	-1058263603
+ 184 004c DC4B6FC0 		.word	-1066447908
+ 185 0050 2B3906C1 		.word	-1056556757
+ 186 0054 08913C3E 		.word	1044156680
+ 187 0058 9206C7BF 		.word	-1077475694
+ 188 005c 26567240 		.word	1081234982
+ 189 0060 1B9BD7BF 		.word	-1076389093
+ 190 0064 CCD1AC40 		.word	1085067724
+ 191 0068 0800CABF 		.word	-1077280760
+ 192 006c 55E8EC40 		.word	1089267797
+ 193 0070 550E0541 		.word	1090850389
+ 194 0074 18230540 		.word	1074078488
+ 195 0078 923E3141 		.word	1093746322
+ 196 007c A4FA2F40 		.word	1076886180
+ 197 0080 6072E440 		.word	1088713312
+ 198 0084 B7EB2F40 		.word	1076882359
+ 199 0088 8D0D293F 		.word	1059655053
+ 200 008c FE467B3F 		.word	1065043710
+ 201 0090 789CB83F 		.word	1069063288
+ 202 0094 207F0D3F 		.word	1057849120
+ 203 0098 CCEB24C0 		.word	-1071322164
+ 204 009c 14879640 		.word	1083606804
+ 205 00a0 54397D3F 		.word	1065171284
+ 206 00a4 46260C41 		.word	1091315270
+ 207 00a8 5F9810BF 		.word	-1089431457
+ 208 00ac D6A87FC0 		.word	-1065375530
+ 209 00b0 E067743F 		.word	1064593376
+ 210 00b4 DE73A0C0 		.word	-1063226402
+ 211 00b8 5CF4D240 		.word	1087566940
+ 212 00bc 06BCCC3F 		.word	1070382086
+ 213 00c0 95AA5FC1 		.word	-1050695019
+ 214 00c4 F0A5C8BE 		.word	-1094146576
+ 215 00c8 00828EC0 		.word	-1064402432
+ 216 00cc 64EB13C0 		.word	-1072436380
+ 217 00d0 8DB83CC0 		.word	-1069762419
+ 218 00d4 0C76E13F 		.word	1071740428
+ 219 00d8 48A40DBE 		.word	-1106402232
+ 220 00dc 99ED2641 		.word	1093070233
+ 221 00e0 58C813C0 		.word	-1072445352
+ 222 00e4 47828940 		.word	1082753607
+ 223 00e8 81910841 		.word	1091080577
+ 224 00ec D3674D40 		.word	1078814675
+ 225 00f0 13220B41 		.word	1091248659
+ 226 00f4 C73CB240 		.word	1085422791
+ 227 00f8 5BEA2040 		.word	1075898971
+ 228 00fc FB9FB240 		.word	1085448187
+ 229 0100 4DDA0340 		.word	1073994317
+ 230 0104 766C243F 		.word	1059351670
+ 231 0108 A7C9E040 		.word	1088473511
+ 232 010c 00E3D73F 		.word	1071112960
+ 233 0110 8C6ACFC0 		.word	-1060148596
+ 234 0114 2DEAAB3F 		.word	1068231213
+ 235 0118 60B161C0 		.word	-1067339424
+ 236 011c 6DAE8C3F 		.word	1066184301
+ 237 0120 14CF3DC0 		.word	-1069691116
+ 238 0124 71E431BE 		.word	-1104026511
+ 239 0128 479183C0 		.word	-1065119417
+ 240 012c 86E8D040 		.word	1087432838
+ 241 0130 ACE6DEC0 		.word	-1059133780
+ 242 0134 1AF7DC3F 		.word	1071445786
+ 243 0138 8480C43F 		.word	1069842564
+ 244 013c FD5F3041 		.word	1093689341
+ 245 0140 5DA81540 		.word	1075161181
+ 246 0144 051696C0 		.word	-1063905787
+ 247 0148 BF2BA63F 		.word	1067854783
+ 248 014c 9D687C40 		.word	1081895069
+ 249 0150 B2860641 		.word	1090946738
+ 250 0154 3F63A540 		.word	1084580671
+ 251 0158 36232F3F 		.word	1060053814
+ 252 015c 3E93C73F 		.word	1070043966
+ 253 0160 6A14EE3F 		.word	1072567402
+ 254 0164 008E3640 		.word	1077317120
+ 255 0168 642F0941 		.word	1091120996
+ 256 016c 7DCFCBC0 		.word	-1060384899
+ 257 0170 2BC0C040 		.word	1086373931
+ 258 0174 4C683D41 		.word	1094543436
+ 259 0178 5DE2C0C0 		.word	-1061100963
+ 260 017c 9A078F40 		.word	1083115418
+ 261 0180 2B92D9C0 		.word	-1059483093
+ 262 0184 9A232BC0 		.word	-1070914662
+ 263 0188 0203C840 		.word	1086849794
+ 264 018c 48EBD9C0 		.word	-1059460280
+ 265 0190 27665DC0 		.word	-1067620825
+ 266 0194 6ECC1141 		.word	1091685486
+ 267 0198 338B2DC0 		.word	-1070757069
+ 268 019c 4418ABBF 		.word	-1079306172
+ 269 01a0 5039C83F 		.word	1070086480
+ 270 01a4 E23AC8BF 		.word	-1077396766
+ 271 01a8 3BFCA5BF 		.word	-1079641029
+ 272 01ac D6760E41 		.word	1091466966
+ 273 01b0 1BBA4EC0 		.word	-1068582373
+ 274 01b4 AF18DC40 		.word	1088166063
+ 275 01b8 FD3BFAC0 		.word	-1057342467
+ 276 01bc 97AC5740 		.word	1079487639
+ 277 01c0 0326D4BF 		.word	-1076615677
+ 278 01c4 8E7800C0 		.word	-1073710962
+ 279 01c8 439C83C0 		.word	-1065116605
+ 280 01cc 9B72AF3F 		.word	1068462747
+ 281 01d0 E2E95AC0 		.word	-1067783710
+ 282 01d4 F3D9C8C0 		.word	-1060578829
+ 283 01d8 00AC4F40 		.word	1078963200
+ 284 01dc 9F9156C0 		.word	-1068068449
+ 285 01e0 C0CEC53F 		.word	1069928128
+ 286 01e4 4DF7663F 		.word	1063712589
+ 287 01e8 8E3A4A3E 		.word	1045052046
+ 288 01ec 5551B4BF 		.word	-1078701739
+ 289 01f0 E3FC053F 		.word	1057357027
+ 290 01f4 BA66B23E 		.word	1051879098
+ 291              		.global	srcALen
+ 292              		.data
+ 293              		.align	2
+ 296              	srcALen:
+ 297 0200 40000000 		.word	64
+ 298              		.global	srcBLen
+ 299              		.align	2
+ 302              	srcBLen:
+ 303 0204 40000000 		.word	64
+ 304              		.comm	outLen,4,4
+ 305              		.comm	snr,4,4
+ 306              		.global	__aeabi_fcmpgt
+ 307              		.section	.text.main,"ax",%progbits
+ 308              		.align	2
+ 309              		.global	main
+ 310              		.code	16
+ 311              		.thumb_func
+ 313              	main:
+ 314              	.LFB81:
+ 315              		.file 1 "../arm_convolution_example_f32.c"
+   1:../arm_convolution_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_convolution_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_convolution_example_f32.c **** *
+   4:../arm_convolution_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_convolution_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_convolution_example_f32.c **** *
+   7:../arm_convolution_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_convolution_example_f32.c **** * Title:         arm_convolution_example_f32.c
+   9:../arm_convolution_example_f32.c **** *
+  10:../arm_convolution_example_f32.c **** * Description:   Example code demonstrating Convolution of two input signals using fft.
+  11:../arm_convolution_example_f32.c **** *
+  12:../arm_convolution_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  13:../arm_convolution_example_f32.c **** *
+  14:../arm_convolution_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  15:../arm_convolution_example_f32.c **** * modification, are permitted provided that the following conditions
+  16:../arm_convolution_example_f32.c **** * are met:
+  17:../arm_convolution_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  18:../arm_convolution_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  19:../arm_convolution_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  20:../arm_convolution_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  21:../arm_convolution_example_f32.c **** *     the documentation and/or other materials provided with the
+  22:../arm_convolution_example_f32.c **** *     distribution.
+  23:../arm_convolution_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  24:../arm_convolution_example_f32.c **** *     may be used to endorse or promote products derived from this
+  25:../arm_convolution_example_f32.c **** *     software without specific prior written permission.
+  26:../arm_convolution_example_f32.c **** *
+  27:../arm_convolution_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  28:../arm_convolution_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  29:../arm_convolution_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  30:../arm_convolution_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  31:../arm_convolution_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  32:../arm_convolution_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  33:../arm_convolution_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  34:../arm_convolution_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  35:../arm_convolution_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  36:../arm_convolution_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  37:../arm_convolution_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  38:../arm_convolution_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  39:../arm_convolution_example_f32.c **** * -------------------------------------------------------------------- */
+  40:../arm_convolution_example_f32.c **** 
+  41:../arm_convolution_example_f32.c **** /**
+  42:../arm_convolution_example_f32.c ****  * @ingroup groupExamples
+  43:../arm_convolution_example_f32.c ****  */
+  44:../arm_convolution_example_f32.c **** 
+  45:../arm_convolution_example_f32.c **** /**
+  46:../arm_convolution_example_f32.c ****  * @defgroup ConvolutionExample Convolution Example
+  47:../arm_convolution_example_f32.c ****  *
+  48:../arm_convolution_example_f32.c ****  * \par Description:
+  49:../arm_convolution_example_f32.c ****  * \par
+  50:../arm_convolution_example_f32.c ****  * Demonstrates the convolution theorem with the use of the Complex FFT, Complex-by-Complex
+  51:../arm_convolution_example_f32.c ****  * Multiplication, and Support Functions.
+  52:../arm_convolution_example_f32.c ****  *
+  53:../arm_convolution_example_f32.c ****  * \par Algorithm:
+  54:../arm_convolution_example_f32.c ****  * \par
+  55:../arm_convolution_example_f32.c ****  * The convolution theorem states that convolution in the time domain corresponds to
+  56:../arm_convolution_example_f32.c ****  * multiplication in the frequency domain. Therefore, the Fourier transform of the convoution of
+  57:../arm_convolution_example_f32.c ****  * two signals is equal to the product of their individual Fourier transforms.
+  58:../arm_convolution_example_f32.c ****  * The Fourier transform of a signal can be evaluated efficiently using the Fast Fourier Transform 
+  59:../arm_convolution_example_f32.c ****  * \par
+  60:../arm_convolution_example_f32.c ****  * Two input signals, <code>a[n]</code> and <code>b[n]</code>, with lengths \c n1 and \c n2 respect
+  61:../arm_convolution_example_f32.c ****  * are zero padded so that their lengths become \c N, which is greater than or equal to <code>(n1+n
+  62:../arm_convolution_example_f32.c ****  * and is a power of 4 as FFT implementation is radix-4.
+  63:../arm_convolution_example_f32.c ****  * The convolution of <code>a[n]</code> and <code>b[n]</code> is obtained by taking the FFT of the 
+  64:../arm_convolution_example_f32.c ****  * signals, multiplying the Fourier transforms of the two signals, and taking the inverse FFT of
+  65:../arm_convolution_example_f32.c ****  * the multiplied result.
+  66:../arm_convolution_example_f32.c ****  * \par
+  67:../arm_convolution_example_f32.c ****  * This is denoted by the following equations:
+  68:../arm_convolution_example_f32.c ****  * <pre> A[k] = FFT(a[n],N)
+  69:../arm_convolution_example_f32.c ****  * B[k] = FFT(b[n],N)
+  70:../arm_convolution_example_f32.c ****  * conv(a[n], b[n]) = IFFT(A[k] * B[k], N)</pre>
+  71:../arm_convolution_example_f32.c ****  * where <code>A[k]</code> and <code>B[k]</code> are the N-point FFTs of the signals <code>a[n]</co
+  72:../arm_convolution_example_f32.c ****  * and <code>b[n]</code> respectively.
+  73:../arm_convolution_example_f32.c ****  * The length of the convolved signal is <code>(n1+n2-1)</code>.
+  74:../arm_convolution_example_f32.c ****  *
+  75:../arm_convolution_example_f32.c ****  * \par Block Diagram:
+  76:../arm_convolution_example_f32.c ****  * \par
+  77:../arm_convolution_example_f32.c ****  * \image html Convolution.gif
+  78:../arm_convolution_example_f32.c ****  *
+  79:../arm_convolution_example_f32.c ****  * \par Variables Description:
+  80:../arm_convolution_example_f32.c ****  * \par
+  81:../arm_convolution_example_f32.c ****  * \li \c testInputA_f32 points to the first input sequence
+  82:../arm_convolution_example_f32.c ****  * \li \c srcALen length of the first input sequence
+  83:../arm_convolution_example_f32.c ****  * \li \c testInputB_f32 points to the second input sequence
+  84:../arm_convolution_example_f32.c ****  * \li \c srcBLen length of the second input sequence
+  85:../arm_convolution_example_f32.c ****  * \li \c outLen length of convolution output sequence, <code>(srcALen + srcBLen - 1)</code>
+  86:../arm_convolution_example_f32.c ****  * \li \c AxB points to the output array where the product of individual FFTs of inputs is stored.
+  87:../arm_convolution_example_f32.c ****  *
+  88:../arm_convolution_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  89:../arm_convolution_example_f32.c ****  * \par
+  90:../arm_convolution_example_f32.c ****  * - arm_fill_f32()
+  91:../arm_convolution_example_f32.c ****  * - arm_copy_f32()
+  92:../arm_convolution_example_f32.c ****  * - arm_cfft_radix4_init_f32()
+  93:../arm_convolution_example_f32.c ****  * - arm_cfft_radix4_f32()
+  94:../arm_convolution_example_f32.c ****  * - arm_cmplx_mult_cmplx_f32()
+  95:../arm_convolution_example_f32.c ****  *
+  96:../arm_convolution_example_f32.c ****  * <b> Refer  </b>
+  97:../arm_convolution_example_f32.c ****  * \link arm_convolution_example_f32.c \endlink
+  98:../arm_convolution_example_f32.c ****  *
+  99:../arm_convolution_example_f32.c ****  */
+ 100:../arm_convolution_example_f32.c **** 
+ 101:../arm_convolution_example_f32.c **** 
+ 102:../arm_convolution_example_f32.c **** /** \example arm_convolution_example_f32.c
+ 103:../arm_convolution_example_f32.c ****   */
+ 104:../arm_convolution_example_f32.c **** 
+ 105:../arm_convolution_example_f32.c **** #include "arm_math.h"
+ 106:../arm_convolution_example_f32.c **** #include "math_helper.h"
+ 107:../arm_convolution_example_f32.c **** 
+ 108:../arm_convolution_example_f32.c **** /* ----------------------------------------------------------------------
+ 109:../arm_convolution_example_f32.c **** * Defines each of the tests performed
+ 110:../arm_convolution_example_f32.c **** * ------------------------------------------------------------------- */
+ 111:../arm_convolution_example_f32.c **** #define MAX_BLOCKSIZE  128
+ 112:../arm_convolution_example_f32.c **** #define DELTA           (0.000001f)
+ 113:../arm_convolution_example_f32.c **** #define SNR_THRESHOLD   90
+ 114:../arm_convolution_example_f32.c **** 
+ 115:../arm_convolution_example_f32.c **** /* ----------------------------------------------------------------------
+ 116:../arm_convolution_example_f32.c **** * Declare I/O buffers
+ 117:../arm_convolution_example_f32.c **** * ------------------------------------------------------------------- */
+ 118:../arm_convolution_example_f32.c **** float32_t Ak[MAX_BLOCKSIZE];    /* Input A */
+ 119:../arm_convolution_example_f32.c **** float32_t Bk[MAX_BLOCKSIZE];    /* Input B */
+ 120:../arm_convolution_example_f32.c **** float32_t AxB[MAX_BLOCKSIZE * 2];  /* Output */
+ 121:../arm_convolution_example_f32.c **** 
+ 122:../arm_convolution_example_f32.c **** /* ----------------------------------------------------------------------
+ 123:../arm_convolution_example_f32.c **** * Test input data for Floating point Convolution example for 32-blockSize
+ 124:../arm_convolution_example_f32.c **** * Generated by the MATLAB randn() function
+ 125:../arm_convolution_example_f32.c **** * ------------------------------------------------------------------- */
+ 126:../arm_convolution_example_f32.c **** float32_t testInputA_f32[64] =
+ 127:../arm_convolution_example_f32.c **** {
+ 128:../arm_convolution_example_f32.c ****   -0.808920,   1.357369,   1.180861,  -0.504544,   1.762637,  -0.703285,
+ 129:../arm_convolution_example_f32.c ****    1.696966,   0.620571,  -0.151093,  -0.100235,  -0.872382,  -0.403579,
+ 130:../arm_convolution_example_f32.c ****   -0.860749,  -0.382648,  -1.052338,   0.128113,  -0.646269,   1.093377,
+ 131:../arm_convolution_example_f32.c ****   -2.209198,   0.471706,   0.408901,   1.266242,   0.598252,   1.176827,
+ 132:../arm_convolution_example_f32.c ****   -0.203421,   0.213596,  -0.851964,  -0.466958,   0.021841,  -0.698938,
+ 133:../arm_convolution_example_f32.c ****   -0.604107,   0.461778,  -0.318219,   0.942520,   0.577585,   0.417619,
+ 134:../arm_convolution_example_f32.c ****    0.614665,   0.563679,  -1.295073,  -0.764437,   0.952194,  -0.859222,
+ 135:../arm_convolution_example_f32.c ****   -0.618554,  -2.268542,  -1.210592,   1.655853,  -2.627219,  -0.994249,
+ 136:../arm_convolution_example_f32.c ****   -1.374704,   0.343799,   0.025619,   1.227481,  -0.708031,   0.069355,
+ 137:../arm_convolution_example_f32.c ****   -1.845228,  -1.570886,   1.010668,  -1.802084,   1.630088,   1.286090,
+ 138:../arm_convolution_example_f32.c ****   -0.161050,  -0.940794,   0.367961,   0.291907
+ 139:../arm_convolution_example_f32.c **** 
+ 140:../arm_convolution_example_f32.c **** };
+ 141:../arm_convolution_example_f32.c **** 
+ 142:../arm_convolution_example_f32.c **** float32_t testInputB_f32[64] =
+ 143:../arm_convolution_example_f32.c **** {
+ 144:../arm_convolution_example_f32.c ****    0.933724,   0.046881,   1.316470,   0.438345,   0.332682,   2.094885,
+ 145:../arm_convolution_example_f32.c ****    0.512081,   0.035546,   0.050894,  -2.320371,   0.168711,  -1.830493,
+ 146:../arm_convolution_example_f32.c ****   -0.444834,  -1.003242,  -0.531494,  -1.365600,  -0.155420,  -0.757692,
+ 147:../arm_convolution_example_f32.c ****   -0.431880,  -0.380021,   0.096243,  -0.695835,   0.558850,  -1.648962,
+ 148:../arm_convolution_example_f32.c ****    0.020369,  -0.363630,   0.887146,   0.845503,  -0.252864,  -0.330397,
+ 149:../arm_convolution_example_f32.c ****    1.269131,  -1.109295,  -1.027876,   0.135940,   0.116721,  -0.293399,
+ 150:../arm_convolution_example_f32.c ****   -1.349799,   0.166078,  -0.802201,   0.369367,  -0.964568,  -2.266011,
+ 151:../arm_convolution_example_f32.c ****    0.465178,   0.651222,  -0.325426,   0.320245,  -0.784178,  -0.579456,
+ 152:../arm_convolution_example_f32.c ****    0.093374,   0.604778,  -0.048225,   0.376297,  -0.394412,   0.578182,
+ 153:../arm_convolution_example_f32.c ****   -1.218141,  -1.387326,   0.692462,  -0.631297,   0.153137,  -0.638952,
+ 154:../arm_convolution_example_f32.c ****   0.635474,   -0.970468,   1.334057,  -0.111370
+ 155:../arm_convolution_example_f32.c **** };
+ 156:../arm_convolution_example_f32.c **** 
+ 157:../arm_convolution_example_f32.c **** const float testRefOutput_f32[126] =
+ 158:../arm_convolution_example_f32.c **** {
+ 159:../arm_convolution_example_f32.c ****    -0.818943,    1.229484,  -0.533664,    1.016604,   0.341875,  -1.963656,
+ 160:../arm_convolution_example_f32.c ****     5.171476,    3.478033,   7.616361,    6.648384,   0.479069,   1.792012,
+ 161:../arm_convolution_example_f32.c ****    -1.295591,   -7.447818,   0.315830,  -10.657445,  -2.483469,  -6.524236,
+ 162:../arm_convolution_example_f32.c ****    -7.380591,   -3.739005,  -8.388957,    0.184147,  -1.554888,   3.786508,
+ 163:../arm_convolution_example_f32.c ****    -1.684421,    5.400610,  -1.578126,    7.403361,   8.315999,   2.080267,
+ 164:../arm_convolution_example_f32.c ****    11.077776,    2.749673,   7.138962,    2.748762,   0.660363,   0.981552,
+ 165:../arm_convolution_example_f32.c ****     1.442275,    0.552721,  -2.576892,    4.703989,   0.989156,   8.759344,
+ 166:../arm_convolution_example_f32.c ****    -0.564825,   -3.994680,   0.954710,   -5.014144,   6.592329,   1.599488,
+ 167:../arm_convolution_example_f32.c ****   -13.979146,   -0.391891,  -4.453369,   -2.311242,  -2.948764,   1.761415,
+ 168:../arm_convolution_example_f32.c ****    -0.138322,   10.433007,  -2.309103,    4.297153,   8.535523,   3.209462,
+ 169:../arm_convolution_example_f32.c ****     8.695819,    5.569919,   2.514304,    5.582029,   2.060199,   0.642280,
+ 170:../arm_convolution_example_f32.c ****     7.024616,    1.686615,  -6.481756,    1.343084,  -3.526451,   1.099073,
+ 171:../arm_convolution_example_f32.c ****    -2.965764,   -0.173723,  -4.111484,    6.528384,  -6.965658,   1.726291,
+ 172:../arm_convolution_example_f32.c ****     1.535172,   11.023435,   2.338401,   -4.690188,   1.298210,   3.943885,
+ 173:../arm_convolution_example_f32.c ****     8.407885,    5.168365,   0.684131,    1.559181,   1.859998,   2.852417,
+ 174:../arm_convolution_example_f32.c ****     8.574070,   -6.369078,   6.023458,   11.837963,  -6.027632,   4.469678,
+ 175:../arm_convolution_example_f32.c ****    -6.799093,   -2.674048,   6.250367,   -6.809971,  -3.459360,   9.112410,
+ 176:../arm_convolution_example_f32.c ****    -2.711621,   -1.336678,   1.564249,   -1.564297,  -1.296760,   8.904013,
+ 177:../arm_convolution_example_f32.c ****    -3.230109,    6.878013,  -7.819823,    3.369909,  -1.657410,  -2.007358,
+ 178:../arm_convolution_example_f32.c ****    -4.112825,    1.370685,  -3.420525,   -6.276605,   3.244873,  -3.352638,
+ 179:../arm_convolution_example_f32.c ****     1.545372,    0.902211,   0.197489,   -1.408732,   0.523390,   0.348440
+ 180:../arm_convolution_example_f32.c **** };
+ 181:../arm_convolution_example_f32.c **** 
+ 182:../arm_convolution_example_f32.c **** 
+ 183:../arm_convolution_example_f32.c **** /* ----------------------------------------------------------------------
+ 184:../arm_convolution_example_f32.c **** * Declare Global variables
+ 185:../arm_convolution_example_f32.c **** * ------------------------------------------------------------------- */
+ 186:../arm_convolution_example_f32.c **** uint32_t srcALen = 64;   /* Length of Input A */
+ 187:../arm_convolution_example_f32.c **** uint32_t srcBLen = 64;   /* Length of Input B */
+ 188:../arm_convolution_example_f32.c **** uint32_t outLen;     /* Length of convolution output */
+ 189:../arm_convolution_example_f32.c **** float32_t snr;        /* output SNR */
+ 190:../arm_convolution_example_f32.c **** 
+ 191:../arm_convolution_example_f32.c **** int32_t main(void)
+ 192:../arm_convolution_example_f32.c **** {
+ 316              		.loc 1 192 0
+ 317              		.cfi_startproc
+ 318 0000 90B5     		push	{r4, r7, lr}
+ 319              	.LCFI0:
+ 320              		.cfi_def_cfa_offset 12
+ 321              		.cfi_offset 4, -12
+ 322              		.cfi_offset 7, -8
+ 323              		.cfi_offset 14, -4
+ 324 0002 89B0     		sub	sp, sp, #36
+ 325              	.LCFI1:
+ 326              		.cfi_def_cfa_offset 48
+ 327 0004 00AF     		add	r7, sp, #0
+ 328              	.LCFI2:
+ 329              		.cfi_def_cfa_register 7
+ 193:../arm_convolution_example_f32.c ****   arm_status status;     /* Status of the example */
+ 194:../arm_convolution_example_f32.c ****   arm_cfft_radix4_instance_f32 cfft_instance;  /* CFFT Structure instance */
+ 195:../arm_convolution_example_f32.c **** 
+ 196:../arm_convolution_example_f32.c ****   /* CFFT Structure instance pointer */
+ 197:../arm_convolution_example_f32.c ****   arm_cfft_radix4_instance_f32 *cfft_instance_ptr =
+ 330              		.loc 1 197 0
+ 331 0006 3B1D     		add	r3, r7, #4
+ 332 0008 BB61     		str	r3, [r7, #24]
+ 198:../arm_convolution_example_f32.c ****       (arm_cfft_radix4_instance_f32*) &cfft_instance;
+ 199:../arm_convolution_example_f32.c **** 
+ 200:../arm_convolution_example_f32.c ****   /* output length of convolution */
+ 201:../arm_convolution_example_f32.c ****   outLen = srcALen + srcBLen - 1;
+ 333              		.loc 1 201 0
+ 334 000a 3D4B     		ldr	r3, .L7
+ 335 000c 1A68     		ldr	r2, [r3]
+ 336 000e 3D4B     		ldr	r3, .L7+4
+ 337 0010 1B68     		ldr	r3, [r3]
+ 338 0012 D318     		add	r3, r2, r3
+ 339 0014 5A1E     		sub	r2, r3, #1
+ 340 0016 3C4B     		ldr	r3, .L7+8
+ 341 0018 1A60     		str	r2, [r3]
+ 202:../arm_convolution_example_f32.c **** 
+ 203:../arm_convolution_example_f32.c ****   /* Initialise the fft input buffers with all zeros */
+ 204:../arm_convolution_example_f32.c ****   arm_fill_f32(0.0,  Ak, MAX_BLOCKSIZE);
+ 342              		.loc 1 204 0
+ 343 001a 0022     		mov	r2, #0
+ 344 001c 3B4B     		ldr	r3, .L7+12
+ 345 001e 101C     		add	r0, r2, #0
+ 346 0020 191C     		mov	r1, r3
+ 347 0022 8022     		mov	r2, #128
+ 348 0024 FFF7FEFF 		bl	arm_fill_f32
+ 205:../arm_convolution_example_f32.c ****   arm_fill_f32(0.0,  Bk, MAX_BLOCKSIZE);
+ 349              		.loc 1 205 0
+ 350 0028 0022     		mov	r2, #0
+ 351 002a 394B     		ldr	r3, .L7+16
+ 352 002c 101C     		add	r0, r2, #0
+ 353 002e 191C     		mov	r1, r3
+ 354 0030 8022     		mov	r2, #128
+ 355 0032 FFF7FEFF 		bl	arm_fill_f32
+ 206:../arm_convolution_example_f32.c **** 
+ 207:../arm_convolution_example_f32.c ****   /* Copy the input values to the fft input buffers */
+ 208:../arm_convolution_example_f32.c ****   arm_copy_f32(testInputA_f32,  Ak, MAX_BLOCKSIZE/2);
+ 356              		.loc 1 208 0
+ 357 0036 374A     		ldr	r2, .L7+20
+ 358 0038 344B     		ldr	r3, .L7+12
+ 359 003a 101C     		mov	r0, r2
+ 360 003c 191C     		mov	r1, r3
+ 361 003e 4022     		mov	r2, #64
+ 362 0040 FFF7FEFF 		bl	arm_copy_f32
+ 209:../arm_convolution_example_f32.c ****   arm_copy_f32(testInputB_f32,  Bk, MAX_BLOCKSIZE/2);
+ 363              		.loc 1 209 0
+ 364 0044 344A     		ldr	r2, .L7+24
+ 365 0046 324B     		ldr	r3, .L7+16
+ 366 0048 101C     		mov	r0, r2
+ 367 004a 191C     		mov	r1, r3
+ 368 004c 4022     		mov	r2, #64
+ 369 004e FFF7FEFF 		bl	arm_copy_f32
+ 210:../arm_convolution_example_f32.c **** 
+ 211:../arm_convolution_example_f32.c ****   /* Initialize the CFFT function to compute 64 point fft */
+ 212:../arm_convolution_example_f32.c ****   status = arm_cfft_radix4_init_f32(cfft_instance_ptr, 64, 0, 1);
+ 370              		.loc 1 212 0
+ 371 0052 3C1C     		mov	r4, r7
+ 372 0054 1F34     		add	r4, r4, #31
+ 373 0056 BB69     		ldr	r3, [r7, #24]
+ 374 0058 181C     		mov	r0, r3
+ 375 005a 4021     		mov	r1, #64
+ 376 005c 0022     		mov	r2, #0
+ 377 005e 0123     		mov	r3, #1
+ 378 0060 FFF7FEFF 		bl	arm_cfft_radix4_init_f32
+ 379 0064 031C     		mov	r3, r0
+ 380 0066 2370     		strb	r3, [r4]
+ 213:../arm_convolution_example_f32.c **** 
+ 214:../arm_convolution_example_f32.c ****   /* Transform input a[n] from time domain to frequency domain A[k] */
+ 215:../arm_convolution_example_f32.c ****   arm_cfft_radix4_f32(cfft_instance_ptr, Ak);
+ 381              		.loc 1 215 0
+ 382 0068 BA69     		ldr	r2, [r7, #24]
+ 383 006a 284B     		ldr	r3, .L7+12
+ 384 006c 101C     		mov	r0, r2
+ 385 006e 191C     		mov	r1, r3
+ 386 0070 FFF7FEFF 		bl	arm_cfft_radix4_f32
+ 216:../arm_convolution_example_f32.c ****   /* Transform input b[n] from time domain to frequency domain B[k] */
+ 217:../arm_convolution_example_f32.c ****   arm_cfft_radix4_f32(cfft_instance_ptr, Bk);
+ 387              		.loc 1 217 0
+ 388 0074 BA69     		ldr	r2, [r7, #24]
+ 389 0076 264B     		ldr	r3, .L7+16
+ 390 0078 101C     		mov	r0, r2
+ 391 007a 191C     		mov	r1, r3
+ 392 007c FFF7FEFF 		bl	arm_cfft_radix4_f32
+ 218:../arm_convolution_example_f32.c **** 
+ 219:../arm_convolution_example_f32.c ****   /* Complex Multiplication of the two input buffers in frequency domain */
+ 220:../arm_convolution_example_f32.c ****   arm_cmplx_mult_cmplx_f32(Ak, Bk, AxB, MAX_BLOCKSIZE/2);
+ 393              		.loc 1 220 0
+ 394 0080 2249     		ldr	r1, .L7+12
+ 395 0082 234A     		ldr	r2, .L7+16
+ 396 0084 254B     		ldr	r3, .L7+28
+ 397 0086 081C     		mov	r0, r1
+ 398 0088 111C     		mov	r1, r2
+ 399 008a 1A1C     		mov	r2, r3
+ 400 008c 4023     		mov	r3, #64
+ 401 008e FFF7FEFF 		bl	arm_cmplx_mult_cmplx_f32
+ 221:../arm_convolution_example_f32.c **** 
+ 222:../arm_convolution_example_f32.c ****   /* Initialize the CIFFT function to compute 64 point ifft */
+ 223:../arm_convolution_example_f32.c ****   status = arm_cfft_radix4_init_f32(cfft_instance_ptr, 64, 1, 1);
+ 402              		.loc 1 223 0
+ 403 0092 3C1C     		mov	r4, r7
+ 404 0094 1F34     		add	r4, r4, #31
+ 405 0096 BB69     		ldr	r3, [r7, #24]
+ 406 0098 181C     		mov	r0, r3
+ 407 009a 4021     		mov	r1, #64
+ 408 009c 0122     		mov	r2, #1
+ 409 009e 0123     		mov	r3, #1
+ 410 00a0 FFF7FEFF 		bl	arm_cfft_radix4_init_f32
+ 411 00a4 031C     		mov	r3, r0
+ 412 00a6 2370     		strb	r3, [r4]
+ 224:../arm_convolution_example_f32.c **** 
+ 225:../arm_convolution_example_f32.c ****   /* Transform the multiplication output from frequency domain to time domain,
+ 226:../arm_convolution_example_f32.c ****      that gives the convolved output  */
+ 227:../arm_convolution_example_f32.c ****   arm_cfft_radix4_f32(cfft_instance_ptr, AxB);
+ 413              		.loc 1 227 0
+ 414 00a8 BA69     		ldr	r2, [r7, #24]
+ 415 00aa 1C4B     		ldr	r3, .L7+28
+ 416 00ac 101C     		mov	r0, r2
+ 417 00ae 191C     		mov	r1, r3
+ 418 00b0 FFF7FEFF 		bl	arm_cfft_radix4_f32
+ 228:../arm_convolution_example_f32.c **** 
+ 229:../arm_convolution_example_f32.c ****   /* SNR Calculation */
+ 230:../arm_convolution_example_f32.c ****   snr = arm_snr_f32((float32_t *)testRefOutput_f32, AxB, srcALen + srcBLen - 1);
+ 419              		.loc 1 230 0
+ 420 00b4 124B     		ldr	r3, .L7
+ 421 00b6 1A68     		ldr	r2, [r3]
+ 422 00b8 124B     		ldr	r3, .L7+4
+ 423 00ba 1B68     		ldr	r3, [r3]
+ 424 00bc D318     		add	r3, r2, r3
+ 425 00be 013B     		sub	r3, r3, #1
+ 426 00c0 1749     		ldr	r1, .L7+32
+ 427 00c2 164A     		ldr	r2, .L7+28
+ 428 00c4 081C     		mov	r0, r1
+ 429 00c6 111C     		mov	r1, r2
+ 430 00c8 1A1C     		mov	r2, r3
+ 431 00ca FFF7FEFF 		bl	arm_snr_f32
+ 432 00ce 021C     		add	r2, r0, #0
+ 433 00d0 144B     		ldr	r3, .L7+36
+ 434 00d2 1A60     		str	r2, [r3]
+ 231:../arm_convolution_example_f32.c **** 
+ 232:../arm_convolution_example_f32.c ****   /* Compare the SNR with threshold to test whether the
+ 233:../arm_convolution_example_f32.c ****      computed output is matched with the reference output values. */
+ 234:../arm_convolution_example_f32.c ****   if( snr > SNR_THRESHOLD)
+ 435              		.loc 1 234 0
+ 436 00d4 134B     		ldr	r3, .L7+36
+ 437 00d6 1B68     		ldr	r3, [r3]
+ 438 00d8 181C     		add	r0, r3, #0
+ 439 00da 1349     		ldr	r1, .L7+40
+ 440 00dc FFF7FEFF 		bl	__aeabi_fcmpgt
+ 441 00e0 031C     		mov	r3, r0
+ 442 00e2 002B     		cmp	r3, #0
+ 443 00e4 03D0     		beq	.L2
+ 444              	.L6:
+ 235:../arm_convolution_example_f32.c ****   {
+ 236:../arm_convolution_example_f32.c ****     status = ARM_MATH_SUCCESS;
+ 445              		.loc 1 236 0
+ 446 00e6 3B1C     		mov	r3, r7
+ 447 00e8 1F33     		add	r3, r3, #31
+ 448 00ea 0022     		mov	r2, #0
+ 449 00ec 1A70     		strb	r2, [r3]
+ 450              	.L2:
+ 237:../arm_convolution_example_f32.c ****   }
+ 238:../arm_convolution_example_f32.c **** 
+ 239:../arm_convolution_example_f32.c ****   if( status != ARM_MATH_SUCCESS)
+ 451              		.loc 1 239 0
+ 452 00ee 3B1C     		mov	r3, r7
+ 453 00f0 1F33     		add	r3, r3, #31
+ 454 00f2 1B78     		ldrb	r3, [r3]
+ 455 00f4 5BB2     		sxtb	r3, r3
+ 456 00f6 002B     		cmp	r3, #0
+ 457 00f8 00D0     		beq	.L4
+ 458              	.L5:
+ 240:../arm_convolution_example_f32.c ****   {
+ 241:../arm_convolution_example_f32.c ****     while(1);
+ 459              		.loc 1 241 0 discriminator 1
+ 460 00fa FEE7     		b	.L5
+ 461              	.L4:
+ 242:../arm_convolution_example_f32.c ****   }
+ 243:../arm_convolution_example_f32.c **** 
+ 244:../arm_convolution_example_f32.c ****   while(1);                             /* main function does not return */
+ 462              		.loc 1 244 0 discriminator 1
+ 463 00fc FEE7     		b	.L4
+ 464              	.L8:
+ 465 00fe C046     		.align	2
+ 466              	.L7:
+ 467 0100 00000000 		.word	srcALen
+ 468 0104 00000000 		.word	srcBLen
+ 469 0108 00000000 		.word	outLen
+ 470 010c 00000000 		.word	Ak
+ 471 0110 00000000 		.word	Bk
+ 472 0114 00000000 		.word	testInputA_f32
+ 473 0118 00000000 		.word	testInputB_f32
+ 474 011c 00000000 		.word	AxB
+ 475 0120 00000000 		.word	testRefOutput_f32
+ 476 0124 00000000 		.word	snr
+ 477 0128 0000B442 		.word	1119092736
+ 478              		.cfi_endproc
+ 479              	.LFE81:
+ 481              		.text
+ 482              	.Letext0:
+ 483              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 484              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_convolution_example_f32.c
+                            *COM*:00000200 Ak
+                            *COM*:00000200 Bk
+                            *COM*:00000400 AxB
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:25     .data:00000000 testInputA_f32
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:22     .data:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:94     .data:00000100 testInputB_f32
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:164    .rodata:00000000 testRefOutput_f32
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:161    .rodata:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:296    .data:00000200 srcALen
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:302    .data:00000204 srcBLen
+                            *COM*:00000004 outLen
+                            *COM*:00000004 snr
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:308    .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:313    .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\cc1G1YLw.s:467    .text.main:00000100 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.e2c96d5a5488b60ca900a5e0ea7772ef
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.arm_math.h.275.48de47ab2bd311f0657ea6a8c1abb55a
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.297.1d5f7b8b87e168258299acd0bbe0005e
+
+UNDEFINED SYMBOLS
+__aeabi_fcmpgt
+arm_fill_f32
+arm_copy_f32
+arm_cfft_radix4_init_f32
+arm_cfft_radix4_f32
+arm_cmplx_mult_cmplx_f32
+arm_snr_f32

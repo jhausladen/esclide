@@ -1,0 +1,414 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"arm_dotproduct_example_f32.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	srcA_buf_f32
+  20              		.data
+  21              		.align	2
+  24              	srcA_buf_f32:
+  25 0000 2379DDBE 		.word	-1092781789
+  26 0004 DE31D5BF 		.word	-1076547106
+  27 0008 1D57003E 		.word	1040209693
+  28 000c 534A933E 		.word	1049840211
+  29 0010 93BF92BF 		.word	-1080901741
+  30 0014 EB6F983F 		.word	1066954731
+  31 0018 8836983F 		.word	1066940040
+  32 001c 5A251ABD 		.word	-1122359974
+  33 0020 DD92A73E 		.word	1051169501
+  34 0024 9AD4323E 		.word	1043518618
+  35 0028 89303FBE 		.word	-1103155063
+  36 002c 69CD393F 		.word	1060752745
+  37 0030 EA9B16BF 		.word	-1089037334
+  38 0034 51B90B40 		.word	1074510161
+  39 0038 5DAB0BBE 		.word	-1106531491
+  40 003c D254E93D 		.word	1038701778
+  41 0040 DC8B883F 		.word	1065913308
+  42 0044 1ED1723D 		.word	1030934814
+  43 0048 50E3C3BD 		.word	-1111235760
+  44 004c DB1455BF 		.word	-1084943141
+  45 0050 04BD963E 		.word	1050066180
+  46 0054 0208ABBF 		.word	-1079310334
+  47 0058 F9DD363F 		.word	1060560377
+  48 005c E2D0CF3F 		.word	1070584034
+  49 0060 361831BF 		.word	-1087301578
+  50 0064 ACA55B3F 		.word	1062970796
+  51 0068 1E83A03F 		.word	1067483934
+  52 006c 55FFCBBF 		.word	-1077149867
+  53 0070 8671B8BF 		.word	-1078431354
+  54 0074 BB36123F 		.word	1058158267
+  55 0078 CDBDCCBE 		.word	-1093878323
+  56 007c ABA3303F 		.word	1060152235
+  57              		.global	srcB_buf_f32
+  58              		.align	2
+  61              	srcB_buf_f32:
+  62 0080 D3E3DF3F 		.word	1071637459
+  63 0084 D4C7073E 		.word	1040697300
+  64 0088 4F84A63E 		.word	1051100239
+  65 008c 13374BBF 		.word	-1085589741
+  66 0090 AB3DA13E 		.word	1050754475
+  67 0094 33FB06BF 		.word	-1090061517
+  68 0098 07A96E3F 		.word	1064216839
+  69 009c B913953F 		.word	1066734521
+  70 00a0 3FEC02C0 		.word	-1073550273
+  71 00a4 9FF524BF 		.word	-1088096865
+  72 00a8 3EDBDE3F 		.word	1071569726
+  73 00ac B639F93E 		.word	1056520630
+  74 00b0 0640863F 		.word	1065762822
+  75 00b4 A289BE3F 		.word	1069451682
+  76 00b8 CB9FA23F 		.word	1067622347
+  77 00bc 7A95EDBF 		.word	-1074948742
+  78 00c0 B7980840 		.word	1074305207
+  79 00c4 D4C9B73F 		.word	1069009364
+  80 00c8 53D46ABF 		.word	-1083517869
+  81 00cc EF938DBF 		.word	-1081240593
+  82 00d0 92814F3F 		.word	1062175122
+  83 00d4 B8D3323F 		.word	1060295608
+  84 00d8 419CCDBE 		.word	-1093821375
+  85 00dc 7066A23F 		.word	1067607664
+  86 00e0 8E9A48BF 		.word	-1085760882
+  87 00e4 88625A3E 		.word	1046110856
+  88 00e8 B7B3493F 		.word	1061794743
+  89 00ec F38C653F 		.word	1063619827
+  90 00f0 3F673FBE 		.word	-1103141057
+  91 00f4 F0AF813F 		.word	1065463792
+  92 00f8 C3657E3E 		.word	1048470979
+  93 00fc DF27743D 		.word	1031022559
+  94              		.global	refDotProdOut
+  95              		.align	2
+  98              	refDotProdOut:
+  99 0100 F8ACBD40 		.word	1086172408
+ 100              		.comm	multOutput,128,4
+ 101              		.comm	testOutput,4,4
+ 102              		.comm	status,1,1
+ 103              		.section	.text.main,"ax",%progbits
+ 104              		.align	2
+ 105              		.global	main
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	main:
+ 110              	.LFB128:
+ 111              		.file 1 "../arm_dotproduct_example_f32.c"
+   1:../arm_dotproduct_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_dotproduct_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_dotproduct_example_f32.c **** *
+   4:../arm_dotproduct_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_dotproduct_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_dotproduct_example_f32.c **** *
+   7:../arm_dotproduct_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_dotproduct_example_f32.c **** * Title:         arm_dotproduct_example_f32.c
+   9:../arm_dotproduct_example_f32.c **** *
+  10:../arm_dotproduct_example_f32.c **** * Description:   Example code computing dot product of two vectors.
+  11:../arm_dotproduct_example_f32.c **** *
+  12:../arm_dotproduct_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  13:../arm_dotproduct_example_f32.c **** *
+  14:../arm_dotproduct_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  15:../arm_dotproduct_example_f32.c **** * modification, are permitted provided that the following conditions
+  16:../arm_dotproduct_example_f32.c **** * are met:
+  17:../arm_dotproduct_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  18:../arm_dotproduct_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  19:../arm_dotproduct_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  20:../arm_dotproduct_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  21:../arm_dotproduct_example_f32.c **** *     the documentation and/or other materials provided with the
+  22:../arm_dotproduct_example_f32.c **** *     distribution.
+  23:../arm_dotproduct_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  24:../arm_dotproduct_example_f32.c **** *     may be used to endorse or promote products derived from this
+  25:../arm_dotproduct_example_f32.c **** *     software without specific prior written permission.
+  26:../arm_dotproduct_example_f32.c **** *
+  27:../arm_dotproduct_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  28:../arm_dotproduct_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  29:../arm_dotproduct_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  30:../arm_dotproduct_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  31:../arm_dotproduct_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  32:../arm_dotproduct_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  33:../arm_dotproduct_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  34:../arm_dotproduct_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  35:../arm_dotproduct_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  36:../arm_dotproduct_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  37:../arm_dotproduct_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  38:../arm_dotproduct_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  39:../arm_dotproduct_example_f32.c ****  * -------------------------------------------------------------------- */
+  40:../arm_dotproduct_example_f32.c **** 
+  41:../arm_dotproduct_example_f32.c **** /**
+  42:../arm_dotproduct_example_f32.c ****  * @ingroup groupExamples
+  43:../arm_dotproduct_example_f32.c ****  */
+  44:../arm_dotproduct_example_f32.c **** 
+  45:../arm_dotproduct_example_f32.c **** /**
+  46:../arm_dotproduct_example_f32.c ****  * @defgroup DotproductExample Dot Product Example
+  47:../arm_dotproduct_example_f32.c ****  *
+  48:../arm_dotproduct_example_f32.c ****  * \par Description:
+  49:../arm_dotproduct_example_f32.c ****  * \par
+  50:../arm_dotproduct_example_f32.c ****  * Demonstrates the use of the Multiply and Add functions to perform the dot product.
+  51:../arm_dotproduct_example_f32.c ****  * The dot product of two vectors is obtained by multiplying corresponding elements
+  52:../arm_dotproduct_example_f32.c ****  * and summing the products.
+  53:../arm_dotproduct_example_f32.c **** 
+  54:../arm_dotproduct_example_f32.c ****  * \par Algorithm:
+  55:../arm_dotproduct_example_f32.c ****  * \par
+  56:../arm_dotproduct_example_f32.c ****  * The two input vectors \c A and \c B with length \c n, are multiplied element-by-element
+  57:../arm_dotproduct_example_f32.c ****  * and then added to obtain dot product.
+  58:../arm_dotproduct_example_f32.c ****  * \par
+  59:../arm_dotproduct_example_f32.c ****  * This is denoted by the following equation:
+  60:../arm_dotproduct_example_f32.c ****  *         <pre>  dotProduct = A[0] * B[0] + A[1] * B[1] + ... + A[n-1] * B[n-1]</pre>
+  61:../arm_dotproduct_example_f32.c ****  *
+  62:../arm_dotproduct_example_f32.c ****  * \par Block Diagram:
+  63:../arm_dotproduct_example_f32.c ****  * \par
+  64:../arm_dotproduct_example_f32.c ****  * \image html dotProduct.gif
+  65:../arm_dotproduct_example_f32.c ****  *
+  66:../arm_dotproduct_example_f32.c ****  * \par Variables Description:
+  67:../arm_dotproduct_example_f32.c ****  * \par
+  68:../arm_dotproduct_example_f32.c ****  * \li \c srcA_buf_f32 points to first input vector
+  69:../arm_dotproduct_example_f32.c ****  * \li \c srcB_buf_f32 points to second input vector
+  70:../arm_dotproduct_example_f32.c ****  * \li \c testOutput   stores dot product of the two input vectors.
+  71:../arm_dotproduct_example_f32.c ****  *
+  72:../arm_dotproduct_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  73:../arm_dotproduct_example_f32.c ****  * \par
+  74:../arm_dotproduct_example_f32.c ****  * - arm_mult_f32()
+  75:../arm_dotproduct_example_f32.c ****  * - arm_add_f32()
+  76:../arm_dotproduct_example_f32.c ****  *
+  77:../arm_dotproduct_example_f32.c ****  * <b> Refer  </b>
+  78:../arm_dotproduct_example_f32.c ****  * \link arm_dotproduct_example_f32.c \endlink
+  79:../arm_dotproduct_example_f32.c ****  *
+  80:../arm_dotproduct_example_f32.c ****  */
+  81:../arm_dotproduct_example_f32.c **** 
+  82:../arm_dotproduct_example_f32.c **** 
+  83:../arm_dotproduct_example_f32.c **** /** \example arm_dotproduct_example_f32.c
+  84:../arm_dotproduct_example_f32.c ****   */
+  85:../arm_dotproduct_example_f32.c **** 
+  86:../arm_dotproduct_example_f32.c **** #include <math.h>
+  87:../arm_dotproduct_example_f32.c **** #include "arm_math.h"
+  88:../arm_dotproduct_example_f32.c **** 
+  89:../arm_dotproduct_example_f32.c **** /* ----------------------------------------------------------------------
+  90:../arm_dotproduct_example_f32.c **** * Defines each of the tests performed
+  91:../arm_dotproduct_example_f32.c **** * ------------------------------------------------------------------- */
+  92:../arm_dotproduct_example_f32.c **** #define MAX_BLOCKSIZE     32
+  93:../arm_dotproduct_example_f32.c **** #define DELTA           (0.000001f)
+  94:../arm_dotproduct_example_f32.c **** 
+  95:../arm_dotproduct_example_f32.c **** /* ----------------------------------------------------------------------
+  96:../arm_dotproduct_example_f32.c **** * Test input data for Floating point Dot Product example for 32-blockSize
+  97:../arm_dotproduct_example_f32.c **** * Generated by the MATLAB randn() function
+  98:../arm_dotproduct_example_f32.c **** * ------------------------------------------------------------------- */
+  99:../arm_dotproduct_example_f32.c **** /* ----------------------------------------------------------------------
+ 100:../arm_dotproduct_example_f32.c **** ** Test input data of srcA for blockSize 32
+ 101:../arm_dotproduct_example_f32.c **** ** ------------------------------------------------------------------- */
+ 102:../arm_dotproduct_example_f32.c **** float32_t srcA_buf_f32[MAX_BLOCKSIZE] =
+ 103:../arm_dotproduct_example_f32.c **** {
+ 104:../arm_dotproduct_example_f32.c ****   -0.4325648115282207,  -1.6655843782380970,  0.1253323064748307,
+ 105:../arm_dotproduct_example_f32.c ****    0.2876764203585489,  -1.1464713506814637,  1.1909154656429988,
+ 106:../arm_dotproduct_example_f32.c ****    1.1891642016521031,  -0.0376332765933176,  0.3272923614086541,
+ 107:../arm_dotproduct_example_f32.c ****    0.1746391428209245,  -0.1867085776814394,  0.7257905482933027,
+ 108:../arm_dotproduct_example_f32.c ****   -0.5883165430141887,   2.1831858181971011, -0.1363958830865957,
+ 109:../arm_dotproduct_example_f32.c ****    0.1139313135208096,   1.0667682113591888,  0.0592814605236053,
+ 110:../arm_dotproduct_example_f32.c ****   -0.0956484054836690,  -0.8323494636500225,  0.2944108163926404,
+ 111:../arm_dotproduct_example_f32.c ****   -1.3361818579378040,   0.7143245518189522,  1.6235620644462707,
+ 112:../arm_dotproduct_example_f32.c ****   -0.6917757017022868,   0.8579966728282626,  1.2540014216025324,
+ 113:../arm_dotproduct_example_f32.c ****   -1.5937295764474768,  -1.4409644319010200,  0.5711476236581780,
+ 114:../arm_dotproduct_example_f32.c ****   -0.3998855777153632,   0.6899973754643451
+ 115:../arm_dotproduct_example_f32.c **** };
+ 116:../arm_dotproduct_example_f32.c **** 
+ 117:../arm_dotproduct_example_f32.c **** /* ----------------------------------------------------------------------
+ 118:../arm_dotproduct_example_f32.c **** ** Test input data of srcB for blockSize 32
+ 119:../arm_dotproduct_example_f32.c **** ** ------------------------------------------------------------------- */
+ 120:../arm_dotproduct_example_f32.c **** float32_t srcB_buf_f32[MAX_BLOCKSIZE] =
+ 121:../arm_dotproduct_example_f32.c **** {
+ 122:../arm_dotproduct_example_f32.c ****    1.7491401329284098,  0.1325982188803279,   0.3252281811989881,
+ 123:../arm_dotproduct_example_f32.c ****   -0.7938091410349637,  0.3149236145048914,  -0.5272704888029532,
+ 124:../arm_dotproduct_example_f32.c ****    0.9322666565031119,  1.1646643544607362,  -2.0456694357357357,
+ 125:../arm_dotproduct_example_f32.c ****   -0.6443728590041911,  1.7410657940825480,   0.4867684246821860,
+ 126:../arm_dotproduct_example_f32.c ****    1.0488288293660140,  1.4885752747099299,   1.2705014969484090,
+ 127:../arm_dotproduct_example_f32.c ****   -1.8561241921210170,  2.1343209047321410,  1.4358467535865909,
+ 128:../arm_dotproduct_example_f32.c ****   -0.9173023332875400, -1.1060770780029008,   0.8105708062681296,
+ 129:../arm_dotproduct_example_f32.c ****    0.6985430696369063, -0.4015827425012831,   1.2687512030669628,
+ 130:../arm_dotproduct_example_f32.c ****   -0.7836083053674872,  0.2132664971465569,   0.7878984786088954,
+ 131:../arm_dotproduct_example_f32.c ****    0.8966819356782295, -0.1869172943544062,   1.0131816724341454,
+ 132:../arm_dotproduct_example_f32.c ****    0.2484350696132857,  0.0596083377937976
+ 133:../arm_dotproduct_example_f32.c **** };
+ 134:../arm_dotproduct_example_f32.c **** 
+ 135:../arm_dotproduct_example_f32.c **** /* Reference dot product output */
+ 136:../arm_dotproduct_example_f32.c **** float32_t  refDotProdOut = 5.9273644806352142;
+ 137:../arm_dotproduct_example_f32.c **** 
+ 138:../arm_dotproduct_example_f32.c **** /* ----------------------------------------------------------------------
+ 139:../arm_dotproduct_example_f32.c **** * Declare Global variables
+ 140:../arm_dotproduct_example_f32.c **** * ------------------------------------------------------------------- */
+ 141:../arm_dotproduct_example_f32.c **** float32_t multOutput[MAX_BLOCKSIZE];  /* Intermediate output */
+ 142:../arm_dotproduct_example_f32.c **** float32_t testOutput;  /* Final ouput */
+ 143:../arm_dotproduct_example_f32.c **** 
+ 144:../arm_dotproduct_example_f32.c **** arm_status status;   /* Status of the example */
+ 145:../arm_dotproduct_example_f32.c **** 
+ 146:../arm_dotproduct_example_f32.c **** int32_t main(void)
+ 147:../arm_dotproduct_example_f32.c **** {
+ 112              		.loc 1 147 0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 8
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116 0000 80B5     		push	{r7, lr}
+ 117              	.LCFI0:
+ 118              		.cfi_def_cfa_offset 8
+ 119              		.cfi_offset 7, -8
+ 120              		.cfi_offset 14, -4
+ 121 0002 82B0     		sub	sp, sp, #8
+ 122              	.LCFI1:
+ 123              		.cfi_def_cfa_offset 16
+ 124 0004 00AF     		add	r7, sp, #0
+ 125              	.LCFI2:
+ 126              		.cfi_def_cfa_register 7
+ 148:../arm_dotproduct_example_f32.c ****   uint32_t i;       /* Loop counter */
+ 149:../arm_dotproduct_example_f32.c ****   float32_t diff;     /* Difference between reference and test outputs */
+ 150:../arm_dotproduct_example_f32.c **** 
+ 151:../arm_dotproduct_example_f32.c ****   /* Multiplication of two input buffers */
+ 152:../arm_dotproduct_example_f32.c ****   arm_mult_f32(srcA_buf_f32, srcB_buf_f32, multOutput, MAX_BLOCKSIZE);
+ 127              		.loc 1 152 0
+ 128 0006 40F20000 		movw	r0, #:lower16:srcA_buf_f32
+ 129 000a C0F20000 		movt	r0, #:upper16:srcA_buf_f32
+ 130 000e 40F20001 		movw	r1, #:lower16:srcB_buf_f32
+ 131 0012 C0F20001 		movt	r1, #:upper16:srcB_buf_f32
+ 132 0016 40F20002 		movw	r2, #:lower16:multOutput
+ 133 001a C0F20002 		movt	r2, #:upper16:multOutput
+ 134 001e 4FF02003 		mov	r3, #32
+ 135 0022 FFF7FEFF 		bl	arm_mult_f32
+ 153:../arm_dotproduct_example_f32.c **** 
+ 154:../arm_dotproduct_example_f32.c ****   /* Accumulate the multiplication output values to
+ 155:../arm_dotproduct_example_f32.c ****      get the dot product of the two inputs */
+ 156:../arm_dotproduct_example_f32.c ****   for(i=0; i< MAX_BLOCKSIZE; i++)
+ 136              		.loc 1 156 0
+ 137 0026 4FF00003 		mov	r3, #0
+ 138 002a 7B60     		str	r3, [r7, #4]
+ 139 002c 18E0     		b	.L2
+ 140              	.L3:
+ 157:../arm_dotproduct_example_f32.c ****   {
+ 158:../arm_dotproduct_example_f32.c ****     arm_add_f32(&testOutput, &multOutput[i], &testOutput, 1);
+ 141              		.loc 1 158 0 discriminator 2
+ 142 002e 7B68     		ldr	r3, [r7, #4]
+ 143 0030 4FEA8302 		lsl	r2, r3, #2
+ 144 0034 40F20003 		movw	r3, #:lower16:multOutput
+ 145 0038 C0F20003 		movt	r3, #:upper16:multOutput
+ 146 003c D318     		adds	r3, r2, r3
+ 147 003e 40F20000 		movw	r0, #:lower16:testOutput
+ 148 0042 C0F20000 		movt	r0, #:upper16:testOutput
+ 149 0046 1946     		mov	r1, r3
+ 150 0048 40F20002 		movw	r2, #:lower16:testOutput
+ 151 004c C0F20002 		movt	r2, #:upper16:testOutput
+ 152 0050 4FF00103 		mov	r3, #1
+ 153 0054 FFF7FEFF 		bl	arm_add_f32
+ 156:../arm_dotproduct_example_f32.c ****   for(i=0; i< MAX_BLOCKSIZE; i++)
+ 154              		.loc 1 156 0 discriminator 2
+ 155 0058 7B68     		ldr	r3, [r7, #4]
+ 156 005a 03F10103 		add	r3, r3, #1
+ 157 005e 7B60     		str	r3, [r7, #4]
+ 158              	.L2:
+ 156:../arm_dotproduct_example_f32.c ****   for(i=0; i< MAX_BLOCKSIZE; i++)
+ 159              		.loc 1 156 0 is_stmt 0 discriminator 1
+ 160 0060 7B68     		ldr	r3, [r7, #4]
+ 161 0062 1F2B     		cmp	r3, #31
+ 162 0064 E3D9     		bls	.L3
+ 159:../arm_dotproduct_example_f32.c ****   }
+ 160:../arm_dotproduct_example_f32.c **** 
+ 161:../arm_dotproduct_example_f32.c ****   /* absolute value of difference between ref and test */
+ 162:../arm_dotproduct_example_f32.c ****   diff = fabsf(refDotProdOut - testOutput);
+ 163              		.loc 1 162 0 is_stmt 1
+ 164 0066 40F20003 		movw	r3, #:lower16:refDotProdOut
+ 165 006a C0F20003 		movt	r3, #:upper16:refDotProdOut
+ 166 006e 93ED007A 		flds	s14, [r3, #0]
+ 167 0072 40F20003 		movw	r3, #:lower16:testOutput
+ 168 0076 C0F20003 		movt	r3, #:upper16:testOutput
+ 169 007a D3ED007A 		flds	s15, [r3, #0]
+ 170 007e 77EE677A 		fsubs	s15, s14, s15
+ 171 0082 F0EEE77A 		fabss	s15, s15
+ 172 0086 C7ED007A 		fsts	s15, [r7, #0]
+ 163:../arm_dotproduct_example_f32.c **** 
+ 164:../arm_dotproduct_example_f32.c ****   /* Comparison of dot product value with reference */
+ 165:../arm_dotproduct_example_f32.c ****   if(diff > DELTA)
+ 173              		.loc 1 165 0
+ 174 008a 97ED007A 		flds	s14, [r7, #0]
+ 175 008e DFED0C7A 		flds	s15, .L9
+ 176 0092 B4EEE77A 		fcmpes	s14, s15
+ 177 0096 F1EE10FA 		fmstat
+ 178 009a 06DD     		ble	.L4
+ 179              	.L8:
+ 166:../arm_dotproduct_example_f32.c ****   {
+ 167:../arm_dotproduct_example_f32.c ****     status = ARM_MATH_TEST_FAILURE;
+ 180              		.loc 1 167 0
+ 181 009c 40F20003 		movw	r3, #:lower16:status
+ 182 00a0 C0F20003 		movt	r3, #:upper16:status
+ 183 00a4 4FF0FA02 		mov	r2, #250
+ 184 00a8 1A70     		strb	r2, [r3, #0]
+ 185              	.L4:
+ 168:../arm_dotproduct_example_f32.c ****   }
+ 169:../arm_dotproduct_example_f32.c **** 
+ 170:../arm_dotproduct_example_f32.c ****   if( status == ARM_MATH_TEST_FAILURE)
+ 186              		.loc 1 170 0
+ 187 00aa 40F20003 		movw	r3, #:lower16:status
+ 188 00ae C0F20003 		movt	r3, #:upper16:status
+ 189 00b2 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 190 00b4 5BB2     		sxtb	r3, r3
+ 191 00b6 13F1060F 		cmn	r3, #6
+ 192 00ba 00D1     		bne	.L6
+ 193              	.L7:
+ 171:../arm_dotproduct_example_f32.c ****   {
+ 172:../arm_dotproduct_example_f32.c ****     while(1);
+ 194              		.loc 1 172 0 discriminator 1
+ 195 00bc FEE7     		b	.L7
+ 196              	.L6:
+ 173:../arm_dotproduct_example_f32.c ****   }
+ 174:../arm_dotproduct_example_f32.c **** 
+ 175:../arm_dotproduct_example_f32.c ****   while(1);                             /* main function does not return */
+ 197              		.loc 1 175 0 discriminator 1
+ 198 00be FEE7     		b	.L6
+ 199              	.L10:
+ 200              		.align	2
+ 201              	.L9:
+ 202 00c0 BD378635 		.word	897988541
+ 203              		.cfi_endproc
+ 204              	.LFE128:
+ 206              		.text
+ 207              	.Letext0:
+ 208              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 209              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_dotproduct_example_f32.c
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:24     .data:00000000 srcA_buf_f32
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:21     .data:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:61     .data:00000080 srcB_buf_f32
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:98     .data:00000100 refDotProdOut
+                            *COM*:00000080 multOutput
+                            *COM*:00000004 testOutput
+                            *COM*:00000001 status
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:104    .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:109    .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\ccsFYjxl.s:202    .text.main:000000c0 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.9aeeb49319d52ce18428457f37cb413c
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm4.h.47.5b17071cb0e0984e786cc7d50cfa4aef
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.arm_math.h.297.9b8078faaef2b2639f9d65032d7e0d70
+
+UNDEFINED SYMBOLS
+arm_mult_f32
+arm_add_f32

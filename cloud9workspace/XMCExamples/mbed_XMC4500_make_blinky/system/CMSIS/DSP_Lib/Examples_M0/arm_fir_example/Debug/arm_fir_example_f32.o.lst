@@ -1,0 +1,486 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"arm_fir_example_f32.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.bss
+  18              		.align	2
+  19              	testOutput:
+  20 0000 00000000 		.space	1280
+  20      00000000 
+  20      00000000 
+  20      00000000 
+  20      00000000 
+  21              		.align	2
+  22              	firStateF32:
+  23 0500 00000000 		.space	240
+  23      00000000 
+  23      00000000 
+  23      00000000 
+  23      00000000 
+  24              		.global	firCoeffs32
+  25              		.section	.rodata
+  26              		.align	2
+  29              	firCoeffs32:
+  30 0000 B9E1EEBA 		.word	-1158749767
+  31 0004 1222D0BA 		.word	-1160764910
+  32 0008 00000000 		.word	0
+  33 000c F755723B 		.word	997348855
+  34 0010 CF4E043C 		.word	1006915279
+  35 0014 58C20B3C 		.word	1007403608
+  36 0018 00000080 		.word	-2147483648
+  37 001c 9E858EBC 		.word	-1131510370
+  38 0020 88DC0BBD 		.word	-1123296120
+  39 0024 9CA308BD 		.word	-1123507300
+  40 0028 00000000 		.word	0
+  41 002c 0A828A3D 		.word	1032487434
+  42 0030 F0DB1B3E 		.word	1042013168
+  43 0034 5F46643E 		.word	1046759007
+  44 0038 0641803E 		.word	1048592646
+  45 003c 5F46643E 		.word	1046759007
+  46 0040 F0DB1B3E 		.word	1042013168
+  47 0044 0A828A3D 		.word	1032487434
+  48 0048 00000000 		.word	0
+  49 004c 9CA308BD 		.word	-1123507300
+  50 0050 88DC0BBD 		.word	-1123296120
+  51 0054 9E858EBC 		.word	-1131510370
+  52 0058 00000080 		.word	-2147483648
+  53 005c 58C20B3C 		.word	1007403608
+  54 0060 CF4E043C 		.word	1006915279
+  55 0064 F755723B 		.word	997348855
+  56 0068 00000000 		.word	0
+  57 006c 1222D0BA 		.word	-1160764910
+  58 0070 B9E1EEBA 		.word	-1158749767
+  59              		.global	blockSize
+  60              		.data
+  61              		.align	2
+  64              	blockSize:
+  65 0000 20000000 		.word	32
+  66              		.global	numBlocks
+  67              		.align	2
+  70              	numBlocks:
+  71 0004 0A000000 		.word	10
+  72              		.comm	snr,4,4
+  73              		.global	__aeabi_fcmplt
+  74              		.section	.text.main,"ax",%progbits
+  75              		.align	2
+  76              		.global	main
+  77              		.code	16
+  78              		.thumb_func
+  80              	main:
+  81              	.LFB81:
+  82              		.file 1 "../arm_fir_example_f32.c"
+   1:../arm_fir_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_fir_example_f32.c ****  * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_fir_example_f32.c ****  *
+   4:../arm_fir_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_fir_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_fir_example_f32.c **** *
+   7:../arm_fir_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_fir_example_f32.c ****  * Title:        arm_fir_example_f32.c
+   9:../arm_fir_example_f32.c ****  *
+  10:../arm_fir_example_f32.c ****  * Description:  Example code demonstrating how an FIR filter can be used
+  11:../arm_fir_example_f32.c ****  *               as a low pass filter.
+  12:../arm_fir_example_f32.c ****  *
+  13:../arm_fir_example_f32.c ****  * Target Processor: Cortex-M4/Cortex-M3
+  14:../arm_fir_example_f32.c ****  *
+  15:../arm_fir_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  16:../arm_fir_example_f32.c **** * modification, are permitted provided that the following conditions
+  17:../arm_fir_example_f32.c **** * are met:
+  18:../arm_fir_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  19:../arm_fir_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  20:../arm_fir_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  21:../arm_fir_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  22:../arm_fir_example_f32.c **** *     the documentation and/or other materials provided with the
+  23:../arm_fir_example_f32.c **** *     distribution.
+  24:../arm_fir_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  25:../arm_fir_example_f32.c **** *     may be used to endorse or promote products derived from this
+  26:../arm_fir_example_f32.c **** *     software without specific prior written permission.
+  27:../arm_fir_example_f32.c **** *
+  28:../arm_fir_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  29:../arm_fir_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  30:../arm_fir_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  31:../arm_fir_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  32:../arm_fir_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  33:../arm_fir_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  34:../arm_fir_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  35:../arm_fir_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  36:../arm_fir_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  37:../arm_fir_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  38:../arm_fir_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  39:../arm_fir_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  40:../arm_fir_example_f32.c ****  * -------------------------------------------------------------------- */
+  41:../arm_fir_example_f32.c **** 
+  42:../arm_fir_example_f32.c **** /**
+  43:../arm_fir_example_f32.c ****  * @ingroup groupExamples
+  44:../arm_fir_example_f32.c ****  */
+  45:../arm_fir_example_f32.c **** 
+  46:../arm_fir_example_f32.c **** /**
+  47:../arm_fir_example_f32.c ****  * @defgroup FIRLPF FIR Lowpass Filter Example
+  48:../arm_fir_example_f32.c ****  *
+  49:../arm_fir_example_f32.c ****  * \par Description:
+  50:../arm_fir_example_f32.c ****  * \par
+  51:../arm_fir_example_f32.c ****  * Removes high frequency signal components from the input using an FIR lowpass filter.
+  52:../arm_fir_example_f32.c ****  * The example demonstrates how to configure an FIR filter and then pass data through
+  53:../arm_fir_example_f32.c ****  * it in a block-by-block fashion.
+  54:../arm_fir_example_f32.c ****  * \image html FIRLPF_signalflow.gif
+  55:../arm_fir_example_f32.c ****  *
+  56:../arm_fir_example_f32.c ****  * \par Algorithm:
+  57:../arm_fir_example_f32.c ****  * \par
+  58:../arm_fir_example_f32.c ****  * The input signal is a sum of two sine waves:  1 kHz and 15 kHz.
+  59:../arm_fir_example_f32.c ****  * This is processed by an FIR lowpass filter with cutoff frequency 6 kHz.
+  60:../arm_fir_example_f32.c ****  * The lowpass filter eliminates the 15 kHz signal leaving only the 1 kHz sine wave at the output.
+  61:../arm_fir_example_f32.c ****  * \par
+  62:../arm_fir_example_f32.c ****  * The lowpass filter was designed using MATLAB with a sample rate of 48 kHz and
+  63:../arm_fir_example_f32.c ****  * a length of 29 points.
+  64:../arm_fir_example_f32.c ****  * The MATLAB code to generate the filter coefficients is shown below:
+  65:../arm_fir_example_f32.c ****  * <pre>
+  66:../arm_fir_example_f32.c ****  *     h = fir1(28, 6/24);
+  67:../arm_fir_example_f32.c ****  * </pre>
+  68:../arm_fir_example_f32.c ****  * The first argument is the "order" of the filter and is always one less than the desired length.
+  69:../arm_fir_example_f32.c ****  * The second argument is the normalized cutoff frequency.  This is in the range 0 (DC) to 1.0 (Nyq
+  70:../arm_fir_example_f32.c ****  * A 6 kHz cutoff with a Nyquist frequency of 24 kHz lies at a normalized frequency of 6/24 = 0.25.
+  71:../arm_fir_example_f32.c ****  * The CMSIS FIR filter function requires the coefficients to be in time reversed order.
+  72:../arm_fir_example_f32.c ****  * <pre>
+  73:../arm_fir_example_f32.c ****  *     fliplr(h)
+  74:../arm_fir_example_f32.c ****  * </pre>
+  75:../arm_fir_example_f32.c ****  * The resulting filter coefficients and are shown below.
+  76:../arm_fir_example_f32.c ****  * Note that the filter is symmetric (a property of linear phase FIR filters)
+  77:../arm_fir_example_f32.c ****  * and the point of symmetry is sample 14.  Thus the filter will have a delay of
+  78:../arm_fir_example_f32.c ****  * 14 samples for all frequencies.
+  79:../arm_fir_example_f32.c ****  * \par
+  80:../arm_fir_example_f32.c ****  * \image html FIRLPF_coeffs.gif
+  81:../arm_fir_example_f32.c ****  * \par
+  82:../arm_fir_example_f32.c ****  * The frequency response of the filter is shown next.
+  83:../arm_fir_example_f32.c ****  * The passband gain of the filter is 1.0 and it reaches 0.5 at the cutoff frequency 6 kHz.
+  84:../arm_fir_example_f32.c ****  * \par
+  85:../arm_fir_example_f32.c ****  * \image html FIRLPF_response.gif
+  86:../arm_fir_example_f32.c ****  * \par
+  87:../arm_fir_example_f32.c ****  * The input signal is shown below.
+  88:../arm_fir_example_f32.c ****  * The left hand side shows the signal in the time domain while the right hand side is a frequency 
+  89:../arm_fir_example_f32.c ****  * The two sine wave components can be clearly seen.
+  90:../arm_fir_example_f32.c ****  * \par
+  91:../arm_fir_example_f32.c ****  * \image html FIRLPF_input.gif
+  92:../arm_fir_example_f32.c ****  * \par
+  93:../arm_fir_example_f32.c ****  * The output of the filter is shown below.  The 15 kHz component has been eliminated.
+  94:../arm_fir_example_f32.c ****  * \par
+  95:../arm_fir_example_f32.c ****  * \image html FIRLPF_output.gif
+  96:../arm_fir_example_f32.c ****  *
+  97:../arm_fir_example_f32.c ****  * \par Variables Description:
+  98:../arm_fir_example_f32.c ****  * \par
+  99:../arm_fir_example_f32.c ****  * \li \c testInput_f32_1kHz_15kHz points to the input data
+ 100:../arm_fir_example_f32.c ****  * \li \c refOutput points to the reference output data
+ 101:../arm_fir_example_f32.c ****  * \li \c testOutput points to the test output data
+ 102:../arm_fir_example_f32.c ****  * \li \c firStateF32 points to state buffer
+ 103:../arm_fir_example_f32.c ****  * \li \c firCoeffs32 points to coefficient buffer
+ 104:../arm_fir_example_f32.c ****  * \li \c blockSize number of samples processed at a time
+ 105:../arm_fir_example_f32.c ****  * \li \c numBlocks number of frames
+ 106:../arm_fir_example_f32.c ****  *
+ 107:../arm_fir_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+ 108:../arm_fir_example_f32.c ****  * \par
+ 109:../arm_fir_example_f32.c ****  * - arm_fir_init_f32()
+ 110:../arm_fir_example_f32.c ****  * - arm_fir_f32()
+ 111:../arm_fir_example_f32.c ****  *
+ 112:../arm_fir_example_f32.c ****  * <b> Refer  </b>
+ 113:../arm_fir_example_f32.c ****  * \link arm_fir_example_f32.c \endlink
+ 114:../arm_fir_example_f32.c ****  *
+ 115:../arm_fir_example_f32.c ****  */
+ 116:../arm_fir_example_f32.c **** 
+ 117:../arm_fir_example_f32.c **** 
+ 118:../arm_fir_example_f32.c **** /** \example arm_fir_example_f32.c
+ 119:../arm_fir_example_f32.c ****  */
+ 120:../arm_fir_example_f32.c **** 
+ 121:../arm_fir_example_f32.c **** /* ----------------------------------------------------------------------
+ 122:../arm_fir_example_f32.c **** ** Include Files
+ 123:../arm_fir_example_f32.c **** ** ------------------------------------------------------------------- */
+ 124:../arm_fir_example_f32.c **** 
+ 125:../arm_fir_example_f32.c **** #include "arm_math.h"
+ 126:../arm_fir_example_f32.c **** #include "math_helper.h"
+ 127:../arm_fir_example_f32.c **** 
+ 128:../arm_fir_example_f32.c **** /* ----------------------------------------------------------------------
+ 129:../arm_fir_example_f32.c **** ** Macro Defines
+ 130:../arm_fir_example_f32.c **** ** ------------------------------------------------------------------- */
+ 131:../arm_fir_example_f32.c **** 
+ 132:../arm_fir_example_f32.c **** #define TEST_LENGTH_SAMPLES  320
+ 133:../arm_fir_example_f32.c **** #define SNR_THRESHOLD_F32    140.0f
+ 134:../arm_fir_example_f32.c **** #define BLOCK_SIZE            32
+ 135:../arm_fir_example_f32.c **** #define NUM_TAPS              29
+ 136:../arm_fir_example_f32.c **** 
+ 137:../arm_fir_example_f32.c **** /* -------------------------------------------------------------------
+ 138:../arm_fir_example_f32.c ****  * The input signal and reference output (computed with MATLAB)
+ 139:../arm_fir_example_f32.c ****  * are defined externally in arm_fir_lpf_data.c.
+ 140:../arm_fir_example_f32.c ****  * ------------------------------------------------------------------- */
+ 141:../arm_fir_example_f32.c **** 
+ 142:../arm_fir_example_f32.c **** extern float32_t testInput_f32_1kHz_15kHz[TEST_LENGTH_SAMPLES];
+ 143:../arm_fir_example_f32.c **** extern float32_t refOutput[TEST_LENGTH_SAMPLES];
+ 144:../arm_fir_example_f32.c **** 
+ 145:../arm_fir_example_f32.c **** /* -------------------------------------------------------------------
+ 146:../arm_fir_example_f32.c ****  * Declare Test output buffer
+ 147:../arm_fir_example_f32.c ****  * ------------------------------------------------------------------- */
+ 148:../arm_fir_example_f32.c **** 
+ 149:../arm_fir_example_f32.c **** static float32_t testOutput[TEST_LENGTH_SAMPLES];
+ 150:../arm_fir_example_f32.c **** 
+ 151:../arm_fir_example_f32.c **** /* -------------------------------------------------------------------
+ 152:../arm_fir_example_f32.c ****  * Declare State buffer of size (numTaps + blockSize - 1)
+ 153:../arm_fir_example_f32.c ****  * ------------------------------------------------------------------- */
+ 154:../arm_fir_example_f32.c **** 
+ 155:../arm_fir_example_f32.c **** static float32_t firStateF32[BLOCK_SIZE + NUM_TAPS - 1];
+ 156:../arm_fir_example_f32.c **** 
+ 157:../arm_fir_example_f32.c **** /* ----------------------------------------------------------------------
+ 158:../arm_fir_example_f32.c **** ** FIR Coefficients buffer generated using fir1() MATLAB function.
+ 159:../arm_fir_example_f32.c **** ** fir1(28, 6/24)
+ 160:../arm_fir_example_f32.c **** ** ------------------------------------------------------------------- */
+ 161:../arm_fir_example_f32.c **** 
+ 162:../arm_fir_example_f32.c **** const float32_t firCoeffs32[NUM_TAPS] = {
+ 163:../arm_fir_example_f32.c ****   -0.0018225230f, -0.0015879294f, +0.0000000000f, +0.0036977508f, +0.0080754303f, +0.0085302217f, -
+ 164:../arm_fir_example_f32.c ****   -0.0341458607f, -0.0333591565f, +0.0000000000f, +0.0676308395f, +0.1522061835f, +0.2229246956f, +
+ 165:../arm_fir_example_f32.c ****   +0.1522061835f, +0.0676308395f, +0.0000000000f, -0.0333591565f, -0.0341458607f, -0.0173976984f, -
+ 166:../arm_fir_example_f32.c ****   +0.0080754303f, +0.0036977508f, +0.0000000000f, -0.0015879294f, -0.0018225230f
+ 167:../arm_fir_example_f32.c **** };
+ 168:../arm_fir_example_f32.c **** 
+ 169:../arm_fir_example_f32.c **** /* ------------------------------------------------------------------
+ 170:../arm_fir_example_f32.c ****  * Global variables for FIR LPF Example
+ 171:../arm_fir_example_f32.c ****  * ------------------------------------------------------------------- */
+ 172:../arm_fir_example_f32.c **** 
+ 173:../arm_fir_example_f32.c **** uint32_t blockSize = BLOCK_SIZE;
+ 174:../arm_fir_example_f32.c **** uint32_t numBlocks = TEST_LENGTH_SAMPLES/BLOCK_SIZE;
+ 175:../arm_fir_example_f32.c **** 
+ 176:../arm_fir_example_f32.c **** float32_t  snr;
+ 177:../arm_fir_example_f32.c **** 
+ 178:../arm_fir_example_f32.c **** /* ----------------------------------------------------------------------
+ 179:../arm_fir_example_f32.c ****  * FIR LPF Example
+ 180:../arm_fir_example_f32.c ****  * ------------------------------------------------------------------- */
+ 181:../arm_fir_example_f32.c **** 
+ 182:../arm_fir_example_f32.c **** int32_t main(void)
+ 183:../arm_fir_example_f32.c **** {
+  83              		.loc 1 183 0
+  84              		.cfi_startproc
+  85 0000 80B5     		push	{r7, lr}
+  86              	.LCFI0:
+  87              		.cfi_def_cfa_offset 8
+  88              		.cfi_offset 7, -8
+  89              		.cfi_offset 14, -4
+  90 0002 8AB0     		sub	sp, sp, #40
+  91              	.LCFI1:
+  92              		.cfi_def_cfa_offset 48
+  93 0004 02AF     		add	r7, sp, #8
+  94              	.LCFI2:
+  95              		.cfi_def_cfa 7, 40
+ 184:../arm_fir_example_f32.c ****   uint32_t i;
+ 185:../arm_fir_example_f32.c ****   arm_fir_instance_f32 S;
+ 186:../arm_fir_example_f32.c ****   arm_status status;
+ 187:../arm_fir_example_f32.c ****   float32_t  *inputF32, *outputF32;
+ 188:../arm_fir_example_f32.c **** 
+ 189:../arm_fir_example_f32.c ****   /* Initialize input and output buffer pointers */
+ 190:../arm_fir_example_f32.c ****   inputF32 = &testInput_f32_1kHz_15kHz[0];
+  96              		.loc 1 190 0
+  97 0006 294B     		ldr	r3, .L11
+  98 0008 7B61     		str	r3, [r7, #20]
+ 191:../arm_fir_example_f32.c ****   outputF32 = &testOutput[0];
+  99              		.loc 1 191 0
+ 100 000a 294B     		ldr	r3, .L11+4
+ 101 000c 3B61     		str	r3, [r7, #16]
+ 192:../arm_fir_example_f32.c **** 
+ 193:../arm_fir_example_f32.c ****   /* Call FIR init function to initialize the instance structure. */
+ 194:../arm_fir_example_f32.c ****   arm_fir_init_f32(&S, NUM_TAPS, (float32_t *)&firCoeffs32[0], &firStateF32[0], blockSize);
+ 102              		.loc 1 194 0
+ 103 000e 294B     		ldr	r3, .L11+8
+ 104 0010 1868     		ldr	r0, [r3]
+ 105 0012 391D     		add	r1, r7, #4
+ 106 0014 284A     		ldr	r2, .L11+12
+ 107 0016 294B     		ldr	r3, .L11+16
+ 108 0018 0090     		str	r0, [sp]
+ 109 001a 081C     		mov	r0, r1
+ 110 001c 1D21     		mov	r1, #29
+ 111 001e FFF7FEFF 		bl	arm_fir_init_f32
+ 195:../arm_fir_example_f32.c **** 
+ 196:../arm_fir_example_f32.c ****   /* ----------------------------------------------------------------------
+ 197:../arm_fir_example_f32.c ****   ** Call the FIR process function for every blockSize samples
+ 198:../arm_fir_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 199:../arm_fir_example_f32.c **** 
+ 200:../arm_fir_example_f32.c ****   for(i=0; i < numBlocks; i++)
+ 112              		.loc 1 200 0
+ 113 0022 0023     		mov	r3, #0
+ 114 0024 FB61     		str	r3, [r7, #28]
+ 115 0026 15E0     		b	.L2
+ 116              	.L3:
+ 201:../arm_fir_example_f32.c ****   {
+ 202:../arm_fir_example_f32.c ****     arm_fir_f32(&S, inputF32 + (i * blockSize), outputF32 + (i * blockSize), blockSize);
+ 117              		.loc 1 202 0 discriminator 2
+ 118 0028 224B     		ldr	r3, .L11+8
+ 119 002a 1B68     		ldr	r3, [r3]
+ 120 002c FA69     		ldr	r2, [r7, #28]
+ 121 002e 5343     		mul	r3, r2
+ 122 0030 9B00     		lsl	r3, r3, #2
+ 123 0032 7A69     		ldr	r2, [r7, #20]
+ 124 0034 D118     		add	r1, r2, r3
+ 125 0036 1F4B     		ldr	r3, .L11+8
+ 126 0038 1B68     		ldr	r3, [r3]
+ 127 003a FA69     		ldr	r2, [r7, #28]
+ 128 003c 5343     		mul	r3, r2
+ 129 003e 9B00     		lsl	r3, r3, #2
+ 130 0040 3A69     		ldr	r2, [r7, #16]
+ 131 0042 D218     		add	r2, r2, r3
+ 132 0044 1B4B     		ldr	r3, .L11+8
+ 133 0046 1B68     		ldr	r3, [r3]
+ 134 0048 381D     		add	r0, r7, #4
+ 135 004a FFF7FEFF 		bl	arm_fir_f32
+ 200:../arm_fir_example_f32.c ****   for(i=0; i < numBlocks; i++)
+ 136              		.loc 1 200 0 discriminator 2
+ 137 004e FB69     		ldr	r3, [r7, #28]
+ 138 0050 0133     		add	r3, r3, #1
+ 139 0052 FB61     		str	r3, [r7, #28]
+ 140              	.L2:
+ 200:../arm_fir_example_f32.c ****   for(i=0; i < numBlocks; i++)
+ 141              		.loc 1 200 0 is_stmt 0 discriminator 1
+ 142 0054 1A4B     		ldr	r3, .L11+20
+ 143 0056 1B68     		ldr	r3, [r3]
+ 144 0058 FA69     		ldr	r2, [r7, #28]
+ 145 005a 9A42     		cmp	r2, r3
+ 146 005c E4D3     		bcc	.L3
+ 203:../arm_fir_example_f32.c ****   }
+ 204:../arm_fir_example_f32.c **** 
+ 205:../arm_fir_example_f32.c ****   /* ----------------------------------------------------------------------
+ 206:../arm_fir_example_f32.c ****   ** Compare the generated output against the reference output computed
+ 207:../arm_fir_example_f32.c ****   ** in MATLAB.
+ 208:../arm_fir_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 209:../arm_fir_example_f32.c **** 
+ 210:../arm_fir_example_f32.c ****   snr = arm_snr_f32(&refOutput[0], &testOutput[0], TEST_LENGTH_SAMPLES);
+ 147              		.loc 1 210 0 is_stmt 1
+ 148 005e 1949     		ldr	r1, .L11+24
+ 149 0060 134A     		ldr	r2, .L11+4
+ 150 0062 A023     		mov	r3, #160
+ 151 0064 5B00     		lsl	r3, r3, #1
+ 152 0066 081C     		mov	r0, r1
+ 153 0068 111C     		mov	r1, r2
+ 154 006a 1A1C     		mov	r2, r3
+ 155 006c FFF7FEFF 		bl	arm_snr_f32
+ 156 0070 021C     		add	r2, r0, #0
+ 157 0072 154B     		ldr	r3, .L11+28
+ 158 0074 1A60     		str	r2, [r3]
+ 211:../arm_fir_example_f32.c **** 
+ 212:../arm_fir_example_f32.c ****   if (snr < SNR_THRESHOLD_F32)
+ 159              		.loc 1 212 0
+ 160 0076 144B     		ldr	r3, .L11+28
+ 161 0078 1B68     		ldr	r3, [r3]
+ 162 007a 181C     		add	r0, r3, #0
+ 163 007c 1349     		ldr	r1, .L11+32
+ 164 007e FFF7FEFF 		bl	__aeabi_fcmplt
+ 165 0082 031C     		mov	r3, r0
+ 166 0084 002B     		cmp	r3, #0
+ 167 0086 04D0     		beq	.L10
+ 168              	.L9:
+ 213:../arm_fir_example_f32.c ****   {
+ 214:../arm_fir_example_f32.c ****     status = ARM_MATH_TEST_FAILURE;
+ 169              		.loc 1 214 0
+ 170 0088 3B1C     		mov	r3, r7
+ 171 008a 1B33     		add	r3, r3, #27
+ 172 008c FA22     		mov	r2, #250
+ 173 008e 1A70     		strb	r2, [r3]
+ 174 0090 03E0     		b	.L6
+ 175              	.L10:
+ 215:../arm_fir_example_f32.c ****   }
+ 216:../arm_fir_example_f32.c ****   else
+ 217:../arm_fir_example_f32.c ****   {
+ 218:../arm_fir_example_f32.c ****     status = ARM_MATH_SUCCESS;
+ 176              		.loc 1 218 0
+ 177 0092 3B1C     		mov	r3, r7
+ 178 0094 1B33     		add	r3, r3, #27
+ 179 0096 0022     		mov	r2, #0
+ 180 0098 1A70     		strb	r2, [r3]
+ 181              	.L6:
+ 219:../arm_fir_example_f32.c ****   }
+ 220:../arm_fir_example_f32.c **** 
+ 221:../arm_fir_example_f32.c ****   /* ----------------------------------------------------------------------
+ 222:../arm_fir_example_f32.c ****   ** Loop here if the signal does not match the reference output.
+ 223:../arm_fir_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 224:../arm_fir_example_f32.c **** 
+ 225:../arm_fir_example_f32.c ****   if( status != ARM_MATH_SUCCESS)
+ 182              		.loc 1 225 0
+ 183 009a 3B1C     		mov	r3, r7
+ 184 009c 1B33     		add	r3, r3, #27
+ 185 009e 1B78     		ldrb	r3, [r3]
+ 186 00a0 5BB2     		sxtb	r3, r3
+ 187 00a2 002B     		cmp	r3, #0
+ 188 00a4 00D0     		beq	.L7
+ 189              	.L8:
+ 226:../arm_fir_example_f32.c ****   {
+ 227:../arm_fir_example_f32.c ****     while(1);
+ 190              		.loc 1 227 0 discriminator 1
+ 191 00a6 FEE7     		b	.L8
+ 192              	.L7:
+ 228:../arm_fir_example_f32.c ****   }
+ 229:../arm_fir_example_f32.c **** 
+ 230:../arm_fir_example_f32.c ****   while(1);                             /* main function does not return */
+ 193              		.loc 1 230 0 discriminator 1
+ 194 00a8 FEE7     		b	.L7
+ 195              	.L12:
+ 196 00aa C046     		.align	2
+ 197              	.L11:
+ 198 00ac 00000000 		.word	testInput_f32_1kHz_15kHz
+ 199 00b0 00000000 		.word	testOutput
+ 200 00b4 00000000 		.word	blockSize
+ 201 00b8 00000000 		.word	firCoeffs32
+ 202 00bc 00050000 		.word	firStateF32
+ 203 00c0 00000000 		.word	numBlocks
+ 204 00c4 00000000 		.word	refOutput
+ 205 00c8 00000000 		.word	snr
+ 206 00cc 00000C43 		.word	1124859904
+ 207              		.cfi_endproc
+ 208              	.LFE81:
+ 210              		.text
+ 211              	.Letext0:
+ 212              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 213              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_fir_example_f32.c
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:18     .bss:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:19     .bss:00000000 testOutput
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:22     .bss:00000500 firStateF32
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:29     .rodata:00000000 firCoeffs32
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:26     .rodata:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:64     .data:00000000 blockSize
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:61     .data:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:70     .data:00000004 numBlocks
+                            *COM*:00000004 snr
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:75     .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:80     .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\cc2aGkvn.s:198    .text.main:000000ac $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.e2c96d5a5488b60ca900a5e0ea7772ef
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.arm_math.h.275.48de47ab2bd311f0657ea6a8c1abb55a
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.297.1d5f7b8b87e168258299acd0bbe0005e
+
+UNDEFINED SYMBOLS
+__aeabi_fcmplt
+arm_fir_init_f32
+arm_fir_f32
+arm_snr_f32
+testInput_f32_1kHz_15kHz
+refOutput

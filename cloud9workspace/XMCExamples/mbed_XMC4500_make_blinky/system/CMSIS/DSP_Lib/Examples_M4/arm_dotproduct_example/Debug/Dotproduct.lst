@@ -1,0 +1,4301 @@
+
+Dotproduct.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000018b4  08000000  0c000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .ARM.exidx    00000010  080018b4  0c0018b4  000098b4  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 Stack         00000800  20000000  20000000  00018000  2**0
+                  ALLOC
+  3 .bss          00000091  20000800  20000800  00018000  2**2
+                  ALLOC
+  4 .data         00000108  200008a0  0c0018d0  000108a0  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  5 .debug_aranges 00000168  00000000  00000000  000109a8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000016ad  00000000  00000000  00010b10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000047b  00000000  00000000  000121bd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000013ca  00000000  00000000  00012638  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000328  00000000  00000000  00013a04  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00092b8a  00000000  00000000  00013d2c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000007da  00000000  00000000  000a68b6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_macinfo 00005ad0  00000000  00000000  000a7090  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000110  00000000  00000000  000acb60  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .build_attributes 00000172  00000000  00000000  000acc70  2**0
+                  CONTENTS, READONLY
+ 15 .debug_macro  00017f5b  00000000  00000000  000acde2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+08000000 <__Xmc4500_interrupt_vector_cortex_m>:
+ 8000000:	00 08 00 20 01 02 00 08 8f 03 00 08 9f 03 00 08     ... ............
+ 8000010:	af 03 00 08 bf 03 00 08 cf 03 00 08 00 00 00 00     ................
+	...
+ 800002c:	df 03 00 08 ef 03 00 08 00 00 00 00 ff 03 00 08     ................
+ 800003c:	0f 04 00 08 1f 04 00 08 2f 04 00 08 3f 04 00 08     ......../...?...
+ 800004c:	4f 04 00 08 5f 04 00 08 6f 04 00 08 7f 04 00 08     O..._...o.......
+ 800005c:	8f 04 00 08 9f 04 00 08 00 00 00 00 00 00 00 00     ................
+ 800006c:	00 00 00 00 af 04 00 08 00 00 00 00 bf 04 00 08     ................
+ 800007c:	cf 04 00 08 df 04 00 08 ef 04 00 08 ff 04 00 08     ................
+ 800008c:	0f 05 00 08 1f 05 00 08 2f 05 00 08 3f 05 00 08     ......../...?...
+ 800009c:	4f 05 00 08 5f 05 00 08 6f 05 00 08 7f 05 00 08     O..._...o.......
+ 80000ac:	8f 05 00 08 9f 05 00 08 af 05 00 08 bf 05 00 08     ................
+ 80000bc:	cf 05 00 08 df 05 00 08 ef 05 00 08 ff 05 00 08     ................
+ 80000cc:	0f 06 00 08 1f 06 00 08 2f 06 00 08 3f 06 00 08     ......../...?...
+ 80000dc:	4f 06 00 08 5f 06 00 08 6f 06 00 08 7f 06 00 08     O..._...o.......
+ 80000ec:	8f 06 00 08 9f 06 00 08 af 06 00 08 bf 06 00 08     ................
+ 80000fc:	cf 06 00 08 df 06 00 08 ed 06 00 08 fb 06 00 08     ................
+ 800010c:	09 07 00 08 17 07 00 08 25 07 00 08 33 07 00 08     ........%...3...
+ 800011c:	41 07 00 08 4f 07 00 08 5d 07 00 08 6b 07 00 08     A...O...]...k...
+ 800012c:	79 07 00 08 87 07 00 08 95 07 00 08 a3 07 00 08     y...............
+ 800013c:	b1 07 00 08 bf 07 00 08 cd 07 00 08 db 07 00 08     ................
+ 800014c:	e9 07 00 08 f7 07 00 08 05 08 00 08 13 08 00 08     ................
+ 800015c:	21 08 00 08 00 00 00 00 00 00 00 00 00 00 00 00     !...............
+ 800016c:	00 00 00 00 2f 08 00 08 3d 08 00 08 4b 08 00 08     ..../...=...K...
+ 800017c:	59 08 00 08 67 08 00 08 75 08 00 08 83 08 00 08     Y...g...u.......
+ 800018c:	91 08 00 08 9f 08 00 08 ad 08 00 08 bb 08 00 08     ................
+ 800019c:	c9 08 00 08 d7 08 00 08 e5 08 00 08 f3 08 00 08     ................
+ 80001ac:	01 09 00 08 0f 09 00 08 1d 09 00 08 2b 09 00 08     ............+...
+ 80001bc:	39 09 00 08 47 09 00 08 55 09 00 08 63 09 00 08     9...G...U...c...
+ 80001cc:	71 09 00 08 7f 09 00 08 8d 09 00 08 9b 09 00 08     q...............
+ 80001dc:	00 00 00 00 a9 09 00 08 b7 09 00 08 c5 09 00 08     ................
+ 80001ec:	d3 09 00 08 e1 09 00 08 00 00 00 00 ef 09 00 08     ................
+ 80001fc:	00 00 00 00                                         ....
+
+08000200 <__Xmc4500_reset_cortex_m>:
+__Xmc4500_reset_cortex_m:
+    .fnstart
+
+    /* C routines are likely to be called. Setup the stack now */
+    /* This is already setup by BootROM,hence this step is optional */ 
+    LDR SP,=__Xmc4500_stack
+ 8000200:	f8df d00c 	ldr.w	sp, [pc, #12]	; 8000210 <__Xmc4500_reset_cortex_m+0x10>
+
+    /* Clock tree, External memory setup etc may be done here */    
+    LDR     R0, =SystemInit
+ 8000204:	4803      	ldr	r0, [pc, #12]	; (8000214 <__Xmc4500_reset_cortex_m+0x14>)
+    BLX     R0
+ 8000206:	4780      	blx	r0
+
+/* 
+   SystemInit_DAVE3() is provided by DAVE3 code generation engine. It is  
+   weakly defined here though for a potential override.
+*/
+    LDR     R0, =SystemInit_DAVE3     
+ 8000208:	4803      	ldr	r0, [pc, #12]	; (8000218 <__Xmc4500_reset_cortex_m+0x18>)
+    BLX     R0
+ 800020a:	4780      	blx	r0
+
+    B       __Xmc4500_Program_Loader 
+ 800020c:	f000 b806 	b.w	800021c <__Xmc4500_Program_Loader>
+__Xmc4500_reset_cortex_m:
+    .fnstart
+
+    /* C routines are likely to be called. Setup the stack now */
+    /* This is already setup by BootROM,hence this step is optional */ 
+    LDR SP,=__Xmc4500_stack
+ 8000210:	20000800 	.word	0x20000800
+
+    /* Clock tree, External memory setup etc may be done here */    
+    LDR     R0, =SystemInit
+ 8000214:	08000bb9 	.word	0x08000bb9
+
+/* 
+   SystemInit_DAVE3() is provided by DAVE3 code generation engine. It is  
+   weakly defined here though for a potential override.
+*/
+    LDR     R0, =SystemInit_DAVE3     
+ 8000218:	080002c5 	.word	0x080002c5
+
+0800021c <__Xmc4500_Program_Loader>:
+   .fnstart
+   /* Memories are accessible now*/
+   
+   /* DATA COPY */
+   /* R0 = Start address, R1 = Destination address, R2 = Size */
+   LDR R0, =eROData
+ 800021c:	481e      	ldr	r0, [pc, #120]	; (8000298 <SKIPCLEAR+0x20>)
+   LDR R1, =__Xmc4500_sData
+ 800021e:	491f      	ldr	r1, [pc, #124]	; (800029c <SKIPCLEAR+0x24>)
+   LDR R2, =__Xmc4500_Data_Size
+ 8000220:	4a1f      	ldr	r2, [pc, #124]	; (80002a0 <SKIPCLEAR+0x28>)
+
+   /* Is there anything to be copied? */
+   CMP R2,#0
+ 8000222:	2a00      	cmp	r2, #0
+   BEQ SKIPCOPY
+ 8000224:	f000 8012 	beq.w	800024c <SKIPCOPY>
+   
+   /* For bytecount less than 4, at least 1 word must be copied */
+   CMP R2,#4
+ 8000228:	2a04      	cmp	r2, #4
+   BCS STARTCOPY
+ 800022a:	f080 8002 	bcs.w	8000232 <STARTCOPY>
+   
+   /* Byte count < 4 ; so bump it up */
+   MOV R2,#4
+ 800022e:	f04f 0204 	mov.w	r2, #4
+
+08000232 <STARTCOPY>:
+STARTCOPY:
+   /* 
+      R2 contains byte count. Change it to word count. It is ensured in the 
+      linker script that the length is always word aligned.
+   */
+   LSR R2,R2,#2 /* Divide by 4 to obtain word count */
+ 8000232:	ea4f 0292 	mov.w	r2, r2, lsr #2
+
+08000236 <COPYLOOP>:
+
+   /* The proverbial loop from the schooldays */
+COPYLOOP:
+   LDR R3,[R0]
+ 8000236:	6803      	ldr	r3, [r0, #0]
+   STR R3,[R1]
+ 8000238:	600b      	str	r3, [r1, #0]
+   SUBS R2,#1
+ 800023a:	3a01      	subs	r2, #1
+   BEQ SKIPCOPY
+ 800023c:	f000 8006 	beq.w	800024c <SKIPCOPY>
+   ADD R0,#4
+ 8000240:	f100 0004 	add.w	r0, r0, #4
+   ADD R1,#4
+ 8000244:	f101 0104 	add.w	r1, r1, #4
+   B COPYLOOP
+ 8000248:	f7ff bff5 	b.w	8000236 <COPYLOOP>
+
+0800024c <SKIPCOPY>:
+    
+SKIPCOPY:
+   /* BSS CLEAR */
+   LDR R0, =__Xmc4500_sBSS     /* Start of BSS */
+ 800024c:	4815      	ldr	r0, [pc, #84]	; (80002a4 <SKIPCLEAR+0x2c>)
+   LDR R1, =__Xmc4500_BSS_Size /* BSS size in bytes */
+ 800024e:	4916      	ldr	r1, [pc, #88]	; (80002a8 <SKIPCLEAR+0x30>)
+
+   /* Find out if there are items assigned to BSS */   
+   CMP R1,#0 
+ 8000250:	2900      	cmp	r1, #0
+   BEQ SKIPCLEAR
+ 8000252:	f000 8011 	beq.w	8000278 <SKIPCLEAR>
+
+   /* At least 1 word must be copied */
+   CMP R1,#4
+ 8000256:	2904      	cmp	r1, #4
+   BCS STARTCLEAR
+ 8000258:	f080 8002 	bcs.w	8000260 <STARTCLEAR>
+   
+   /* Byte count < 4 ; so bump it up to a word*/
+   MOV R1,#4
+ 800025c:	f04f 0104 	mov.w	r1, #4
+
+08000260 <STARTCLEAR>:
+
+STARTCLEAR:
+   LSR R1,R1,#2            /* BSS size in words */
+ 8000260:	ea4f 0191 	mov.w	r1, r1, lsr #2
+   
+   MOV R2,#0
+ 8000264:	f04f 0200 	mov.w	r2, #0
+
+08000268 <CLEARLOOP>:
+CLEARLOOP:
+   STR R2,[R0]
+ 8000268:	6002      	str	r2, [r0, #0]
+   SUBS R1,#1
+ 800026a:	3901      	subs	r1, #1
+   BEQ SKIPCLEAR
+ 800026c:	f000 8004 	beq.w	8000278 <SKIPCLEAR>
+   ADD R0,#4
+ 8000270:	f100 0004 	add.w	r0, r0, #4
+   B CLEARLOOP
+ 8000274:	f7ff bff8 	b.w	8000268 <CLEARLOOP>
+
+08000278 <SKIPCLEAR>:
+    
+SKIPCLEAR:
+   /* Remap vector table */
+   /* This is already setup by BootROM,hence this step is optional */ 
+   LDR R0, =__Xmc4500_interrupt_vector_cortex_m 
+ 8000278:	480c      	ldr	r0, [pc, #48]	; (80002ac <SKIPCLEAR+0x34>)
+   LDR R1, =SCB_VTOR
+ 800027a:	490d      	ldr	r1, [pc, #52]	; (80002b0 <SKIPCLEAR+0x38>)
+   STR R0,[R1]
+ 800027c:	6008      	str	r0, [r1, #0]
+   
+   /* Update System Clock */
+   LDR R0,=SystemCoreClockUpdate
+ 800027e:	480d      	ldr	r0, [pc, #52]	; (80002b4 <SKIPCLEAR+0x3c>)
+   BLX R0
+ 8000280:	4780      	blx	r0
+ 
+   /* C++ : Call global constructors */
+   LDR R0,=__libc_init_array
+ 8000282:	480d      	ldr	r0, [pc, #52]	; (80002b8 <SKIPCLEAR+0x40>)
+   BLX R0
+ 8000284:	4780      	blx	r0
+
+   /* Reset stack pointer before zipping off to user application, Optional */
+   LDR SP,=__Xmc4500_stack 
+ 8000286:	f8df d034 	ldr.w	sp, [pc, #52]	; 80002bc <SKIPCLEAR+0x44>
+   MOV R0,#0
+ 800028a:	f04f 0000 	mov.w	r0, #0
+   MOV R1,#0
+ 800028e:	f04f 0100 	mov.w	r1, #0
+   LDR PC, =main
+ 8000292:	f8df f02c 	ldr.w	pc, [pc, #44]	; 80002c0 <SKIPCLEAR+0x48>
+ 8000296:	0000      	.short	0x0000
+   .fnstart
+   /* Memories are accessible now*/
+   
+   /* DATA COPY */
+   /* R0 = Start address, R1 = Destination address, R2 = Size */
+   LDR R0, =eROData
+ 8000298:	0c0018d0 	.word	0x0c0018d0
+   LDR R1, =__Xmc4500_sData
+ 800029c:	200008a0 	.word	0x200008a0
+   LDR R2, =__Xmc4500_Data_Size
+ 80002a0:	00000108 	.word	0x00000108
+   ADD R1,#4
+   B COPYLOOP
+    
+SKIPCOPY:
+   /* BSS CLEAR */
+   LDR R0, =__Xmc4500_sBSS     /* Start of BSS */
+ 80002a4:	20000800 	.word	0x20000800
+   LDR R1, =__Xmc4500_BSS_Size /* BSS size in bytes */
+ 80002a8:	00000094 	.word	0x00000094
+   B CLEARLOOP
+    
+SKIPCLEAR:
+   /* Remap vector table */
+   /* This is already setup by BootROM,hence this step is optional */ 
+   LDR R0, =__Xmc4500_interrupt_vector_cortex_m 
+ 80002ac:	08000000 	.word	0x08000000
+   LDR R1, =SCB_VTOR
+ 80002b0:	e000ed08 	.word	0xe000ed08
+   STR R0,[R1]
+   
+   /* Update System Clock */
+   LDR R0,=SystemCoreClockUpdate
+ 80002b4:	08000c55 	.word	0x08000c55
+   BLX R0
+ 
+   /* C++ : Call global constructors */
+   LDR R0,=__libc_init_array
+ 80002b8:	080015fd 	.word	0x080015fd
+   BLX R0
+
+   /* Reset stack pointer before zipping off to user application, Optional */
+   LDR SP,=__Xmc4500_stack 
+ 80002bc:	20000800 	.word	0x20000800
+   MOV R0,#0
+   MOV R1,#0
+   LDR PC, =main
+ 80002c0:	080002c9 	.word	0x080002c9
+
+080002c4 <SystemInit_DAVE3>:
+*/
+     .section ".XmcStartup"
+     .weak SystemInit_DAVE3
+     .type SystemInit_DAVE3, %function
+SystemInit_DAVE3:
+     NOP
+ 80002c4:	bf00      	nop
+     BX LR
+ 80002c6:	4770      	bx	lr
+
+080002c8 <main>:
+float32_t testOutput;  /* Final ouput */
+
+arm_status status;   /* Status of the example */
+
+int32_t main(void)
+{
+ 80002c8:	b580      	push	{r7, lr}
+ 80002ca:	b082      	sub	sp, #8
+ 80002cc:	af00      	add	r7, sp, #0
+  uint32_t i;       /* Loop counter */
+  float32_t diff;     /* Difference between reference and test outputs */
+
+  /* Multiplication of two input buffers */
+  arm_mult_f32(srcA_buf_f32, srcB_buf_f32, multOutput, MAX_BLOCKSIZE);
+ 80002ce:	f640 00a0 	movw	r0, #2208	; 0x8a0
+ 80002d2:	f2c2 0000 	movt	r0, #8192	; 0x2000
+ 80002d6:	f640 1120 	movw	r1, #2336	; 0x920
+ 80002da:	f2c2 0100 	movt	r1, #8192	; 0x2000
+ 80002de:	f640 020c 	movw	r2, #2060	; 0x80c
+ 80002e2:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 80002e6:	f04f 0320 	mov.w	r3, #32
+ 80002ea:	f001 f8a3 	bl	8001434 <arm_mult_f32>
+
+  /* Accumulate the multiplication output values to
+     get the dot product of the two inputs */
+  for(i=0; i< MAX_BLOCKSIZE; i++)
+ 80002ee:	f04f 0300 	mov.w	r3, #0
+ 80002f2:	607b      	str	r3, [r7, #4]
+ 80002f4:	e018      	b.n	8000328 <main+0x60>
+  {
+    arm_add_f32(&testOutput, &multOutput[i], &testOutput, 1);
+ 80002f6:	687b      	ldr	r3, [r7, #4]
+ 80002f8:	ea4f 0283 	mov.w	r2, r3, lsl #2
+ 80002fc:	f640 030c 	movw	r3, #2060	; 0x80c
+ 8000300:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000304:	18d3      	adds	r3, r2, r3
+ 8000306:	f640 008c 	movw	r0, #2188	; 0x88c
+ 800030a:	f2c2 0000 	movt	r0, #8192	; 0x2000
+ 800030e:	4619      	mov	r1, r3
+ 8000310:	f640 028c 	movw	r2, #2188	; 0x88c
+ 8000314:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 8000318:	f04f 0301 	mov.w	r3, #1
+ 800031c:	f000 ffa4 	bl	8001268 <arm_add_f32>
+  /* Multiplication of two input buffers */
+  arm_mult_f32(srcA_buf_f32, srcB_buf_f32, multOutput, MAX_BLOCKSIZE);
+
+  /* Accumulate the multiplication output values to
+     get the dot product of the two inputs */
+  for(i=0; i< MAX_BLOCKSIZE; i++)
+ 8000320:	687b      	ldr	r3, [r7, #4]
+ 8000322:	f103 0301 	add.w	r3, r3, #1
+ 8000326:	607b      	str	r3, [r7, #4]
+ 8000328:	687b      	ldr	r3, [r7, #4]
+ 800032a:	2b1f      	cmp	r3, #31
+ 800032c:	d9e3      	bls.n	80002f6 <main+0x2e>
+  {
+    arm_add_f32(&testOutput, &multOutput[i], &testOutput, 1);
+  }
+
+  /* absolute value of difference between ref and test */
+  diff = fabsf(refDotProdOut - testOutput);
+ 800032e:	f640 13a0 	movw	r3, #2464	; 0x9a0
+ 8000332:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000336:	ed93 7a00 	vldr	s14, [r3]
+ 800033a:	f640 038c 	movw	r3, #2188	; 0x88c
+ 800033e:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000342:	edd3 7a00 	vldr	s15, [r3]
+ 8000346:	ee77 7a67 	vsub.f32	s15, s14, s15
+ 800034a:	eef0 7ae7 	vabs.f32	s15, s15
+ 800034e:	edc7 7a00 	vstr	s15, [r7]
+
+  /* Comparison of dot product value with reference */
+  if(diff > DELTA)
+ 8000352:	ed97 7a00 	vldr	s14, [r7]
+ 8000356:	eddf 7a0c 	vldr	s15, [pc, #48]	; 8000388 <main+0xc0>
+ 800035a:	eeb4 7ae7 	vcmpe.f32	s14, s15
+ 800035e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 8000362:	dd06      	ble.n	8000372 <main+0xaa>
+  {
+    status = ARM_MATH_TEST_FAILURE;
+ 8000364:	f640 0390 	movw	r3, #2192	; 0x890
+ 8000368:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 800036c:	f04f 02fa 	mov.w	r2, #250	; 0xfa
+ 8000370:	701a      	strb	r2, [r3, #0]
+  }
+
+  if( status == ARM_MATH_TEST_FAILURE)
+ 8000372:	f640 0390 	movw	r3, #2192	; 0x890
+ 8000376:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 800037a:	781b      	ldrb	r3, [r3, #0]
+ 800037c:	b25b      	sxtb	r3, r3
+ 800037e:	f113 0f06 	cmn.w	r3, #6
+ 8000382:	d100      	bne.n	8000386 <main+0xbe>
+  {
+    while(1);
+ 8000384:	e7fe      	b.n	8000384 <main+0xbc>
+  }
+
+  while(1);                             /* main function does not return */
+ 8000386:	e7fe      	b.n	8000386 <main+0xbe>
+ 8000388:	358637bd 	.word	0x358637bd
+
+0800038c <NMI_Handler>:
+/* Default exception Handlers - Users may override this default functionality by
+   defining handlers of the same name in their C code */
+    .thumb
+    .text
+
+     Insert_ExceptionHandler NMI_Handler
+ 800038c:	e7fe      	b.n	800038c <NMI_Handler>
+
+0800038e <NMI_Handler_Veneer>:
+ 800038e:	f8df 0670 	ldr.w	r0, [pc, #1648]	; 8000a00 <AllowPLLInitByStartup+0x6>
+ 8000392:	b500      	push	{lr}
+ 8000394:	b081      	sub	sp, #4
+ 8000396:	4780      	blx	r0
+ 8000398:	b001      	add	sp, #4
+ 800039a:	bd00      	pop	{pc}
+
+0800039c <HardFault_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler HardFault_Handler
+ 800039c:	e7fe      	b.n	800039c <HardFault_Handler>
+
+0800039e <HardFault_Handler_Veneer>:
+ 800039e:	f8df 0664 	ldr.w	r0, [pc, #1636]	; 8000a04 <AllowPLLInitByStartup+0xa>
+ 80003a2:	b500      	push	{lr}
+ 80003a4:	b081      	sub	sp, #4
+ 80003a6:	4780      	blx	r0
+ 80003a8:	b001      	add	sp, #4
+ 80003aa:	bd00      	pop	{pc}
+
+080003ac <MemManage_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler MemManage_Handler
+ 80003ac:	e7fe      	b.n	80003ac <MemManage_Handler>
+
+080003ae <MemManage_Handler_Veneer>:
+ 80003ae:	f8df 0658 	ldr.w	r0, [pc, #1624]	; 8000a08 <AllowPLLInitByStartup+0xe>
+ 80003b2:	b500      	push	{lr}
+ 80003b4:	b081      	sub	sp, #4
+ 80003b6:	4780      	blx	r0
+ 80003b8:	b001      	add	sp, #4
+ 80003ba:	bd00      	pop	{pc}
+
+080003bc <BusFault_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler BusFault_Handler
+ 80003bc:	e7fe      	b.n	80003bc <BusFault_Handler>
+
+080003be <BusFault_Handler_Veneer>:
+ 80003be:	f8df 064c 	ldr.w	r0, [pc, #1612]	; 8000a0c <AllowPLLInitByStartup+0x12>
+ 80003c2:	b500      	push	{lr}
+ 80003c4:	b081      	sub	sp, #4
+ 80003c6:	4780      	blx	r0
+ 80003c8:	b001      	add	sp, #4
+ 80003ca:	bd00      	pop	{pc}
+
+080003cc <UsageFault_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler UsageFault_Handler
+ 80003cc:	e7fe      	b.n	80003cc <UsageFault_Handler>
+
+080003ce <UsageFault_Handler_Veneer>:
+ 80003ce:	f8df 0640 	ldr.w	r0, [pc, #1600]	; 8000a10 <AllowPLLInitByStartup+0x16>
+ 80003d2:	b500      	push	{lr}
+ 80003d4:	b081      	sub	sp, #4
+ 80003d6:	4780      	blx	r0
+ 80003d8:	b001      	add	sp, #4
+ 80003da:	bd00      	pop	{pc}
+
+080003dc <SVC_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler SVC_Handler
+ 80003dc:	e7fe      	b.n	80003dc <SVC_Handler>
+
+080003de <SVC_Handler_Veneer>:
+ 80003de:	f8df 0634 	ldr.w	r0, [pc, #1588]	; 8000a14 <AllowPLLInitByStartup+0x1a>
+ 80003e2:	b500      	push	{lr}
+ 80003e4:	b081      	sub	sp, #4
+ 80003e6:	4780      	blx	r0
+ 80003e8:	b001      	add	sp, #4
+ 80003ea:	bd00      	pop	{pc}
+
+080003ec <DebugMon_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DebugMon_Handler
+ 80003ec:	e7fe      	b.n	80003ec <DebugMon_Handler>
+
+080003ee <DebugMon_Handler_Veneer>:
+ 80003ee:	f8df 0628 	ldr.w	r0, [pc, #1576]	; 8000a18 <AllowPLLInitByStartup+0x1e>
+ 80003f2:	b500      	push	{lr}
+ 80003f4:	b081      	sub	sp, #4
+ 80003f6:	4780      	blx	r0
+ 80003f8:	b001      	add	sp, #4
+ 80003fa:	bd00      	pop	{pc}
+
+080003fc <PendSV_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler PendSV_Handler
+ 80003fc:	e7fe      	b.n	80003fc <PendSV_Handler>
+
+080003fe <PendSV_Handler_Veneer>:
+ 80003fe:	f8df 061c 	ldr.w	r0, [pc, #1564]	; 8000a1c <AllowPLLInitByStartup+0x22>
+ 8000402:	b500      	push	{lr}
+ 8000404:	b081      	sub	sp, #4
+ 8000406:	4780      	blx	r0
+ 8000408:	b001      	add	sp, #4
+ 800040a:	bd00      	pop	{pc}
+
+0800040c <SysTick_Handler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler SysTick_Handler
+ 800040c:	e7fe      	b.n	800040c <SysTick_Handler>
+
+0800040e <SysTick_Handler_Veneer>:
+ 800040e:	f8df 0610 	ldr.w	r0, [pc, #1552]	; 8000a20 <AllowPLLInitByStartup+0x26>
+ 8000412:	b500      	push	{lr}
+ 8000414:	b081      	sub	sp, #4
+ 8000416:	4780      	blx	r0
+ 8000418:	b001      	add	sp, #4
+ 800041a:	bd00      	pop	{pc}
+
+0800041c <SCU_0_IRQHandler>:
+/* ============= END OF EXCEPTION HANDLER DEFINITION ======================== */
+
+/* ============= START OF INTERRUPT HANDLER DEFINITION ====================== */
+
+/* IRQ Handlers */
+     Insert_ExceptionHandler SCU_0_IRQHandler
+ 800041c:	e7fe      	b.n	800041c <SCU_0_IRQHandler>
+
+0800041e <SCU_0_IRQHandler_Veneer>:
+ 800041e:	f8df 0604 	ldr.w	r0, [pc, #1540]	; 8000a24 <AllowPLLInitByStartup+0x2a>
+ 8000422:	b500      	push	{lr}
+ 8000424:	b081      	sub	sp, #4
+ 8000426:	4780      	blx	r0
+ 8000428:	b001      	add	sp, #4
+ 800042a:	bd00      	pop	{pc}
+
+0800042c <ERU0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_0_IRQHandler
+ 800042c:	e7fe      	b.n	800042c <ERU0_0_IRQHandler>
+
+0800042e <ERU0_0_IRQHandler_Veneer>:
+ 800042e:	f8df 05f8 	ldr.w	r0, [pc, #1528]	; 8000a28 <AllowPLLInitByStartup+0x2e>
+ 8000432:	b500      	push	{lr}
+ 8000434:	b081      	sub	sp, #4
+ 8000436:	4780      	blx	r0
+ 8000438:	b001      	add	sp, #4
+ 800043a:	bd00      	pop	{pc}
+
+0800043c <ERU0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_1_IRQHandler
+ 800043c:	e7fe      	b.n	800043c <ERU0_1_IRQHandler>
+
+0800043e <ERU0_1_IRQHandler_Veneer>:
+ 800043e:	f8df 05ec 	ldr.w	r0, [pc, #1516]	; 8000a2c <AllowPLLInitByStartup+0x32>
+ 8000442:	b500      	push	{lr}
+ 8000444:	b081      	sub	sp, #4
+ 8000446:	4780      	blx	r0
+ 8000448:	b001      	add	sp, #4
+ 800044a:	bd00      	pop	{pc}
+
+0800044c <ERU0_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_2_IRQHandler
+ 800044c:	e7fe      	b.n	800044c <ERU0_2_IRQHandler>
+
+0800044e <ERU0_2_IRQHandler_Veneer>:
+ 800044e:	f8df 05e0 	ldr.w	r0, [pc, #1504]	; 8000a30 <AllowPLLInitByStartup+0x36>
+ 8000452:	b500      	push	{lr}
+ 8000454:	b081      	sub	sp, #4
+ 8000456:	4780      	blx	r0
+ 8000458:	b001      	add	sp, #4
+ 800045a:	bd00      	pop	{pc}
+
+0800045c <ERU0_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_3_IRQHandler
+ 800045c:	e7fe      	b.n	800045c <ERU0_3_IRQHandler>
+
+0800045e <ERU0_3_IRQHandler_Veneer>:
+ 800045e:	f8df 05d4 	ldr.w	r0, [pc, #1492]	; 8000a34 <AllowPLLInitByStartup+0x3a>
+ 8000462:	b500      	push	{lr}
+ 8000464:	b081      	sub	sp, #4
+ 8000466:	4780      	blx	r0
+ 8000468:	b001      	add	sp, #4
+ 800046a:	bd00      	pop	{pc}
+
+0800046c <ERU1_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_0_IRQHandler
+ 800046c:	e7fe      	b.n	800046c <ERU1_0_IRQHandler>
+
+0800046e <ERU1_0_IRQHandler_Veneer>:
+ 800046e:	f8df 05c8 	ldr.w	r0, [pc, #1480]	; 8000a38 <AllowPLLInitByStartup+0x3e>
+ 8000472:	b500      	push	{lr}
+ 8000474:	b081      	sub	sp, #4
+ 8000476:	4780      	blx	r0
+ 8000478:	b001      	add	sp, #4
+ 800047a:	bd00      	pop	{pc}
+
+0800047c <ERU1_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_1_IRQHandler
+ 800047c:	e7fe      	b.n	800047c <ERU1_1_IRQHandler>
+
+0800047e <ERU1_1_IRQHandler_Veneer>:
+ 800047e:	f8df 05bc 	ldr.w	r0, [pc, #1468]	; 8000a3c <AllowPLLInitByStartup+0x42>
+ 8000482:	b500      	push	{lr}
+ 8000484:	b081      	sub	sp, #4
+ 8000486:	4780      	blx	r0
+ 8000488:	b001      	add	sp, #4
+ 800048a:	bd00      	pop	{pc}
+
+0800048c <ERU1_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_2_IRQHandler
+ 800048c:	e7fe      	b.n	800048c <ERU1_2_IRQHandler>
+
+0800048e <ERU1_2_IRQHandler_Veneer>:
+ 800048e:	f8df 05b0 	ldr.w	r0, [pc, #1456]	; 8000a40 <AllowPLLInitByStartup+0x46>
+ 8000492:	b500      	push	{lr}
+ 8000494:	b081      	sub	sp, #4
+ 8000496:	4780      	blx	r0
+ 8000498:	b001      	add	sp, #4
+ 800049a:	bd00      	pop	{pc}
+
+0800049c <ERU1_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_3_IRQHandler
+ 800049c:	e7fe      	b.n	800049c <ERU1_3_IRQHandler>
+
+0800049e <ERU1_3_IRQHandler_Veneer>:
+ 800049e:	f8df 05a4 	ldr.w	r0, [pc, #1444]	; 8000a44 <AllowPLLInitByStartup+0x4a>
+ 80004a2:	b500      	push	{lr}
+ 80004a4:	b081      	sub	sp, #4
+ 80004a6:	4780      	blx	r0
+ 80004a8:	b001      	add	sp, #4
+ 80004aa:	bd00      	pop	{pc}
+
+080004ac <PMU0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler PMU0_0_IRQHandler
+ 80004ac:	e7fe      	b.n	80004ac <PMU0_0_IRQHandler>
+
+080004ae <PMU0_0_IRQHandler_Veneer>:
+ 80004ae:	f8df 0598 	ldr.w	r0, [pc, #1432]	; 8000a48 <AllowPLLInitByStartup+0x4e>
+ 80004b2:	b500      	push	{lr}
+ 80004b4:	b081      	sub	sp, #4
+ 80004b6:	4780      	blx	r0
+ 80004b8:	b001      	add	sp, #4
+ 80004ba:	bd00      	pop	{pc}
+
+080004bc <VADC0_C0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_0_IRQHandler
+ 80004bc:	e7fe      	b.n	80004bc <VADC0_C0_0_IRQHandler>
+
+080004be <VADC0_C0_0_IRQHandler_Veneer>:
+ 80004be:	f8df 058c 	ldr.w	r0, [pc, #1420]	; 8000a4c <AllowPLLInitByStartup+0x52>
+ 80004c2:	b500      	push	{lr}
+ 80004c4:	b081      	sub	sp, #4
+ 80004c6:	4780      	blx	r0
+ 80004c8:	b001      	add	sp, #4
+ 80004ca:	bd00      	pop	{pc}
+
+080004cc <VADC0_C0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_1_IRQHandler
+ 80004cc:	e7fe      	b.n	80004cc <VADC0_C0_1_IRQHandler>
+
+080004ce <VADC0_C0_1_IRQHandler_Veneer>:
+ 80004ce:	f8df 0580 	ldr.w	r0, [pc, #1408]	; 8000a50 <AllowPLLInitByStartup+0x56>
+ 80004d2:	b500      	push	{lr}
+ 80004d4:	b081      	sub	sp, #4
+ 80004d6:	4780      	blx	r0
+ 80004d8:	b001      	add	sp, #4
+ 80004da:	bd00      	pop	{pc}
+
+080004dc <VADC0_C0_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_2_IRQHandler
+ 80004dc:	e7fe      	b.n	80004dc <VADC0_C0_2_IRQHandler>
+
+080004de <VADC0_C0_2_IRQHandler_Veneer>:
+ 80004de:	f8df 0574 	ldr.w	r0, [pc, #1396]	; 8000a54 <AllowPLLInitByStartup+0x5a>
+ 80004e2:	b500      	push	{lr}
+ 80004e4:	b081      	sub	sp, #4
+ 80004e6:	4780      	blx	r0
+ 80004e8:	b001      	add	sp, #4
+ 80004ea:	bd00      	pop	{pc}
+
+080004ec <VADC0_C0_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_3_IRQHandler
+ 80004ec:	e7fe      	b.n	80004ec <VADC0_C0_3_IRQHandler>
+
+080004ee <VADC0_C0_3_IRQHandler_Veneer>:
+ 80004ee:	f8df 0568 	ldr.w	r0, [pc, #1384]	; 8000a58 <AllowPLLInitByStartup+0x5e>
+ 80004f2:	b500      	push	{lr}
+ 80004f4:	b081      	sub	sp, #4
+ 80004f6:	4780      	blx	r0
+ 80004f8:	b001      	add	sp, #4
+ 80004fa:	bd00      	pop	{pc}
+
+080004fc <VADC0_G0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_0_IRQHandler
+ 80004fc:	e7fe      	b.n	80004fc <VADC0_G0_0_IRQHandler>
+
+080004fe <VADC0_G0_0_IRQHandler_Veneer>:
+ 80004fe:	f8df 055c 	ldr.w	r0, [pc, #1372]	; 8000a5c <AllowPLLInitByStartup+0x62>
+ 8000502:	b500      	push	{lr}
+ 8000504:	b081      	sub	sp, #4
+ 8000506:	4780      	blx	r0
+ 8000508:	b001      	add	sp, #4
+ 800050a:	bd00      	pop	{pc}
+
+0800050c <VADC0_G0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_1_IRQHandler
+ 800050c:	e7fe      	b.n	800050c <VADC0_G0_1_IRQHandler>
+
+0800050e <VADC0_G0_1_IRQHandler_Veneer>:
+ 800050e:	f8df 0550 	ldr.w	r0, [pc, #1360]	; 8000a60 <AllowPLLInitByStartup+0x66>
+ 8000512:	b500      	push	{lr}
+ 8000514:	b081      	sub	sp, #4
+ 8000516:	4780      	blx	r0
+ 8000518:	b001      	add	sp, #4
+ 800051a:	bd00      	pop	{pc}
+
+0800051c <VADC0_G0_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_2_IRQHandler
+ 800051c:	e7fe      	b.n	800051c <VADC0_G0_2_IRQHandler>
+
+0800051e <VADC0_G0_2_IRQHandler_Veneer>:
+ 800051e:	f8df 0544 	ldr.w	r0, [pc, #1348]	; 8000a64 <AllowPLLInitByStartup+0x6a>
+ 8000522:	b500      	push	{lr}
+ 8000524:	b081      	sub	sp, #4
+ 8000526:	4780      	blx	r0
+ 8000528:	b001      	add	sp, #4
+ 800052a:	bd00      	pop	{pc}
+
+0800052c <VADC0_G0_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_3_IRQHandler
+ 800052c:	e7fe      	b.n	800052c <VADC0_G0_3_IRQHandler>
+
+0800052e <VADC0_G0_3_IRQHandler_Veneer>:
+ 800052e:	f8df 0538 	ldr.w	r0, [pc, #1336]	; 8000a68 <AllowPLLInitByStartup+0x6e>
+ 8000532:	b500      	push	{lr}
+ 8000534:	b081      	sub	sp, #4
+ 8000536:	4780      	blx	r0
+ 8000538:	b001      	add	sp, #4
+ 800053a:	bd00      	pop	{pc}
+
+0800053c <VADC0_G1_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_0_IRQHandler
+ 800053c:	e7fe      	b.n	800053c <VADC0_G1_0_IRQHandler>
+
+0800053e <VADC0_G1_0_IRQHandler_Veneer>:
+ 800053e:	f8df 052c 	ldr.w	r0, [pc, #1324]	; 8000a6c <AllowPLLInitByStartup+0x72>
+ 8000542:	b500      	push	{lr}
+ 8000544:	b081      	sub	sp, #4
+ 8000546:	4780      	blx	r0
+ 8000548:	b001      	add	sp, #4
+ 800054a:	bd00      	pop	{pc}
+
+0800054c <VADC0_G1_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_1_IRQHandler
+ 800054c:	e7fe      	b.n	800054c <VADC0_G1_1_IRQHandler>
+
+0800054e <VADC0_G1_1_IRQHandler_Veneer>:
+ 800054e:	f8df 0520 	ldr.w	r0, [pc, #1312]	; 8000a70 <AllowPLLInitByStartup+0x76>
+ 8000552:	b500      	push	{lr}
+ 8000554:	b081      	sub	sp, #4
+ 8000556:	4780      	blx	r0
+ 8000558:	b001      	add	sp, #4
+ 800055a:	bd00      	pop	{pc}
+
+0800055c <VADC0_G1_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_2_IRQHandler
+ 800055c:	e7fe      	b.n	800055c <VADC0_G1_2_IRQHandler>
+
+0800055e <VADC0_G1_2_IRQHandler_Veneer>:
+ 800055e:	f8df 0514 	ldr.w	r0, [pc, #1300]	; 8000a74 <AllowPLLInitByStartup+0x7a>
+ 8000562:	b500      	push	{lr}
+ 8000564:	b081      	sub	sp, #4
+ 8000566:	4780      	blx	r0
+ 8000568:	b001      	add	sp, #4
+ 800056a:	bd00      	pop	{pc}
+
+0800056c <VADC0_G1_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_3_IRQHandler
+ 800056c:	e7fe      	b.n	800056c <VADC0_G1_3_IRQHandler>
+
+0800056e <VADC0_G1_3_IRQHandler_Veneer>:
+ 800056e:	f8df 0508 	ldr.w	r0, [pc, #1288]	; 8000a78 <AllowPLLInitByStartup+0x7e>
+ 8000572:	b500      	push	{lr}
+ 8000574:	b081      	sub	sp, #4
+ 8000576:	4780      	blx	r0
+ 8000578:	b001      	add	sp, #4
+ 800057a:	bd00      	pop	{pc}
+
+0800057c <VADC0_G2_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_0_IRQHandler
+ 800057c:	e7fe      	b.n	800057c <VADC0_G2_0_IRQHandler>
+
+0800057e <VADC0_G2_0_IRQHandler_Veneer>:
+ 800057e:	f8df 04fc 	ldr.w	r0, [pc, #1276]	; 8000a7c <AllowPLLInitByStartup+0x82>
+ 8000582:	b500      	push	{lr}
+ 8000584:	b081      	sub	sp, #4
+ 8000586:	4780      	blx	r0
+ 8000588:	b001      	add	sp, #4
+ 800058a:	bd00      	pop	{pc}
+
+0800058c <VADC0_G2_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_1_IRQHandler
+ 800058c:	e7fe      	b.n	800058c <VADC0_G2_1_IRQHandler>
+
+0800058e <VADC0_G2_1_IRQHandler_Veneer>:
+ 800058e:	f8df 04f0 	ldr.w	r0, [pc, #1264]	; 8000a80 <AllowPLLInitByStartup+0x86>
+ 8000592:	b500      	push	{lr}
+ 8000594:	b081      	sub	sp, #4
+ 8000596:	4780      	blx	r0
+ 8000598:	b001      	add	sp, #4
+ 800059a:	bd00      	pop	{pc}
+
+0800059c <VADC0_G2_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_2_IRQHandler
+ 800059c:	e7fe      	b.n	800059c <VADC0_G2_2_IRQHandler>
+
+0800059e <VADC0_G2_2_IRQHandler_Veneer>:
+ 800059e:	f8df 04e4 	ldr.w	r0, [pc, #1252]	; 8000a84 <AllowPLLInitByStartup+0x8a>
+ 80005a2:	b500      	push	{lr}
+ 80005a4:	b081      	sub	sp, #4
+ 80005a6:	4780      	blx	r0
+ 80005a8:	b001      	add	sp, #4
+ 80005aa:	bd00      	pop	{pc}
+
+080005ac <VADC0_G2_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_3_IRQHandler
+ 80005ac:	e7fe      	b.n	80005ac <VADC0_G2_3_IRQHandler>
+
+080005ae <VADC0_G2_3_IRQHandler_Veneer>:
+ 80005ae:	f8df 04d8 	ldr.w	r0, [pc, #1240]	; 8000a88 <AllowPLLInitByStartup+0x8e>
+ 80005b2:	b500      	push	{lr}
+ 80005b4:	b081      	sub	sp, #4
+ 80005b6:	4780      	blx	r0
+ 80005b8:	b001      	add	sp, #4
+ 80005ba:	bd00      	pop	{pc}
+
+080005bc <VADC0_G3_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_0_IRQHandler
+ 80005bc:	e7fe      	b.n	80005bc <VADC0_G3_0_IRQHandler>
+
+080005be <VADC0_G3_0_IRQHandler_Veneer>:
+ 80005be:	f8df 04cc 	ldr.w	r0, [pc, #1228]	; 8000a8c <AllowPLLInitByStartup+0x92>
+ 80005c2:	b500      	push	{lr}
+ 80005c4:	b081      	sub	sp, #4
+ 80005c6:	4780      	blx	r0
+ 80005c8:	b001      	add	sp, #4
+ 80005ca:	bd00      	pop	{pc}
+
+080005cc <VADC0_G3_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_1_IRQHandler
+ 80005cc:	e7fe      	b.n	80005cc <VADC0_G3_1_IRQHandler>
+
+080005ce <VADC0_G3_1_IRQHandler_Veneer>:
+ 80005ce:	f8df 04c0 	ldr.w	r0, [pc, #1216]	; 8000a90 <AllowPLLInitByStartup+0x96>
+ 80005d2:	b500      	push	{lr}
+ 80005d4:	b081      	sub	sp, #4
+ 80005d6:	4780      	blx	r0
+ 80005d8:	b001      	add	sp, #4
+ 80005da:	bd00      	pop	{pc}
+
+080005dc <VADC0_G3_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_2_IRQHandler
+ 80005dc:	e7fe      	b.n	80005dc <VADC0_G3_2_IRQHandler>
+
+080005de <VADC0_G3_2_IRQHandler_Veneer>:
+ 80005de:	f8df 04b4 	ldr.w	r0, [pc, #1204]	; 8000a94 <AllowPLLInitByStartup+0x9a>
+ 80005e2:	b500      	push	{lr}
+ 80005e4:	b081      	sub	sp, #4
+ 80005e6:	4780      	blx	r0
+ 80005e8:	b001      	add	sp, #4
+ 80005ea:	bd00      	pop	{pc}
+
+080005ec <VADC0_G3_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_3_IRQHandler
+ 80005ec:	e7fe      	b.n	80005ec <VADC0_G3_3_IRQHandler>
+
+080005ee <VADC0_G3_3_IRQHandler_Veneer>:
+ 80005ee:	f8df 04a8 	ldr.w	r0, [pc, #1192]	; 8000a98 <AllowPLLInitByStartup+0x9e>
+ 80005f2:	b500      	push	{lr}
+ 80005f4:	b081      	sub	sp, #4
+ 80005f6:	4780      	blx	r0
+ 80005f8:	b001      	add	sp, #4
+ 80005fa:	bd00      	pop	{pc}
+
+080005fc <DSD0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_0_IRQHandler
+ 80005fc:	e7fe      	b.n	80005fc <DSD0_0_IRQHandler>
+
+080005fe <DSD0_0_IRQHandler_Veneer>:
+ 80005fe:	f8df 049c 	ldr.w	r0, [pc, #1180]	; 8000a9c <AllowPLLInitByStartup+0xa2>
+ 8000602:	b500      	push	{lr}
+ 8000604:	b081      	sub	sp, #4
+ 8000606:	4780      	blx	r0
+ 8000608:	b001      	add	sp, #4
+ 800060a:	bd00      	pop	{pc}
+
+0800060c <DSD0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_1_IRQHandler
+ 800060c:	e7fe      	b.n	800060c <DSD0_1_IRQHandler>
+
+0800060e <DSD0_1_IRQHandler_Veneer>:
+ 800060e:	f8df 0490 	ldr.w	r0, [pc, #1168]	; 8000aa0 <AllowPLLInitByStartup+0xa6>
+ 8000612:	b500      	push	{lr}
+ 8000614:	b081      	sub	sp, #4
+ 8000616:	4780      	blx	r0
+ 8000618:	b001      	add	sp, #4
+ 800061a:	bd00      	pop	{pc}
+
+0800061c <DSD0_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_2_IRQHandler
+ 800061c:	e7fe      	b.n	800061c <DSD0_2_IRQHandler>
+
+0800061e <DSD0_2_IRQHandler_Veneer>:
+ 800061e:	f8df 0484 	ldr.w	r0, [pc, #1156]	; 8000aa4 <AllowPLLInitByStartup+0xaa>
+ 8000622:	b500      	push	{lr}
+ 8000624:	b081      	sub	sp, #4
+ 8000626:	4780      	blx	r0
+ 8000628:	b001      	add	sp, #4
+ 800062a:	bd00      	pop	{pc}
+
+0800062c <DSD0_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_3_IRQHandler
+ 800062c:	e7fe      	b.n	800062c <DSD0_3_IRQHandler>
+
+0800062e <DSD0_3_IRQHandler_Veneer>:
+ 800062e:	f8df 0478 	ldr.w	r0, [pc, #1144]	; 8000aa8 <AllowPLLInitByStartup+0xae>
+ 8000632:	b500      	push	{lr}
+ 8000634:	b081      	sub	sp, #4
+ 8000636:	4780      	blx	r0
+ 8000638:	b001      	add	sp, #4
+ 800063a:	bd00      	pop	{pc}
+
+0800063c <DSD0_4_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_4_IRQHandler
+ 800063c:	e7fe      	b.n	800063c <DSD0_4_IRQHandler>
+
+0800063e <DSD0_4_IRQHandler_Veneer>:
+ 800063e:	f8df 046c 	ldr.w	r0, [pc, #1132]	; 8000aac <AllowPLLInitByStartup+0xb2>
+ 8000642:	b500      	push	{lr}
+ 8000644:	b081      	sub	sp, #4
+ 8000646:	4780      	blx	r0
+ 8000648:	b001      	add	sp, #4
+ 800064a:	bd00      	pop	{pc}
+
+0800064c <DSD0_5_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_5_IRQHandler
+ 800064c:	e7fe      	b.n	800064c <DSD0_5_IRQHandler>
+
+0800064e <DSD0_5_IRQHandler_Veneer>:
+ 800064e:	f8df 0460 	ldr.w	r0, [pc, #1120]	; 8000ab0 <AllowPLLInitByStartup+0xb6>
+ 8000652:	b500      	push	{lr}
+ 8000654:	b081      	sub	sp, #4
+ 8000656:	4780      	blx	r0
+ 8000658:	b001      	add	sp, #4
+ 800065a:	bd00      	pop	{pc}
+
+0800065c <DSD0_6_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_6_IRQHandler
+ 800065c:	e7fe      	b.n	800065c <DSD0_6_IRQHandler>
+
+0800065e <DSD0_6_IRQHandler_Veneer>:
+ 800065e:	f8df 0454 	ldr.w	r0, [pc, #1108]	; 8000ab4 <AllowPLLInitByStartup+0xba>
+ 8000662:	b500      	push	{lr}
+ 8000664:	b081      	sub	sp, #4
+ 8000666:	4780      	blx	r0
+ 8000668:	b001      	add	sp, #4
+ 800066a:	bd00      	pop	{pc}
+
+0800066c <DSD0_7_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_7_IRQHandler
+ 800066c:	e7fe      	b.n	800066c <DSD0_7_IRQHandler>
+
+0800066e <DSD0_7_IRQHandler_Veneer>:
+ 800066e:	f8df 0448 	ldr.w	r0, [pc, #1096]	; 8000ab8 <AllowPLLInitByStartup+0xbe>
+ 8000672:	b500      	push	{lr}
+ 8000674:	b081      	sub	sp, #4
+ 8000676:	4780      	blx	r0
+ 8000678:	b001      	add	sp, #4
+ 800067a:	bd00      	pop	{pc}
+
+0800067c <DAC0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DAC0_0_IRQHandler
+ 800067c:	e7fe      	b.n	800067c <DAC0_0_IRQHandler>
+
+0800067e <DAC0_0_IRQHandler_Veneer>:
+ 800067e:	f8df 043c 	ldr.w	r0, [pc, #1084]	; 8000abc <AllowPLLInitByStartup+0xc2>
+ 8000682:	b500      	push	{lr}
+ 8000684:	b081      	sub	sp, #4
+ 8000686:	4780      	blx	r0
+ 8000688:	b001      	add	sp, #4
+ 800068a:	bd00      	pop	{pc}
+
+0800068c <DAC0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler DAC0_1_IRQHandler
+ 800068c:	e7fe      	b.n	800068c <DAC0_1_IRQHandler>
+
+0800068e <DAC0_1_IRQHandler_Veneer>:
+ 800068e:	f8df 0430 	ldr.w	r0, [pc, #1072]	; 8000ac0 <AllowPLLInitByStartup+0xc6>
+ 8000692:	b500      	push	{lr}
+ 8000694:	b081      	sub	sp, #4
+ 8000696:	4780      	blx	r0
+ 8000698:	b001      	add	sp, #4
+ 800069a:	bd00      	pop	{pc}
+
+0800069c <CCU40_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_0_IRQHandler
+ 800069c:	e7fe      	b.n	800069c <CCU40_0_IRQHandler>
+
+0800069e <CCU40_0_IRQHandler_Veneer>:
+ 800069e:	f8df 0424 	ldr.w	r0, [pc, #1060]	; 8000ac4 <AllowPLLInitByStartup+0xca>
+ 80006a2:	b500      	push	{lr}
+ 80006a4:	b081      	sub	sp, #4
+ 80006a6:	4780      	blx	r0
+ 80006a8:	b001      	add	sp, #4
+ 80006aa:	bd00      	pop	{pc}
+
+080006ac <CCU40_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_1_IRQHandler
+ 80006ac:	e7fe      	b.n	80006ac <CCU40_1_IRQHandler>
+
+080006ae <CCU40_1_IRQHandler_Veneer>:
+ 80006ae:	f8df 0418 	ldr.w	r0, [pc, #1048]	; 8000ac8 <AllowPLLInitByStartup+0xce>
+ 80006b2:	b500      	push	{lr}
+ 80006b4:	b081      	sub	sp, #4
+ 80006b6:	4780      	blx	r0
+ 80006b8:	b001      	add	sp, #4
+ 80006ba:	bd00      	pop	{pc}
+
+080006bc <CCU40_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_2_IRQHandler
+ 80006bc:	e7fe      	b.n	80006bc <CCU40_2_IRQHandler>
+
+080006be <CCU40_2_IRQHandler_Veneer>:
+ 80006be:	f8df 040c 	ldr.w	r0, [pc, #1036]	; 8000acc <AllowPLLInitByStartup+0xd2>
+ 80006c2:	b500      	push	{lr}
+ 80006c4:	b081      	sub	sp, #4
+ 80006c6:	4780      	blx	r0
+ 80006c8:	b001      	add	sp, #4
+ 80006ca:	bd00      	pop	{pc}
+
+080006cc <CCU40_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_3_IRQHandler
+ 80006cc:	e7fe      	b.n	80006cc <CCU40_3_IRQHandler>
+
+080006ce <CCU40_3_IRQHandler_Veneer>:
+ 80006ce:	f8df 0400 	ldr.w	r0, [pc, #1024]	; 8000ad0 <AllowPLLInitByStartup+0xd6>
+ 80006d2:	b500      	push	{lr}
+ 80006d4:	b081      	sub	sp, #4
+ 80006d6:	4780      	blx	r0
+ 80006d8:	b001      	add	sp, #4
+ 80006da:	bd00      	pop	{pc}
+
+080006dc <CCU41_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_0_IRQHandler
+ 80006dc:	e7fe      	b.n	80006dc <CCU41_0_IRQHandler>
+
+080006de <CCU41_0_IRQHandler_Veneer>:
+ 80006de:	48fd      	ldr	r0, [pc, #1012]	; (8000ad4 <AllowPLLInitByStartup+0xda>)
+ 80006e0:	b500      	push	{lr}
+ 80006e2:	b081      	sub	sp, #4
+ 80006e4:	4780      	blx	r0
+ 80006e6:	b001      	add	sp, #4
+ 80006e8:	bd00      	pop	{pc}
+
+080006ea <CCU41_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_1_IRQHandler
+ 80006ea:	e7fe      	b.n	80006ea <CCU41_1_IRQHandler>
+
+080006ec <CCU41_1_IRQHandler_Veneer>:
+ 80006ec:	48fa      	ldr	r0, [pc, #1000]	; (8000ad8 <AllowPLLInitByStartup+0xde>)
+ 80006ee:	b500      	push	{lr}
+ 80006f0:	b081      	sub	sp, #4
+ 80006f2:	4780      	blx	r0
+ 80006f4:	b001      	add	sp, #4
+ 80006f6:	bd00      	pop	{pc}
+
+080006f8 <CCU41_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_2_IRQHandler
+ 80006f8:	e7fe      	b.n	80006f8 <CCU41_2_IRQHandler>
+
+080006fa <CCU41_2_IRQHandler_Veneer>:
+ 80006fa:	48f8      	ldr	r0, [pc, #992]	; (8000adc <AllowPLLInitByStartup+0xe2>)
+ 80006fc:	b500      	push	{lr}
+ 80006fe:	b081      	sub	sp, #4
+ 8000700:	4780      	blx	r0
+ 8000702:	b001      	add	sp, #4
+ 8000704:	bd00      	pop	{pc}
+
+08000706 <CCU41_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_3_IRQHandler
+ 8000706:	e7fe      	b.n	8000706 <CCU41_3_IRQHandler>
+
+08000708 <CCU41_3_IRQHandler_Veneer>:
+ 8000708:	48f5      	ldr	r0, [pc, #980]	; (8000ae0 <AllowPLLInitByStartup+0xe6>)
+ 800070a:	b500      	push	{lr}
+ 800070c:	b081      	sub	sp, #4
+ 800070e:	4780      	blx	r0
+ 8000710:	b001      	add	sp, #4
+ 8000712:	bd00      	pop	{pc}
+
+08000714 <CCU42_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_0_IRQHandler
+ 8000714:	e7fe      	b.n	8000714 <CCU42_0_IRQHandler>
+
+08000716 <CCU42_0_IRQHandler_Veneer>:
+ 8000716:	48f3      	ldr	r0, [pc, #972]	; (8000ae4 <AllowPLLInitByStartup+0xea>)
+ 8000718:	b500      	push	{lr}
+ 800071a:	b081      	sub	sp, #4
+ 800071c:	4780      	blx	r0
+ 800071e:	b001      	add	sp, #4
+ 8000720:	bd00      	pop	{pc}
+
+08000722 <CCU42_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_1_IRQHandler
+ 8000722:	e7fe      	b.n	8000722 <CCU42_1_IRQHandler>
+
+08000724 <CCU42_1_IRQHandler_Veneer>:
+ 8000724:	48f0      	ldr	r0, [pc, #960]	; (8000ae8 <AllowPLLInitByStartup+0xee>)
+ 8000726:	b500      	push	{lr}
+ 8000728:	b081      	sub	sp, #4
+ 800072a:	4780      	blx	r0
+ 800072c:	b001      	add	sp, #4
+ 800072e:	bd00      	pop	{pc}
+
+08000730 <CCU42_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_2_IRQHandler
+ 8000730:	e7fe      	b.n	8000730 <CCU42_2_IRQHandler>
+
+08000732 <CCU42_2_IRQHandler_Veneer>:
+ 8000732:	48ee      	ldr	r0, [pc, #952]	; (8000aec <AllowPLLInitByStartup+0xf2>)
+ 8000734:	b500      	push	{lr}
+ 8000736:	b081      	sub	sp, #4
+ 8000738:	4780      	blx	r0
+ 800073a:	b001      	add	sp, #4
+ 800073c:	bd00      	pop	{pc}
+
+0800073e <CCU42_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_3_IRQHandler
+ 800073e:	e7fe      	b.n	800073e <CCU42_3_IRQHandler>
+
+08000740 <CCU42_3_IRQHandler_Veneer>:
+ 8000740:	48eb      	ldr	r0, [pc, #940]	; (8000af0 <AllowPLLInitByStartup+0xf6>)
+ 8000742:	b500      	push	{lr}
+ 8000744:	b081      	sub	sp, #4
+ 8000746:	4780      	blx	r0
+ 8000748:	b001      	add	sp, #4
+ 800074a:	bd00      	pop	{pc}
+
+0800074c <CCU43_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_0_IRQHandler
+ 800074c:	e7fe      	b.n	800074c <CCU43_0_IRQHandler>
+
+0800074e <CCU43_0_IRQHandler_Veneer>:
+ 800074e:	48e9      	ldr	r0, [pc, #932]	; (8000af4 <AllowPLLInitByStartup+0xfa>)
+ 8000750:	b500      	push	{lr}
+ 8000752:	b081      	sub	sp, #4
+ 8000754:	4780      	blx	r0
+ 8000756:	b001      	add	sp, #4
+ 8000758:	bd00      	pop	{pc}
+
+0800075a <CCU43_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_1_IRQHandler
+ 800075a:	e7fe      	b.n	800075a <CCU43_1_IRQHandler>
+
+0800075c <CCU43_1_IRQHandler_Veneer>:
+ 800075c:	48e6      	ldr	r0, [pc, #920]	; (8000af8 <AllowPLLInitByStartup+0xfe>)
+ 800075e:	b500      	push	{lr}
+ 8000760:	b081      	sub	sp, #4
+ 8000762:	4780      	blx	r0
+ 8000764:	b001      	add	sp, #4
+ 8000766:	bd00      	pop	{pc}
+
+08000768 <CCU43_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_2_IRQHandler
+ 8000768:	e7fe      	b.n	8000768 <CCU43_2_IRQHandler>
+
+0800076a <CCU43_2_IRQHandler_Veneer>:
+ 800076a:	48e4      	ldr	r0, [pc, #912]	; (8000afc <AllowPLLInitByStartup+0x102>)
+ 800076c:	b500      	push	{lr}
+ 800076e:	b081      	sub	sp, #4
+ 8000770:	4780      	blx	r0
+ 8000772:	b001      	add	sp, #4
+ 8000774:	bd00      	pop	{pc}
+
+08000776 <CCU43_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_3_IRQHandler
+ 8000776:	e7fe      	b.n	8000776 <CCU43_3_IRQHandler>
+
+08000778 <CCU43_3_IRQHandler_Veneer>:
+ 8000778:	48e1      	ldr	r0, [pc, #900]	; (8000b00 <AllowPLLInitByStartup+0x106>)
+ 800077a:	b500      	push	{lr}
+ 800077c:	b081      	sub	sp, #4
+ 800077e:	4780      	blx	r0
+ 8000780:	b001      	add	sp, #4
+ 8000782:	bd00      	pop	{pc}
+
+08000784 <CCU80_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_0_IRQHandler
+ 8000784:	e7fe      	b.n	8000784 <CCU80_0_IRQHandler>
+
+08000786 <CCU80_0_IRQHandler_Veneer>:
+ 8000786:	48df      	ldr	r0, [pc, #892]	; (8000b04 <AllowPLLInitByStartup+0x10a>)
+ 8000788:	b500      	push	{lr}
+ 800078a:	b081      	sub	sp, #4
+ 800078c:	4780      	blx	r0
+ 800078e:	b001      	add	sp, #4
+ 8000790:	bd00      	pop	{pc}
+
+08000792 <CCU80_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_1_IRQHandler
+ 8000792:	e7fe      	b.n	8000792 <CCU80_1_IRQHandler>
+
+08000794 <CCU80_1_IRQHandler_Veneer>:
+ 8000794:	48dc      	ldr	r0, [pc, #880]	; (8000b08 <AllowPLLInitByStartup+0x10e>)
+ 8000796:	b500      	push	{lr}
+ 8000798:	b081      	sub	sp, #4
+ 800079a:	4780      	blx	r0
+ 800079c:	b001      	add	sp, #4
+ 800079e:	bd00      	pop	{pc}
+
+080007a0 <CCU80_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_2_IRQHandler
+ 80007a0:	e7fe      	b.n	80007a0 <CCU80_2_IRQHandler>
+
+080007a2 <CCU80_2_IRQHandler_Veneer>:
+ 80007a2:	48da      	ldr	r0, [pc, #872]	; (8000b0c <AllowPLLInitByStartup+0x112>)
+ 80007a4:	b500      	push	{lr}
+ 80007a6:	b081      	sub	sp, #4
+ 80007a8:	4780      	blx	r0
+ 80007aa:	b001      	add	sp, #4
+ 80007ac:	bd00      	pop	{pc}
+
+080007ae <CCU80_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_3_IRQHandler
+ 80007ae:	e7fe      	b.n	80007ae <CCU80_3_IRQHandler>
+
+080007b0 <CCU80_3_IRQHandler_Veneer>:
+ 80007b0:	48d7      	ldr	r0, [pc, #860]	; (8000b10 <AllowPLLInitByStartup+0x116>)
+ 80007b2:	b500      	push	{lr}
+ 80007b4:	b081      	sub	sp, #4
+ 80007b6:	4780      	blx	r0
+ 80007b8:	b001      	add	sp, #4
+ 80007ba:	bd00      	pop	{pc}
+
+080007bc <CCU81_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_0_IRQHandler
+ 80007bc:	e7fe      	b.n	80007bc <CCU81_0_IRQHandler>
+
+080007be <CCU81_0_IRQHandler_Veneer>:
+ 80007be:	48d5      	ldr	r0, [pc, #852]	; (8000b14 <AllowPLLInitByStartup+0x11a>)
+ 80007c0:	b500      	push	{lr}
+ 80007c2:	b081      	sub	sp, #4
+ 80007c4:	4780      	blx	r0
+ 80007c6:	b001      	add	sp, #4
+ 80007c8:	bd00      	pop	{pc}
+
+080007ca <CCU81_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_1_IRQHandler
+ 80007ca:	e7fe      	b.n	80007ca <CCU81_1_IRQHandler>
+
+080007cc <CCU81_1_IRQHandler_Veneer>:
+ 80007cc:	48d2      	ldr	r0, [pc, #840]	; (8000b18 <AllowPLLInitByStartup+0x11e>)
+ 80007ce:	b500      	push	{lr}
+ 80007d0:	b081      	sub	sp, #4
+ 80007d2:	4780      	blx	r0
+ 80007d4:	b001      	add	sp, #4
+ 80007d6:	bd00      	pop	{pc}
+
+080007d8 <CCU81_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_2_IRQHandler
+ 80007d8:	e7fe      	b.n	80007d8 <CCU81_2_IRQHandler>
+
+080007da <CCU81_2_IRQHandler_Veneer>:
+ 80007da:	48d0      	ldr	r0, [pc, #832]	; (8000b1c <AllowPLLInitByStartup+0x122>)
+ 80007dc:	b500      	push	{lr}
+ 80007de:	b081      	sub	sp, #4
+ 80007e0:	4780      	blx	r0
+ 80007e2:	b001      	add	sp, #4
+ 80007e4:	bd00      	pop	{pc}
+
+080007e6 <CCU81_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_3_IRQHandler
+ 80007e6:	e7fe      	b.n	80007e6 <CCU81_3_IRQHandler>
+
+080007e8 <CCU81_3_IRQHandler_Veneer>:
+ 80007e8:	48cd      	ldr	r0, [pc, #820]	; (8000b20 <AllowPLLInitByStartup+0x126>)
+ 80007ea:	b500      	push	{lr}
+ 80007ec:	b081      	sub	sp, #4
+ 80007ee:	4780      	blx	r0
+ 80007f0:	b001      	add	sp, #4
+ 80007f2:	bd00      	pop	{pc}
+
+080007f4 <POSIF0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF0_0_IRQHandler
+ 80007f4:	e7fe      	b.n	80007f4 <POSIF0_0_IRQHandler>
+
+080007f6 <POSIF0_0_IRQHandler_Veneer>:
+ 80007f6:	48cb      	ldr	r0, [pc, #812]	; (8000b24 <AllowPLLInitByStartup+0x12a>)
+ 80007f8:	b500      	push	{lr}
+ 80007fa:	b081      	sub	sp, #4
+ 80007fc:	4780      	blx	r0
+ 80007fe:	b001      	add	sp, #4
+ 8000800:	bd00      	pop	{pc}
+
+08000802 <POSIF0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF0_1_IRQHandler
+ 8000802:	e7fe      	b.n	8000802 <POSIF0_1_IRQHandler>
+
+08000804 <POSIF0_1_IRQHandler_Veneer>:
+ 8000804:	48c8      	ldr	r0, [pc, #800]	; (8000b28 <AllowPLLInitByStartup+0x12e>)
+ 8000806:	b500      	push	{lr}
+ 8000808:	b081      	sub	sp, #4
+ 800080a:	4780      	blx	r0
+ 800080c:	b001      	add	sp, #4
+ 800080e:	bd00      	pop	{pc}
+
+08000810 <POSIF1_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF1_0_IRQHandler
+ 8000810:	e7fe      	b.n	8000810 <POSIF1_0_IRQHandler>
+
+08000812 <POSIF1_0_IRQHandler_Veneer>:
+ 8000812:	48c6      	ldr	r0, [pc, #792]	; (8000b2c <AllowPLLInitByStartup+0x132>)
+ 8000814:	b500      	push	{lr}
+ 8000816:	b081      	sub	sp, #4
+ 8000818:	4780      	blx	r0
+ 800081a:	b001      	add	sp, #4
+ 800081c:	bd00      	pop	{pc}
+
+0800081e <POSIF1_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF1_1_IRQHandler
+ 800081e:	e7fe      	b.n	800081e <POSIF1_1_IRQHandler>
+
+08000820 <POSIF1_1_IRQHandler_Veneer>:
+ 8000820:	48c3      	ldr	r0, [pc, #780]	; (8000b30 <AllowPLLInitByStartup+0x136>)
+ 8000822:	b500      	push	{lr}
+ 8000824:	b081      	sub	sp, #4
+ 8000826:	4780      	blx	r0
+ 8000828:	b001      	add	sp, #4
+ 800082a:	bd00      	pop	{pc}
+
+0800082c <CAN0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_0_IRQHandler
+ 800082c:	e7fe      	b.n	800082c <CAN0_0_IRQHandler>
+
+0800082e <CAN0_0_IRQHandler_Veneer>:
+ 800082e:	48c1      	ldr	r0, [pc, #772]	; (8000b34 <AllowPLLInitByStartup+0x13a>)
+ 8000830:	b500      	push	{lr}
+ 8000832:	b081      	sub	sp, #4
+ 8000834:	4780      	blx	r0
+ 8000836:	b001      	add	sp, #4
+ 8000838:	bd00      	pop	{pc}
+
+0800083a <CAN0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_1_IRQHandler
+ 800083a:	e7fe      	b.n	800083a <CAN0_1_IRQHandler>
+
+0800083c <CAN0_1_IRQHandler_Veneer>:
+ 800083c:	48be      	ldr	r0, [pc, #760]	; (8000b38 <AllowPLLInitByStartup+0x13e>)
+ 800083e:	b500      	push	{lr}
+ 8000840:	b081      	sub	sp, #4
+ 8000842:	4780      	blx	r0
+ 8000844:	b001      	add	sp, #4
+ 8000846:	bd00      	pop	{pc}
+
+08000848 <CAN0_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_2_IRQHandler
+ 8000848:	e7fe      	b.n	8000848 <CAN0_2_IRQHandler>
+
+0800084a <CAN0_2_IRQHandler_Veneer>:
+ 800084a:	48bc      	ldr	r0, [pc, #752]	; (8000b3c <AllowPLLInitByStartup+0x142>)
+ 800084c:	b500      	push	{lr}
+ 800084e:	b081      	sub	sp, #4
+ 8000850:	4780      	blx	r0
+ 8000852:	b001      	add	sp, #4
+ 8000854:	bd00      	pop	{pc}
+
+08000856 <CAN0_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_3_IRQHandler
+ 8000856:	e7fe      	b.n	8000856 <CAN0_3_IRQHandler>
+
+08000858 <CAN0_3_IRQHandler_Veneer>:
+ 8000858:	48b9      	ldr	r0, [pc, #740]	; (8000b40 <AllowPLLInitByStartup+0x146>)
+ 800085a:	b500      	push	{lr}
+ 800085c:	b081      	sub	sp, #4
+ 800085e:	4780      	blx	r0
+ 8000860:	b001      	add	sp, #4
+ 8000862:	bd00      	pop	{pc}
+
+08000864 <CAN0_4_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_4_IRQHandler
+ 8000864:	e7fe      	b.n	8000864 <CAN0_4_IRQHandler>
+
+08000866 <CAN0_4_IRQHandler_Veneer>:
+ 8000866:	48b7      	ldr	r0, [pc, #732]	; (8000b44 <AllowPLLInitByStartup+0x14a>)
+ 8000868:	b500      	push	{lr}
+ 800086a:	b081      	sub	sp, #4
+ 800086c:	4780      	blx	r0
+ 800086e:	b001      	add	sp, #4
+ 8000870:	bd00      	pop	{pc}
+
+08000872 <CAN0_5_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_5_IRQHandler
+ 8000872:	e7fe      	b.n	8000872 <CAN0_5_IRQHandler>
+
+08000874 <CAN0_5_IRQHandler_Veneer>:
+ 8000874:	48b4      	ldr	r0, [pc, #720]	; (8000b48 <AllowPLLInitByStartup+0x14e>)
+ 8000876:	b500      	push	{lr}
+ 8000878:	b081      	sub	sp, #4
+ 800087a:	4780      	blx	r0
+ 800087c:	b001      	add	sp, #4
+ 800087e:	bd00      	pop	{pc}
+
+08000880 <CAN0_6_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_6_IRQHandler
+ 8000880:	e7fe      	b.n	8000880 <CAN0_6_IRQHandler>
+
+08000882 <CAN0_6_IRQHandler_Veneer>:
+ 8000882:	48b2      	ldr	r0, [pc, #712]	; (8000b4c <AllowPLLInitByStartup+0x152>)
+ 8000884:	b500      	push	{lr}
+ 8000886:	b081      	sub	sp, #4
+ 8000888:	4780      	blx	r0
+ 800088a:	b001      	add	sp, #4
+ 800088c:	bd00      	pop	{pc}
+
+0800088e <CAN0_7_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_7_IRQHandler
+ 800088e:	e7fe      	b.n	800088e <CAN0_7_IRQHandler>
+
+08000890 <CAN0_7_IRQHandler_Veneer>:
+ 8000890:	48af      	ldr	r0, [pc, #700]	; (8000b50 <AllowPLLInitByStartup+0x156>)
+ 8000892:	b500      	push	{lr}
+ 8000894:	b081      	sub	sp, #4
+ 8000896:	4780      	blx	r0
+ 8000898:	b001      	add	sp, #4
+ 800089a:	bd00      	pop	{pc}
+
+0800089c <USIC0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_0_IRQHandler
+ 800089c:	e7fe      	b.n	800089c <USIC0_0_IRQHandler>
+
+0800089e <USIC0_0_IRQHandler_Veneer>:
+ 800089e:	48ad      	ldr	r0, [pc, #692]	; (8000b54 <AllowPLLInitByStartup+0x15a>)
+ 80008a0:	b500      	push	{lr}
+ 80008a2:	b081      	sub	sp, #4
+ 80008a4:	4780      	blx	r0
+ 80008a6:	b001      	add	sp, #4
+ 80008a8:	bd00      	pop	{pc}
+
+080008aa <USIC0_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_1_IRQHandler
+ 80008aa:	e7fe      	b.n	80008aa <USIC0_1_IRQHandler>
+
+080008ac <USIC0_1_IRQHandler_Veneer>:
+ 80008ac:	48aa      	ldr	r0, [pc, #680]	; (8000b58 <AllowPLLInitByStartup+0x15e>)
+ 80008ae:	b500      	push	{lr}
+ 80008b0:	b081      	sub	sp, #4
+ 80008b2:	4780      	blx	r0
+ 80008b4:	b001      	add	sp, #4
+ 80008b6:	bd00      	pop	{pc}
+
+080008b8 <USIC0_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_2_IRQHandler
+ 80008b8:	e7fe      	b.n	80008b8 <USIC0_2_IRQHandler>
+
+080008ba <USIC0_2_IRQHandler_Veneer>:
+ 80008ba:	48a8      	ldr	r0, [pc, #672]	; (8000b5c <AllowPLLInitByStartup+0x162>)
+ 80008bc:	b500      	push	{lr}
+ 80008be:	b081      	sub	sp, #4
+ 80008c0:	4780      	blx	r0
+ 80008c2:	b001      	add	sp, #4
+ 80008c4:	bd00      	pop	{pc}
+
+080008c6 <USIC0_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_3_IRQHandler
+ 80008c6:	e7fe      	b.n	80008c6 <USIC0_3_IRQHandler>
+
+080008c8 <USIC0_3_IRQHandler_Veneer>:
+ 80008c8:	48a5      	ldr	r0, [pc, #660]	; (8000b60 <AllowPLLInitByStartup+0x166>)
+ 80008ca:	b500      	push	{lr}
+ 80008cc:	b081      	sub	sp, #4
+ 80008ce:	4780      	blx	r0
+ 80008d0:	b001      	add	sp, #4
+ 80008d2:	bd00      	pop	{pc}
+
+080008d4 <USIC0_4_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_4_IRQHandler
+ 80008d4:	e7fe      	b.n	80008d4 <USIC0_4_IRQHandler>
+
+080008d6 <USIC0_4_IRQHandler_Veneer>:
+ 80008d6:	48a3      	ldr	r0, [pc, #652]	; (8000b64 <AllowPLLInitByStartup+0x16a>)
+ 80008d8:	b500      	push	{lr}
+ 80008da:	b081      	sub	sp, #4
+ 80008dc:	4780      	blx	r0
+ 80008de:	b001      	add	sp, #4
+ 80008e0:	bd00      	pop	{pc}
+
+080008e2 <USIC0_5_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_5_IRQHandler
+ 80008e2:	e7fe      	b.n	80008e2 <USIC0_5_IRQHandler>
+
+080008e4 <USIC0_5_IRQHandler_Veneer>:
+ 80008e4:	48a0      	ldr	r0, [pc, #640]	; (8000b68 <AllowPLLInitByStartup+0x16e>)
+ 80008e6:	b500      	push	{lr}
+ 80008e8:	b081      	sub	sp, #4
+ 80008ea:	4780      	blx	r0
+ 80008ec:	b001      	add	sp, #4
+ 80008ee:	bd00      	pop	{pc}
+
+080008f0 <USIC1_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_0_IRQHandler
+ 80008f0:	e7fe      	b.n	80008f0 <USIC1_0_IRQHandler>
+
+080008f2 <USIC1_0_IRQHandler_Veneer>:
+ 80008f2:	489e      	ldr	r0, [pc, #632]	; (8000b6c <AllowPLLInitByStartup+0x172>)
+ 80008f4:	b500      	push	{lr}
+ 80008f6:	b081      	sub	sp, #4
+ 80008f8:	4780      	blx	r0
+ 80008fa:	b001      	add	sp, #4
+ 80008fc:	bd00      	pop	{pc}
+
+080008fe <USIC1_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_1_IRQHandler
+ 80008fe:	e7fe      	b.n	80008fe <USIC1_1_IRQHandler>
+
+08000900 <USIC1_1_IRQHandler_Veneer>:
+ 8000900:	489b      	ldr	r0, [pc, #620]	; (8000b70 <AllowPLLInitByStartup+0x176>)
+ 8000902:	b500      	push	{lr}
+ 8000904:	b081      	sub	sp, #4
+ 8000906:	4780      	blx	r0
+ 8000908:	b001      	add	sp, #4
+ 800090a:	bd00      	pop	{pc}
+
+0800090c <USIC1_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_2_IRQHandler
+ 800090c:	e7fe      	b.n	800090c <USIC1_2_IRQHandler>
+
+0800090e <USIC1_2_IRQHandler_Veneer>:
+ 800090e:	4899      	ldr	r0, [pc, #612]	; (8000b74 <AllowPLLInitByStartup+0x17a>)
+ 8000910:	b500      	push	{lr}
+ 8000912:	b081      	sub	sp, #4
+ 8000914:	4780      	blx	r0
+ 8000916:	b001      	add	sp, #4
+ 8000918:	bd00      	pop	{pc}
+
+0800091a <USIC1_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_3_IRQHandler
+ 800091a:	e7fe      	b.n	800091a <USIC1_3_IRQHandler>
+
+0800091c <USIC1_3_IRQHandler_Veneer>:
+ 800091c:	4896      	ldr	r0, [pc, #600]	; (8000b78 <AllowPLLInitByStartup+0x17e>)
+ 800091e:	b500      	push	{lr}
+ 8000920:	b081      	sub	sp, #4
+ 8000922:	4780      	blx	r0
+ 8000924:	b001      	add	sp, #4
+ 8000926:	bd00      	pop	{pc}
+
+08000928 <USIC1_4_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_4_IRQHandler
+ 8000928:	e7fe      	b.n	8000928 <USIC1_4_IRQHandler>
+
+0800092a <USIC1_4_IRQHandler_Veneer>:
+ 800092a:	4894      	ldr	r0, [pc, #592]	; (8000b7c <AllowPLLInitByStartup+0x182>)
+ 800092c:	b500      	push	{lr}
+ 800092e:	b081      	sub	sp, #4
+ 8000930:	4780      	blx	r0
+ 8000932:	b001      	add	sp, #4
+ 8000934:	bd00      	pop	{pc}
+
+08000936 <USIC1_5_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_5_IRQHandler
+ 8000936:	e7fe      	b.n	8000936 <USIC1_5_IRQHandler>
+
+08000938 <USIC1_5_IRQHandler_Veneer>:
+ 8000938:	4891      	ldr	r0, [pc, #580]	; (8000b80 <AllowPLLInitByStartup+0x186>)
+ 800093a:	b500      	push	{lr}
+ 800093c:	b081      	sub	sp, #4
+ 800093e:	4780      	blx	r0
+ 8000940:	b001      	add	sp, #4
+ 8000942:	bd00      	pop	{pc}
+
+08000944 <USIC2_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_0_IRQHandler
+ 8000944:	e7fe      	b.n	8000944 <USIC2_0_IRQHandler>
+
+08000946 <USIC2_0_IRQHandler_Veneer>:
+ 8000946:	488f      	ldr	r0, [pc, #572]	; (8000b84 <AllowPLLInitByStartup+0x18a>)
+ 8000948:	b500      	push	{lr}
+ 800094a:	b081      	sub	sp, #4
+ 800094c:	4780      	blx	r0
+ 800094e:	b001      	add	sp, #4
+ 8000950:	bd00      	pop	{pc}
+
+08000952 <USIC2_1_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_1_IRQHandler
+ 8000952:	e7fe      	b.n	8000952 <USIC2_1_IRQHandler>
+
+08000954 <USIC2_1_IRQHandler_Veneer>:
+ 8000954:	488c      	ldr	r0, [pc, #560]	; (8000b88 <AllowPLLInitByStartup+0x18e>)
+ 8000956:	b500      	push	{lr}
+ 8000958:	b081      	sub	sp, #4
+ 800095a:	4780      	blx	r0
+ 800095c:	b001      	add	sp, #4
+ 800095e:	bd00      	pop	{pc}
+
+08000960 <USIC2_2_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_2_IRQHandler
+ 8000960:	e7fe      	b.n	8000960 <USIC2_2_IRQHandler>
+
+08000962 <USIC2_2_IRQHandler_Veneer>:
+ 8000962:	488a      	ldr	r0, [pc, #552]	; (8000b8c <AllowPLLInitByStartup+0x192>)
+ 8000964:	b500      	push	{lr}
+ 8000966:	b081      	sub	sp, #4
+ 8000968:	4780      	blx	r0
+ 800096a:	b001      	add	sp, #4
+ 800096c:	bd00      	pop	{pc}
+
+0800096e <USIC2_3_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_3_IRQHandler
+ 800096e:	e7fe      	b.n	800096e <USIC2_3_IRQHandler>
+
+08000970 <USIC2_3_IRQHandler_Veneer>:
+ 8000970:	4887      	ldr	r0, [pc, #540]	; (8000b90 <AllowPLLInitByStartup+0x196>)
+ 8000972:	b500      	push	{lr}
+ 8000974:	b081      	sub	sp, #4
+ 8000976:	4780      	blx	r0
+ 8000978:	b001      	add	sp, #4
+ 800097a:	bd00      	pop	{pc}
+
+0800097c <USIC2_4_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_4_IRQHandler
+ 800097c:	e7fe      	b.n	800097c <USIC2_4_IRQHandler>
+
+0800097e <USIC2_4_IRQHandler_Veneer>:
+ 800097e:	4885      	ldr	r0, [pc, #532]	; (8000b94 <AllowPLLInitByStartup+0x19a>)
+ 8000980:	b500      	push	{lr}
+ 8000982:	b081      	sub	sp, #4
+ 8000984:	4780      	blx	r0
+ 8000986:	b001      	add	sp, #4
+ 8000988:	bd00      	pop	{pc}
+
+0800098a <USIC2_5_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_5_IRQHandler
+ 800098a:	e7fe      	b.n	800098a <USIC2_5_IRQHandler>
+
+0800098c <USIC2_5_IRQHandler_Veneer>:
+ 800098c:	4882      	ldr	r0, [pc, #520]	; (8000b98 <AllowPLLInitByStartup+0x19e>)
+ 800098e:	b500      	push	{lr}
+ 8000990:	b081      	sub	sp, #4
+ 8000992:	4780      	blx	r0
+ 8000994:	b001      	add	sp, #4
+ 8000996:	bd00      	pop	{pc}
+
+08000998 <LEDTS0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler LEDTS0_0_IRQHandler
+ 8000998:	e7fe      	b.n	8000998 <LEDTS0_0_IRQHandler>
+
+0800099a <LEDTS0_0_IRQHandler_Veneer>:
+ 800099a:	4880      	ldr	r0, [pc, #512]	; (8000b9c <AllowPLLInitByStartup+0x1a2>)
+ 800099c:	b500      	push	{lr}
+ 800099e:	b081      	sub	sp, #4
+ 80009a0:	4780      	blx	r0
+ 80009a2:	b001      	add	sp, #4
+ 80009a4:	bd00      	pop	{pc}
+
+080009a6 <FCE0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler FCE0_0_IRQHandler
+ 80009a6:	e7fe      	b.n	80009a6 <FCE0_0_IRQHandler>
+
+080009a8 <FCE0_0_IRQHandler_Veneer>:
+ 80009a8:	487d      	ldr	r0, [pc, #500]	; (8000ba0 <AllowPLLInitByStartup+0x1a6>)
+ 80009aa:	b500      	push	{lr}
+ 80009ac:	b081      	sub	sp, #4
+ 80009ae:	4780      	blx	r0
+ 80009b0:	b001      	add	sp, #4
+ 80009b2:	bd00      	pop	{pc}
+
+080009b4 <GPDMA0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler GPDMA0_0_IRQHandler
+ 80009b4:	e7fe      	b.n	80009b4 <GPDMA0_0_IRQHandler>
+
+080009b6 <GPDMA0_0_IRQHandler_Veneer>:
+ 80009b6:	487b      	ldr	r0, [pc, #492]	; (8000ba4 <AllowPLLInitByStartup+0x1aa>)
+ 80009b8:	b500      	push	{lr}
+ 80009ba:	b081      	sub	sp, #4
+ 80009bc:	4780      	blx	r0
+ 80009be:	b001      	add	sp, #4
+ 80009c0:	bd00      	pop	{pc}
+
+080009c2 <SDMMC0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler SDMMC0_0_IRQHandler
+ 80009c2:	e7fe      	b.n	80009c2 <SDMMC0_0_IRQHandler>
+
+080009c4 <SDMMC0_0_IRQHandler_Veneer>:
+ 80009c4:	4878      	ldr	r0, [pc, #480]	; (8000ba8 <AllowPLLInitByStartup+0x1ae>)
+ 80009c6:	b500      	push	{lr}
+ 80009c8:	b081      	sub	sp, #4
+ 80009ca:	4780      	blx	r0
+ 80009cc:	b001      	add	sp, #4
+ 80009ce:	bd00      	pop	{pc}
+
+080009d0 <USB0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler USB0_0_IRQHandler
+ 80009d0:	e7fe      	b.n	80009d0 <USB0_0_IRQHandler>
+
+080009d2 <USB0_0_IRQHandler_Veneer>:
+ 80009d2:	4876      	ldr	r0, [pc, #472]	; (8000bac <AllowPLLInitByStartup+0x1b2>)
+ 80009d4:	b500      	push	{lr}
+ 80009d6:	b081      	sub	sp, #4
+ 80009d8:	4780      	blx	r0
+ 80009da:	b001      	add	sp, #4
+ 80009dc:	bd00      	pop	{pc}
+
+080009de <ETH0_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler ETH0_0_IRQHandler
+ 80009de:	e7fe      	b.n	80009de <ETH0_0_IRQHandler>
+
+080009e0 <ETH0_0_IRQHandler_Veneer>:
+ 80009e0:	4873      	ldr	r0, [pc, #460]	; (8000bb0 <AllowPLLInitByStartup+0x1b6>)
+ 80009e2:	b500      	push	{lr}
+ 80009e4:	b081      	sub	sp, #4
+ 80009e6:	4780      	blx	r0
+ 80009e8:	b001      	add	sp, #4
+ 80009ea:	bd00      	pop	{pc}
+
+080009ec <GPDMA1_0_IRQHandler>:
+/* ======================================================================== */
+     Insert_ExceptionHandler GPDMA1_0_IRQHandler
+ 80009ec:	e7fe      	b.n	80009ec <GPDMA1_0_IRQHandler>
+
+080009ee <GPDMA1_0_IRQHandler_Veneer>:
+ 80009ee:	4871      	ldr	r0, [pc, #452]	; (8000bb4 <AllowPLLInitByStartup+0x1ba>)
+ 80009f0:	b500      	push	{lr}
+ 80009f2:	b081      	sub	sp, #4
+ 80009f4:	4780      	blx	r0
+ 80009f6:	b001      	add	sp, #4
+ 80009f8:	bd00      	pop	{pc}
+
+080009fa <AllowPLLInitByStartup>:
+   returns FALSE indicating that the code engine has performed the clock setup
+*/   
+    .weak   AllowPLLInitByStartup
+    .type   AllowPLLInitByStartup, %function
+AllowPLLInitByStartup:
+    MOV R0,#1
+ 80009fa:	f04f 0001 	mov.w	r0, #1
+    BX LR
+ 80009fe:	4770      	bx	lr
+/* Default exception Handlers - Users may override this default functionality by
+   defining handlers of the same name in their C code */
+    .thumb
+    .text
+
+     Insert_ExceptionHandler NMI_Handler
+ 8000a00:	0800038d 	.word	0x0800038d
+/* ======================================================================== */
+     Insert_ExceptionHandler HardFault_Handler
+ 8000a04:	0800039d 	.word	0x0800039d
+/* ======================================================================== */
+     Insert_ExceptionHandler MemManage_Handler
+ 8000a08:	080003ad 	.word	0x080003ad
+/* ======================================================================== */
+     Insert_ExceptionHandler BusFault_Handler
+ 8000a0c:	080003bd 	.word	0x080003bd
+/* ======================================================================== */
+     Insert_ExceptionHandler UsageFault_Handler
+ 8000a10:	080003cd 	.word	0x080003cd
+/* ======================================================================== */
+     Insert_ExceptionHandler SVC_Handler
+ 8000a14:	080003dd 	.word	0x080003dd
+/* ======================================================================== */
+     Insert_ExceptionHandler DebugMon_Handler
+ 8000a18:	080003ed 	.word	0x080003ed
+/* ======================================================================== */
+     Insert_ExceptionHandler PendSV_Handler
+ 8000a1c:	080003fd 	.word	0x080003fd
+/* ======================================================================== */
+     Insert_ExceptionHandler SysTick_Handler
+ 8000a20:	0800040d 	.word	0x0800040d
+/* ============= END OF EXCEPTION HANDLER DEFINITION ======================== */
+
+/* ============= START OF INTERRUPT HANDLER DEFINITION ====================== */
+
+/* IRQ Handlers */
+     Insert_ExceptionHandler SCU_0_IRQHandler
+ 8000a24:	0800041d 	.word	0x0800041d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_0_IRQHandler
+ 8000a28:	0800042d 	.word	0x0800042d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_1_IRQHandler
+ 8000a2c:	0800043d 	.word	0x0800043d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_2_IRQHandler
+ 8000a30:	0800044d 	.word	0x0800044d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU0_3_IRQHandler
+ 8000a34:	0800045d 	.word	0x0800045d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_0_IRQHandler
+ 8000a38:	0800046d 	.word	0x0800046d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_1_IRQHandler
+ 8000a3c:	0800047d 	.word	0x0800047d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_2_IRQHandler
+ 8000a40:	0800048d 	.word	0x0800048d
+/* ======================================================================== */
+     Insert_ExceptionHandler ERU1_3_IRQHandler
+ 8000a44:	0800049d 	.word	0x0800049d
+/* ======================================================================== */
+     Insert_ExceptionHandler PMU0_0_IRQHandler
+ 8000a48:	080004ad 	.word	0x080004ad
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_0_IRQHandler
+ 8000a4c:	080004bd 	.word	0x080004bd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_1_IRQHandler
+ 8000a50:	080004cd 	.word	0x080004cd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_2_IRQHandler
+ 8000a54:	080004dd 	.word	0x080004dd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_C0_3_IRQHandler
+ 8000a58:	080004ed 	.word	0x080004ed
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_0_IRQHandler
+ 8000a5c:	080004fd 	.word	0x080004fd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_1_IRQHandler
+ 8000a60:	0800050d 	.word	0x0800050d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_2_IRQHandler
+ 8000a64:	0800051d 	.word	0x0800051d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G0_3_IRQHandler
+ 8000a68:	0800052d 	.word	0x0800052d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_0_IRQHandler
+ 8000a6c:	0800053d 	.word	0x0800053d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_1_IRQHandler
+ 8000a70:	0800054d 	.word	0x0800054d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_2_IRQHandler
+ 8000a74:	0800055d 	.word	0x0800055d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G1_3_IRQHandler
+ 8000a78:	0800056d 	.word	0x0800056d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_0_IRQHandler
+ 8000a7c:	0800057d 	.word	0x0800057d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_1_IRQHandler
+ 8000a80:	0800058d 	.word	0x0800058d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_2_IRQHandler
+ 8000a84:	0800059d 	.word	0x0800059d
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G2_3_IRQHandler
+ 8000a88:	080005ad 	.word	0x080005ad
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_0_IRQHandler
+ 8000a8c:	080005bd 	.word	0x080005bd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_1_IRQHandler
+ 8000a90:	080005cd 	.word	0x080005cd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_2_IRQHandler
+ 8000a94:	080005dd 	.word	0x080005dd
+/* ======================================================================== */
+     Insert_ExceptionHandler VADC0_G3_3_IRQHandler
+ 8000a98:	080005ed 	.word	0x080005ed
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_0_IRQHandler
+ 8000a9c:	080005fd 	.word	0x080005fd
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_1_IRQHandler
+ 8000aa0:	0800060d 	.word	0x0800060d
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_2_IRQHandler
+ 8000aa4:	0800061d 	.word	0x0800061d
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_3_IRQHandler
+ 8000aa8:	0800062d 	.word	0x0800062d
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_4_IRQHandler
+ 8000aac:	0800063d 	.word	0x0800063d
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_5_IRQHandler
+ 8000ab0:	0800064d 	.word	0x0800064d
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_6_IRQHandler
+ 8000ab4:	0800065d 	.word	0x0800065d
+/* ======================================================================== */
+     Insert_ExceptionHandler DSD0_7_IRQHandler
+ 8000ab8:	0800066d 	.word	0x0800066d
+/* ======================================================================== */
+     Insert_ExceptionHandler DAC0_0_IRQHandler
+ 8000abc:	0800067d 	.word	0x0800067d
+/* ======================================================================== */
+     Insert_ExceptionHandler DAC0_1_IRQHandler
+ 8000ac0:	0800068d 	.word	0x0800068d
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_0_IRQHandler
+ 8000ac4:	0800069d 	.word	0x0800069d
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_1_IRQHandler
+ 8000ac8:	080006ad 	.word	0x080006ad
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_2_IRQHandler
+ 8000acc:	080006bd 	.word	0x080006bd
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU40_3_IRQHandler
+ 8000ad0:	080006cd 	.word	0x080006cd
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_0_IRQHandler
+ 8000ad4:	080006dd 	.word	0x080006dd
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_1_IRQHandler
+ 8000ad8:	080006eb 	.word	0x080006eb
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_2_IRQHandler
+ 8000adc:	080006f9 	.word	0x080006f9
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU41_3_IRQHandler
+ 8000ae0:	08000707 	.word	0x08000707
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_0_IRQHandler
+ 8000ae4:	08000715 	.word	0x08000715
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_1_IRQHandler
+ 8000ae8:	08000723 	.word	0x08000723
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_2_IRQHandler
+ 8000aec:	08000731 	.word	0x08000731
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU42_3_IRQHandler
+ 8000af0:	0800073f 	.word	0x0800073f
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_0_IRQHandler
+ 8000af4:	0800074d 	.word	0x0800074d
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_1_IRQHandler
+ 8000af8:	0800075b 	.word	0x0800075b
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_2_IRQHandler
+ 8000afc:	08000769 	.word	0x08000769
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU43_3_IRQHandler
+ 8000b00:	08000777 	.word	0x08000777
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_0_IRQHandler
+ 8000b04:	08000785 	.word	0x08000785
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_1_IRQHandler
+ 8000b08:	08000793 	.word	0x08000793
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_2_IRQHandler
+ 8000b0c:	080007a1 	.word	0x080007a1
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU80_3_IRQHandler
+ 8000b10:	080007af 	.word	0x080007af
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_0_IRQHandler
+ 8000b14:	080007bd 	.word	0x080007bd
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_1_IRQHandler
+ 8000b18:	080007cb 	.word	0x080007cb
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_2_IRQHandler
+ 8000b1c:	080007d9 	.word	0x080007d9
+/* ======================================================================== */
+     Insert_ExceptionHandler CCU81_3_IRQHandler
+ 8000b20:	080007e7 	.word	0x080007e7
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF0_0_IRQHandler
+ 8000b24:	080007f5 	.word	0x080007f5
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF0_1_IRQHandler
+ 8000b28:	08000803 	.word	0x08000803
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF1_0_IRQHandler
+ 8000b2c:	08000811 	.word	0x08000811
+/* ======================================================================== */
+     Insert_ExceptionHandler POSIF1_1_IRQHandler
+ 8000b30:	0800081f 	.word	0x0800081f
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_0_IRQHandler
+ 8000b34:	0800082d 	.word	0x0800082d
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_1_IRQHandler
+ 8000b38:	0800083b 	.word	0x0800083b
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_2_IRQHandler
+ 8000b3c:	08000849 	.word	0x08000849
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_3_IRQHandler
+ 8000b40:	08000857 	.word	0x08000857
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_4_IRQHandler
+ 8000b44:	08000865 	.word	0x08000865
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_5_IRQHandler
+ 8000b48:	08000873 	.word	0x08000873
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_6_IRQHandler
+ 8000b4c:	08000881 	.word	0x08000881
+/* ======================================================================== */
+     Insert_ExceptionHandler CAN0_7_IRQHandler
+ 8000b50:	0800088f 	.word	0x0800088f
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_0_IRQHandler
+ 8000b54:	0800089d 	.word	0x0800089d
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_1_IRQHandler
+ 8000b58:	080008ab 	.word	0x080008ab
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_2_IRQHandler
+ 8000b5c:	080008b9 	.word	0x080008b9
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_3_IRQHandler
+ 8000b60:	080008c7 	.word	0x080008c7
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_4_IRQHandler
+ 8000b64:	080008d5 	.word	0x080008d5
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC0_5_IRQHandler
+ 8000b68:	080008e3 	.word	0x080008e3
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_0_IRQHandler
+ 8000b6c:	080008f1 	.word	0x080008f1
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_1_IRQHandler
+ 8000b70:	080008ff 	.word	0x080008ff
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_2_IRQHandler
+ 8000b74:	0800090d 	.word	0x0800090d
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_3_IRQHandler
+ 8000b78:	0800091b 	.word	0x0800091b
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_4_IRQHandler
+ 8000b7c:	08000929 	.word	0x08000929
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC1_5_IRQHandler
+ 8000b80:	08000937 	.word	0x08000937
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_0_IRQHandler
+ 8000b84:	08000945 	.word	0x08000945
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_1_IRQHandler
+ 8000b88:	08000953 	.word	0x08000953
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_2_IRQHandler
+ 8000b8c:	08000961 	.word	0x08000961
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_3_IRQHandler
+ 8000b90:	0800096f 	.word	0x0800096f
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_4_IRQHandler
+ 8000b94:	0800097d 	.word	0x0800097d
+/* ======================================================================== */
+     Insert_ExceptionHandler USIC2_5_IRQHandler
+ 8000b98:	0800098b 	.word	0x0800098b
+/* ======================================================================== */
+     Insert_ExceptionHandler LEDTS0_0_IRQHandler
+ 8000b9c:	08000999 	.word	0x08000999
+/* ======================================================================== */
+     Insert_ExceptionHandler FCE0_0_IRQHandler
+ 8000ba0:	080009a7 	.word	0x080009a7
+/* ======================================================================== */
+     Insert_ExceptionHandler GPDMA0_0_IRQHandler
+ 8000ba4:	080009b5 	.word	0x080009b5
+/* ======================================================================== */
+     Insert_ExceptionHandler SDMMC0_0_IRQHandler
+ 8000ba8:	080009c3 	.word	0x080009c3
+/* ======================================================================== */
+     Insert_ExceptionHandler USB0_0_IRQHandler
+ 8000bac:	080009d1 	.word	0x080009d1
+/* ======================================================================== */
+     Insert_ExceptionHandler ETH0_0_IRQHandler
+ 8000bb0:	080009df 	.word	0x080009df
+/* ======================================================================== */
+     Insert_ExceptionHandler GPDMA1_0_IRQHandler
+ 8000bb4:	080009ed 	.word	0x080009ed
+
+08000bb8 <SystemInit>:
+  *         SystemCoreClock variable.
+  * @param  None
+  * @retval None
+  */
+void SystemInit(void)
+{
+ 8000bb8:	b580      	push	{r7, lr}
+ 8000bba:	b082      	sub	sp, #8
+ 8000bbc:	af00      	add	r7, sp, #0
+int temp;
+	
+#if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+SCB->CPACR |= ((3UL << 10*2) |                 /* set CP10 Full Access */
+ 8000bbe:	f44f 436d 	mov.w	r3, #60672	; 0xed00
+ 8000bc2:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000bc6:	f44f 426d 	mov.w	r2, #60672	; 0xed00
+ 8000bca:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 8000bce:	f8d2 2088 	ldr.w	r2, [r2, #136]	; 0x88
+ 8000bd2:	f442 0270 	orr.w	r2, r2, #15728640	; 0xf00000
+ 8000bd6:	f8c3 2088 	str.w	r2, [r3, #136]	; 0x88
+               (3UL << 11*2)  );               /* set CP11 Full Access */
+#endif
+
+/* Enable unaligned memory access - SCB_CCR.UNALIGN_TRP = 0 */
+SCB->CCR &= ~(SCB_CCR_UNALIGN_TRP_Msk);
+ 8000bda:	f44f 436d 	mov.w	r3, #60672	; 0xed00
+ 8000bde:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000be2:	f44f 426d 	mov.w	r2, #60672	; 0xed00
+ 8000be6:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 8000bea:	6952      	ldr	r2, [r2, #20]
+ 8000bec:	f022 0208 	bic.w	r2, r2, #8
+ 8000bf0:	615a      	str	r2, [r3, #20]
+	
+/* Setup the WDT */
+#if WDT_SETUP
+
+WDT->CTR &= ~WDTENB_nVal; 
+ 8000bf2:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+ 8000bf6:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000bfa:	f44f 4200 	mov.w	r2, #32768	; 0x8000
+ 8000bfe:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000c02:	6852      	ldr	r2, [r2, #4]
+ 8000c04:	f022 0201 	bic.w	r2, r2, #1
+ 8000c08:	605a      	str	r2, [r3, #4]
+
+#endif
+
+/* Setup the Flash Wait State */
+#if PMU_FLASH
+temp = FLASH0->FCON; 
+ 8000c0a:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+ 8000c0e:	f6c5 0300 	movt	r3, #22528	; 0x5800
+ 8000c12:	f503 5380 	add.w	r3, r3, #4096	; 0x1000
+ 8000c16:	f103 0314 	add.w	r3, r3, #20
+ 8000c1a:	681b      	ldr	r3, [r3, #0]
+ 8000c1c:	607b      	str	r3, [r7, #4]
+temp &= ~FLASH_FCON_WSPFLASH_Msk;
+ 8000c1e:	687b      	ldr	r3, [r7, #4]
+ 8000c20:	f023 030f 	bic.w	r3, r3, #15
+ 8000c24:	607b      	str	r3, [r7, #4]
+temp |= PMU_FLASH_WS+3;
+ 8000c26:	687b      	ldr	r3, [r7, #4]
+ 8000c28:	f043 0303 	orr.w	r3, r3, #3
+ 8000c2c:	607b      	str	r3, [r7, #4]
+FLASH0->FCON = temp;
+ 8000c2e:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+ 8000c32:	f6c5 0300 	movt	r3, #22528	; 0x5800
+ 8000c36:	687a      	ldr	r2, [r7, #4]
+ 8000c38:	f503 5380 	add.w	r3, r3, #4096	; 0x1000
+ 8000c3c:	f103 0314 	add.w	r3, r3, #20
+ 8000c40:	601a      	str	r2, [r3, #0]
+#endif
+
+
+/* Setup the System clock */ 
+#if SCU_CLOCK_SETUP
+SystemClockSetup();
+ 8000c42:	f000 f8ab 	bl	8000d9c <SystemClockSetup>
+#endif
+
+/*----------------------------------------------------------------------------
+  Clock Variable definitions
+ *----------------------------------------------------------------------------*/
+SystemCoreClockUpdate();/*!< System Clock Frequency (Core Clock)*/
+ 8000c46:	f000 f805 	bl	8000c54 <SystemCoreClockUpdate>
+USBClockSetup();
+#endif
+
+
+
+}
+ 8000c4a:	f107 0708 	add.w	r7, r7, #8
+ 8000c4e:	46bd      	mov	sp, r7
+ 8000c50:	bd80      	pop	{r7, pc}
+ 8000c52:	bf00      	nop
+
+08000c54 <SystemCoreClockUpdate>:
+  * @note   -  
+  * @param  None
+  * @retval None
+  */
+void SystemCoreClockUpdate(void)
+{
+ 8000c54:	b480      	push	{r7}
+ 8000c56:	b085      	sub	sp, #20
+ 8000c58:	af00      	add	r7, sp, #0
+
+
+/*----------------------------------------------------------------------------
+  Clock Variable definitions
+ *----------------------------------------------------------------------------*/
+if (SCU_CLK->SYSCLKCR ==  0x00010000)
+ 8000c5a:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8000c5e:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000c62:	68db      	ldr	r3, [r3, #12]
+ 8000c64:	f5b3 3f80 	cmp.w	r3, #65536	; 0x10000
+ 8000c68:	f040 8089 	bne.w	8000d7e <SystemCoreClockUpdate+0x12a>
+{
+	if (SCU_PLL->PLLSTAT & SCU_PLL_PLLSTAT_VCOLOCK_Msk){
+ 8000c6c:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000c70:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000c74:	681b      	ldr	r3, [r3, #0]
+ 8000c76:	f003 0304 	and.w	r3, r3, #4
+ 8000c7a:	2b00      	cmp	r3, #0
+ 8000c7c:	f000 8088 	beq.w	8000d90 <SystemCoreClockUpdate+0x13c>
+		/* check if PLL is locked */
+		/* read back divider settings */
+		 PDIV = ((SCU_PLL->PLLCON1 & SCU_PLL_PLLCON1_PDIV_Msk)>>24)+1;
+ 8000c80:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000c84:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000c88:	689b      	ldr	r3, [r3, #8]
+ 8000c8a:	f003 6370 	and.w	r3, r3, #251658240	; 0xf000000
+ 8000c8e:	ea4f 6313 	mov.w	r3, r3, lsr #24
+ 8000c92:	f103 0301 	add.w	r3, r3, #1
+ 8000c96:	60fb      	str	r3, [r7, #12]
+		 NDIV = ((SCU_PLL->PLLCON1 & SCU_PLL_PLLCON1_NDIV_Msk)>>8)+1;
+ 8000c98:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000c9c:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000ca0:	689b      	ldr	r3, [r3, #8]
+ 8000ca2:	f403 43fe 	and.w	r3, r3, #32512	; 0x7f00
+ 8000ca6:	ea4f 2313 	mov.w	r3, r3, lsr #8
+ 8000caa:	f103 0301 	add.w	r3, r3, #1
+ 8000cae:	60bb      	str	r3, [r7, #8]
+		 K2DIV  = ((SCU_PLL->PLLCON1 & SCU_PLL_PLLCON1_K2DIV_Msk)>>16)+1;
+ 8000cb0:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000cb4:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000cb8:	689b      	ldr	r3, [r3, #8]
+ 8000cba:	f403 03fe 	and.w	r3, r3, #8323072	; 0x7f0000
+ 8000cbe:	ea4f 4313 	mov.w	r3, r3, lsr #16
+ 8000cc2:	f103 0301 	add.w	r3, r3, #1
+ 8000cc6:	607b      	str	r3, [r7, #4]
+
+		if(SCU_PLL->PLLCON2 & SCU_PLL_PLLCON2_PINSEL_Msk){
+ 8000cc8:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000ccc:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000cd0:	68db      	ldr	r3, [r3, #12]
+ 8000cd2:	f003 0301 	and.w	r3, r3, #1
+ 8000cd6:	2b00      	cmp	r3, #0
+ 8000cd8:	d028      	beq.n	8000d2c <SystemCoreClockUpdate+0xd8>
+		/* the selected clock is the Backup clock fofi */
+		VCO = (CLOCK_BACK_UP/PDIV)*NDIV;
+ 8000cda:	f44f 5358 	mov.w	r3, #13824	; 0x3600
+ 8000cde:	f2c0 136e 	movt	r3, #366	; 0x16e
+ 8000ce2:	68fa      	ldr	r2, [r7, #12]
+ 8000ce4:	fbb3 f3f2 	udiv	r3, r3, r2
+ 8000ce8:	68ba      	ldr	r2, [r7, #8]
+ 8000cea:	fb02 f303 	mul.w	r3, r2, r3
+ 8000cee:	603b      	str	r3, [r7, #0]
+		SystemCoreClock = VCO/K2DIV;
+ 8000cf0:	683a      	ldr	r2, [r7, #0]
+ 8000cf2:	687b      	ldr	r3, [r7, #4]
+ 8000cf4:	fbb2 f2f3 	udiv	r2, r2, r3
+ 8000cf8:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000cfc:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d00:	601a      	str	r2, [r3, #0]
+		/* in case the sysclock div is used */
+		SystemCoreClock = SystemCoreClock/((SCU_CLK->SYSCLKCR & SCU_CLK_SYSCLKCR_SYSDIV_Msk)+1);
+ 8000d02:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000d06:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d0a:	681a      	ldr	r2, [r3, #0]
+ 8000d0c:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8000d10:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000d14:	68db      	ldr	r3, [r3, #12]
+ 8000d16:	b2db      	uxtb	r3, r3
+ 8000d18:	f103 0301 	add.w	r3, r3, #1
+ 8000d1c:	fbb2 f2f3 	udiv	r2, r2, r3
+ 8000d20:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000d24:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d28:	601a      	str	r2, [r3, #0]
+ 8000d2a:	e031      	b.n	8000d90 <SystemCoreClockUpdate+0x13c>
+		
+		}
+		else
+		{
+		/* the selected clock is the PLL external oscillator */		
+		VCO = (CLOCK_CRYSTAL_FREQUENCY/PDIV)*NDIV;
+ 8000d2c:	f44f 53d8 	mov.w	r3, #6912	; 0x1b00
+ 8000d30:	f2c0 03b7 	movt	r3, #183	; 0xb7
+ 8000d34:	68fa      	ldr	r2, [r7, #12]
+ 8000d36:	fbb3 f3f2 	udiv	r3, r3, r2
+ 8000d3a:	68ba      	ldr	r2, [r7, #8]
+ 8000d3c:	fb02 f303 	mul.w	r3, r2, r3
+ 8000d40:	603b      	str	r3, [r7, #0]
+		SystemCoreClock = VCO/K2DIV;
+ 8000d42:	683a      	ldr	r2, [r7, #0]
+ 8000d44:	687b      	ldr	r3, [r7, #4]
+ 8000d46:	fbb2 f2f3 	udiv	r2, r2, r3
+ 8000d4a:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000d4e:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d52:	601a      	str	r2, [r3, #0]
+		/* in case the sysclock div is used */
+		SystemCoreClock = SystemCoreClock/((SCU_CLK->SYSCLKCR & SCU_CLK_SYSCLKCR_SYSDIV_Msk)+1);
+ 8000d54:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000d58:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d5c:	681a      	ldr	r2, [r3, #0]
+ 8000d5e:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8000d62:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000d66:	68db      	ldr	r3, [r3, #12]
+ 8000d68:	b2db      	uxtb	r3, r3
+ 8000d6a:	f103 0301 	add.w	r3, r3, #1
+ 8000d6e:	fbb2 f2f3 	udiv	r2, r2, r3
+ 8000d72:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000d76:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d7a:	601a      	str	r2, [r3, #0]
+ 8000d7c:	e008      	b.n	8000d90 <SystemCoreClockUpdate+0x13c>
+	
+	}
+}
+else
+{
+SystemCoreClock = CLOCK_BACK_UP;
+ 8000d7e:	f640 13a4 	movw	r3, #2468	; 0x9a4
+ 8000d82:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8000d86:	f44f 5258 	mov.w	r2, #13824	; 0x3600
+ 8000d8a:	f2c0 126e 	movt	r2, #366	; 0x16e
+ 8000d8e:	601a      	str	r2, [r3, #0]
+}
+
+
+}
+ 8000d90:	f107 0714 	add.w	r7, r7, #20
+ 8000d94:	46bd      	mov	sp, r7
+ 8000d96:	bc80      	pop	{r7}
+ 8000d98:	4770      	bx	lr
+ 8000d9a:	bf00      	nop
+
+08000d9c <SystemClockSetup>:
+  * @param  None
+  * @retval None
+  */
+#if (SCU_CLOCK_SETUP == 1)
+static int SystemClockSetup(void)
+{
+ 8000d9c:	b580      	push	{r7, lr}
+ 8000d9e:	b082      	sub	sp, #8
+ 8000da0:	af00      	add	r7, sp, #0
+int temp;
+unsigned int long VCO;
+int stepping_K2DIV;	
+
+/* this weak function enables DAVE3 clock App usage */	
+if(AllowPLLInitByStartup()){
+ 8000da2:	f7ff fe2a 	bl	80009fa <AllowPLLInitByStartup>
+ 8000da6:	4603      	mov	r3, r0
+ 8000da8:	2b00      	cmp	r3, #0
+ 8000daa:	f000 8255 	beq.w	8001258 <SystemClockSetup+0x4bc>
+	
+/* check if PLL is switched on */
+if ((SCU_PLL->PLLCON0 &(SCU_PLL_PLLCON0_VCOPWD_Msk | SCU_PLL_PLLCON0_PLLPWD_Msk)) != 0){
+ 8000dae:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000db2:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000db6:	685a      	ldr	r2, [r3, #4]
+ 8000db8:	f04f 0302 	mov.w	r3, #2
+ 8000dbc:	f2c0 0301 	movt	r3, #1
+ 8000dc0:	4013      	ands	r3, r2
+ 8000dc2:	2b00      	cmp	r3, #0
+ 8000dc4:	d00d      	beq.n	8000de2 <SystemClockSetup+0x46>
+/* enable PLL first */
+  SCU_PLL->PLLCON0 &= ~(SCU_PLL_PLLCON0_VCOPWD_Msk | SCU_PLL_PLLCON0_PLLPWD_Msk);
+ 8000dc6:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000dca:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000dce:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000dd2:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000dd6:	6852      	ldr	r2, [r2, #4]
+ 8000dd8:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+ 8000ddc:	f022 0202 	bic.w	r2, r2, #2
+ 8000de0:	605a      	str	r2, [r3, #4]
+  {
+	/********************************************************************************************************************/
+	/*   Use external crystal for PLL clock input                                                                            */
+	/********************************************************************************************************************/
+
+   if (SCU_OSC->OSCHPCTRL & SCU_OSC_OSCHPCTRL_MODE_Msk){
+ 8000de2:	f44f 438e 	mov.w	r3, #18176	; 0x4700
+ 8000de6:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000dea:	685b      	ldr	r3, [r3, #4]
+ 8000dec:	f003 0330 	and.w	r3, r3, #48	; 0x30
+ 8000df0:	2b00      	cmp	r3, #0
+ 8000df2:	d072      	beq.n	8000eda <SystemClockSetup+0x13e>
+	   SCU_OSC->OSCHPCTRL &= ~(SCU_OSC_HP_MODE);	 /*enable the OSC_HP*/
+ 8000df4:	f44f 438e 	mov.w	r3, #18176	; 0x4700
+ 8000df8:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000dfc:	f44f 428e 	mov.w	r2, #18176	; 0x4700
+ 8000e00:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000e04:	6852      	ldr	r2, [r2, #4]
+ 8000e06:	f022 02f0 	bic.w	r2, r2, #240	; 0xf0
+ 8000e0a:	605a      	str	r2, [r3, #4]
+	   /* setup OSC WDG devider */
+	   SCU_OSC->OSCHPCTRL |= (SCU_OSCHPWDGDIV<<16);         
+ 8000e0c:	f44f 438e 	mov.w	r3, #18176	; 0x4700
+ 8000e10:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000e14:	f44f 428e 	mov.w	r2, #18176	; 0x4700
+ 8000e18:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000e1c:	6852      	ldr	r2, [r2, #4]
+ 8000e1e:	f442 3200 	orr.w	r2, r2, #131072	; 0x20000
+ 8000e22:	605a      	str	r2, [r3, #4]
+	   /* select external OSC as PLL input */
+	   SCU_PLL->PLLCON2 &= ~SCU_PLL_PLLCON2_PINSEL_Msk;
+ 8000e24:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000e28:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000e2c:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000e30:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000e34:	68d2      	ldr	r2, [r2, #12]
+ 8000e36:	f022 0201 	bic.w	r2, r2, #1
+ 8000e3a:	60da      	str	r2, [r3, #12]
+	   /* restart OSC Watchdog */
+	   SCU_PLL->PLLCON0 &= ~SCU_PLL_PLLCON0_OSCRES_Msk;  
+ 8000e3c:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000e40:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000e44:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000e48:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000e4c:	6852      	ldr	r2, [r2, #4]
+ 8000e4e:	f422 3200 	bic.w	r2, r2, #131072	; 0x20000
+ 8000e52:	605a      	str	r2, [r3, #4]
+
+       /* Timeout for wait loop ~150ms */
+	   /********************************/
+	   SysTick->LOAD  = ((5000000+100) & SysTick_LOAD_RELOAD_Msk) - 1;/* set reload register */
+ 8000e54:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000e58:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000e5c:	f644 32a3 	movw	r2, #19363	; 0x4ba3
+ 8000e60:	f2c0 024c 	movt	r2, #76	; 0x4c
+ 8000e64:	605a      	str	r2, [r3, #4]
+	   SysTick->VAL   = 0;                                         /* Load the SysTick Counter Value */
+ 8000e66:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000e6a:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000e6e:	f04f 0200 	mov.w	r2, #0
+ 8000e72:	609a      	str	r2, [r3, #8]
+	   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 8000e74:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000e78:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000e7c:	f04f 0205 	mov.w	r2, #5
+ 8000e80:	601a      	str	r2, [r3, #0]
+	                   SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */		  
+	   do 
+	   {
+       ;/* wait for ~150ms  */
+	   }while((((SCU_PLL->PLLSTAT) & (SCU_PLL_PLLSTAT_PLLHV_Msk | SCU_PLL_PLLSTAT_PLLLV_Msk |SCU_PLL_PLLSTAT_PLLSP_Msk)) != 0x380)&&(SysTick->VAL >= 500)); 
+ 8000e82:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000e86:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000e8a:	681b      	ldr	r3, [r3, #0]
+ 8000e8c:	f403 7360 	and.w	r3, r3, #896	; 0x380
+ 8000e90:	f5b3 7f60 	cmp.w	r3, #896	; 0x380
+ 8000e94:	d008      	beq.n	8000ea8 <SystemClockSetup+0x10c>
+ 8000e96:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000e9a:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000e9e:	689a      	ldr	r2, [r3, #8]
+ 8000ea0:	f240 13f3 	movw	r3, #499	; 0x1f3
+ 8000ea4:	429a      	cmp	r2, r3
+ 8000ea6:	d8ec      	bhi.n	8000e82 <SystemClockSetup+0xe6>
+
+	   SysTick->CTRL  &= ~SysTick_CTRL_ENABLE_Msk;                 /* Stop SysTick Timer */
+ 8000ea8:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000eac:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000eb0:	f24e 0210 	movw	r2, #57360	; 0xe010
+ 8000eb4:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 8000eb8:	6812      	ldr	r2, [r2, #0]
+ 8000eba:	f022 0201 	bic.w	r2, r2, #1
+ 8000ebe:	601a      	str	r2, [r3, #0]
+	   if (((SCU_PLL->PLLSTAT) & (SCU_PLL_PLLSTAT_PLLHV_Msk | SCU_PLL_PLLSTAT_PLLLV_Msk |SCU_PLL_PLLSTAT_PLLSP_Msk)) != 0x380)
+ 8000ec0:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000ec4:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000ec8:	681b      	ldr	r3, [r3, #0]
+ 8000eca:	f403 7360 	and.w	r3, r3, #896	; 0x380
+ 8000ece:	f5b3 7f60 	cmp.w	r3, #896	; 0x380
+ 8000ed2:	d002      	beq.n	8000eda <SystemClockSetup+0x13e>
+	   return(0);/* Return Error */
+ 8000ed4:	f04f 0300 	mov.w	r3, #0
+ 8000ed8:	e1c0      	b.n	800125c <SystemClockSetup+0x4c0>
+
+	/********************************************************************************************************************/
+	/*   Setup and look the main PLL                                                                                    */
+	/********************************************************************************************************************/
+
+if (!(SCU_PLL->PLLSTAT & SCU_PLL_PLLSTAT_VCOLOCK_Msk)){
+ 8000eda:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000ede:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000ee2:	681b      	ldr	r3, [r3, #0]
+ 8000ee4:	f003 0304 	and.w	r3, r3, #4
+ 8000ee8:	2b00      	cmp	r3, #0
+ 8000eea:	f040 81b5 	bne.w	8001258 <SystemClockSetup+0x4bc>
+	/* Systen is still running from internal clock */
+		   /* select FOFI as system clock */
+		   if((SCU_CLK->SYSCLKCR & SCU_CLK_SYSCLKCR_SYSSEL_Msk) != 0x0)SCU_CLK->SYSCLKCR &= ~SCU_CLK_SYSCLKCR_SYSSEL_Msk; /*Select FOFI*/
+ 8000eee:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8000ef2:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000ef6:	68db      	ldr	r3, [r3, #12]
+ 8000ef8:	f403 3380 	and.w	r3, r3, #65536	; 0x10000
+ 8000efc:	2b00      	cmp	r3, #0
+ 8000efe:	d00b      	beq.n	8000f18 <SystemClockSetup+0x17c>
+ 8000f00:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8000f04:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000f08:	f44f 428c 	mov.w	r2, #17920	; 0x4600
+ 8000f0c:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000f10:	68d2      	ldr	r2, [r2, #12]
+ 8000f12:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+ 8000f16:	60da      	str	r2, [r3, #12]
+
+
+			 /*calulation for stepping*/
+			 if (SCU_PLL_CLOCK_INPUT == SCU_CLOCK_CRYSTAL)VCO = (CLOCK_CRYSTAL_FREQUENCY/(SCU_PLL_PDIV+1))*(SCU_PLL_NDIV+1);
+ 8000f18:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8000f1c:	f6c1 439c 	movt	r3, #7324	; 0x1c9c
+ 8000f20:	607b      	str	r3, [r7, #4]
+			 if ((SCU_PLL_CLOCK_INPUT == SCU_CLOCK_BACK_UP_AUTOMATIC) ||(SCU_PLL_CLOCK_INPUT == SCU_CLOCK_BACK_UP_FACTORY))
+					VCO = (CLOCK_BACK_UP/(SCU_PLL_PDIV+1))*(SCU_PLL_NDIV+1);
+	 
+			 stepping_K2DIV = (VCO/24000000)-1;	
+ 8000f22:	687a      	ldr	r2, [r7, #4]
+ 8000f24:	f649 7381 	movw	r3, #40833	; 0x9f81
+ 8000f28:	f2c1 635e 	movt	r3, #5726	; 0x165e
+ 8000f2c:	fba3 1302 	umull	r1, r3, r3, r2
+ 8000f30:	ea4f 5353 	mov.w	r3, r3, lsr #21
+ 8000f34:	f103 33ff 	add.w	r3, r3, #4294967295
+ 8000f38:	603b      	str	r3, [r7, #0]
+			 /* Go to bypass the Main PLL */
+		   SCU_PLL->PLLCON0 |= SCU_PLL_PLLCON0_VCOBYP_Msk;
+ 8000f3a:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000f3e:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000f42:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000f46:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000f4a:	6852      	ldr	r2, [r2, #4]
+ 8000f4c:	f042 0201 	orr.w	r2, r2, #1
+ 8000f50:	605a      	str	r2, [r3, #4]
+		   /* disconnect OSC_HP to PLL */
+		   SCU_PLL->PLLCON0 |= SCU_PLL_PLLCON0_FINDIS_Msk;
+ 8000f52:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000f56:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000f5a:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000f5e:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000f62:	6852      	ldr	r2, [r2, #4]
+ 8000f64:	f042 0210 	orr.w	r2, r2, #16
+ 8000f68:	605a      	str	r2, [r3, #4]
+		   /* Setup devider settings for main PLL */
+		   SCU_PLL->PLLCON1 = ((SCU_PLL_K1DIV) | (SCU_PLL_NDIV<<8) | (stepping_K2DIV<<16) | (SCU_PLL_PDIV<<24));
+ 8000f6a:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000f6e:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000f72:	683b      	ldr	r3, [r7, #0]
+ 8000f74:	ea4f 4103 	mov.w	r1, r3, lsl #16
+ 8000f78:	f644 7301 	movw	r3, #20225	; 0x4f01
+ 8000f7c:	f2c0 1300 	movt	r3, #256	; 0x100
+ 8000f80:	430b      	orrs	r3, r1
+ 8000f82:	6093      	str	r3, [r2, #8]
+		   /* we may have to set OSCDISCDIS */
+		   SCU_PLL->PLLCON0 |= SCU_PLL_PLLCON0_OSCDISCDIS_Msk;
+ 8000f84:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000f88:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000f8c:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000f90:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000f94:	6852      	ldr	r2, [r2, #4]
+ 8000f96:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 8000f9a:	605a      	str	r2, [r3, #4]
+		   /* connect OSC_HP to PLL */
+		   SCU_PLL->PLLCON0 &= ~SCU_PLL_PLLCON0_FINDIS_Msk;
+ 8000f9c:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000fa0:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000fa4:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000fa8:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000fac:	6852      	ldr	r2, [r2, #4]
+ 8000fae:	f022 0210 	bic.w	r2, r2, #16
+ 8000fb2:	605a      	str	r2, [r3, #4]
+		   /* restart PLL Lock detection */
+		   SCU_PLL->PLLCON0 |= SCU_PLL_PLLCON0_RESLD_Msk;
+ 8000fb4:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8000fb8:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8000fbc:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8000fc0:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8000fc4:	6852      	ldr	r2, [r2, #4]
+ 8000fc6:	f442 2280 	orr.w	r2, r2, #262144	; 0x40000
+ 8000fca:	605a      	str	r2, [r3, #4]
+		   /* wait for PLL Lock */
+		   /* setup time out loop */
+	       /* Timeout for wait loo ~150ms */
+		   /********************************/
+		   SysTick->LOAD  = ((5000000+100) & SysTick_LOAD_RELOAD_Msk) - 1;/* set reload register */
+ 8000fcc:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000fd0:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000fd4:	f644 32a3 	movw	r2, #19363	; 0x4ba3
+ 8000fd8:	f2c0 024c 	movt	r2, #76	; 0x4c
+ 8000fdc:	605a      	str	r2, [r3, #4]
+		   SysTick->VAL   = 0;                                         /* Load the SysTick Counter Value */
+ 8000fde:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000fe2:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000fe6:	f04f 0200 	mov.w	r2, #0
+ 8000fea:	609a      	str	r2, [r3, #8]
+		   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 8000fec:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8000ff0:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8000ff4:	f04f 0205 	mov.w	r2, #5
+ 8000ff8:	601a      	str	r2, [r3, #0]
+		                   SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */		  
+		   
+		   while ((!(SCU_PLL->PLLSTAT & SCU_PLL_PLLSTAT_VCOLOCK_Msk))&&(SysTick->VAL >= 500));
+ 8000ffa:	bf00      	nop
+ 8000ffc:	f244 7310 	movw	r3, #18192	; 0x4710
+ 8001000:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001004:	681b      	ldr	r3, [r3, #0]
+ 8001006:	f003 0304 	and.w	r3, r3, #4
+ 800100a:	2b00      	cmp	r3, #0
+ 800100c:	d108      	bne.n	8001020 <SystemClockSetup+0x284>
+ 800100e:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001012:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001016:	689a      	ldr	r2, [r3, #8]
+ 8001018:	f240 13f3 	movw	r3, #499	; 0x1f3
+ 800101c:	429a      	cmp	r2, r3
+ 800101e:	d8ed      	bhi.n	8000ffc <SystemClockSetup+0x260>
+	       SysTick->CTRL  &= ~SysTick_CTRL_ENABLE_Msk;                 /* Stop SysTick Timer */
+ 8001020:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001024:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001028:	f24e 0210 	movw	r2, #57360	; 0xe010
+ 800102c:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 8001030:	6812      	ldr	r2, [r2, #0]
+ 8001032:	f022 0201 	bic.w	r2, r2, #1
+ 8001036:	601a      	str	r2, [r3, #0]
+
+		   if ((SCU_PLL->PLLSTAT & SCU_PLL_PLLSTAT_VCOLOCK_Msk)==SCU_PLL_PLLSTAT_VCOLOCK_Msk)
+ 8001038:	f244 7310 	movw	r3, #18192	; 0x4710
+ 800103c:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001040:	681b      	ldr	r3, [r3, #0]
+ 8001042:	f003 0304 	and.w	r3, r3, #4
+ 8001046:	2b00      	cmp	r3, #0
+ 8001048:	d04e      	beq.n	80010e8 <SystemClockSetup+0x34c>
+		   		{
+				/* Go back to the Main PLL */
+				SCU_PLL->PLLCON0 &= ~SCU_PLL_PLLCON0_VCOBYP_Msk;
+ 800104a:	f244 7310 	movw	r3, #18192	; 0x4710
+ 800104e:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001052:	f244 7210 	movw	r2, #18192	; 0x4710
+ 8001056:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 800105a:	6852      	ldr	r2, [r2, #4]
+ 800105c:	f022 0201 	bic.w	r2, r2, #1
+ 8001060:	605a      	str	r2, [r3, #4]
+	
+	   /*********************************************************
+	   here we need to setup the system clock divider
+	   *********************************************************/
+	
+		SCU_CLK->CPUCLKCR = SCU_CPUCLKCR_DIV;
+ 8001062:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8001066:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 800106a:	f04f 0200 	mov.w	r2, #0
+ 800106e:	611a      	str	r2, [r3, #16]
+		SCU_CLK->PBCLKCR = SCU_PBCLKCR_DIV;	
+ 8001070:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8001074:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001078:	f04f 0200 	mov.w	r2, #0
+ 800107c:	615a      	str	r2, [r3, #20]
+		SCU_CLK->CCUCLKCR = SCU_CCUCLKCR_DIV;
+ 800107e:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8001082:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001086:	f04f 0200 	mov.w	r2, #0
+ 800108a:	621a      	str	r2, [r3, #32]
+	
+
+		 /* Switch system clock to PLL */
+	   SCU_CLK->SYSCLKCR |=  0x00010000; 
+ 800108c:	f44f 438c 	mov.w	r3, #17920	; 0x4600
+ 8001090:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001094:	f44f 428c 	mov.w	r2, #17920	; 0x4600
+ 8001098:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 800109c:	68d2      	ldr	r2, [r2, #12]
+ 800109e:	f442 3280 	orr.w	r2, r2, #65536	; 0x10000
+ 80010a2:	60da      	str	r2, [r3, #12]
+				
+	   /* we may have to reset OSCDISCDIS */
+	   SCU_PLL->PLLCON0 &= ~SCU_PLL_PLLCON0_OSCDISCDIS_Msk;
+ 80010a4:	f244 7310 	movw	r3, #18192	; 0x4710
+ 80010a8:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 80010ac:	f244 7210 	movw	r2, #18192	; 0x4710
+ 80010b0:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 80010b4:	6852      	ldr	r2, [r2, #4]
+ 80010b6:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+ 80010ba:	605a      	str	r2, [r3, #4]
+				
+																  
+		 /*********************************************************/
+		 /* Delay for next K2 step ~50탎 */
+		 /*********************************************************/
+		 SysTick->LOAD  = ((1250+100) & SysTick_LOAD_RELOAD_Msk) - 1;/* set reload register */
+ 80010bc:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 80010c0:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80010c4:	f240 5245 	movw	r2, #1349	; 0x545
+ 80010c8:	605a      	str	r2, [r3, #4]
+		 SysTick->VAL   = 0;                                         /* Load the SysTick Counter Value */
+ 80010ca:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 80010ce:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80010d2:	f04f 0200 	mov.w	r2, #0
+ 80010d6:	609a      	str	r2, [r3, #8]
+		 SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 80010d8:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 80010dc:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80010e0:	f04f 0205 	mov.w	r2, #5
+ 80010e4:	601a      	str	r2, [r3, #0]
+										 SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
+	
+		 while (SysTick->VAL >= 100);								   /* wait for ~50탎  */
+ 80010e6:	e002      	b.n	80010ee <SystemClockSetup+0x352>
+		   if ((SCU_PLL->PLLSTAT & SCU_PLL_PLLSTAT_VCOLOCK_Msk)==SCU_PLL_PLLSTAT_VCOLOCK_Msk)
+		   		{
+				/* Go back to the Main PLL */
+				SCU_PLL->PLLCON0 &= ~SCU_PLL_PLLCON0_VCOBYP_Msk;
+				}
+				else return(0);
+ 80010e8:	f04f 0300 	mov.w	r3, #0
+ 80010ec:	e0b6      	b.n	800125c <SystemClockSetup+0x4c0>
+		 SysTick->LOAD  = ((1250+100) & SysTick_LOAD_RELOAD_Msk) - 1;/* set reload register */
+		 SysTick->VAL   = 0;                                         /* Load the SysTick Counter Value */
+		 SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+										 SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
+	
+		 while (SysTick->VAL >= 100);								   /* wait for ~50탎  */
+ 80010ee:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 80010f2:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80010f6:	689b      	ldr	r3, [r3, #8]
+ 80010f8:	2b63      	cmp	r3, #99	; 0x63
+ 80010fa:	d8f8      	bhi.n	80010ee <SystemClockSetup+0x352>
+		 SysTick->CTRL  &= ~SysTick_CTRL_ENABLE_Msk;                 /* Stop SysTick Timer */
+ 80010fc:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001100:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001104:	f24e 0210 	movw	r2, #57360	; 0xe010
+ 8001108:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 800110c:	6812      	ldr	r2, [r2, #0]
+ 800110e:	f022 0201 	bic.w	r2, r2, #1
+ 8001112:	601a      	str	r2, [r3, #0]
+	   /*********************************************************
+	   here the ramp up of the system clock starts FSys < 60MHz
+	   *********************************************************/
+		if (CLOCK_FSYS > 60000000){
+			 /*calulation for stepping*/
+			 if (SCU_PLL_CLOCK_INPUT == SCU_CLOCK_CRYSTAL)VCO = (CLOCK_CRYSTAL_FREQUENCY/(SCU_PLL_PDIV+1))*(SCU_PLL_NDIV+1);
+ 8001114:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 8001118:	f6c1 439c 	movt	r3, #7324	; 0x1c9c
+ 800111c:	607b      	str	r3, [r7, #4]
+			 if ((SCU_PLL_CLOCK_INPUT == SCU_CLOCK_BACK_UP_AUTOMATIC) ||(SCU_PLL_CLOCK_INPUT == SCU_CLOCK_BACK_UP_FACTORY))
+					VCO = (CLOCK_BACK_UP/(SCU_PLL_PDIV+1))*(SCU_PLL_NDIV+1);
+	 
+			 stepping_K2DIV = (VCO/60000000)-1;	
+ 800111e:	687b      	ldr	r3, [r7, #4]
+ 8001120:	ea4f 2213 	mov.w	r2, r3, lsr #8
+ 8001124:	f245 43c7 	movw	r3, #21703	; 0x54c7
+ 8001128:	f2c0 131e 	movt	r3, #286	; 0x11e
+ 800112c:	fba3 1302 	umull	r1, r3, r3, r2
+ 8001130:	ea4f 2393 	mov.w	r3, r3, lsr #10
+ 8001134:	f103 33ff 	add.w	r3, r3, #4294967295
+ 8001138:	603b      	str	r3, [r7, #0]
+
+			 /* Setup devider settings for main PLL */
+				SCU_PLL->PLLCON1 = ((SCU_PLL_K1DIV) | (SCU_PLL_NDIV<<8) | (stepping_K2DIV<<16) | (SCU_PLL_PDIV<<24));
+ 800113a:	f244 7210 	movw	r2, #18192	; 0x4710
+ 800113e:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 8001142:	683b      	ldr	r3, [r7, #0]
+ 8001144:	ea4f 4103 	mov.w	r1, r3, lsl #16
+ 8001148:	f644 7301 	movw	r3, #20225	; 0x4f01
+ 800114c:	f2c0 1300 	movt	r3, #256	; 0x100
+ 8001150:	430b      	orrs	r3, r1
+ 8001152:	6093      	str	r3, [r2, #8]
+		 }
+
+		 /*********************************************************/
+		 /* Delay for next K2 step ~50탎 */
+		 /*********************************************************/
+	   SysTick->LOAD  = ((3000+100) & SysTick_LOAD_RELOAD_Msk) - 1;
+ 8001154:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001158:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 800115c:	f640 421b 	movw	r2, #3099	; 0xc1b
+ 8001160:	605a      	str	r2, [r3, #4]
+	   SysTick->VAL   = 0;                                         /* Load the SysTick Counter Value */
+ 8001162:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001166:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 800116a:	f04f 0200 	mov.w	r2, #0
+ 800116e:	609a      	str	r2, [r3, #8]
+	   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 8001170:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001174:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001178:	f04f 0205 	mov.w	r2, #5
+ 800117c:	601a      	str	r2, [r3, #0]
+	                   SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
+	
+	   while (SysTick->VAL >= 100);								   /* wait for ~50탎  */
+ 800117e:	bf00      	nop
+ 8001180:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001184:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001188:	689b      	ldr	r3, [r3, #8]
+ 800118a:	2b63      	cmp	r3, #99	; 0x63
+ 800118c:	d8f8      	bhi.n	8001180 <SystemClockSetup+0x3e4>
+	   SysTick->CTRL  &= ~SysTick_CTRL_ENABLE_Msk;                 /* Stop SysTick Timer */
+ 800118e:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001192:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001196:	f24e 0210 	movw	r2, #57360	; 0xe010
+ 800119a:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 800119e:	6812      	ldr	r2, [r2, #0]
+ 80011a0:	f022 0201 	bic.w	r2, r2, #1
+ 80011a4:	601a      	str	r2, [r3, #0]
+   /*********************************************************
+	   here the ramp up of the system clock starts FSys < 90MHz
+	   *********************************************************/
+		if (CLOCK_FSYS > 90000000){
+			 /*calulation for stepping*/
+			 if (SCU_PLL_CLOCK_INPUT == SCU_CLOCK_CRYSTAL)VCO = (CLOCK_CRYSTAL_FREQUENCY/(SCU_PLL_PDIV+1))*(SCU_PLL_NDIV+1);
+ 80011a6:	f44f 5360 	mov.w	r3, #14336	; 0x3800
+ 80011aa:	f6c1 439c 	movt	r3, #7324	; 0x1c9c
+ 80011ae:	607b      	str	r3, [r7, #4]
+			 if ((SCU_PLL_CLOCK_INPUT == SCU_CLOCK_BACK_UP_AUTOMATIC) ||(SCU_PLL_CLOCK_INPUT == SCU_CLOCK_BACK_UP_FACTORY))
+					VCO = (CLOCK_BACK_UP/(SCU_PLL_PDIV+1))*(SCU_PLL_NDIV+1);
+
+			 stepping_K2DIV = (VCO/90000000)-1;			
+ 80011b0:	687b      	ldr	r3, [r7, #4]
+ 80011b2:	ea4f 12d3 	mov.w	r2, r3, lsr #7
+ 80011b6:	f24e 332f 	movw	r3, #58159	; 0xe32f
+ 80011ba:	f2c0 03be 	movt	r3, #190	; 0xbe
+ 80011be:	fba3 1302 	umull	r1, r3, r3, r2
+ 80011c2:	ea4f 23d3 	mov.w	r3, r3, lsr #11
+ 80011c6:	f103 33ff 	add.w	r3, r3, #4294967295
+ 80011ca:	603b      	str	r3, [r7, #0]
+
+			 /* Setup devider settings for main PLL */
+				SCU_PLL->PLLCON1 = ((SCU_PLL_K1DIV) | (SCU_PLL_NDIV<<8) | (stepping_K2DIV<<16) | (SCU_PLL_PDIV<<24));
+ 80011cc:	f244 7210 	movw	r2, #18192	; 0x4710
+ 80011d0:	f2c5 0200 	movt	r2, #20480	; 0x5000
+ 80011d4:	683b      	ldr	r3, [r7, #0]
+ 80011d6:	ea4f 4103 	mov.w	r1, r3, lsl #16
+ 80011da:	f644 7301 	movw	r3, #20225	; 0x4f01
+ 80011de:	f2c0 1300 	movt	r3, #256	; 0x100
+ 80011e2:	430b      	orrs	r3, r1
+ 80011e4:	6093      	str	r3, [r2, #8]
+		 }
+	
+		 /*********************************************************/
+		 /* Delay for next K2 step ~50탎 */
+		 /*********************************************************/
+	   SysTick->LOAD  = ((4800+100) & SysTick_LOAD_RELOAD_Msk) - 1;
+ 80011e6:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 80011ea:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80011ee:	f241 3223 	movw	r2, #4899	; 0x1323
+ 80011f2:	605a      	str	r2, [r3, #4]
+	   SysTick->VAL   = 0;                                         /* Load the SysTick Counter Value */
+ 80011f4:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 80011f8:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 80011fc:	f04f 0200 	mov.w	r2, #0
+ 8001200:	609a      	str	r2, [r3, #8]
+	   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 8001202:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001206:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 800120a:	f04f 0205 	mov.w	r2, #5
+ 800120e:	601a      	str	r2, [r3, #0]
+	                   SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
+	
+	   while (SysTick->VAL >= 100);								   /* wait for ~50탎  */
+ 8001210:	bf00      	nop
+ 8001212:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001216:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 800121a:	689b      	ldr	r3, [r3, #8]
+ 800121c:	2b63      	cmp	r3, #99	; 0x63
+ 800121e:	d8f8      	bhi.n	8001212 <SystemClockSetup+0x476>
+	   SysTick->CTRL  &= ~SysTick_CTRL_ENABLE_Msk;                 /* Stop SysTick Timer */
+ 8001220:	f24e 0310 	movw	r3, #57360	; 0xe010
+ 8001224:	f2ce 0300 	movt	r3, #57344	; 0xe000
+ 8001228:	f24e 0210 	movw	r2, #57360	; 0xe010
+ 800122c:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 8001230:	6812      	ldr	r2, [r2, #0]
+ 8001232:	f022 0201 	bic.w	r2, r2, #1
+ 8001236:	601a      	str	r2, [r3, #0]
+	   /********************************/
+	
+	   /* Setup devider settings for main PLL */
+	   SCU_PLL->PLLCON1 = ((SCU_PLL_K1DIV) | (SCU_PLL_NDIV<<8) | (SCU_PLL_K2DIV<<16) | (SCU_PLL_PDIV<<24));
+ 8001238:	f244 7310 	movw	r3, #18192	; 0x4710
+ 800123c:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001240:	f644 7201 	movw	r2, #20225	; 0x4f01
+ 8001244:	f2c0 1203 	movt	r2, #259	; 0x103
+ 8001248:	609a      	str	r2, [r3, #8]
+	
+	   SCU_TRAP->TRAPCLR = SCU_TRAP_TRAPCLR_SOSCWDGT_Msk | SCU_TRAP_TRAPCLR_SVCOLCKT_Msk;  /* clear request for System OCS Watchdog Trap and System VCO Lock Trap  */
+ 800124a:	f244 1360 	movw	r3, #16736	; 0x4160
+ 800124e:	f2c5 0300 	movt	r3, #20480	; 0x5000
+ 8001252:	f04f 0205 	mov.w	r2, #5
+ 8001256:	60da      	str	r2, [r3, #12]
+	}
+ }/* end this weak function enables DAVE3 clock App usage */	
+   return(1);
+ 8001258:	f04f 0301 	mov.w	r3, #1
+
+}
+ 800125c:	4618      	mov	r0, r3
+ 800125e:	f107 0708 	add.w	r7, r7, #8
+ 8001262:	46bd      	mov	sp, r7
+ 8001264:	bd80      	pop	{r7, pc}
+ 8001266:	bf00      	nop
+
+08001268 <arm_add_f32>:
+void arm_add_f32(
+  float32_t * pSrcA,
+  float32_t * pSrcB,
+  float32_t * pDst,
+  uint32_t blockSize)
+{
+ 8001268:	e92d 07f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl}
+  /*loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 800126c:	ea5f 0a93 	movs.w	sl, r3, lsr #2
+ 8001270:	f000 80a8 	beq.w	80013c4 <arm_add_f32+0x15c>
+    /* Add and then store the results in the destination buffer. */
+
+    /* read four inputs from sourceA and four inputs from sourceB */
+    inA1 = *pSrcA;
+    inB1 = *pSrcB;
+    inA2 = *(pSrcA + 1);
+ 8001274:	edd0 4a01 	vldr	s9, [r0, #4]
+    inB2 = *(pSrcB + 1);
+ 8001278:	edd1 6a01 	vldr	s13, [r1, #4]
+    inA3 = *(pSrcA + 2);
+ 800127c:	ed90 5a02 	vldr	s10, [r0, #8]
+    inB3 = *(pSrcB + 2);
+ 8001280:	ed91 7a02 	vldr	s14, [r1, #8]
+    inA4 = *(pSrcA + 3);
+ 8001284:	edd0 5a03 	vldr	s11, [r0, #12]
+    inB4 = *(pSrcB + 3);
+ 8001288:	edd1 7a03 	vldr	s15, [r1, #12]
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 800128c:	ed90 4a00 	vldr	s8, [r0]
+ 8001290:	ed91 6a00 	vldr	s12, [r1]
+ 8001294:	f10a 34ff 	add.w	r4, sl, #4294967295
+ 8001298:	ee34 0a06 	vadd.f32	s0, s8, s12
+    *(pDst + 1) = inA2 + inB2;
+ 800129c:	ee74 0aa6 	vadd.f32	s1, s9, s13
+    *(pDst + 2) = inA3 + inB3;
+ 80012a0:	ee35 1a07 	vadd.f32	s2, s10, s14
+    *(pDst + 3) = inA4 + inB4;
+ 80012a4:	ee75 1aa7 	vadd.f32	s3, s11, s15
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 80012a8:	4606      	mov	r6, r0
+ 80012aa:	460d      	mov	r5, r1
+  /*loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 80012ac:	46a1      	mov	r9, r4
+ 80012ae:	f004 0701 	and.w	r7, r4, #1
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 80012b2:	3610      	adds	r6, #16
+ 80012b4:	3510      	adds	r5, #16
+ 80012b6:	ed82 0a00 	vstr	s0, [r2]
+    *(pDst + 1) = inA2 + inB2;
+ 80012ba:	edc2 0a01 	vstr	s1, [r2, #4]
+    *(pDst + 2) = inA3 + inB3;
+ 80012be:	ed82 1a02 	vstr	s2, [r2, #8]
+    *(pDst + 3) = inA4 + inB4;
+ 80012c2:	edc2 1a03 	vstr	s3, [r2, #12]
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+    pDst += 4u;
+ 80012c6:	f102 0410 	add.w	r4, r2, #16
+  /*loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 80012ca:	f1b9 0f00 	cmp.w	r9, #0
+ 80012ce:	d074      	beq.n	80013ba <arm_add_f32+0x152>
+ 80012d0:	b33f      	cbz	r7, 8001322 <arm_add_f32+0xba>
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 80012d2:	46b0      	mov	r8, r6
+ 80012d4:	462f      	mov	r7, r5
+    /* Add and then store the results in the destination buffer. */
+
+    /* read four inputs from sourceA and four inputs from sourceB */
+    inA1 = *pSrcA;
+    inB1 = *pSrcB;
+    inA2 = *(pSrcA + 1);
+ 80012d6:	ed96 2a01 	vldr	s4, [r6, #4]
+    inB2 = *(pSrcB + 1);
+ 80012da:	edd5 2a01 	vldr	s5, [r5, #4]
+    inA3 = *(pSrcA + 2);
+ 80012de:	ed96 3a02 	vldr	s6, [r6, #8]
+    inB3 = *(pSrcB + 2);
+ 80012e2:	edd5 3a02 	vldr	s7, [r5, #8]
+    inA4 = *(pSrcA + 3);
+ 80012e6:	ed96 5a03 	vldr	s10, [r6, #12]
+    inB4 = *(pSrcB + 3);
+ 80012ea:	edd5 5a03 	vldr	s11, [r5, #12]
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 80012ee:	edd8 4a00 	vldr	s9, [r8]
+ 80012f2:	ed97 7a00 	vldr	s14, [r7]
+    *(pDst + 1) = inA2 + inB2;
+ 80012f6:	ee72 6a22 	vadd.f32	s13, s4, s5
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 80012fa:	ee34 4a87 	vadd.f32	s8, s9, s14
+    *(pDst + 1) = inA2 + inB2;
+    *(pDst + 2) = inA3 + inB3;
+ 80012fe:	ee33 6a23 	vadd.f32	s12, s6, s7
+    *(pDst + 3) = inA4 + inB4;
+ 8001302:	ee75 7a25 	vadd.f32	s15, s10, s11
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001306:	3610      	adds	r6, #16
+ 8001308:	3510      	adds	r5, #16
+ 800130a:	ed84 4a00 	vstr	s8, [r4]
+    *(pDst + 1) = inA2 + inB2;
+ 800130e:	edc4 6a01 	vstr	s13, [r4, #4]
+    *(pDst + 2) = inA3 + inB3;
+ 8001312:	ed84 6a02 	vstr	s12, [r4, #8]
+    *(pDst + 3) = inA4 + inB4;
+ 8001316:	edc4 7a03 	vstr	s15, [r4, #12]
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+    pDst += 4u;
+ 800131a:	3410      	adds	r4, #16
+  /*loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 800131c:	f1b9 0901 	subs.w	r9, r9, #1
+ 8001320:	d04b      	beq.n	80013ba <arm_add_f32+0x152>
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001322:	ed96 0a00 	vldr	s0, [r6]
+ 8001326:	edd5 0a00 	vldr	s1, [r5]
+    /* Add and then store the results in the destination buffer. */
+
+    /* read four inputs from sourceA and four inputs from sourceB */
+    inA1 = *pSrcA;
+    inB1 = *pSrcB;
+    inA2 = *(pSrcA + 1);
+ 800132a:	ed96 1a01 	vldr	s2, [r6, #4]
+    inB2 = *(pSrcB + 1);
+ 800132e:	edd5 1a01 	vldr	s3, [r5, #4]
+    inA3 = *(pSrcA + 2);
+ 8001332:	ed96 2a02 	vldr	s4, [r6, #8]
+    inB3 = *(pSrcB + 2);
+ 8001336:	edd5 2a02 	vldr	s5, [r5, #8]
+    inA4 = *(pSrcA + 3);
+ 800133a:	ed96 3a03 	vldr	s6, [r6, #12]
+    inB4 = *(pSrcB + 3);
+ 800133e:	edd5 3a03 	vldr	s7, [r5, #12]
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001342:	ee30 5a20 	vadd.f32	s10, s0, s1
+    *(pDst + 1) = inA2 + inB2;
+ 8001346:	ee71 5a21 	vadd.f32	s11, s2, s3
+    *(pDst + 2) = inA3 + inB3;
+ 800134a:	ee72 4a22 	vadd.f32	s9, s4, s5
+    *(pDst + 3) = inA4 + inB4;
+ 800134e:	ee33 7a23 	vadd.f32	s14, s6, s7
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001352:	ed84 5a00 	vstr	s10, [r4]
+    *(pDst + 1) = inA2 + inB2;
+ 8001356:	edc4 5a01 	vstr	s11, [r4, #4]
+    *(pDst + 2) = inA3 + inB3;
+ 800135a:	edc4 4a02 	vstr	s9, [r4, #8]
+    *(pDst + 3) = inA4 + inB4;
+ 800135e:	ed84 7a03 	vstr	s14, [r4, #12]
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001362:	ed96 4a04 	vldr	s8, [r6, #16]
+ 8001366:	ed95 6a04 	vldr	s12, [r5, #16]
+    /* Add and then store the results in the destination buffer. */
+
+    /* read four inputs from sourceA and four inputs from sourceB */
+    inA1 = *pSrcA;
+    inB1 = *pSrcB;
+    inA2 = *(pSrcA + 1);
+ 800136a:	ed96 0a05 	vldr	s0, [r6, #20]
+    inB2 = *(pSrcB + 1);
+ 800136e:	edd5 6a05 	vldr	s13, [r5, #20]
+    inA3 = *(pSrcA + 2);
+ 8001372:	edd6 0a06 	vldr	s1, [r6, #24]
+    inB3 = *(pSrcB + 2);
+ 8001376:	ed95 1a06 	vldr	s2, [r5, #24]
+    inA4 = *(pSrcA + 3);
+ 800137a:	edd6 1a07 	vldr	s3, [r6, #28]
+    inB4 = *(pSrcB + 3);
+ 800137e:	edd5 7a07 	vldr	s15, [r5, #28]
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001382:	ee34 2a06 	vadd.f32	s4, s8, s12
+    *(pDst + 1) = inA2 + inB2;
+ 8001386:	ee70 2a26 	vadd.f32	s5, s0, s13
+    *(pDst + 2) = inA3 + inB3;
+ 800138a:	ee30 3a81 	vadd.f32	s6, s1, s2
+    *(pDst + 3) = inA4 + inB4;
+ 800138e:	ee71 3aa7 	vadd.f32	s7, s3, s15
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001392:	462f      	mov	r7, r5
+    *(pDst + 3) = inA4 + inB4;
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+    pDst += 4u;
+ 8001394:	f104 0810 	add.w	r8, r4, #16
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 8001398:	ed84 2a04 	vstr	s4, [r4, #16]
+    *(pDst + 1) = inA2 + inB2;
+ 800139c:	edc4 2a05 	vstr	s5, [r4, #20]
+    *(pDst + 2) = inA3 + inB3;
+ 80013a0:	ed84 3a06 	vstr	s6, [r4, #24]
+    *(pDst + 3) = inA4 + inB4;
+ 80013a4:	edc4 3a07 	vstr	s7, [r4, #28]
+    inA4 = *(pSrcA + 3);
+    inB4 = *(pSrcB + 3);
+
+    /* C = A + B */
+    /* add and store result to destination */
+    *pDst = inA1 + inB1;
+ 80013a8:	3710      	adds	r7, #16
+    *(pDst + 3) = inA4 + inB4;
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+    pDst += 4u;
+ 80013aa:	3420      	adds	r4, #32
+  /*loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 80013ac:	f1b9 0902 	subs.w	r9, r9, #2
+    *(pDst + 1) = inA2 + inB2;
+    *(pDst + 2) = inA3 + inB3;
+    *(pDst + 3) = inA4 + inB4;
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+ 80013b0:	f106 0620 	add.w	r6, r6, #32
+    pSrcB += 4u;
+ 80013b4:	f105 0520 	add.w	r5, r5, #32
+  /*loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 80013b8:	d1b3      	bne.n	8001322 <arm_add_f32+0xba>
+ * @param[out]      *pDst points to the output vector        
+ * @param[in]       blockSize number of samples in each vector        
+ * @return none.        
+ */
+
+void arm_add_f32(
+ 80013ba:	ea4f 140a 	mov.w	r4, sl, lsl #4
+ 80013be:	1900      	adds	r0, r0, r4
+ 80013c0:	1909      	adds	r1, r1, r4
+ 80013c2:	1912      	adds	r2, r2, r4
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80013c4:	f013 0303 	ands.w	r3, r3, #3
+ 80013c8:	d031      	beq.n	800142e <arm_add_f32+0x1c6>
+  {
+    /* C = A + B */
+    /* Add and then store the results in the destination buffer. */
+    *pDst++ = (*pSrcA++) + (*pSrcB++);
+ 80013ca:	ed90 5a00 	vldr	s10, [r0]
+ 80013ce:	edd1 5a00 	vldr	s11, [r1]
+ 80013d2:	1e5c      	subs	r4, r3, #1
+ 80013d4:	ee75 4a25 	vadd.f32	s9, s10, s11
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80013d8:	4623      	mov	r3, r4
+  {
+    /* C = A + B */
+    /* Add and then store the results in the destination buffer. */
+    *pDst++ = (*pSrcA++) + (*pSrcB++);
+ 80013da:	ece2 4a01 	vstmia	r2!, {s9}
+ 80013de:	f004 0401 	and.w	r4, r4, #1
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80013e2:	b323      	cbz	r3, 800142e <arm_add_f32+0x1c6>
+ 80013e4:	b16c      	cbz	r4, 8001402 <arm_add_f32+0x19a>
+  {
+    /* C = A + B */
+    /* Add and then store the results in the destination buffer. */
+    *pDst++ = (*pSrcA++) + (*pSrcB++);
+ 80013e6:	3004      	adds	r0, #4
+ 80013e8:	3104      	adds	r1, #4
+ 80013ea:	ed90 7a00 	vldr	s14, [r0]
+ 80013ee:	ed91 4a00 	vldr	s8, [r1]
+ 80013f2:	ee37 6a04 	vadd.f32	s12, s14, s8
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80013f6:	3b01      	subs	r3, #1
+  {
+    /* C = A + B */
+    /* Add and then store the results in the destination buffer. */
+    *pDst++ = (*pSrcA++) + (*pSrcB++);
+ 80013f8:	4604      	mov	r4, r0
+ 80013fa:	460f      	mov	r7, r1
+ 80013fc:	eca2 6a01 	vstmia	r2!, {s12}
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 8001400:	d015      	beq.n	800142e <arm_add_f32+0x1c6>
+  {
+    /* C = A + B */
+    /* Add and then store the results in the destination buffer. */
+    *pDst++ = (*pSrcA++) + (*pSrcB++);
+ 8001402:	ed90 0a01 	vldr	s0, [r0, #4]
+ 8001406:	edd1 6a01 	vldr	s13, [r1, #4]
+ 800140a:	ee70 0a26 	vadd.f32	s1, s0, s13
+ 800140e:	4614      	mov	r4, r2
+ 8001410:	ece4 0a01 	vstmia	r4!, {s1}
+ 8001414:	ed90 1a02 	vldr	s2, [r0, #8]
+ 8001418:	edd1 1a02 	vldr	s3, [r1, #8]
+ 800141c:	ee71 7a21 	vadd.f32	s15, s2, s3
+ 8001420:	3008      	adds	r0, #8
+ 8001422:	edc2 7a01 	vstr	s15, [r2, #4]
+ 8001426:	3108      	adds	r1, #8
+ 8001428:	1d22      	adds	r2, r4, #4
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 800142a:	3b02      	subs	r3, #2
+ 800142c:	d1e9      	bne.n	8001402 <arm_add_f32+0x19a>
+    *pDst++ = (*pSrcA++) + (*pSrcB++);
+
+    /* Decrement the loop counter */
+    blkCnt--;
+  }
+}
+ 800142e:	e8bd 07f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl}
+ 8001432:	4770      	bx	lr
+
+08001434 <arm_mult_f32>:
+void arm_mult_f32(
+  float32_t * pSrcA,
+  float32_t * pSrcB,
+  float32_t * pDst,
+  uint32_t blockSize)
+{
+ 8001434:	e92d 03f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9}
+  /* loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 8001438:	ea5f 0893 	movs.w	r8, r3, lsr #2
+ 800143c:	f000 80a5 	beq.w	800158a <arm_mult_f32+0x156>
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 8001440:	edd1 7a00 	vldr	s15, [r1]
+ 8001444:	ed90 7a00 	vldr	s14, [r0]
+ 8001448:	ee27 0a27 	vmul.f32	s0, s14, s15
+
+    /* read sample from sourceA */
+    inA3 = *(pSrcA + 2);
+ 800144c:	edd0 5a02 	vldr	s11, [r0, #8]
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+ 8001450:	edd1 0a02 	vldr	s1, [r1, #8]
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 8001454:	ed90 5a01 	vldr	s10, [r0, #4]
+ 8001458:	edd1 6a01 	vldr	s13, [r1, #4]
+
+    /* read sample from sourceA */
+    inA4 = *(pSrcA + 3);
+ 800145c:	ed90 6a03 	vldr	s12, [r0, #12]
+
+    /* store result to destination buffer */
+    *pDst = out1;
+ 8001460:	ed82 0a00 	vstr	s0, [r2]
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+ 8001464:	ed91 1a03 	vldr	s2, [r1, #12]
+ 8001468:	f108 35ff 	add.w	r5, r8, #4294967295
+    inA3 = *(pSrcA + 2);
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 800146c:	ee65 1a26 	vmul.f32	s3, s10, s13
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+ 8001470:	ee25 2aa0 	vmul.f32	s4, s11, s1
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+ 8001474:	ee66 2a01 	vmul.f32	s5, s12, s2
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 8001478:	4606      	mov	r6, r0
+  /* loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 800147a:	46ac      	mov	ip, r5
+ 800147c:	f005 0701 	and.w	r7, r5, #1
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 8001480:	3610      	adds	r6, #16
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+ 8001482:	edc2 1a01 	vstr	s3, [r2, #4]
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+    /* store result to destination buffer */
+    *(pDst + 2) = out3;
+ 8001486:	ed82 2a02 	vstr	s4, [r2, #8]
+    /* store result to destination buffer */
+    *(pDst + 3) = out4;
+ 800148a:	edc2 2a03 	vstr	s5, [r2, #12]
+
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+ 800148e:	f101 0510 	add.w	r5, r1, #16
+    pDst += 4u;
+ 8001492:	f102 0410 	add.w	r4, r2, #16
+  /* loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 8001496:	f1bc 0f00 	cmp.w	ip, #0
+ 800149a:	d071      	beq.n	8001580 <arm_mult_f32+0x14c>
+ 800149c:	b337      	cbz	r7, 80014ec <arm_mult_f32+0xb8>
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 800149e:	46b1      	mov	r9, r6
+ 80014a0:	edd5 4a00 	vldr	s9, [r5]
+ 80014a4:	edd9 7a00 	vldr	s15, [r9]
+ 80014a8:	ee27 0aa4 	vmul.f32	s0, s15, s9
+
+    /* read sample from sourceA */
+    inA3 = *(pSrcA + 2);
+ 80014ac:	ed96 3a02 	vldr	s6, [r6, #8]
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 80014b0:	edd6 3a01 	vldr	s7, [r6, #4]
+
+    /* read sample from sourceA */
+    inA4 = *(pSrcA + 3);
+ 80014b4:	ed96 4a03 	vldr	s8, [r6, #12]
+    out1 = inA1 * inB1;
+
+    /* read sample from sourceA */
+    inA3 = *(pSrcA + 2);
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+ 80014b8:	ed95 7a02 	vldr	s14, [r5, #8]
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 80014bc:	edd5 5a01 	vldr	s11, [r5, #4]
+
+    /* read sample from sourceA */
+    inA4 = *(pSrcA + 3);
+
+    /* store result to destination buffer */
+    *pDst = out1;
+ 80014c0:	ed84 0a00 	vstr	s0, [r4]
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+ 80014c4:	edd5 0a03 	vldr	s1, [r5, #12]
+    inA3 = *(pSrcA + 2);
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 80014c8:	ee23 5aa5 	vmul.f32	s10, s7, s11
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+ 80014cc:	ee63 6a07 	vmul.f32	s13, s6, s14
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+ 80014d0:	ee24 6a20 	vmul.f32	s12, s8, s1
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 80014d4:	3610      	adds	r6, #16
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+ 80014d6:	ed84 5a01 	vstr	s10, [r4, #4]
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+    /* store result to destination buffer */
+    *(pDst + 2) = out3;
+ 80014da:	edc4 6a02 	vstr	s13, [r4, #8]
+    /* store result to destination buffer */
+    *(pDst + 3) = out4;
+ 80014de:	ed84 6a03 	vstr	s12, [r4, #12]
+
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+ 80014e2:	3510      	adds	r5, #16
+    pDst += 4u;
+ 80014e4:	3410      	adds	r4, #16
+  /* loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 80014e6:	f1bc 0c01 	subs.w	ip, ip, #1
+ 80014ea:	d049      	beq.n	8001580 <arm_mult_f32+0x14c>
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 80014ec:	ed95 1a00 	vldr	s2, [r5]
+ 80014f0:	edd6 1a00 	vldr	s3, [r6]
+ 80014f4:	ee21 2a81 	vmul.f32	s4, s3, s2
+
+    /* read sample from sourceA */
+    inA3 = *(pSrcA + 2);
+ 80014f8:	edd6 2a02 	vldr	s5, [r6, #8]
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+ 80014fc:	ed95 3a02 	vldr	s6, [r5, #8]
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 8001500:	edd6 3a01 	vldr	s7, [r6, #4]
+ 8001504:	ed95 4a01 	vldr	s8, [r5, #4]
+
+    /* read sample from sourceA */
+    inA4 = *(pSrcA + 3);
+ 8001508:	edd6 4a03 	vldr	s9, [r6, #12]
+
+    /* store result to destination buffer */
+    *pDst = out1;
+ 800150c:	ed84 2a00 	vstr	s4, [r4]
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+ 8001510:	edd5 7a03 	vldr	s15, [r5, #12]
+    inA3 = *(pSrcA + 2);
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 8001514:	ee23 0a84 	vmul.f32	s0, s7, s8
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+ 8001518:	ee22 7a83 	vmul.f32	s14, s5, s6
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+ 800151c:	ee64 5aa7 	vmul.f32	s11, s9, s15
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+ 8001520:	ed84 0a01 	vstr	s0, [r4, #4]
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+    /* store result to destination buffer */
+    *(pDst + 2) = out3;
+ 8001524:	ed84 7a02 	vstr	s14, [r4, #8]
+    /* store result to destination buffer */
+    *(pDst + 3) = out4;
+ 8001528:	edc4 5a03 	vstr	s11, [r4, #12]
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 800152c:	edd6 0a04 	vldr	s1, [r6, #16]
+ 8001530:	ed95 5a04 	vldr	s10, [r5, #16]
+ 8001534:	ee20 1a85 	vmul.f32	s2, s1, s10
+
+    /* read sample from sourceA */
+    inA3 = *(pSrcA + 2);
+ 8001538:	edd6 1a06 	vldr	s3, [r6, #24]
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+ 800153c:	ed95 2a06 	vldr	s4, [r5, #24]
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 8001540:	edd6 2a05 	vldr	s5, [r6, #20]
+ 8001544:	edd5 6a05 	vldr	s13, [r5, #20]
+
+    /* read sample from sourceA */
+    inA4 = *(pSrcA + 3);
+ 8001548:	ed96 6a07 	vldr	s12, [r6, #28]
+
+    /* store result to destination buffer */
+    *pDst = out1;
+ 800154c:	ed84 1a04 	vstr	s2, [r4, #16]
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+ 8001550:	ed95 3a07 	vldr	s6, [r5, #28]
+    inA3 = *(pSrcA + 2);
+    /* read sample from sourceB */
+    inB3 = *(pSrcB + 2);
+
+    /* out = sourceA * sourceB */
+    out2 = inA2 * inB2;
+ 8001554:	ee62 3aa6 	vmul.f32	s7, s5, s13
+
+    /* read sample from sourceB */
+    inB4 = *(pSrcB + 3);
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+ 8001558:	ee21 4a82 	vmul.f32	s8, s3, s4
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+ 800155c:	ee66 4a03 	vmul.f32	s9, s12, s6
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 8001560:	4637      	mov	r7, r6
+
+    /* out = sourceA * sourceB */
+    out3 = inA3 * inB3;
+
+    /* store result to destination buffer */
+    *(pDst + 1) = out2;
+ 8001562:	edc4 3a05 	vstr	s7, [r4, #20]
+
+    /* out = sourceA * sourceB */
+    out4 = inA4 * inB4;
+    /* store result to destination buffer */
+    *(pDst + 2) = out3;
+ 8001566:	ed84 4a06 	vstr	s8, [r4, #24]
+    /* store result to destination buffer */
+    *(pDst + 3) = out4;
+ 800156a:	edc4 4a07 	vstr	s9, [r4, #28]
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 800156e:	3710      	adds	r7, #16
+    *(pDst + 3) = out4;
+
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+    pSrcB += 4u;
+ 8001570:	3520      	adds	r5, #32
+    pDst += 4u;
+ 8001572:	3420      	adds	r4, #32
+  /* loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 8001574:	f1bc 0c02 	subs.w	ip, ip, #2
+    inA2 = *(pSrcA + 1);
+    /* read sample from sourceB */
+    inB2 = *(pSrcB + 1);
+
+    /* out = sourceA * sourceB */
+    out1 = inA1 * inB1;
+ 8001578:	46b1      	mov	r9, r6
+    /* store result to destination buffer */
+    *(pDst + 3) = out4;
+
+
+    /* update pointers to process next samples */
+    pSrcA += 4u;
+ 800157a:	f106 0620 	add.w	r6, r6, #32
+  /* loop Unrolling */
+  blkCnt = blockSize >> 2u;
+
+  /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.        
+   ** a second loop below computes the remaining 1 to 3 samples. */
+  while(blkCnt > 0u)
+ 800157e:	d1b5      	bne.n	80014ec <arm_mult_f32+0xb8>
+ * @param[out]      *pDst points to the output vector        
+ * @param[in]       blockSize number of samples in each vector        
+ * @return none.        
+ */
+
+void arm_mult_f32(
+ 8001580:	ea4f 1408 	mov.w	r4, r8, lsl #4
+ 8001584:	1900      	adds	r0, r0, r4
+ 8001586:	1909      	adds	r1, r1, r4
+ 8001588:	1912      	adds	r2, r2, r4
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 800158a:	f013 0303 	ands.w	r3, r3, #3
+ 800158e:	d031      	beq.n	80015f4 <arm_mult_f32+0x1c0>
+  {
+    /* C = A * B */
+    /* Multiply the inputs and store the results in output buffer */
+    *pDst++ = (*pSrcA++) * (*pSrcB++);
+ 8001590:	ed90 0a00 	vldr	s0, [r0]
+ 8001594:	edd1 7a00 	vldr	s15, [r1]
+ 8001598:	1e5c      	subs	r4, r3, #1
+ 800159a:	ee20 7a27 	vmul.f32	s14, s0, s15
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 800159e:	4623      	mov	r3, r4
+  {
+    /* C = A * B */
+    /* Multiply the inputs and store the results in output buffer */
+    *pDst++ = (*pSrcA++) * (*pSrcB++);
+ 80015a0:	eca2 7a01 	vstmia	r2!, {s14}
+ 80015a4:	f004 0401 	and.w	r4, r4, #1
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80015a8:	b323      	cbz	r3, 80015f4 <arm_mult_f32+0x1c0>
+ 80015aa:	b16c      	cbz	r4, 80015c8 <arm_mult_f32+0x194>
+  {
+    /* C = A * B */
+    /* Multiply the inputs and store the results in output buffer */
+    *pDst++ = (*pSrcA++) * (*pSrcB++);
+ 80015ac:	3004      	adds	r0, #4
+ 80015ae:	3104      	adds	r1, #4
+ 80015b0:	edd0 5a00 	vldr	s11, [r0]
+ 80015b4:	edd1 0a00 	vldr	s1, [r1]
+ 80015b8:	ee25 5aa0 	vmul.f32	s10, s11, s1
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80015bc:	3b01      	subs	r3, #1
+  {
+    /* C = A * B */
+    /* Multiply the inputs and store the results in output buffer */
+    *pDst++ = (*pSrcA++) * (*pSrcB++);
+ 80015be:	4604      	mov	r4, r0
+ 80015c0:	460f      	mov	r7, r1
+ 80015c2:	eca2 5a01 	vstmia	r2!, {s10}
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80015c6:	d015      	beq.n	80015f4 <arm_mult_f32+0x1c0>
+  {
+    /* C = A * B */
+    /* Multiply the inputs and store the results in output buffer */
+    *pDst++ = (*pSrcA++) * (*pSrcB++);
+ 80015c8:	ed90 1a01 	vldr	s2, [r0, #4]
+ 80015cc:	edd1 1a01 	vldr	s3, [r1, #4]
+ 80015d0:	ee21 2a21 	vmul.f32	s4, s2, s3
+ 80015d4:	4614      	mov	r4, r2
+ 80015d6:	eca4 2a01 	vstmia	r4!, {s4}
+ 80015da:	edd0 2a02 	vldr	s5, [r0, #8]
+ 80015de:	edd1 6a02 	vldr	s13, [r1, #8]
+ 80015e2:	ee22 6aa6 	vmul.f32	s12, s5, s13
+ 80015e6:	3008      	adds	r0, #8
+ 80015e8:	ed82 6a01 	vstr	s12, [r2, #4]
+ 80015ec:	3108      	adds	r1, #8
+ 80015ee:	1d22      	adds	r2, r4, #4
+  /* Initialize blkCnt with number of samples */
+  blkCnt = blockSize;
+
+#endif /* #ifndef ARM_MATH_CM0_FAMILY */
+
+  while(blkCnt > 0u)
+ 80015f0:	3b02      	subs	r3, #2
+ 80015f2:	d1e9      	bne.n	80015c8 <arm_mult_f32+0x194>
+    *pDst++ = (*pSrcA++) * (*pSrcB++);
+
+    /* Decrement the blockSize loop counter */
+    blkCnt--;
+  }
+}
+ 80015f4:	e8bd 03f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9}
+ 80015f8:	4770      	bx	lr
+ 80015fa:	bf00      	nop
+
+080015fc <__libc_init_array>:
+ 80015fc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80015fe:	4f20      	ldr	r7, [pc, #128]	; (8001680 <__libc_init_array+0x84>)
+ 8001600:	4c20      	ldr	r4, [pc, #128]	; (8001684 <__libc_init_array+0x88>)
+ 8001602:	1b38      	subs	r0, r7, r4
+ 8001604:	1087      	asrs	r7, r0, #2
+ 8001606:	d017      	beq.n	8001638 <__libc_init_array+0x3c>
+ 8001608:	1e7a      	subs	r2, r7, #1
+ 800160a:	6823      	ldr	r3, [r4, #0]
+ 800160c:	2501      	movs	r5, #1
+ 800160e:	f002 0601 	and.w	r6, r2, #1
+ 8001612:	4798      	blx	r3
+ 8001614:	42af      	cmp	r7, r5
+ 8001616:	d00f      	beq.n	8001638 <__libc_init_array+0x3c>
+ 8001618:	b12e      	cbz	r6, 8001626 <__libc_init_array+0x2a>
+ 800161a:	f854 1f04 	ldr.w	r1, [r4, #4]!
+ 800161e:	2502      	movs	r5, #2
+ 8001620:	4788      	blx	r1
+ 8001622:	42af      	cmp	r7, r5
+ 8001624:	d008      	beq.n	8001638 <__libc_init_array+0x3c>
+ 8001626:	6860      	ldr	r0, [r4, #4]
+ 8001628:	4780      	blx	r0
+ 800162a:	3502      	adds	r5, #2
+ 800162c:	68a2      	ldr	r2, [r4, #8]
+ 800162e:	1d26      	adds	r6, r4, #4
+ 8001630:	4790      	blx	r2
+ 8001632:	3408      	adds	r4, #8
+ 8001634:	42af      	cmp	r7, r5
+ 8001636:	d1f6      	bne.n	8001626 <__libc_init_array+0x2a>
+ 8001638:	4f13      	ldr	r7, [pc, #76]	; (8001688 <__libc_init_array+0x8c>)
+ 800163a:	4c14      	ldr	r4, [pc, #80]	; (800168c <__libc_init_array+0x90>)
+ 800163c:	f000 f928 	bl	8001890 <_init>
+ 8001640:	1b3b      	subs	r3, r7, r4
+ 8001642:	109f      	asrs	r7, r3, #2
+ 8001644:	d018      	beq.n	8001678 <__libc_init_array+0x7c>
+ 8001646:	1e7d      	subs	r5, r7, #1
+ 8001648:	6821      	ldr	r1, [r4, #0]
+ 800164a:	f005 0601 	and.w	r6, r5, #1
+ 800164e:	2501      	movs	r5, #1
+ 8001650:	4788      	blx	r1
+ 8001652:	42af      	cmp	r7, r5
+ 8001654:	d011      	beq.n	800167a <__libc_init_array+0x7e>
+ 8001656:	b12e      	cbz	r6, 8001664 <__libc_init_array+0x68>
+ 8001658:	f854 0f04 	ldr.w	r0, [r4, #4]!
+ 800165c:	2502      	movs	r5, #2
+ 800165e:	4780      	blx	r0
+ 8001660:	42af      	cmp	r7, r5
+ 8001662:	d00b      	beq.n	800167c <__libc_init_array+0x80>
+ 8001664:	6862      	ldr	r2, [r4, #4]
+ 8001666:	4790      	blx	r2
+ 8001668:	3502      	adds	r5, #2
+ 800166a:	68a3      	ldr	r3, [r4, #8]
+ 800166c:	1d26      	adds	r6, r4, #4
+ 800166e:	4798      	blx	r3
+ 8001670:	3408      	adds	r4, #8
+ 8001672:	42af      	cmp	r7, r5
+ 8001674:	d1f6      	bne.n	8001664 <__libc_init_array+0x68>
+ 8001676:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+ 8001678:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+ 800167a:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+ 800167c:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+ 800167e:	bf00      	nop
+ 8001680:	080018b4 	.word	0x080018b4
+ 8001684:	080018b4 	.word	0x080018b4
+ 8001688:	080018b4 	.word	0x080018b4
+ 800168c:	080018b4 	.word	0x080018b4
+
+08001690 <_open>:
+ 8001690:	b480      	push	{r7}
+ 8001692:	b085      	sub	sp, #20
+ 8001694:	af00      	add	r7, sp, #0
+ 8001696:	60f8      	str	r0, [r7, #12]
+ 8001698:	60b9      	str	r1, [r7, #8]
+ 800169a:	607a      	str	r2, [r7, #4]
+ 800169c:	f04f 33ff 	mov.w	r3, #4294967295
+ 80016a0:	4618      	mov	r0, r3
+ 80016a2:	f107 0714 	add.w	r7, r7, #20
+ 80016a6:	46bd      	mov	sp, r7
+ 80016a8:	bc80      	pop	{r7}
+ 80016aa:	4770      	bx	lr
+
+080016ac <_lseek>:
+ 80016ac:	b480      	push	{r7}
+ 80016ae:	b085      	sub	sp, #20
+ 80016b0:	af00      	add	r7, sp, #0
+ 80016b2:	60f8      	str	r0, [r7, #12]
+ 80016b4:	60b9      	str	r1, [r7, #8]
+ 80016b6:	607a      	str	r2, [r7, #4]
+ 80016b8:	f04f 33ff 	mov.w	r3, #4294967295
+ 80016bc:	4618      	mov	r0, r3
+ 80016be:	f107 0714 	add.w	r7, r7, #20
+ 80016c2:	46bd      	mov	sp, r7
+ 80016c4:	bc80      	pop	{r7}
+ 80016c6:	4770      	bx	lr
+
+080016c8 <_read>:
+ 80016c8:	b480      	push	{r7}
+ 80016ca:	b085      	sub	sp, #20
+ 80016cc:	af00      	add	r7, sp, #0
+ 80016ce:	60f8      	str	r0, [r7, #12]
+ 80016d0:	60b9      	str	r1, [r7, #8]
+ 80016d2:	607a      	str	r2, [r7, #4]
+ 80016d4:	f04f 0300 	mov.w	r3, #0
+ 80016d8:	4618      	mov	r0, r3
+ 80016da:	f107 0714 	add.w	r7, r7, #20
+ 80016de:	46bd      	mov	sp, r7
+ 80016e0:	bc80      	pop	{r7}
+ 80016e2:	4770      	bx	lr
+
+080016e4 <_write>:
+ 80016e4:	b480      	push	{r7}
+ 80016e6:	b085      	sub	sp, #20
+ 80016e8:	af00      	add	r7, sp, #0
+ 80016ea:	60f8      	str	r0, [r7, #12]
+ 80016ec:	60b9      	str	r1, [r7, #8]
+ 80016ee:	607a      	str	r2, [r7, #4]
+ 80016f0:	f04f 33ff 	mov.w	r3, #4294967295
+ 80016f4:	4618      	mov	r0, r3
+ 80016f6:	f107 0714 	add.w	r7, r7, #20
+ 80016fa:	46bd      	mov	sp, r7
+ 80016fc:	bc80      	pop	{r7}
+ 80016fe:	4770      	bx	lr
+
+08001700 <_close>:
+ 8001700:	b480      	push	{r7}
+ 8001702:	af00      	add	r7, sp, #0
+ 8001704:	f04f 33ff 	mov.w	r3, #4294967295
+ 8001708:	4618      	mov	r0, r3
+ 800170a:	46bd      	mov	sp, r7
+ 800170c:	bc80      	pop	{r7}
+ 800170e:	4770      	bx	lr
+
+08001710 <_fstat>:
+ 8001710:	b480      	push	{r7}
+ 8001712:	b083      	sub	sp, #12
+ 8001714:	af00      	add	r7, sp, #0
+ 8001716:	6078      	str	r0, [r7, #4]
+ 8001718:	6039      	str	r1, [r7, #0]
+ 800171a:	683b      	ldr	r3, [r7, #0]
+ 800171c:	2b00      	cmp	r3, #0
+ 800171e:	d002      	beq.n	8001726 <_fstat+0x16>
+ 8001720:	f04f 33ff 	mov.w	r3, #4294967295
+ 8001724:	e001      	b.n	800172a <_fstat+0x1a>
+ 8001726:	f06f 0301 	mvn.w	r3, #1
+ 800172a:	4618      	mov	r0, r3
+ 800172c:	f107 070c 	add.w	r7, r7, #12
+ 8001730:	46bd      	mov	sp, r7
+ 8001732:	bc80      	pop	{r7}
+ 8001734:	4770      	bx	lr
+ 8001736:	bf00      	nop
+
+08001738 <_link>:
+ 8001738:	b480      	push	{r7}
+ 800173a:	b083      	sub	sp, #12
+ 800173c:	af00      	add	r7, sp, #0
+ 800173e:	6078      	str	r0, [r7, #4]
+ 8001740:	6039      	str	r1, [r7, #0]
+ 8001742:	687a      	ldr	r2, [r7, #4]
+ 8001744:	683b      	ldr	r3, [r7, #0]
+ 8001746:	429a      	cmp	r2, r3
+ 8001748:	d102      	bne.n	8001750 <_link+0x18>
+ 800174a:	f04f 33ff 	mov.w	r3, #4294967295
+ 800174e:	e001      	b.n	8001754 <_link+0x1c>
+ 8001750:	f06f 0301 	mvn.w	r3, #1
+ 8001754:	4618      	mov	r0, r3
+ 8001756:	f107 070c 	add.w	r7, r7, #12
+ 800175a:	46bd      	mov	sp, r7
+ 800175c:	bc80      	pop	{r7}
+ 800175e:	4770      	bx	lr
+
+08001760 <_unlink>:
+ 8001760:	b480      	push	{r7}
+ 8001762:	b083      	sub	sp, #12
+ 8001764:	af00      	add	r7, sp, #0
+ 8001766:	6078      	str	r0, [r7, #4]
+ 8001768:	f04f 33ff 	mov.w	r3, #4294967295
+ 800176c:	4618      	mov	r0, r3
+ 800176e:	f107 070c 	add.w	r7, r7, #12
+ 8001772:	46bd      	mov	sp, r7
+ 8001774:	bc80      	pop	{r7}
+ 8001776:	4770      	bx	lr
+
+08001778 <_sbrk>:
+ 8001778:	b480      	push	{r7}
+ 800177a:	b087      	sub	sp, #28
+ 800177c:	af00      	add	r7, sp, #0
+ 800177e:	6078      	str	r0, [r7, #4]
+ 8001780:	f24f 6358 	movw	r3, #63064	; 0xf658
+ 8001784:	f2c0 0300 	movt	r3, #0
+ 8001788:	617b      	str	r3, [r7, #20]
+ 800178a:	f640 0304 	movw	r3, #2052	; 0x804
+ 800178e:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8001792:	681b      	ldr	r3, [r3, #0]
+ 8001794:	2b00      	cmp	r3, #0
+ 8001796:	d114      	bne.n	80017c2 <_sbrk+0x4a>
+ 8001798:	f640 0304 	movw	r3, #2052	; 0x804
+ 800179c:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80017a0:	f640 12a8 	movw	r2, #2472	; 0x9a8
+ 80017a4:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 80017a8:	601a      	str	r2, [r3, #0]
+ 80017aa:	f640 0304 	movw	r3, #2052	; 0x804
+ 80017ae:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80017b2:	681a      	ldr	r2, [r3, #0]
+ 80017b4:	697b      	ldr	r3, [r7, #20]
+ 80017b6:	18d2      	adds	r2, r2, r3
+ 80017b8:	f640 0308 	movw	r3, #2056	; 0x808
+ 80017bc:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80017c0:	601a      	str	r2, [r3, #0]
+ 80017c2:	f640 0304 	movw	r3, #2052	; 0x804
+ 80017c6:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80017ca:	681b      	ldr	r3, [r3, #0]
+ 80017cc:	613b      	str	r3, [r7, #16]
+ 80017ce:	f640 0304 	movw	r3, #2052	; 0x804
+ 80017d2:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80017d6:	681b      	ldr	r3, [r3, #0]
+ 80017d8:	461a      	mov	r2, r3
+ 80017da:	687b      	ldr	r3, [r7, #4]
+ 80017dc:	18d3      	adds	r3, r2, r3
+ 80017de:	f103 0307 	add.w	r3, r3, #7
+ 80017e2:	f023 0307 	bic.w	r3, r3, #7
+ 80017e6:	60fb      	str	r3, [r7, #12]
+ 80017e8:	f640 0308 	movw	r3, #2056	; 0x808
+ 80017ec:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 80017f0:	681b      	ldr	r3, [r3, #0]
+ 80017f2:	68fa      	ldr	r2, [r7, #12]
+ 80017f4:	429a      	cmp	r2, r3
+ 80017f6:	d302      	bcc.n	80017fe <_sbrk+0x86>
+ 80017f8:	f04f 0300 	mov.w	r3, #0
+ 80017fc:	e006      	b.n	800180c <_sbrk+0x94>
+ 80017fe:	f640 0304 	movw	r3, #2052	; 0x804
+ 8001802:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 8001806:	68fa      	ldr	r2, [r7, #12]
+ 8001808:	601a      	str	r2, [r3, #0]
+ 800180a:	693b      	ldr	r3, [r7, #16]
+ 800180c:	4618      	mov	r0, r3
+ 800180e:	f107 071c 	add.w	r7, r7, #28
+ 8001812:	46bd      	mov	sp, r7
+ 8001814:	bc80      	pop	{r7}
+ 8001816:	4770      	bx	lr
+
+08001818 <_times>:
+ 8001818:	b480      	push	{r7}
+ 800181a:	b083      	sub	sp, #12
+ 800181c:	af00      	add	r7, sp, #0
+ 800181e:	6078      	str	r0, [r7, #4]
+ 8001820:	f04f 33ff 	mov.w	r3, #4294967295
+ 8001824:	4618      	mov	r0, r3
+ 8001826:	f107 070c 	add.w	r7, r7, #12
+ 800182a:	46bd      	mov	sp, r7
+ 800182c:	bc80      	pop	{r7}
+ 800182e:	4770      	bx	lr
+
+08001830 <_wait>:
+ 8001830:	b480      	push	{r7}
+ 8001832:	b083      	sub	sp, #12
+ 8001834:	af00      	add	r7, sp, #0
+ 8001836:	6078      	str	r0, [r7, #4]
+ 8001838:	f04f 33ff 	mov.w	r3, #4294967295
+ 800183c:	4618      	mov	r0, r3
+ 800183e:	f107 070c 	add.w	r7, r7, #12
+ 8001842:	46bd      	mov	sp, r7
+ 8001844:	bc80      	pop	{r7}
+ 8001846:	4770      	bx	lr
+
+08001848 <_kill>:
+ 8001848:	b480      	push	{r7}
+ 800184a:	b083      	sub	sp, #12
+ 800184c:	af00      	add	r7, sp, #0
+ 800184e:	6078      	str	r0, [r7, #4]
+ 8001850:	6039      	str	r1, [r7, #0]
+ 8001852:	f04f 33ff 	mov.w	r3, #4294967295
+ 8001856:	4618      	mov	r0, r3
+ 8001858:	f107 070c 	add.w	r7, r7, #12
+ 800185c:	46bd      	mov	sp, r7
+ 800185e:	bc80      	pop	{r7}
+ 8001860:	4770      	bx	lr
+ 8001862:	bf00      	nop
+
+08001864 <_fork>:
+ 8001864:	b480      	push	{r7}
+ 8001866:	af00      	add	r7, sp, #0
+ 8001868:	f04f 33ff 	mov.w	r3, #4294967295
+ 800186c:	4618      	mov	r0, r3
+ 800186e:	46bd      	mov	sp, r7
+ 8001870:	bc80      	pop	{r7}
+ 8001872:	4770      	bx	lr
+
+08001874 <_getpid>:
+ 8001874:	b480      	push	{r7}
+ 8001876:	af00      	add	r7, sp, #0
+ 8001878:	f04f 33ff 	mov.w	r3, #4294967295
+ 800187c:	4618      	mov	r0, r3
+ 800187e:	46bd      	mov	sp, r7
+ 8001880:	bc80      	pop	{r7}
+ 8001882:	4770      	bx	lr
+
+08001884 <_exit>:
+ 8001884:	b480      	push	{r7}
+ 8001886:	b083      	sub	sp, #12
+ 8001888:	af00      	add	r7, sp, #0
+ 800188a:	6078      	str	r0, [r7, #4]
+ 800188c:	e7fe      	b.n	800188c <_exit+0x8>
+ 800188e:	bf00      	nop
+
+08001890 <_init>:
+ 8001890:	b480      	push	{r7}
+ 8001892:	af00      	add	r7, sp, #0
+ 8001894:	46bd      	mov	sp, r7
+ 8001896:	bc80      	pop	{r7}
+ 8001898:	4770      	bx	lr
+ 800189a:	bf00      	nop
+
+0800189c <_isatty>:
+ 800189c:	b480      	push	{r7}
+ 800189e:	b083      	sub	sp, #12
+ 80018a0:	af00      	add	r7, sp, #0
+ 80018a2:	6078      	str	r0, [r7, #4]
+ 80018a4:	f04f 33ff 	mov.w	r3, #4294967295
+ 80018a8:	4618      	mov	r0, r3
+ 80018aa:	f107 070c 	add.w	r7, r7, #12
+ 80018ae:	46bd      	mov	sp, r7
+ 80018b0:	bc80      	pop	{r7}
+ 80018b2:	4770      	bx	lr

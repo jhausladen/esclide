@@ -1,0 +1,1683 @@
+   1              	# 1 "../Startup/startup_XMC4500.s"
+   1              	/*****************************************************************************/
+   0              	
+   2              	/* Startup_XMC4500.s: Startup file for XMC4500 device series                 */
+   0              	
+   3              	/*****************************************************************************/
+   4              	
+   5              	/* ********************* Version History *********************************** */
+   6              	/* ***************************************************************************
+   7              	V1.0 , July 2011, First version for XIP profile
+   8              	V1.1 , Oct  2011, Program loading code included (GH: b to main changed)
+   9              	V1.2 , Nov, 01, 2011 GH :Removed second definition of section .Xmc4500.reset
+  10              	                         at line 186. 
+  11              	V1.3 , Nov, 16, 2011 GH :Removed PMU0_1_IRQHandler and respective weak function
+  12              	                         declaration.
+  13              	V1.4 , Dec, 16, 2011 PKB:Jump to __Xmc4500_start_c reinstated for RTOS integration
+  14              	V1.5 , Jan, 10, 2012 PKB:Migrated to GCC from ARM
+  15              	V1.6 , Jan, 16, 2012 PKB:Branch prediction turned off, Parity errors cleared.
+  16              	V1.7 , Apr, 17, 2012 PKB:Added decision function for PLL initialization  
+  17              	V1.8 , Apr, 20, 2012 PKB:Handshake with DAVE code engine added  
+  18              	V1.9 , Jun, 14, 2012 PKB:Removed the handshake protocol towards simplification  
+  19              	V1.10, Aug, 13, 2012 PKB:Flash Wait states handling  
+  20              	V1.11, Oct, 11, 2012 PKB:C++ support. Call to global constructors  
+  21              	V1.12, Jan, 23, 2013 PKB:XMC4 Prefetch bug workaround  
+  22              	V1.13, Jul, 29, 2013 PKB:AAPCS violation in V1.12 fixed
+  23              	**************************************************************************** */
+  24              	/**
+  25              	* @file     Startup_XMC4500.s
+  26              	*           XMC4000 Device Series
+  27              	* @version  V1.13
+  28              	* @date     Jul 2013
+  29              	*
+  30              	Copyright (C) 2013 Infineon Technologies AG. All rights reserved.
+  31              	*
+  32              	*
+  33              	* @par
+  34              	* Infineon Technologies AG (Infineon) is supplying this software for use with 
+  35              	* Infineon's microcontrollers.  This file can be freely distributed
+  36              	* within development tools that are supporting such microcontrollers.
+  37              	*
+  38              	* @par
+  39              	* THIS SOFTWARE IS PROVIDED AS IS.  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  40              	* OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  41              	* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  42              	* ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  43              	* CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  44              	*
+  45              	******************************************************************************/
+  46              	#include <uc_id.inc>
+   1              	/*************************************************************************** */
+   2              	/**
+   3              	* @file     uc_id.inc
+   4              	*           Infineon XMC Device Series
+   5              	* @version  V1.2
+   6              	* @date     18 Feb 2013
+   7              	*
+   8              	Copyright (C) 2013 Infineon Technologies AG. All rights reserved.
+   9              	*
+  10              	*
+  11              	* @par
+  12              	* Infineon Technologies AG (Infineon) is supplying this software for use with 
+  13              	* Infineon's microcontrollers.  This file can be freely distributed
+  14              	* within development tools that are supporting such microcontrollers.
+  15              	*
+  16              	* @par
+  17              	* THIS SOFTWARE IS PROVIDED AS IS.  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  18              	* OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  19              	* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  20              	* ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  21              	* CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  22              	*
+  23              	******************************************************************************/
+  24              	
+  25              	/*****************************************************************************
+  26              	************************* Version history ************************************
+  27              	V1.0, 25 Jan 2013, PKB, First version with XMC4 devices
+  28              	V1.1, 12 Feb 2013, RD, Addition of XMC1 devices
+  29              	V1.2, 18 Feb 2013, RD, Updated Package definitions
+  30              	*****************************************************************************/
+  31              	
+  32              	/* ***************************************************************************
+  33              	******************************* ID definitions *******************************
+  34              	*************************************************************************** */
+  35              	/* Family definitions  */
+  36              	#define    XMC4       (4)
+  37              	#define    XMC1       (1)
+  38              	
+  39              	/* Series definitions  */
+  40              	#define    XMC45      (45)
+  41              	#define    XMC44      (44)
+  42              	#define    XMC42      (42)
+  43              	#define    XMC41      (41)
+  44              	
+  45              	#define    XMC13      (13)
+  46              	#define    XMC12      (12)
+  47              	#define    XMC11      (11)
+  48              	
+  49              	/* Device definitions  */
+  50              	#define    XMC4500    (4500)
+  51              	#define    XMC4502    (4502)
+  52              	#define    XMC4504    (4504)
+  53              	#define    XMC4400    (4400)
+  54              	#define    XMC4402    (4402)
+  55              	#define    XMC4200    (4200)
+  56              	#define    XMC4100    (4100)
+  57              	#define    XMC4104    (4104)
+  58              	
+  59              	#define    XMC1300    (1300)
+  60              	#define    XMC1301    (1301)
+  61              	#define    XMC1302    (1302)
+  62              	#define    XMC1200    (1200)
+  63              	#define    XMC1201    (1201)
+  64              	#define    XMC1202    (1202)
+  65              	#define    XMC1203    (1203)
+  66              	#define    XMC1100    (1100)
+  67              	
+  68              	/* STEP definitions    */
+  69              	#define    STEP_AA    (01)
+  70              	#define    STEP_AB    (02)
+  71              	#define    STEP_AC    (03)
+  72              	#define    STEP_BA    (04)
+  73              	#define    STEP_BB    (05)
+  74              	#define    STEP_BC    (06)
+  75              	
+  76              	/* Package definitions */
+  77              	#define    BGA144     (01)
+  78              	#define    LQFP144    (02)
+  79              	#define    LQFP100    (03)
+  80              	#define    BGA64      (04)
+  81              	#define    LQFP64     (05)
+  82              	#define    VQFN48     (06)
+  83              	#define    TSSOP38    (07)
+  84              	#define    TSSOP28    (08)
+  85              	#define    TSSOP16    (09) 
+  86              	#define    VQFN24     (10)
+  87              	
+  88              	/************************* End of ID definitions ************************** */
+  89              	
+  90              	/* *************** README README README README README README ************** */
+  91              	/*
+  92              	 * Within a family and specifically within a series, SW ID uniquely identifies
+  93              	 * a device by available functionality, silicon revision (aka STEP) and 
+  94              	 * packaging information.
+  95              	 *
+  96              	 * The early engineering samples of XMC45/44/42/41 series and initial steps of 
+  97              	 * productive XMC45 series devices had a simple 4 digit SW ID.
+  98              	 *
+  99              	 * In order to make this numbering scheme more scalable, a 7 digit encoding
+ 100              	 * scheme is adopted for later steps of productive samples of XMC45/44/42/41
+ 101              	 */
+ 102              	
+ 103              	/* ***************************************************************************
+ 104              	**************** Mapping between IDs and supported SW IDs ********************
+ 105              	*************************************************************************** */
+ 106              	
+ 107              	/* ***************** Start of section for XMC45 devices ******************* */
+ 108              	#if (UC_ID == 4501)         /* SW ID : 45.0.1 */
+ 109              	#define UC_FAMILY    XMC4
+ 110              	#define UC_SERIES    XMC45
+ 111              	#define UC_DEVICE    XMC4500
+ 112              	#define UC_STEP      STEP_AA
+ 113              	#define UC_PACKAGE   BGA144
+ 114              	
+ 115              	#elif (UC_ID == 4502)       /* SW ID : 45.0.2 */
+ 116              	#define UC_FAMILY    XMC4
+ 117              	#define UC_SERIES    XMC45
+ 118              	#define UC_DEVICE    XMC4500
+ 119              	#define UC_STEP      STEP_AA
+ 120              	#define UC_PACKAGE   LQFP144
+ 121              	
+ 122              	#elif (UC_ID == 4503)       /* SW ID : 45.0.3 */
+ 123              	#define UC_FAMILY    XMC4
+ 124              	#define UC_SERIES    XMC45
+ 125              	#define UC_DEVICE    XMC4500
+ 126              	#define UC_STEP      STEP_AA
+ 127              	#define UC_PACKAGE   LQFP100
+ 128              	
+ 129              	#elif (UC_ID == 4523)       /* SW ID : 45.2.3 */
+ 130              	#define UC_FAMILY    XMC4
+ 131              	#define UC_SERIES    XMC45
+ 132              	#define UC_DEVICE    XMC4502
+ 133              	#define UC_STEP      STEP_AA
+ 134              	#define UC_PACKAGE   LQFP100
+ 135              	
+ 136              	#elif (UC_ID == 4543)       /* SW ID : 45.4.3 */
+ 137              	#define UC_FAMILY    XMC4
+ 138              	#define UC_SERIES    XMC45
+ 139              	#define UC_DEVICE    XMC4504
+ 140              	#define UC_STEP      STEP_AA
+ 141              	#define UC_PACKAGE   LQFP100
+ 142              	
+ 143              	#elif (UC_ID == 4542)       /* SW ID : 45.4.2 */
+ 144              	#define UC_FAMILY    XMC4
+ 145              	#define UC_SERIES    XMC45
+ 146              	#define UC_DEVICE    XMC4504
+ 147              	#define UC_STEP      STEP_AA
+ 148              	#define UC_PACKAGE   LQFP144
+ 149              	
+ 150              	#elif (UC_ID == 4502001)    /* SW ID : 45.0200.1 */
+ 151              	#define UC_FAMILY    XMC4
+ 152              	#define UC_SERIES    XMC45
+ 153              	#define UC_DEVICE    XMC4500
+ 154              	#define UC_STEP      STEP_AB
+ 155              	#define UC_PACKAGE   BGA144
+ 156              	
+ 157              	#elif (UC_ID == 4502002)    /* SW ID : 45.0200.2 */
+ 158              	#define UC_FAMILY    XMC4
+ 159              	#define UC_SERIES    XMC45
+ 160              	#define UC_DEVICE    XMC4500
+ 161              	#define UC_STEP      STEP_AB
+ 162              	#define UC_PACKAGE   LQFP144
+ 163              	
+ 164              	#elif (UC_ID == 4502003)    /* SW ID : 45.0200.3 */
+ 165              	#define UC_FAMILY    XMC4
+ 166              	#define UC_SERIES    XMC45
+ 167              	#define UC_DEVICE    XMC4500
+ 168              	#define UC_STEP      STEP_AB
+ 169              	#define UC_PACKAGE   LQFP100
+ 170              	
+ 171              	#elif (UC_ID == 4502023)    /* SW ID : 45.0202.3 */
+ 172              	#define UC_FAMILY    XMC4
+ 173              	#define UC_SERIES    XMC45
+ 174              	#define UC_DEVICE    XMC4502
+ 175              	#define UC_STEP      STEP_AB
+ 176              	#define UC_PACKAGE   LQFP100
+ 177              	
+ 178              	#elif (UC_ID == 4502043)    /* SW ID : 45.0204.3 */
+ 179              	#define UC_FAMILY    XMC4
+ 180              	#define UC_SERIES    XMC45
+ 181              	#define UC_DEVICE    XMC4504
+ 182              	#define UC_STEP      STEP_AB
+ 183              	#define UC_PACKAGE   LQFP100
+ 184              	
+ 185              	#elif (UC_ID == 4502042)    /* SW ID : 45.0204.2 */
+ 186              	#define UC_FAMILY    XMC4
+ 187              	#define UC_SERIES    XMC45
+ 188              	#define UC_DEVICE    XMC4504
+ 189              	#define UC_STEP      STEP_AB
+ 190              	#define UC_PACKAGE   LQFP144
+ 191              	
+ 192              	#elif (UC_ID == 4503001)    /* SW ID : 45.0300.1 */
+ 193              	#define UC_FAMILY    XMC4
+ 194              	#define UC_SERIES    XMC45
+ 195              	#define UC_DEVICE    XMC4500
+ 196              	#define UC_STEP      STEP_AC
+ 197              	#define UC_PACKAGE   BGA144
+ 198              	
+ 199              	#elif (UC_ID == 4503002)    /* SW ID : 45.0300.2 */
+ 200              	#define UC_FAMILY    XMC4
+ 201              	#define UC_SERIES    XMC45
+ 202              	#define UC_DEVICE    XMC4500
+ 203              	#define UC_STEP      STEP_AC
+ 204              	#define UC_PACKAGE   LQFP144
+ 205              	
+ 206              	#elif (UC_ID == 4503003)    /* SW ID : 45.0300.3 */
+ 207              	#define UC_FAMILY    XMC4
+ 208              	#define UC_SERIES    XMC45
+ 209              	#define UC_DEVICE    XMC4500
+ 210              	#define UC_STEP      STEP_AC
+ 211              	#define UC_PACKAGE   LQFP100
+ 212              	
+ 213              	#elif (UC_ID == 4503023)    /* SW ID : 45.0302.3 */
+ 214              	#define UC_FAMILY    XMC4
+ 215              	#define UC_SERIES    XMC45
+ 216              	#define UC_DEVICE    XMC4502
+ 217              	#define UC_STEP      STEP_AC
+ 218              	#define UC_PACKAGE   LQFP100
+ 219              	
+ 220              	#elif (UC_ID == 4503043)    /* SW ID : 45.0304.3 */
+ 221              	#define UC_FAMILY    XMC4
+ 222              	#define UC_SERIES    XMC45
+ 223              	#define UC_DEVICE    XMC4504
+ 224              	#define UC_STEP      STEP_AC
+ 225              	#define UC_PACKAGE   LQFP100
+ 226              	
+ 227              	#elif (UC_ID == 4503042)    /* SW ID : 45.0304.2 */
+ 228              	#define UC_FAMILY    XMC4
+ 229              	#define UC_SERIES    XMC45
+ 230              	#define UC_DEVICE    XMC4504
+ 231              	#define UC_STEP      STEP_AC
+ 232              	#define UC_PACKAGE   LQFP144
+ 233              	
+ 234              	/* ***************** Start of section for XMC44 devices ******************* */
+ 235              	#elif (UC_ID == 4403)       /* SW ID : 44.0.3 */
+ 236              	#define UC_FAMILY    XMC4
+ 237              	#define UC_SERIES    XMC44
+ 238              	#define UC_DEVICE    XMC4400
+ 239              	#define UC_STEP      STEP_AA
+ 240              	#define UC_PACKAGE   LQFP100
+ 241              	
+ 242              	#elif (UC_ID == 44005)      /* SW ID : 44.00.5 */
+ 243              	#define UC_FAMILY    XMC4
+ 244              	#define UC_SERIES    XMC44
+ 245              	#define UC_DEVICE    XMC4400
+ 246              	#define UC_STEP      STEP_AA
+ 247              	#define UC_PACKAGE   LQFP64
+ 248              	
+ 249              	#elif (UC_ID == 44023)      /* SW ID : 44.02.3 */
+ 250              	#define UC_FAMILY    XMC4
+ 251              	#define UC_SERIES    XMC44
+ 252              	#define UC_DEVICE    XMC4402
+ 253              	#define UC_STEP      STEP_AA
+ 254              	#define UC_PACKAGE   LQFP100
+ 255              	
+ 256              	#elif (UC_ID == 44025)      /* SW ID : 44.02.5 */
+ 257              	#define UC_FAMILY    XMC4
+ 258              	#define UC_SERIES    XMC44
+ 259              	#define UC_DEVICE    XMC4402
+ 260              	#define UC_STEP      STEP_AA
+ 261              	#define UC_PACKAGE   LQFP64
+ 262              	
+ 263              	#elif (UC_ID == 4402003)       /* SW ID : 44.0200.3 */
+ 264              	#define UC_FAMILY    XMC4
+ 265              	#define UC_SERIES    XMC44
+ 266              	#define UC_DEVICE    XMC4400
+ 267              	#define UC_STEP      STEP_AB
+ 268              	#define UC_PACKAGE   LQFP100
+ 269              	
+ 270              	#elif (UC_ID == 4402005)      /* SW ID : 44.0200.5 */
+ 271              	#define UC_FAMILY    XMC4
+ 272              	#define UC_SERIES    XMC44
+ 273              	#define UC_DEVICE    XMC4400
+ 274              	#define UC_STEP      STEP_AB
+ 275              	#define UC_PACKAGE   LQFP64
+ 276              	
+ 277              	#elif (UC_ID == 4402023)      /* SW ID : 44.0202.3 */
+ 278              	#define UC_FAMILY    XMC4
+ 279              	#define UC_SERIES    XMC44
+ 280              	#define UC_DEVICE    XMC4402
+ 281              	#define UC_STEP      STEP_AB
+ 282              	#define UC_PACKAGE   LQFP100
+ 283              	
+ 284              	#elif (UC_ID == 4402025)      /* SW ID : 44.0202.5 */
+ 285              	#define UC_FAMILY    XMC4
+ 286              	#define UC_SERIES    XMC44
+ 287              	#define UC_DEVICE    XMC4402
+ 288              	#define UC_STEP      STEP_AB
+ 289              	#define UC_PACKAGE   LQFP64
+ 290              	
+ 291              	/* **************** Start of section for XMC42/41 devices ****************** */
+ 292              	#elif (UC_ID == 42005)      /* SW ID : 42.00.5 */
+ 293              	#define UC_FAMILY    XMC4
+ 294              	#define UC_SERIES    XMC42
+ 295              	#define UC_DEVICE    XMC4200
+ 296              	#define UC_STEP      STEP_AA
+ 297              	#define UC_PACKAGE   LQFP64
+ 298              	
+ 299              	#elif (UC_ID == 4206)       /* SW ID : 42.0.6 */
+ 300              	#define UC_FAMILY    XMC4
+ 301              	#define UC_SERIES    XMC42
+ 302              	#define UC_DEVICE    XMC4200
+ 303              	#define UC_STEP      STEP_AA
+ 304              	#define UC_PACKAGE   VQFN48
+ 305              	
+ 306              	#elif (UC_ID == 42045)      /* SW ID : 42.04.5 */
+ 307              	#define UC_FAMILY    XMC4
+ 308              	#define UC_SERIES    XMC41
+ 309              	#define UC_DEVICE    XMC4104
+ 310              	#define UC_STEP      STEP_AA
+ 311              	#define UC_PACKAGE   LQFP64
+ 312              	
+ 313              	#elif (UC_ID == 42046)      /* SW ID : 42.04.6 */
+ 314              	#define UC_FAMILY    XMC4
+ 315              	#define UC_SERIES    XMC41
+ 316              	#define UC_DEVICE    XMC4104
+ 317              	#define UC_STEP      STEP_AA
+ 318              	#define UC_PACKAGE   VQFN48
+ 319              	
+ 320              	#elif (UC_ID == 4202005)      /* SW ID : 42.0200.5 */
+ 321              	#define UC_FAMILY    XMC4
+ 322              	#define UC_SERIES    XMC42
+ 323              	#define UC_DEVICE    XMC4200
+ 324              	#define UC_STEP      STEP_AB
+ 325              	#define UC_PACKAGE   LQFP64
+ 326              	
+ 327              	#elif (UC_ID == 4202006)       /* SW ID : 42.0200.6 */
+ 328              	#define UC_FAMILY    XMC4
+ 329              	#define UC_SERIES    XMC42
+ 330              	#define UC_DEVICE    XMC4200
+ 331              	#define UC_STEP      STEP_AB
+ 332              	#define UC_PACKAGE   VQFN48
+ 333              	
+ 334              	#elif (UC_ID == 4202045)      /* SW ID : 42.0204.5 */
+ 335              	#define UC_FAMILY    XMC4
+ 336              	#define UC_SERIES    XMC41
+ 337              	#define UC_DEVICE    XMC4104
+ 338              	#define UC_STEP      STEP_AB
+ 339              	#define UC_PACKAGE   LQFP64
+ 340              	
+ 341              	#elif (UC_ID == 4202046)      /* SW ID : 42.0204.6 */
+ 342              	#define UC_FAMILY    XMC4
+ 343              	#define UC_SERIES    XMC41
+ 344              	#define UC_DEVICE    XMC4104
+ 345              	#define UC_STEP      STEP_AB
+ 346              	#define UC_PACKAGE   VQFN48
+ 347              	
+ 348              	/* **************** Start of section for XMC13 devices ****************** */
+ 349              	#elif (UC_ID == 1301017)       /* SW ID : 13.0101.7 */
+ 350              	#define UC_FAMILY    XMC1
+ 351              	#define UC_SERIES    XMC13
+ 352              	#define UC_DEVICE    XMC1301
+ 353              	#define UC_STEP      STEP_AA
+ 354              	#define UC_PACKAGE   TSSOP38
+ 355              	
+ 356              	#elif (UC_ID == 1301019)       /* SW ID : 13.0101.9 */
+ 357              	#define UC_FAMILY    XMC1
+ 358              	#define UC_SERIES    XMC13
+ 359              	#define UC_DEVICE    XMC1301
+ 360              	#define UC_STEP      STEP_AA
+ 361              	#define UC_PACKAGE   TSSOP16
+ 362              	
+ 363              	#elif (UC_ID == 1301027)      /* SW ID : 13.0102.7 */
+ 364              	#define UC_FAMILY    XMC1
+ 365              	#define UC_SERIES    XMC13
+ 366              	#define UC_DEVICE    XMC1302
+ 367              	#define UC_STEP      STEP_AA
+ 368              	#define UC_PACKAGE   TSSOP38
+ 369              	
+ 370              	#elif (UC_ID == 13010210)      /* SW ID : 13.0102.10 */
+ 371              	#define UC_FAMILY    XMC1
+ 372              	#define UC_SERIES    XMC13
+ 373              	#define UC_DEVICE    XMC1302
+ 374              	#define UC_STEP      STEP_AA
+ 375              	#define UC_PACKAGE   VQFN24
+ 376              	
+ 377              	/* **************** Start of section for XMC12 devices ****************** */
+ 378              	#elif (UC_ID == 1201007)      /* SW ID : 12.0100.7 */
+ 379              	#define UC_FAMILY    XMC1
+ 380              	#define UC_SERIES    XMC12
+ 381              	#define UC_DEVICE    XMC1200
+ 382              	#define UC_STEP      STEP_AA
+ 383              	#define UC_PACKAGE   TSSOP38
+ 384              	
+ 385              	#elif (UC_ID == 1201017)       /* SW ID : 12.0101.7 */
+ 386              	#define UC_FAMILY    XMC1
+ 387              	#define UC_SERIES    XMC12
+ 388              	#define UC_DEVICE    XMC1201
+ 389              	#define UC_STEP      STEP_AA
+ 390              	#define UC_PACKAGE   TSSOP38
+ 391              	
+ 392              	#elif (UC_ID == 1201018)       /* SW ID : 12.0101.8 */
+ 393              	#define UC_FAMILY    XMC1
+ 394              	#define UC_SERIES    XMC12
+ 395              	#define UC_DEVICE    XMC1201
+ 396              	#define UC_STEP      STEP_AA
+ 397              	#define UC_PACKAGE   TSSOP28
+ 398              	
+ 399              	#elif (UC_ID == 1201027)      /* SW ID : 12.0102.7 */
+ 400              	#define UC_FAMILY    XMC1
+ 401              	#define UC_SERIES    XMC12
+ 402              	#define UC_DEVICE    XMC1202
+ 403              	#define UC_STEP      STEP_AA
+ 404              	#define UC_PACKAGE   TSSOP38
+ 405              	
+ 406              	#elif (UC_ID == 1201028)      /* SW ID : 12.0102.8 */
+ 407              	#define UC_FAMILY    XMC1
+ 408              	#define UC_SERIES    XMC12
+ 409              	#define UC_DEVICE    XMC1202
+ 410              	#define UC_STEP      STEP_AA
+ 411              	#define UC_PACKAGE   TSSOP28
+ 412              	
+ 413              	#elif (UC_ID == 1201029)      /* SW ID : 12.0102.9 */
+ 414              	#define UC_FAMILY    XMC1
+ 415              	#define UC_SERIES    XMC12
+ 416              	#define UC_DEVICE    XMC1202
+ 417              	#define UC_STEP      STEP_AA
+ 418              	#define UC_PACKAGE   TSSOP16
+ 419              	
+ 420              	#elif (UC_ID == 1201039)      /* SW ID : 12.0103.9 */
+ 421              	#define UC_FAMILY    XMC1
+ 422              	#define UC_SERIES    XMC12
+ 423              	#define UC_DEVICE    XMC1203
+ 424              	#define UC_STEP      STEP_AA
+ 425              	#define UC_PACKAGE   TSSOP16
+ 426              	
+ 427              	#elif (UC_ID == 12010310)      /* SW ID : 12.0103.10 */
+ 428              	#define UC_FAMILY    XMC1
+ 429              	#define UC_SERIES    XMC12
+ 430              	#define UC_DEVICE    XMC1203
+ 431              	#define UC_STEP      STEP_AA
+ 432              	#define UC_PACKAGE   VQFN24
+ 433              	
+ 434              	/* **************** Start of section for XMC11 devices ****************** */
+ 435              	#elif (UC_ID == 1101007)      /* SW ID : 11.0100.7 */
+ 436              	#define UC_FAMILY    XMC1
+ 437              	#define UC_SERIES    XMC11
+ 438              	#define UC_DEVICE    XMC1100
+ 439              	#define UC_STEP      STEP_AA
+ 440              	#define UC_PACKAGE   TSSOP38
+ 441              	
+ 442              	#elif (UC_ID == 1101009)      /* SW ID : 11.0100.9 */
+ 443              	#define UC_FAMILY    XMC1
+ 444              	#define UC_SERIES    XMC11
+ 445              	#define UC_DEVICE    XMC1100
+ 446              	#define UC_STEP      STEP_AA
+ 447              	#define UC_PACKAGE   TSSOP16
+ 448              	
+ 449              	#else
+ 450              	#error "Unsupported XMC device"
+ 451              	#endif
+ 452              	
+ 453              	#define __TARGET_DEVICE__ UC_SERIES
+ 454              	
+  47              	
+  48              	/* ===========START : MACRO DEFINITION MACRO DEFINITION ================== */
+  49              	/*
+  50              	 * STEP_AB and below have the prefetch bug. A veneer defined below will first
+  51              	 * be executed which in turn branches to the final exception handler.
+  52              	 * 
+  53              	 * In addition to defining the veneers, the vector table must for these buggy
+  54              	 * devices contain the veneers. 
+  55              	 */
+  56              	 
+  57              	/* A macro to setup a vector table entry based on STEP ID */ 
+  58              	.macro Entry Handler
+  59              	 #if (UC_STEP > STEP_AB)
+  60              	   .long \Handler
+  61              	 #else
+  62              	   .long \Handler\()_Veneer
+  63              	 #endif
+  64              	.endm
+  65              	
+  66              	/* A macro to ease definition of the various handlers based on STEP ID */
+  67              	#if (UC_STEP <= STEP_AB)
+  68              	 /* First define the final exception handler */
+  69              	 .macro Insert_ExceptionHandler Handler_Func 
+  70              	  .weak \Handler_Func
+  72              	  \Handler_Func:
+  73              	  B .
+  75              	
+  76              	  /* And then define a veneer that will branch to the final excp handler */
+  77              	  .weak \Handler_Func\()_Veneer
+  79              	  \Handler_Func\()_Veneer:
+  80              	  LDR     R0, =\Handler_Func
+  81              	  PUSH    {LR}
+  82              	  SUB     SP,#4  
+  83              	  BLX     R0
+  84              	  ADD     SP,#4
+  85              	  POP     {PC}
+  87              	 .endm
+  88              	#else
+  89              	 /* No prefetch bug, hence define only the final exception handler */
+  90              	 .macro Insert_ExceptionHandler Handler_Func 
+  91              	  .weak \Handler_Func
+  93              	  \Handler_Func:
+  94              	  B .
+  96              	 .endm
+  97              	#endif 
+  98              	/* =============END : MACRO DEFINITION MACRO DEFINITION ================== */
+  99              	
+ 100              	/* ================== START OF VECTOR TABLE DEFINITION ====================== */
+ 101              	/* Vector Table - This gets programed into VTOR register by onchip BootROM */
+ 102              	    .syntax unified
+ 103              	
+ 104              	    .section ".Xmc4500.reset"
+ 105              	    .globl  __Xmc4500_interrupt_vector_cortex_m
+ 107              	
+ 108              	__Xmc4500_interrupt_vector_cortex_m:
+ 109 0000 00000000 	    .long   __Xmc4500_stack             /* Top of Stack                 */
+ 110 0004 00000000 	    .long   __Xmc4500_reset_cortex_m    /* Reset Handler                */
+ 111              	
+ 112 0008 00000000 	    Entry   NMI_Handler                 /* NMI Handler                  */
+ 113 000c 00000000 	    Entry   HardFault_Handler           /* Hard Fault Handler           */
+ 114 0010 00000000 	    Entry   MemManage_Handler           /* MPU Fault Handler            */
+ 115 0014 00000000 	    Entry   BusFault_Handler            /* Bus Fault Handler            */
+ 116 0018 00000000 	    Entry   UsageFault_Handler          /* Usage Fault Handler          */
+ 117 001c 00000000 	    .long   0                           /* Reserved                     */
+ 118 0020 00000000 	    .long   0                           /* Reserved                     */
+ 119 0024 00000000 	    .long   0                           /* Reserved                     */
+ 120 0028 00000000 	    .long   0                           /* Reserved                     */
+ 121 002c 00000000 	    Entry   SVC_Handler                 /* SVCall Handler               */
+ 122 0030 00000000 	    Entry   DebugMon_Handler            /* Debug Monitor Handler        */
+ 123 0034 00000000 	    .long   0                           /* Reserved                     */
+ 124 0038 00000000 	    Entry   PendSV_Handler              /* PendSV Handler               */
+ 125 003c 00000000 	    Entry   SysTick_Handler             /* SysTick Handler              */
+ 126              	
+ 127              	    /* Interrupt Handlers for Service Requests (SR) from XMC4500 Peripherals */
+ 128 0040 00000000 	    Entry   SCU_0_IRQHandler            /* Handler name for SR SCU_0     */
+ 129 0044 00000000 	    Entry   ERU0_0_IRQHandler           /* Handler name for SR ERU0_0    */
+ 130 0048 00000000 	    Entry   ERU0_1_IRQHandler           /* Handler name for SR ERU0_1    */
+ 131 004c 00000000 	    Entry   ERU0_2_IRQHandler           /* Handler name for SR ERU0_2    */
+ 132 0050 00000000 	    Entry   ERU0_3_IRQHandler           /* Handler name for SR ERU0_3    */ 
+ 133 0054 00000000 	    Entry   ERU1_0_IRQHandler           /* Handler name for SR ERU1_0    */
+ 134 0058 00000000 	    Entry   ERU1_1_IRQHandler           /* Handler name for SR ERU1_1    */
+ 135 005c 00000000 	    Entry   ERU1_2_IRQHandler           /* Handler name for SR ERU1_2    */
+ 136 0060 00000000 	    Entry   ERU1_3_IRQHandler           /* Handler name for SR ERU1_3    */
+ 137 0064 00000000 	    .long   0                           /* Not Available                 */
+ 138 0068 00000000 	    .long   0                           /* Not Available                 */
+ 139 006c 00000000 	    .long   0                           /* Not Available                 */
+ 140 0070 00000000 	    Entry   PMU0_0_IRQHandler           /* Handler name for SR PMU0_0    */
+ 141 0074 00000000 	    .long   0                           /* Not Available                 */
+ 142 0078 00000000 	    Entry   VADC0_C0_0_IRQHandler       /* Handler name for SR VADC0_C0_0  */
+ 143 007c 00000000 	    Entry   VADC0_C0_1_IRQHandler       /* Handler name for SR VADC0_C0_1  */
+ 144 0080 00000000 	    Entry   VADC0_C0_2_IRQHandler       /* Handler name for SR VADC0_C0_1  */
+ 145 0084 00000000 	    Entry   VADC0_C0_3_IRQHandler       /* Handler name for SR VADC0_C0_3  */
+ 146 0088 00000000 	    Entry   VADC0_G0_0_IRQHandler       /* Handler name for SR VADC0_G0_0  */
+ 147 008c 00000000 	    Entry   VADC0_G0_1_IRQHandler       /* Handler name for SR VADC0_G0_1  */
+ 148 0090 00000000 	    Entry   VADC0_G0_2_IRQHandler       /* Handler name for SR VADC0_G0_2  */
+ 149 0094 00000000 	    Entry   VADC0_G0_3_IRQHandler       /* Handler name for SR VADC0_G0_3  */
+ 150 0098 00000000 	    Entry   VADC0_G1_0_IRQHandler       /* Handler name for SR VADC0_G1_0  */
+ 151 009c 00000000 	    Entry   VADC0_G1_1_IRQHandler       /* Handler name for SR VADC0_G1_1  */
+ 152 00a0 00000000 	    Entry   VADC0_G1_2_IRQHandler       /* Handler name for SR VADC0_G1_2  */
+ 153 00a4 00000000 	    Entry   VADC0_G1_3_IRQHandler       /* Handler name for SR VADC0_G1_3  */
+ 154 00a8 00000000 	    Entry   VADC0_G2_0_IRQHandler       /* Handler name for SR VADC0_G2_0  */
+ 155 00ac 00000000 	    Entry   VADC0_G2_1_IRQHandler       /* Handler name for SR VADC0_G2_1  */
+ 156 00b0 00000000 	    Entry   VADC0_G2_2_IRQHandler       /* Handler name for SR VADC0_G2_2  */
+ 157 00b4 00000000 	    Entry   VADC0_G2_3_IRQHandler       /* Handler name for SR VADC0_G2_3  */
+ 158 00b8 00000000 	    Entry   VADC0_G3_0_IRQHandler       /* Handler name for SR VADC0_G3_0  */
+ 159 00bc 00000000 	    Entry   VADC0_G3_1_IRQHandler       /* Handler name for SR VADC0_G3_1  */
+ 160 00c0 00000000 	    Entry   VADC0_G3_2_IRQHandler       /* Handler name for SR VADC0_G3_2  */
+ 161 00c4 00000000 	    Entry   VADC0_G3_3_IRQHandler       /* Handler name for SR VADC0_G3_3  */
+ 162 00c8 00000000 	    Entry   DSD0_0_IRQHandler           /* Handler name for SR DSD0_0    */
+ 163 00cc 00000000 	    Entry   DSD0_1_IRQHandler           /* Handler name for SR DSD0_1    */
+ 164 00d0 00000000 	    Entry   DSD0_2_IRQHandler           /* Handler name for SR DSD0_2    */
+ 165 00d4 00000000 	    Entry   DSD0_3_IRQHandler           /* Handler name for SR DSD0_3    */
+ 166 00d8 00000000 	    Entry   DSD0_4_IRQHandler           /* Handler name for SR DSD0_4    */
+ 167 00dc 00000000 	    Entry   DSD0_5_IRQHandler           /* Handler name for SR DSD0_5    */
+ 168 00e0 00000000 	    Entry   DSD0_6_IRQHandler           /* Handler name for SR DSD0_6    */
+ 169 00e4 00000000 	    Entry   DSD0_7_IRQHandler           /* Handler name for SR DSD0_7    */
+ 170 00e8 00000000 	    Entry   DAC0_0_IRQHandler           /* Handler name for SR DAC0_0    */
+ 171 00ec 00000000 	    Entry   DAC0_1_IRQHandler           /* Handler name for SR DAC0_0    */
+ 172 00f0 00000000 	    Entry   CCU40_0_IRQHandler          /* Handler name for SR CCU40_0   */
+ 173 00f4 00000000 	    Entry   CCU40_1_IRQHandler          /* Handler name for SR CCU40_1   */
+ 174 00f8 00000000 	    Entry   CCU40_2_IRQHandler          /* Handler name for SR CCU40_2   */
+ 175 00fc 00000000 	    Entry   CCU40_3_IRQHandler          /* Handler name for SR CCU40_3   */
+ 176 0100 00000000 	    Entry   CCU41_0_IRQHandler          /* Handler name for SR CCU41_0   */
+ 177 0104 00000000 	    Entry   CCU41_1_IRQHandler          /* Handler name for SR CCU41_1   */
+ 178 0108 00000000 	    Entry   CCU41_2_IRQHandler          /* Handler name for SR CCU41_2   */
+ 179 010c 00000000 	    Entry   CCU41_3_IRQHandler          /* Handler name for SR CCU41_3   */
+ 180 0110 00000000 	    Entry   CCU42_0_IRQHandler          /* Handler name for SR CCU42_0   */
+ 181 0114 00000000 	    Entry   CCU42_1_IRQHandler          /* Handler name for SR CCU42_1   */
+ 182 0118 00000000 	    Entry   CCU42_2_IRQHandler          /* Handler name for SR CCU42_2   */
+ 183 011c 00000000 	    Entry   CCU42_3_IRQHandler          /* Handler name for SR CCU42_3   */
+ 184 0120 00000000 	    Entry   CCU43_0_IRQHandler          /* Handler name for SR CCU43_0   */
+ 185 0124 00000000 	    Entry   CCU43_1_IRQHandler          /* Handler name for SR CCU43_1   */
+ 186 0128 00000000 	    Entry   CCU43_2_IRQHandler          /* Handler name for SR CCU43_2   */
+ 187 012c 00000000 	    Entry   CCU43_3_IRQHandler          /* Handler name for SR CCU43_3   */
+ 188 0130 00000000 	    Entry   CCU80_0_IRQHandler          /* Handler name for SR CCU80_0   */
+ 189 0134 00000000 	    Entry   CCU80_1_IRQHandler          /* Handler name for SR CCU80_1   */
+ 190 0138 00000000 	    Entry   CCU80_2_IRQHandler          /* Handler name for SR CCU80_2   */
+ 191 013c 00000000 	    Entry   CCU80_3_IRQHandler          /* Handler name for SR CCU80_3   */
+ 192 0140 00000000 	    Entry   CCU81_0_IRQHandler          /* Handler name for SR CCU81_0   */
+ 193 0144 00000000 	    Entry   CCU81_1_IRQHandler          /* Handler name for SR CCU81_1   */
+ 194 0148 00000000 	    Entry   CCU81_2_IRQHandler          /* Handler name for SR CCU81_2   */
+ 195 014c 00000000 	    Entry   CCU81_3_IRQHandler          /* Handler name for SR CCU81_3   */
+ 196 0150 00000000 	    Entry   POSIF0_0_IRQHandler         /* Handler name for SR POSIF0_0  */
+ 197 0154 00000000 	    Entry   POSIF0_1_IRQHandler         /* Handler name for SR POSIF0_1  */
+ 198 0158 00000000 	    Entry   POSIF1_0_IRQHandler         /* Handler name for SR POSIF1_0  */
+ 199 015c 00000000 	    Entry   POSIF1_1_IRQHandler         /* Handler name for SR POSIF1_1  */
+ 200 0160 00000000 	    .long   0                           /* Not Available                 */
+ 201 0164 00000000 	    .long   0                           /* Not Available                 */
+ 202 0168 00000000 	    .long   0                           /* Not Available                 */
+ 203 016c 00000000 	    .long   0                           /* Not Available                 */
+ 204 0170 00000000 	    Entry   CAN0_0_IRQHandler           /* Handler name for SR CAN0_0    */
+ 205 0174 00000000 	    Entry   CAN0_1_IRQHandler           /* Handler name for SR CAN0_1    */
+ 206 0178 00000000 	    Entry   CAN0_2_IRQHandler           /* Handler name for SR CAN0_2    */
+ 207 017c 00000000 	    Entry   CAN0_3_IRQHandler           /* Handler name for SR CAN0_3    */
+ 208 0180 00000000 	    Entry   CAN0_4_IRQHandler           /* Handler name for SR CAN0_4    */
+ 209 0184 00000000 	    Entry   CAN0_5_IRQHandler           /* Handler name for SR CAN0_5    */
+ 210 0188 00000000 	    Entry   CAN0_6_IRQHandler           /* Handler name for SR CAN0_6    */
+ 211 018c 00000000 	    Entry   CAN0_7_IRQHandler           /* Handler name for SR CAN0_7    */
+ 212 0190 00000000 	    Entry   USIC0_0_IRQHandler          /* Handler name for SR USIC0_0   */
+ 213 0194 00000000 	    Entry   USIC0_1_IRQHandler          /* Handler name for SR USIC0_1   */
+ 214 0198 00000000 	    Entry   USIC0_2_IRQHandler          /* Handler name for SR USIC0_2   */
+ 215 019c 00000000 	    Entry   USIC0_3_IRQHandler          /* Handler name for SR USIC0_3   */
+ 216 01a0 00000000 	    Entry   USIC0_4_IRQHandler          /* Handler name for SR USIC0_4   */
+ 217 01a4 00000000 	    Entry   USIC0_5_IRQHandler          /* Handler name for SR USIC0_5   */
+ 218 01a8 00000000 	    Entry   USIC1_0_IRQHandler          /* Handler name for SR USIC1_0   */
+ 219 01ac 00000000 	    Entry   USIC1_1_IRQHandler          /* Handler name for SR USIC1_1   */
+ 220 01b0 00000000 	    Entry   USIC1_2_IRQHandler          /* Handler name for SR USIC1_2   */
+ 221 01b4 00000000 	    Entry   USIC1_3_IRQHandler          /* Handler name for SR USIC1_3   */
+ 222 01b8 00000000 	    Entry   USIC1_4_IRQHandler          /* Handler name for SR USIC1_4   */
+ 223 01bc 00000000 	    Entry   USIC1_5_IRQHandler          /* Handler name for SR USIC1_5   */
+ 224 01c0 00000000 	    Entry   USIC2_0_IRQHandler          /* Handler name for SR USIC2_0   */
+ 225 01c4 00000000 	    Entry   USIC2_1_IRQHandler          /* Handler name for SR USIC2_1   */
+ 226 01c8 00000000 	    Entry   USIC2_2_IRQHandler          /* Handler name for SR USIC2_2   */
+ 227 01cc 00000000 	    Entry   USIC2_3_IRQHandler          /* Handler name for SR USIC2_3   */
+ 228 01d0 00000000 	    Entry   USIC2_4_IRQHandler          /* Handler name for SR USIC2_4   */
+ 229 01d4 00000000 	    Entry   USIC2_5_IRQHandler          /* Handler name for SR USIC2_5   */
+ 230 01d8 00000000 	    Entry   LEDTS0_0_IRQHandler         /* Handler name for SR LEDTS0_0  */
+ 231 01dc 00000000 	    .long   0                           /* Not Available                 */
+ 232 01e0 00000000 	    Entry   FCE0_0_IRQHandler           /* Handler name for SR FCE0_0    */
+ 233 01e4 00000000 	    Entry   GPDMA0_0_IRQHandler         /* Handler name for SR GPDMA0_0  */
+ 234 01e8 00000000 	    Entry   SDMMC0_0_IRQHandler         /* Handler name for SR SDMMC0_0  */
+ 235 01ec 00000000 	    Entry   USB0_0_IRQHandler           /* Handler name for SR USB0_0    */
+ 236 01f0 00000000 	    Entry   ETH0_0_IRQHandler           /* Handler name for SR ETH0_0    */
+ 237 01f4 00000000 	    .long   0                           /* Not Available                 */
+ 238 01f8 00000000 	    Entry   GPDMA1_0_IRQHandler         /* Handler name for SR GPDMA1_0  */
+ 239 01fc 00000000 	    .long   0                           /* Not Available                 */
+ 240              	
+ 242              	/* ================== END OF VECTOR TABLE DEFINITION ======================= */
+ 243              	
+ 244              	/* ================== START OF VECTOR ROUTINES ============================= */
+ 245              	    .thumb
+ 246              	/* ======================================================================== */
+ 247              	/* Reset Handler */
+ 248              	
+ 249              	    .thumb_func
+ 250              	    .globl  __Xmc4500_reset_cortex_m
+ 252              	__Xmc4500_reset_cortex_m:
+ 253              	    .fnstart
+ 254              	
+ 255              	    /* C routines are likely to be called. Setup the stack now */
+ 256              	    /* This is already setup by BootROM,hence this step is optional */ 
+ 257 0200 DFF80CD0 	    LDR SP,=__Xmc4500_stack
+ 258              	
+ 259              	    /* Clock tree, External memory setup etc may be done here */    
+ 260 0204 0348     	    LDR     R0, =SystemInit
+ 261 0206 8047     	    BLX     R0
+ 262              	
+ 263              	/* 
+ 264              	   SystemInit_DAVE3() is provided by DAVE3 code generation engine. It is  
+ 265              	   weakly defined here though for a potential override.
+ 266              	*/
+ 267 0208 0348     	    LDR     R0, =SystemInit_DAVE3     
+ 268 020a 8047     	    BLX     R0
+ 269              	
+ 270 020c FFF7FEBF 	    B       __Xmc4500_Program_Loader 
+ 271              	    
+ 272 0210 00000000 	    .pool
+ 272      00000000 
+ 272      00000000 
+ 273              	    .cantunwind
+ 274              	    .fnend
+ 276              	/* ======================================================================== */
+ 277              	/* __Xmc4500_reset must yield control to __Xmc4500_Program_Loader before control
+ 278              	   to C land is given */
+ 279              	   .section .Xmc4500.postreset,"x",%progbits
+ 280              	   __Xmc4500_Program_Loader:
+ 281              	   .fnstart
+ 282              	   /* Memories are accessible now*/
+ 283              	   
+ 284              	   /* DATA COPY */
+ 285              	   /* R0 = Start address, R1 = Destination address, R2 = Size */
+ 286 0000 1E48     	   LDR R0, =eROData
+ 287 0002 1F49     	   LDR R1, =__Xmc4500_sData
+ 288 0004 1F4A     	   LDR R2, =__Xmc4500_Data_Size
+ 289              	
+ 290              	   /* Is there anything to be copied? */
+ 291 0006 002A     	   CMP R2,#0
+ 292 0008 00F01280 	   BEQ SKIPCOPY
+ 293              	   
+ 294              	   /* For bytecount less than 4, at least 1 word must be copied */
+ 295 000c 042A     	   CMP R2,#4
+ 296 000e 80F00280 	   BCS STARTCOPY
+ 297              	   
+ 298              	   /* Byte count < 4 ; so bump it up */
+ 299 0012 4FF00402 	   MOV R2,#4
+ 300              	
+ 301              	STARTCOPY:
+ 302              	   /* 
+ 303              	      R2 contains byte count. Change it to word count. It is ensured in the 
+ 304              	      linker script that the length is always word aligned.
+ 305              	   */
+ 306 0016 4FEA9202 	   LSR R2,R2,#2 /* Divide by 4 to obtain word count */
+ 307              	
+ 308              	   /* The proverbial loop from the schooldays */
+ 309              	COPYLOOP:
+ 310 001a 0368     	   LDR R3,[R0]
+ 311 001c 0B60     	   STR R3,[R1]
+ 312 001e 013A     	   SUBS R2,#1
+ 313 0020 00F00680 	   BEQ SKIPCOPY
+ 314 0024 00F10400 	   ADD R0,#4
+ 315 0028 01F10401 	   ADD R1,#4
+ 316 002c FFF7F5BF 	   B COPYLOOP
+ 317              	    
+ 318              	SKIPCOPY:
+ 319              	   /* BSS CLEAR */
+ 320 0030 1548     	   LDR R0, =__Xmc4500_sBSS     /* Start of BSS */
+ 321 0032 1649     	   LDR R1, =__Xmc4500_BSS_Size /* BSS size in bytes */
+ 322              	
+ 323              	   /* Find out if there are items assigned to BSS */   
+ 324 0034 0029     	   CMP R1,#0 
+ 325 0036 00F01180 	   BEQ SKIPCLEAR
+ 326              	
+ 327              	   /* At least 1 word must be copied */
+ 328 003a 0429     	   CMP R1,#4
+ 329 003c 80F00280 	   BCS STARTCLEAR
+ 330              	   
+ 331              	   /* Byte count < 4 ; so bump it up to a word*/
+ 332 0040 4FF00401 	   MOV R1,#4
+ 333              	
+ 334              	STARTCLEAR:
+ 335 0044 4FEA9101 	   LSR R1,R1,#2            /* BSS size in words */
+ 336              	   
+ 337 0048 4FF00002 	   MOV R2,#0
+ 338              	CLEARLOOP:
+ 339 004c 0260     	   STR R2,[R0]
+ 340 004e 0139     	   SUBS R1,#1
+ 341 0050 00F00480 	   BEQ SKIPCLEAR
+ 342 0054 00F10400 	   ADD R0,#4
+ 343 0058 FFF7F8BF 	   B CLEARLOOP
+ 344              	    
+ 345              	SKIPCLEAR:
+ 346              	   /* Remap vector table */
+ 347              	   /* This is already setup by BootROM,hence this step is optional */ 
+ 348 005c 0C48     	   LDR R0, =__Xmc4500_interrupt_vector_cortex_m 
+ 349 005e 0D49     	   LDR R1, =SCB_VTOR
+ 350 0060 0860     	   STR R0,[R1]
+ 351              	   
+ 352              	   /* Update System Clock */
+ 353 0062 0D48     	   LDR R0,=SystemCoreClockUpdate
+ 354 0064 8047     	   BLX R0
+ 355              	 
+ 356              	   /* C++ : Call global constructors */
+ 357 0066 0D48     	   LDR R0,=__libc_init_array
+ 358 0068 8047     	   BLX R0
+ 359              	
+ 360              	   /* Reset stack pointer before zipping off to user application, Optional */
+ 361 006a DFF834D0 	   LDR SP,=__Xmc4500_stack 
+ 362 006e 4FF00000 	   MOV R0,#0
+ 363 0072 4FF00001 	   MOV R1,#0
+ 364 0076 DFF82CF0 	   LDR PC, =main
+ 365 007a 00000000 	   .pool
+ 365      00000000 
+ 365      00000000 
+ 365      00000000 
+ 365      00000000 
+ 366              	   .cantunwind
+ 367              	   .fnend
+ 369              	/* ======================================================================== */
+ 370              	/* ========== START OF EXCEPTION HANDLER DEFINITION ======================== */
+ 371              	
+ 372              	
+ 373              	/* Default exception Handlers - Users may override this default functionality by
+ 374              	   defining handlers of the same name in their C code */
+ 375              	    .thumb
+ 376              	    .text
+ 377              	
+ 378 0000 FEE7DFF8 	     Insert_ExceptionHandler NMI_Handler
+ 378      700600B5 
+ 378      81B08047 
+ 378      01B000BD 
+ 379              	/* ======================================================================== */
+ 380 0010 FEE7DFF8 	     Insert_ExceptionHandler HardFault_Handler
+ 380      640600B5 
+ 380      81B08047 
+ 380      01B000BD 
+ 381              	/* ======================================================================== */
+ 382 0020 FEE7DFF8 	     Insert_ExceptionHandler MemManage_Handler
+ 382      580600B5 
+ 382      81B08047 
+ 382      01B000BD 
+ 383              	/* ======================================================================== */
+ 384 0030 FEE7DFF8 	     Insert_ExceptionHandler BusFault_Handler
+ 384      4C0600B5 
+ 384      81B08047 
+ 384      01B000BD 
+ 385              	/* ======================================================================== */
+ 386 0040 FEE7DFF8 	     Insert_ExceptionHandler UsageFault_Handler
+ 386      400600B5 
+ 386      81B08047 
+ 386      01B000BD 
+ 387              	/* ======================================================================== */
+ 388 0050 FEE7DFF8 	     Insert_ExceptionHandler SVC_Handler
+ 388      340600B5 
+ 388      81B08047 
+ 388      01B000BD 
+ 389              	/* ======================================================================== */
+ 390 0060 FEE7DFF8 	     Insert_ExceptionHandler DebugMon_Handler
+ 390      280600B5 
+ 390      81B08047 
+ 390      01B000BD 
+ 391              	/* ======================================================================== */
+ 392 0070 FEE7DFF8 	     Insert_ExceptionHandler PendSV_Handler
+ 392      1C0600B5 
+ 392      81B08047 
+ 392      01B000BD 
+ 393              	/* ======================================================================== */
+ 394 0080 FEE7DFF8 	     Insert_ExceptionHandler SysTick_Handler
+ 394      100600B5 
+ 394      81B08047 
+ 394      01B000BD 
+ 395              	
+ 396              	/* ============= END OF EXCEPTION HANDLER DEFINITION ======================== */
+ 397              	
+ 398              	/* ============= START OF INTERRUPT HANDLER DEFINITION ====================== */
+ 399              	
+ 400              	/* IRQ Handlers */
+ 401 0090 FEE7DFF8 	     Insert_ExceptionHandler SCU_0_IRQHandler
+ 401      040600B5 
+ 401      81B08047 
+ 401      01B000BD 
+ 402              	/* ======================================================================== */
+ 403 00a0 FEE7DFF8 	     Insert_ExceptionHandler ERU0_0_IRQHandler
+ 403      F80500B5 
+ 403      81B08047 
+ 403      01B000BD 
+ 404              	/* ======================================================================== */
+ 405 00b0 FEE7DFF8 	     Insert_ExceptionHandler ERU0_1_IRQHandler
+ 405      EC0500B5 
+ 405      81B08047 
+ 405      01B000BD 
+ 406              	/* ======================================================================== */
+ 407 00c0 FEE7DFF8 	     Insert_ExceptionHandler ERU0_2_IRQHandler
+ 407      E00500B5 
+ 407      81B08047 
+ 407      01B000BD 
+ 408              	/* ======================================================================== */
+ 409 00d0 FEE7DFF8 	     Insert_ExceptionHandler ERU0_3_IRQHandler
+ 409      D40500B5 
+ 409      81B08047 
+ 409      01B000BD 
+ 410              	/* ======================================================================== */
+ 411 00e0 FEE7DFF8 	     Insert_ExceptionHandler ERU1_0_IRQHandler
+ 411      C80500B5 
+ 411      81B08047 
+ 411      01B000BD 
+ 412              	/* ======================================================================== */
+ 413 00f0 FEE7DFF8 	     Insert_ExceptionHandler ERU1_1_IRQHandler
+ 413      BC0500B5 
+ 413      81B08047 
+ 413      01B000BD 
+ 414              	/* ======================================================================== */
+ 415 0100 FEE7DFF8 	     Insert_ExceptionHandler ERU1_2_IRQHandler
+ 415      B00500B5 
+ 415      81B08047 
+ 415      01B000BD 
+ 416              	/* ======================================================================== */
+ 417 0110 FEE7DFF8 	     Insert_ExceptionHandler ERU1_3_IRQHandler
+ 417      A40500B5 
+ 417      81B08047 
+ 417      01B000BD 
+ 418              	/* ======================================================================== */
+ 419 0120 FEE7DFF8 	     Insert_ExceptionHandler PMU0_0_IRQHandler
+ 419      980500B5 
+ 419      81B08047 
+ 419      01B000BD 
+ 420              	/* ======================================================================== */
+ 421 0130 FEE7DFF8 	     Insert_ExceptionHandler VADC0_C0_0_IRQHandler
+ 421      8C0500B5 
+ 421      81B08047 
+ 421      01B000BD 
+ 422              	/* ======================================================================== */
+ 423 0140 FEE7DFF8 	     Insert_ExceptionHandler VADC0_C0_1_IRQHandler
+ 423      800500B5 
+ 423      81B08047 
+ 423      01B000BD 
+ 424              	/* ======================================================================== */
+ 425 0150 FEE7DFF8 	     Insert_ExceptionHandler VADC0_C0_2_IRQHandler
+ 425      740500B5 
+ 425      81B08047 
+ 425      01B000BD 
+ 426              	/* ======================================================================== */
+ 427 0160 FEE7DFF8 	     Insert_ExceptionHandler VADC0_C0_3_IRQHandler
+ 427      680500B5 
+ 427      81B08047 
+ 427      01B000BD 
+ 428              	/* ======================================================================== */
+ 429 0170 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G0_0_IRQHandler
+ 429      5C0500B5 
+ 429      81B08047 
+ 429      01B000BD 
+ 430              	/* ======================================================================== */
+ 431 0180 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G0_1_IRQHandler
+ 431      500500B5 
+ 431      81B08047 
+ 431      01B000BD 
+ 432              	/* ======================================================================== */
+ 433 0190 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G0_2_IRQHandler
+ 433      440500B5 
+ 433      81B08047 
+ 433      01B000BD 
+ 434              	/* ======================================================================== */
+ 435 01a0 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G0_3_IRQHandler
+ 435      380500B5 
+ 435      81B08047 
+ 435      01B000BD 
+ 436              	/* ======================================================================== */
+ 437 01b0 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G1_0_IRQHandler
+ 437      2C0500B5 
+ 437      81B08047 
+ 437      01B000BD 
+ 438              	/* ======================================================================== */
+ 439 01c0 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G1_1_IRQHandler
+ 439      200500B5 
+ 439      81B08047 
+ 439      01B000BD 
+ 440              	/* ======================================================================== */
+ 441 01d0 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G1_2_IRQHandler
+ 441      140500B5 
+ 441      81B08047 
+ 441      01B000BD 
+ 442              	/* ======================================================================== */
+ 443 01e0 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G1_3_IRQHandler
+ 443      080500B5 
+ 443      81B08047 
+ 443      01B000BD 
+ 444              	/* ======================================================================== */
+ 445 01f0 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G2_0_IRQHandler
+ 445      FC0400B5 
+ 445      81B08047 
+ 445      01B000BD 
+ 446              	/* ======================================================================== */
+ 447 0200 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G2_1_IRQHandler
+ 447      F00400B5 
+ 447      81B08047 
+ 447      01B000BD 
+ 448              	/* ======================================================================== */
+ 449 0210 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G2_2_IRQHandler
+ 449      E40400B5 
+ 449      81B08047 
+ 449      01B000BD 
+ 450              	/* ======================================================================== */
+ 451 0220 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G2_3_IRQHandler
+ 451      D80400B5 
+ 451      81B08047 
+ 451      01B000BD 
+ 452              	/* ======================================================================== */
+ 453 0230 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G3_0_IRQHandler
+ 453      CC0400B5 
+ 453      81B08047 
+ 453      01B000BD 
+ 454              	/* ======================================================================== */
+ 455 0240 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G3_1_IRQHandler
+ 455      C00400B5 
+ 455      81B08047 
+ 455      01B000BD 
+ 456              	/* ======================================================================== */
+ 457 0250 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G3_2_IRQHandler
+ 457      B40400B5 
+ 457      81B08047 
+ 457      01B000BD 
+ 458              	/* ======================================================================== */
+ 459 0260 FEE7DFF8 	     Insert_ExceptionHandler VADC0_G3_3_IRQHandler
+ 459      A80400B5 
+ 459      81B08047 
+ 459      01B000BD 
+ 460              	/* ======================================================================== */
+ 461 0270 FEE7DFF8 	     Insert_ExceptionHandler DSD0_0_IRQHandler
+ 461      9C0400B5 
+ 461      81B08047 
+ 461      01B000BD 
+ 462              	/* ======================================================================== */
+ 463 0280 FEE7DFF8 	     Insert_ExceptionHandler DSD0_1_IRQHandler
+ 463      900400B5 
+ 463      81B08047 
+ 463      01B000BD 
+ 464              	/* ======================================================================== */
+ 465 0290 FEE7DFF8 	     Insert_ExceptionHandler DSD0_2_IRQHandler
+ 465      840400B5 
+ 465      81B08047 
+ 465      01B000BD 
+ 466              	/* ======================================================================== */
+ 467 02a0 FEE7DFF8 	     Insert_ExceptionHandler DSD0_3_IRQHandler
+ 467      780400B5 
+ 467      81B08047 
+ 467      01B000BD 
+ 468              	/* ======================================================================== */
+ 469 02b0 FEE7DFF8 	     Insert_ExceptionHandler DSD0_4_IRQHandler
+ 469      6C0400B5 
+ 469      81B08047 
+ 469      01B000BD 
+ 470              	/* ======================================================================== */
+ 471 02c0 FEE7DFF8 	     Insert_ExceptionHandler DSD0_5_IRQHandler
+ 471      600400B5 
+ 471      81B08047 
+ 471      01B000BD 
+ 472              	/* ======================================================================== */
+ 473 02d0 FEE7DFF8 	     Insert_ExceptionHandler DSD0_6_IRQHandler
+ 473      540400B5 
+ 473      81B08047 
+ 473      01B000BD 
+ 474              	/* ======================================================================== */
+ 475 02e0 FEE7DFF8 	     Insert_ExceptionHandler DSD0_7_IRQHandler
+ 475      480400B5 
+ 475      81B08047 
+ 475      01B000BD 
+ 476              	/* ======================================================================== */
+ 477 02f0 FEE7DFF8 	     Insert_ExceptionHandler DAC0_0_IRQHandler
+ 477      3C0400B5 
+ 477      81B08047 
+ 477      01B000BD 
+ 478              	/* ======================================================================== */
+ 479 0300 FEE7DFF8 	     Insert_ExceptionHandler DAC0_1_IRQHandler
+ 479      300400B5 
+ 479      81B08047 
+ 479      01B000BD 
+ 480              	/* ======================================================================== */
+ 481 0310 FEE7DFF8 	     Insert_ExceptionHandler CCU40_0_IRQHandler
+ 481      240400B5 
+ 481      81B08047 
+ 481      01B000BD 
+ 482              	/* ======================================================================== */
+ 483 0320 FEE7DFF8 	     Insert_ExceptionHandler CCU40_1_IRQHandler
+ 483      180400B5 
+ 483      81B08047 
+ 483      01B000BD 
+ 484              	/* ======================================================================== */
+ 485 0330 FEE7DFF8 	     Insert_ExceptionHandler CCU40_2_IRQHandler
+ 485      0C0400B5 
+ 485      81B08047 
+ 485      01B000BD 
+ 486              	/* ======================================================================== */
+ 487 0340 FEE7DFF8 	     Insert_ExceptionHandler CCU40_3_IRQHandler
+ 487      000400B5 
+ 487      81B08047 
+ 487      01B000BD 
+ 488              	/* ======================================================================== */
+ 489 0350 FEE7FD48 	     Insert_ExceptionHandler CCU41_0_IRQHandler
+ 489      00B581B0 
+ 489      804701B0 
+ 489      00BD
+ 490              	/* ======================================================================== */
+ 491 035e FEE7FA48 	     Insert_ExceptionHandler CCU41_1_IRQHandler
+ 491      00B581B0 
+ 491      804701B0 
+ 491      00BD
+ 492              	/* ======================================================================== */
+ 493 036c FEE7F848 	     Insert_ExceptionHandler CCU41_2_IRQHandler
+ 493      00B581B0 
+ 493      804701B0 
+ 493      00BD
+ 494              	/* ======================================================================== */
+ 495 037a FEE7F548 	     Insert_ExceptionHandler CCU41_3_IRQHandler
+ 495      00B581B0 
+ 495      804701B0 
+ 495      00BD
+ 496              	/* ======================================================================== */
+ 497 0388 FEE7F348 	     Insert_ExceptionHandler CCU42_0_IRQHandler
+ 497      00B581B0 
+ 497      804701B0 
+ 497      00BD
+ 498              	/* ======================================================================== */
+ 499 0396 FEE7F048 	     Insert_ExceptionHandler CCU42_1_IRQHandler
+ 499      00B581B0 
+ 499      804701B0 
+ 499      00BD
+ 500              	/* ======================================================================== */
+ 501 03a4 FEE7EE48 	     Insert_ExceptionHandler CCU42_2_IRQHandler
+ 501      00B581B0 
+ 501      804701B0 
+ 501      00BD
+ 502              	/* ======================================================================== */
+ 503 03b2 FEE7EB48 	     Insert_ExceptionHandler CCU42_3_IRQHandler
+ 503      00B581B0 
+ 503      804701B0 
+ 503      00BD
+ 504              	/* ======================================================================== */
+ 505 03c0 FEE7E948 	     Insert_ExceptionHandler CCU43_0_IRQHandler
+ 505      00B581B0 
+ 505      804701B0 
+ 505      00BD
+ 506              	/* ======================================================================== */
+ 507 03ce FEE7E648 	     Insert_ExceptionHandler CCU43_1_IRQHandler
+ 507      00B581B0 
+ 507      804701B0 
+ 507      00BD
+ 508              	/* ======================================================================== */
+ 509 03dc FEE7E448 	     Insert_ExceptionHandler CCU43_2_IRQHandler
+ 509      00B581B0 
+ 509      804701B0 
+ 509      00BD
+ 510              	/* ======================================================================== */
+ 511 03ea FEE7E148 	     Insert_ExceptionHandler CCU43_3_IRQHandler
+ 511      00B581B0 
+ 511      804701B0 
+ 511      00BD
+ 512              	/* ======================================================================== */
+ 513 03f8 FEE7DF48 	     Insert_ExceptionHandler CCU80_0_IRQHandler
+ 513      00B581B0 
+ 513      804701B0 
+ 513      00BD
+ 514              	/* ======================================================================== */
+ 515 0406 FEE7DC48 	     Insert_ExceptionHandler CCU80_1_IRQHandler
+ 515      00B581B0 
+ 515      804701B0 
+ 515      00BD
+ 516              	/* ======================================================================== */
+ 517 0414 FEE7DA48 	     Insert_ExceptionHandler CCU80_2_IRQHandler
+ 517      00B581B0 
+ 517      804701B0 
+ 517      00BD
+ 518              	/* ======================================================================== */
+ 519 0422 FEE7D748 	     Insert_ExceptionHandler CCU80_3_IRQHandler
+ 519      00B581B0 
+ 519      804701B0 
+ 519      00BD
+ 520              	/* ======================================================================== */
+ 521 0430 FEE7D548 	     Insert_ExceptionHandler CCU81_0_IRQHandler
+ 521      00B581B0 
+ 521      804701B0 
+ 521      00BD
+ 522              	/* ======================================================================== */
+ 523 043e FEE7D248 	     Insert_ExceptionHandler CCU81_1_IRQHandler
+ 523      00B581B0 
+ 523      804701B0 
+ 523      00BD
+ 524              	/* ======================================================================== */
+ 525 044c FEE7D048 	     Insert_ExceptionHandler CCU81_2_IRQHandler
+ 525      00B581B0 
+ 525      804701B0 
+ 525      00BD
+ 526              	/* ======================================================================== */
+ 527 045a FEE7CD48 	     Insert_ExceptionHandler CCU81_3_IRQHandler
+ 527      00B581B0 
+ 527      804701B0 
+ 527      00BD
+ 528              	/* ======================================================================== */
+ 529 0468 FEE7CB48 	     Insert_ExceptionHandler POSIF0_0_IRQHandler
+ 529      00B581B0 
+ 529      804701B0 
+ 529      00BD
+ 530              	/* ======================================================================== */
+ 531 0476 FEE7C848 	     Insert_ExceptionHandler POSIF0_1_IRQHandler
+ 531      00B581B0 
+ 531      804701B0 
+ 531      00BD
+ 532              	/* ======================================================================== */
+ 533 0484 FEE7C648 	     Insert_ExceptionHandler POSIF1_0_IRQHandler
+ 533      00B581B0 
+ 533      804701B0 
+ 533      00BD
+ 534              	/* ======================================================================== */
+ 535 0492 FEE7C348 	     Insert_ExceptionHandler POSIF1_1_IRQHandler
+ 535      00B581B0 
+ 535      804701B0 
+ 535      00BD
+ 536              	/* ======================================================================== */
+ 537 04a0 FEE7C148 	     Insert_ExceptionHandler CAN0_0_IRQHandler
+ 537      00B581B0 
+ 537      804701B0 
+ 537      00BD
+ 538              	/* ======================================================================== */
+ 539 04ae FEE7BE48 	     Insert_ExceptionHandler CAN0_1_IRQHandler
+ 539      00B581B0 
+ 539      804701B0 
+ 539      00BD
+ 540              	/* ======================================================================== */
+ 541 04bc FEE7BC48 	     Insert_ExceptionHandler CAN0_2_IRQHandler
+ 541      00B581B0 
+ 541      804701B0 
+ 541      00BD
+ 542              	/* ======================================================================== */
+ 543 04ca FEE7B948 	     Insert_ExceptionHandler CAN0_3_IRQHandler
+ 543      00B581B0 
+ 543      804701B0 
+ 543      00BD
+ 544              	/* ======================================================================== */
+ 545 04d8 FEE7B748 	     Insert_ExceptionHandler CAN0_4_IRQHandler
+ 545      00B581B0 
+ 545      804701B0 
+ 545      00BD
+ 546              	/* ======================================================================== */
+ 547 04e6 FEE7B448 	     Insert_ExceptionHandler CAN0_5_IRQHandler
+ 547      00B581B0 
+ 547      804701B0 
+ 547      00BD
+ 548              	/* ======================================================================== */
+ 549 04f4 FEE7B248 	     Insert_ExceptionHandler CAN0_6_IRQHandler
+ 549      00B581B0 
+ 549      804701B0 
+ 549      00BD
+ 550              	/* ======================================================================== */
+ 551 0502 FEE7AF48 	     Insert_ExceptionHandler CAN0_7_IRQHandler
+ 551      00B581B0 
+ 551      804701B0 
+ 551      00BD
+ 552              	/* ======================================================================== */
+ 553 0510 FEE7AD48 	     Insert_ExceptionHandler USIC0_0_IRQHandler
+ 553      00B581B0 
+ 553      804701B0 
+ 553      00BD
+ 554              	/* ======================================================================== */
+ 555 051e FEE7AA48 	     Insert_ExceptionHandler USIC0_1_IRQHandler
+ 555      00B581B0 
+ 555      804701B0 
+ 555      00BD
+ 556              	/* ======================================================================== */
+ 557 052c FEE7A848 	     Insert_ExceptionHandler USIC0_2_IRQHandler
+ 557      00B581B0 
+ 557      804701B0 
+ 557      00BD
+ 558              	/* ======================================================================== */
+ 559 053a FEE7A548 	     Insert_ExceptionHandler USIC0_3_IRQHandler
+ 559      00B581B0 
+ 559      804701B0 
+ 559      00BD
+ 560              	/* ======================================================================== */
+ 561 0548 FEE7A348 	     Insert_ExceptionHandler USIC0_4_IRQHandler
+ 561      00B581B0 
+ 561      804701B0 
+ 561      00BD
+ 562              	/* ======================================================================== */
+ 563 0556 FEE7A048 	     Insert_ExceptionHandler USIC0_5_IRQHandler
+ 563      00B581B0 
+ 563      804701B0 
+ 563      00BD
+ 564              	/* ======================================================================== */
+ 565 0564 FEE79E48 	     Insert_ExceptionHandler USIC1_0_IRQHandler
+ 565      00B581B0 
+ 565      804701B0 
+ 565      00BD
+ 566              	/* ======================================================================== */
+ 567 0572 FEE79B48 	     Insert_ExceptionHandler USIC1_1_IRQHandler
+ 567      00B581B0 
+ 567      804701B0 
+ 567      00BD
+ 568              	/* ======================================================================== */
+ 569 0580 FEE79948 	     Insert_ExceptionHandler USIC1_2_IRQHandler
+ 569      00B581B0 
+ 569      804701B0 
+ 569      00BD
+ 570              	/* ======================================================================== */
+ 571 058e FEE79648 	     Insert_ExceptionHandler USIC1_3_IRQHandler
+ 571      00B581B0 
+ 571      804701B0 
+ 571      00BD
+ 572              	/* ======================================================================== */
+ 573 059c FEE79448 	     Insert_ExceptionHandler USIC1_4_IRQHandler
+ 573      00B581B0 
+ 573      804701B0 
+ 573      00BD
+ 574              	/* ======================================================================== */
+ 575 05aa FEE79148 	     Insert_ExceptionHandler USIC1_5_IRQHandler
+ 575      00B581B0 
+ 575      804701B0 
+ 575      00BD
+ 576              	/* ======================================================================== */
+ 577 05b8 FEE78F48 	     Insert_ExceptionHandler USIC2_0_IRQHandler
+ 577      00B581B0 
+ 577      804701B0 
+ 577      00BD
+ 578              	/* ======================================================================== */
+ 579 05c6 FEE78C48 	     Insert_ExceptionHandler USIC2_1_IRQHandler
+ 579      00B581B0 
+ 579      804701B0 
+ 579      00BD
+ 580              	/* ======================================================================== */
+ 581 05d4 FEE78A48 	     Insert_ExceptionHandler USIC2_2_IRQHandler
+ 581      00B581B0 
+ 581      804701B0 
+ 581      00BD
+ 582              	/* ======================================================================== */
+ 583 05e2 FEE78748 	     Insert_ExceptionHandler USIC2_3_IRQHandler
+ 583      00B581B0 
+ 583      804701B0 
+ 583      00BD
+ 584              	/* ======================================================================== */
+ 585 05f0 FEE78548 	     Insert_ExceptionHandler USIC2_4_IRQHandler
+ 585      00B581B0 
+ 585      804701B0 
+ 585      00BD
+ 586              	/* ======================================================================== */
+ 587 05fe FEE78248 	     Insert_ExceptionHandler USIC2_5_IRQHandler
+ 587      00B581B0 
+ 587      804701B0 
+ 587      00BD
+ 588              	/* ======================================================================== */
+ 589 060c FEE78048 	     Insert_ExceptionHandler LEDTS0_0_IRQHandler
+ 589      00B581B0 
+ 589      804701B0 
+ 589      00BD
+ 590              	/* ======================================================================== */
+ 591 061a FEE77D48 	     Insert_ExceptionHandler FCE0_0_IRQHandler
+ 591      00B581B0 
+ 591      804701B0 
+ 591      00BD
+ 592              	/* ======================================================================== */
+ 593 0628 FEE77B48 	     Insert_ExceptionHandler GPDMA0_0_IRQHandler
+ 593      00B581B0 
+ 593      804701B0 
+ 593      00BD
+ 594              	/* ======================================================================== */
+ 595 0636 FEE77848 	     Insert_ExceptionHandler SDMMC0_0_IRQHandler
+ 595      00B581B0 
+ 595      804701B0 
+ 595      00BD
+ 596              	/* ======================================================================== */
+ 597 0644 FEE77648 	     Insert_ExceptionHandler USB0_0_IRQHandler
+ 597      00B581B0 
+ 597      804701B0 
+ 597      00BD
+ 598              	/* ======================================================================== */
+ 599 0652 FEE77348 	     Insert_ExceptionHandler ETH0_0_IRQHandler
+ 599      00B581B0 
+ 599      804701B0 
+ 599      00BD
+ 600              	/* ======================================================================== */
+ 601 0660 FEE77148 	     Insert_ExceptionHandler GPDMA1_0_IRQHandler
+ 601      00B581B0 
+ 601      804701B0 
+ 601      00BD
+ 602              	/* ======================================================================== */
+ 603              	/* ======================================================================== */
+ 604              	
+ 605              	/* ============= END OF INTERRUPT HANDLER DEFINITION ====================== */
+ 606              	
+ 607              	/* ======== Decision function queried by CMSIS startup for PLL setup ====== */
+ 608              	/* In the absence of DAVE code engine, CMSIS SystemInit() must perform clock 
+ 609              	   tree setup. 
+ 610              	   
+ 611              	   This decision routine defined here will always return TRUE.
+ 612              	   
+ 613              	   When overridden by a definition defined in DAVE code engine, this routine
+ 614              	   returns FALSE indicating that the code engine has performed the clock setup
+ 615              	*/   
+ 616              	    .weak   AllowPLLInitByStartup
+ 618              	AllowPLLInitByStartup:
+ 619 066e 4FF00100 	    MOV R0,#1
+ 620 0672 7047     	    BX LR
+ 622              	
+ 623              	/* ======  Definition of the default weak SystemInit_DAVE3 function =========
+ 624              	If DAVE3 requires an extended SystemInit it will create its own version of
+ 625              	SystemInit_DAVE3 which overrides this weak definition. Example includes
+ 626              	setting up of external memory interfaces.
+ 627              	*/
+ 628              	     .section ".XmcStartup"
+ 629              	     .weak SystemInit_DAVE3
+ 631              	SystemInit_DAVE3:
+ 632 0000 00BF     	     NOP
+ 633 0002 7047     	     BX LR
+ 635              	/* ======================================================================== */
+ 636              	/* ======================================================================== */
+ 637              	
+ 638              	/* ======================== Data references =============================== */
+ 639              	.equ  SCB_VTOR,       0xE000ED08
+ 640              	.equ  PREF_PCON,      0x58004000
+ 641              	.equ  SCU_GCU_PEEN,   0x5000413C
+ 642              	.equ  SCU_GCU_PEFLAG, 0x50004150
+ 643              	.equ  FLASH_FCON,     0x58002014
+ 644              	
+ 645              	    .end
+DEFINED SYMBOLS
+../Startup/startup_XMC4500.s:108    .Xmc4500.reset:00000000 __Xmc4500_interrupt_vector_cortex_m
+../Startup/startup_XMC4500.s:252    .Xmc4500.reset:00000200 __Xmc4500_reset_cortex_m
+../Startup/startup_XMC4500.s:378    .text:00000002 NMI_Handler_Veneer
+../Startup/startup_XMC4500.s:380    .text:00000012 HardFault_Handler_Veneer
+../Startup/startup_XMC4500.s:382    .text:00000022 MemManage_Handler_Veneer
+../Startup/startup_XMC4500.s:384    .text:00000032 BusFault_Handler_Veneer
+../Startup/startup_XMC4500.s:386    .text:00000042 UsageFault_Handler_Veneer
+../Startup/startup_XMC4500.s:388    .text:00000052 SVC_Handler_Veneer
+../Startup/startup_XMC4500.s:390    .text:00000062 DebugMon_Handler_Veneer
+../Startup/startup_XMC4500.s:392    .text:00000072 PendSV_Handler_Veneer
+../Startup/startup_XMC4500.s:394    .text:00000082 SysTick_Handler_Veneer
+../Startup/startup_XMC4500.s:401    .text:00000092 SCU_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:403    .text:000000a2 ERU0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:405    .text:000000b2 ERU0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:407    .text:000000c2 ERU0_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:409    .text:000000d2 ERU0_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:411    .text:000000e2 ERU1_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:413    .text:000000f2 ERU1_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:415    .text:00000102 ERU1_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:417    .text:00000112 ERU1_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:419    .text:00000122 PMU0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:421    .text:00000132 VADC0_C0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:423    .text:00000142 VADC0_C0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:425    .text:00000152 VADC0_C0_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:427    .text:00000162 VADC0_C0_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:429    .text:00000172 VADC0_G0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:431    .text:00000182 VADC0_G0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:433    .text:00000192 VADC0_G0_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:435    .text:000001a2 VADC0_G0_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:437    .text:000001b2 VADC0_G1_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:439    .text:000001c2 VADC0_G1_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:441    .text:000001d2 VADC0_G1_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:443    .text:000001e2 VADC0_G1_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:445    .text:000001f2 VADC0_G2_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:447    .text:00000202 VADC0_G2_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:449    .text:00000212 VADC0_G2_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:451    .text:00000222 VADC0_G2_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:453    .text:00000232 VADC0_G3_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:455    .text:00000242 VADC0_G3_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:457    .text:00000252 VADC0_G3_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:459    .text:00000262 VADC0_G3_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:461    .text:00000272 DSD0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:463    .text:00000282 DSD0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:465    .text:00000292 DSD0_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:467    .text:000002a2 DSD0_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:469    .text:000002b2 DSD0_4_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:471    .text:000002c2 DSD0_5_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:473    .text:000002d2 DSD0_6_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:475    .text:000002e2 DSD0_7_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:477    .text:000002f2 DAC0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:479    .text:00000302 DAC0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:481    .text:00000312 CCU40_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:483    .text:00000322 CCU40_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:485    .text:00000332 CCU40_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:487    .text:00000342 CCU40_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:489    .text:00000352 CCU41_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:491    .text:00000360 CCU41_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:493    .text:0000036e CCU41_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:495    .text:0000037c CCU41_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:497    .text:0000038a CCU42_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:499    .text:00000398 CCU42_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:501    .text:000003a6 CCU42_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:503    .text:000003b4 CCU42_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:505    .text:000003c2 CCU43_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:507    .text:000003d0 CCU43_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:509    .text:000003de CCU43_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:511    .text:000003ec CCU43_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:513    .text:000003fa CCU80_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:515    .text:00000408 CCU80_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:517    .text:00000416 CCU80_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:519    .text:00000424 CCU80_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:521    .text:00000432 CCU81_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:523    .text:00000440 CCU81_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:525    .text:0000044e CCU81_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:527    .text:0000045c CCU81_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:529    .text:0000046a POSIF0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:531    .text:00000478 POSIF0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:533    .text:00000486 POSIF1_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:535    .text:00000494 POSIF1_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:537    .text:000004a2 CAN0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:539    .text:000004b0 CAN0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:541    .text:000004be CAN0_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:543    .text:000004cc CAN0_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:545    .text:000004da CAN0_4_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:547    .text:000004e8 CAN0_5_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:549    .text:000004f6 CAN0_6_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:551    .text:00000504 CAN0_7_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:553    .text:00000512 USIC0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:555    .text:00000520 USIC0_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:557    .text:0000052e USIC0_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:559    .text:0000053c USIC0_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:561    .text:0000054a USIC0_4_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:563    .text:00000558 USIC0_5_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:565    .text:00000566 USIC1_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:567    .text:00000574 USIC1_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:569    .text:00000582 USIC1_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:571    .text:00000590 USIC1_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:573    .text:0000059e USIC1_4_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:575    .text:000005ac USIC1_5_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:577    .text:000005ba USIC2_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:579    .text:000005c8 USIC2_1_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:581    .text:000005d6 USIC2_2_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:583    .text:000005e4 USIC2_3_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:585    .text:000005f2 USIC2_4_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:587    .text:00000600 USIC2_5_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:589    .text:0000060e LEDTS0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:591    .text:0000061c FCE0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:593    .text:0000062a GPDMA0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:595    .text:00000638 SDMMC0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:597    .text:00000646 USB0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:599    .text:00000654 ETH0_0_IRQHandler_Veneer
+../Startup/startup_XMC4500.s:601    .text:00000662 GPDMA1_0_IRQHandler_Veneer
+                   .Xmc4500.reset:00000000 $d
+../Startup/startup_XMC4500.s:257    .Xmc4500.reset:00000200 $t
+../Startup/startup_XMC4500.s:631    .XmcStartup:00000000 SystemInit_DAVE3
+../Startup/startup_XMC4500.s:280    .Xmc4500.postreset:00000000 __Xmc4500_Program_Loader
+../Startup/startup_XMC4500.s:272    .Xmc4500.reset:00000210 $d
+         .ARM.exidx.Xmc4500.reset:00000000 $d
+../Startup/startup_XMC4500.s:286    .Xmc4500.postreset:00000000 $t
+../Startup/startup_XMC4500.s:318    .Xmc4500.postreset:00000030 SKIPCOPY
+../Startup/startup_XMC4500.s:301    .Xmc4500.postreset:00000016 STARTCOPY
+../Startup/startup_XMC4500.s:309    .Xmc4500.postreset:0000001a COPYLOOP
+../Startup/startup_XMC4500.s:345    .Xmc4500.postreset:0000005c SKIPCLEAR
+../Startup/startup_XMC4500.s:334    .Xmc4500.postreset:00000044 STARTCLEAR
+../Startup/startup_XMC4500.s:338    .Xmc4500.postreset:0000004c CLEARLOOP
+                            *ABS*:e000ed08 SCB_VTOR
+../Startup/startup_XMC4500.s:365    .Xmc4500.postreset:0000007a $d
+     .ARM.exidx.Xmc4500.postreset:00000000 $d
+../Startup/startup_XMC4500.s:378    .text:00000000 NMI_Handler
+../Startup/startup_XMC4500.s:378    .text:00000000 $t
+../Startup/startup_XMC4500.s:380    .text:00000010 HardFault_Handler
+../Startup/startup_XMC4500.s:382    .text:00000020 MemManage_Handler
+../Startup/startup_XMC4500.s:384    .text:00000030 BusFault_Handler
+../Startup/startup_XMC4500.s:386    .text:00000040 UsageFault_Handler
+../Startup/startup_XMC4500.s:388    .text:00000050 SVC_Handler
+../Startup/startup_XMC4500.s:390    .text:00000060 DebugMon_Handler
+../Startup/startup_XMC4500.s:392    .text:00000070 PendSV_Handler
+../Startup/startup_XMC4500.s:394    .text:00000080 SysTick_Handler
+../Startup/startup_XMC4500.s:401    .text:00000090 SCU_0_IRQHandler
+../Startup/startup_XMC4500.s:403    .text:000000a0 ERU0_0_IRQHandler
+../Startup/startup_XMC4500.s:405    .text:000000b0 ERU0_1_IRQHandler
+../Startup/startup_XMC4500.s:407    .text:000000c0 ERU0_2_IRQHandler
+../Startup/startup_XMC4500.s:409    .text:000000d0 ERU0_3_IRQHandler
+../Startup/startup_XMC4500.s:411    .text:000000e0 ERU1_0_IRQHandler
+../Startup/startup_XMC4500.s:413    .text:000000f0 ERU1_1_IRQHandler
+../Startup/startup_XMC4500.s:415    .text:00000100 ERU1_2_IRQHandler
+../Startup/startup_XMC4500.s:417    .text:00000110 ERU1_3_IRQHandler
+../Startup/startup_XMC4500.s:419    .text:00000120 PMU0_0_IRQHandler
+../Startup/startup_XMC4500.s:421    .text:00000130 VADC0_C0_0_IRQHandler
+../Startup/startup_XMC4500.s:423    .text:00000140 VADC0_C0_1_IRQHandler
+../Startup/startup_XMC4500.s:425    .text:00000150 VADC0_C0_2_IRQHandler
+../Startup/startup_XMC4500.s:427    .text:00000160 VADC0_C0_3_IRQHandler
+../Startup/startup_XMC4500.s:429    .text:00000170 VADC0_G0_0_IRQHandler
+../Startup/startup_XMC4500.s:431    .text:00000180 VADC0_G0_1_IRQHandler
+../Startup/startup_XMC4500.s:433    .text:00000190 VADC0_G0_2_IRQHandler
+../Startup/startup_XMC4500.s:435    .text:000001a0 VADC0_G0_3_IRQHandler
+../Startup/startup_XMC4500.s:437    .text:000001b0 VADC0_G1_0_IRQHandler
+../Startup/startup_XMC4500.s:439    .text:000001c0 VADC0_G1_1_IRQHandler
+../Startup/startup_XMC4500.s:441    .text:000001d0 VADC0_G1_2_IRQHandler
+../Startup/startup_XMC4500.s:443    .text:000001e0 VADC0_G1_3_IRQHandler
+../Startup/startup_XMC4500.s:445    .text:000001f0 VADC0_G2_0_IRQHandler
+../Startup/startup_XMC4500.s:447    .text:00000200 VADC0_G2_1_IRQHandler
+../Startup/startup_XMC4500.s:449    .text:00000210 VADC0_G2_2_IRQHandler
+../Startup/startup_XMC4500.s:451    .text:00000220 VADC0_G2_3_IRQHandler
+../Startup/startup_XMC4500.s:453    .text:00000230 VADC0_G3_0_IRQHandler
+../Startup/startup_XMC4500.s:455    .text:00000240 VADC0_G3_1_IRQHandler
+../Startup/startup_XMC4500.s:457    .text:00000250 VADC0_G3_2_IRQHandler
+../Startup/startup_XMC4500.s:459    .text:00000260 VADC0_G3_3_IRQHandler
+../Startup/startup_XMC4500.s:461    .text:00000270 DSD0_0_IRQHandler
+../Startup/startup_XMC4500.s:463    .text:00000280 DSD0_1_IRQHandler
+../Startup/startup_XMC4500.s:465    .text:00000290 DSD0_2_IRQHandler
+../Startup/startup_XMC4500.s:467    .text:000002a0 DSD0_3_IRQHandler
+../Startup/startup_XMC4500.s:469    .text:000002b0 DSD0_4_IRQHandler
+../Startup/startup_XMC4500.s:471    .text:000002c0 DSD0_5_IRQHandler
+../Startup/startup_XMC4500.s:473    .text:000002d0 DSD0_6_IRQHandler
+../Startup/startup_XMC4500.s:475    .text:000002e0 DSD0_7_IRQHandler
+../Startup/startup_XMC4500.s:477    .text:000002f0 DAC0_0_IRQHandler
+../Startup/startup_XMC4500.s:479    .text:00000300 DAC0_1_IRQHandler
+../Startup/startup_XMC4500.s:481    .text:00000310 CCU40_0_IRQHandler
+../Startup/startup_XMC4500.s:483    .text:00000320 CCU40_1_IRQHandler
+../Startup/startup_XMC4500.s:485    .text:00000330 CCU40_2_IRQHandler
+../Startup/startup_XMC4500.s:487    .text:00000340 CCU40_3_IRQHandler
+../Startup/startup_XMC4500.s:489    .text:00000350 CCU41_0_IRQHandler
+../Startup/startup_XMC4500.s:491    .text:0000035e CCU41_1_IRQHandler
+../Startup/startup_XMC4500.s:493    .text:0000036c CCU41_2_IRQHandler
+../Startup/startup_XMC4500.s:495    .text:0000037a CCU41_3_IRQHandler
+../Startup/startup_XMC4500.s:497    .text:00000388 CCU42_0_IRQHandler
+../Startup/startup_XMC4500.s:499    .text:00000396 CCU42_1_IRQHandler
+../Startup/startup_XMC4500.s:501    .text:000003a4 CCU42_2_IRQHandler
+../Startup/startup_XMC4500.s:503    .text:000003b2 CCU42_3_IRQHandler
+../Startup/startup_XMC4500.s:505    .text:000003c0 CCU43_0_IRQHandler
+../Startup/startup_XMC4500.s:507    .text:000003ce CCU43_1_IRQHandler
+../Startup/startup_XMC4500.s:509    .text:000003dc CCU43_2_IRQHandler
+../Startup/startup_XMC4500.s:511    .text:000003ea CCU43_3_IRQHandler
+../Startup/startup_XMC4500.s:513    .text:000003f8 CCU80_0_IRQHandler
+../Startup/startup_XMC4500.s:515    .text:00000406 CCU80_1_IRQHandler
+../Startup/startup_XMC4500.s:517    .text:00000414 CCU80_2_IRQHandler
+../Startup/startup_XMC4500.s:519    .text:00000422 CCU80_3_IRQHandler
+../Startup/startup_XMC4500.s:521    .text:00000430 CCU81_0_IRQHandler
+../Startup/startup_XMC4500.s:523    .text:0000043e CCU81_1_IRQHandler
+../Startup/startup_XMC4500.s:525    .text:0000044c CCU81_2_IRQHandler
+../Startup/startup_XMC4500.s:527    .text:0000045a CCU81_3_IRQHandler
+../Startup/startup_XMC4500.s:529    .text:00000468 POSIF0_0_IRQHandler
+../Startup/startup_XMC4500.s:531    .text:00000476 POSIF0_1_IRQHandler
+../Startup/startup_XMC4500.s:533    .text:00000484 POSIF1_0_IRQHandler
+../Startup/startup_XMC4500.s:535    .text:00000492 POSIF1_1_IRQHandler
+../Startup/startup_XMC4500.s:537    .text:000004a0 CAN0_0_IRQHandler
+../Startup/startup_XMC4500.s:539    .text:000004ae CAN0_1_IRQHandler
+../Startup/startup_XMC4500.s:541    .text:000004bc CAN0_2_IRQHandler
+../Startup/startup_XMC4500.s:543    .text:000004ca CAN0_3_IRQHandler
+../Startup/startup_XMC4500.s:545    .text:000004d8 CAN0_4_IRQHandler
+../Startup/startup_XMC4500.s:547    .text:000004e6 CAN0_5_IRQHandler
+../Startup/startup_XMC4500.s:549    .text:000004f4 CAN0_6_IRQHandler
+../Startup/startup_XMC4500.s:551    .text:00000502 CAN0_7_IRQHandler
+../Startup/startup_XMC4500.s:553    .text:00000510 USIC0_0_IRQHandler
+../Startup/startup_XMC4500.s:555    .text:0000051e USIC0_1_IRQHandler
+../Startup/startup_XMC4500.s:557    .text:0000052c USIC0_2_IRQHandler
+../Startup/startup_XMC4500.s:559    .text:0000053a USIC0_3_IRQHandler
+../Startup/startup_XMC4500.s:561    .text:00000548 USIC0_4_IRQHandler
+../Startup/startup_XMC4500.s:563    .text:00000556 USIC0_5_IRQHandler
+../Startup/startup_XMC4500.s:565    .text:00000564 USIC1_0_IRQHandler
+../Startup/startup_XMC4500.s:567    .text:00000572 USIC1_1_IRQHandler
+../Startup/startup_XMC4500.s:569    .text:00000580 USIC1_2_IRQHandler
+../Startup/startup_XMC4500.s:571    .text:0000058e USIC1_3_IRQHandler
+../Startup/startup_XMC4500.s:573    .text:0000059c USIC1_4_IRQHandler
+../Startup/startup_XMC4500.s:575    .text:000005aa USIC1_5_IRQHandler
+../Startup/startup_XMC4500.s:577    .text:000005b8 USIC2_0_IRQHandler
+../Startup/startup_XMC4500.s:579    .text:000005c6 USIC2_1_IRQHandler
+../Startup/startup_XMC4500.s:581    .text:000005d4 USIC2_2_IRQHandler
+../Startup/startup_XMC4500.s:583    .text:000005e2 USIC2_3_IRQHandler
+../Startup/startup_XMC4500.s:585    .text:000005f0 USIC2_4_IRQHandler
+../Startup/startup_XMC4500.s:587    .text:000005fe USIC2_5_IRQHandler
+../Startup/startup_XMC4500.s:589    .text:0000060c LEDTS0_0_IRQHandler
+../Startup/startup_XMC4500.s:591    .text:0000061a FCE0_0_IRQHandler
+../Startup/startup_XMC4500.s:593    .text:00000628 GPDMA0_0_IRQHandler
+../Startup/startup_XMC4500.s:595    .text:00000636 SDMMC0_0_IRQHandler
+../Startup/startup_XMC4500.s:597    .text:00000644 USB0_0_IRQHandler
+../Startup/startup_XMC4500.s:599    .text:00000652 ETH0_0_IRQHandler
+../Startup/startup_XMC4500.s:601    .text:00000660 GPDMA1_0_IRQHandler
+../Startup/startup_XMC4500.s:618    .text:0000066e AllowPLLInitByStartup
+../Startup/startup_XMC4500.s:632    .XmcStartup:00000000 $t
+../Startup/startup_XMC4500.s:640    *ABS*:58004000 PREF_PCON
+../Startup/startup_XMC4500.s:641    *ABS*:5000413c SCU_GCU_PEEN
+../Startup/startup_XMC4500.s:642    *ABS*:50004150 SCU_GCU_PEFLAG
+../Startup/startup_XMC4500.s:643    *ABS*:58002014 FLASH_FCON
+../Startup/startup_XMC4500.s:628    .text:00000674 $d
+                   .debug_aranges:0000000c $d
+
+UNDEFINED SYMBOLS
+__Xmc4500_stack
+SystemInit
+eROData
+__Xmc4500_sData
+__Xmc4500_Data_Size
+__Xmc4500_sBSS
+__Xmc4500_BSS_Size
+SystemCoreClockUpdate
+__libc_init_array
+main

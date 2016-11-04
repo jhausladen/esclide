@@ -1,0 +1,125 @@
+package at.embsys.sat.jlink;
+
+import at.embsys.sat.RemoteGDBConnector;
+import at.embsys.sat.websocket.WebSocketConnectionHandler;
+import javafx.application.Platform;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+import java.io.*;
+import java.net.Socket;
+
+public class RedirectToJLink implements Runnable {
+
+    private final Circle xmc4500StateCircle;
+    private static boolean xmc4500_connected = false;
+    private static OutputStream outToServer;
+    private OutputStream outToJLinkGDB;
+    private int timeoutCount=1;
+    private int retries = 5;
+    private final int timeoutms = 1000;
+    private int retriestmp, timeoutCountTmp;
+
+    public static boolean isXmc4500_connected() {
+        return xmc4500_connected;
+    }
+
+    public OutputStream getOutToJLinkGDB() {
+        return outToJLinkGDB;
+    }
+
+    public RedirectToJLink(Circle jlinkState) {
+
+        xmc4500StateCircle = jlinkState;
+
+    }
+
+    public static void setOutToServer(OutputStream outToServer) {
+        RedirectToJLink.outToServer = outToServer;
+    }
+
+    @Override
+    public void run() {
+        retriestmp = retries;
+        timeoutCountTmp = timeoutCount;
+        while(timeoutCount <= retries) {
+            timeoutCount++;
+            InputStream in;
+            // Create socket that is connected to server on specified port
+            try {
+
+                String server = "127.0.0.1";
+                Socket socket = new Socket(server, OnChipDebugSystemSoftwareJLink.getjLinkPort());
+                System.out.println("Connected to jlink");
+                retries = 0;
+                in = socket.getInputStream();
+
+
+                outToJLinkGDB =
+                        socket.getOutputStream();
+
+                RemoteGDBConnector.setOutToJLink(outToJLinkGDB);
+            /* Wird mit 0 initialisiert */
+                int anzahlZeichen;
+                byte[] buffer = new byte[200];
+                System.out.println("Wait@RedirectToJLink");
+
+            /* UI updaten */
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        xmc4500StateCircle.setFill(Color.GREEN);
+                    }
+                });
+                WebSocketConnectionHandler.ws_sendMsg("xmc4500-online");
+                xmc4500_connected = true;
+                WebSocketConnectionHandler.ws_sendMsg("DBGControlServiceJLink-ready");
+                while ((anzahlZeichen = in.read(buffer)) >= 0) {
+
+                    if (outToServer != null) {
+                        outToServer.write(buffer, 0, anzahlZeichen);
+                        outToServer.flush();
+                    }
+
+                }
+
+                RemoteGDBConnector.setOutToJLink(null);
+                socket.close();  // Close the socket and its streams
+
+            /* UI updaten */
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        xmc4500StateCircle.setFill(Color.RED);
+                    }
+                });
+                WebSocketConnectionHandler.ws_sendMsg("xmc4500-offline");
+                xmc4500_connected = false;
+                System.out.println("JLink server closed ");
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                RemoteGDBConnector.setOutToJLink(null);
+                WebSocketConnectionHandler.ws_sendMsg("xmc4500-offline");
+                xmc4500_connected = false;
+
+            }
+            finally{
+            	in.close();
+            }
+            System.out.println("Could not connect to OOCD! Retry in "+timeoutms+"ms. Count: "+(timeoutCount-1)+":"+retries);
+            try {
+                Thread.sleep(timeoutms);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        retries=retriestmp;
+        timeoutCount=timeoutCountTmp;
+        System.out.println("JLink redirect Thread ends!");
+
+    }
+}

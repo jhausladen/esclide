@@ -1,0 +1,518 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"arm_class_marks_example_f32.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	testMarks_f32
+  20              		.section	.rodata
+  21              		.align	2
+  24              	testMarks_f32:
+  25 0000 00002842 		.word	1109917696
+  26 0004 00001442 		.word	1108606976
+  27 0008 0000A242 		.word	1117913088
+  28 000c 0000E041 		.word	1105199104
+  29 0010 0000A642 		.word	1118175232
+  30 0014 00009042 		.word	1116733440
+  31 0018 00001042 		.word	1108344832
+  32 001c 00001842 		.word	1108869120
+  33 0020 00000042 		.word	1107296256
+  34 0024 00004C42 		.word	1112276992
+  35 0028 00007C42 		.word	1115422720
+  36 002c 00008042 		.word	1115684864
+  37 0030 0000C242 		.word	1120010240
+  38 0034 0000A442 		.word	1118044160
+  39 0038 0000BE42 		.word	1119748096
+  40 003c 0000B442 		.word	1119092736
+  41 0040 00008442 		.word	1115947008
+  42 0044 00004C42 		.word	1112276992
+  43 0048 00005842 		.word	1113063424
+  44 004c 00002842 		.word	1109917696
+  45 0050 00008642 		.word	1116078080
+  46 0054 00006042 		.word	1113587712
+  47 0058 00003442 		.word	1110704128
+  48 005c 00006442 		.word	1113849856
+  49 0060 00008642 		.word	1116078080
+  50 0064 00008A42 		.word	1116340224
+  51 0068 00000C42 		.word	1108082688
+  52 006c 00005042 		.word	1112539136
+  53 0070 0000E841 		.word	1105723392
+  54 0074 0000A242 		.word	1117913088
+  55 0078 00006842 		.word	1114112000
+  56 007c 00003C42 		.word	1111228416
+  57 0080 00001842 		.word	1108869120
+  58 0084 00009842 		.word	1117257728
+  59 0088 0000C842 		.word	1120403456
+  60 008c 0000E841 		.word	1105723392
+  61 0090 00000442 		.word	1107558400
+  62 0094 00003C42 		.word	1111228416
+  63 0098 0000E841 		.word	1105723392
+  64 009c 00004842 		.word	1112014848
+  65 00a0 00000842 		.word	1107820544
+  66 00a4 00002442 		.word	1109655552
+  67 00a8 00007442 		.word	1114898432
+  68 00ac 00003842 		.word	1110966272
+  69 00b0 00005042 		.word	1112539136
+  70 00b4 00004842 		.word	1112014848
+  71 00b8 00004042 		.word	1111490560
+  72 00bc 00001042 		.word	1108344832
+  73 00c0 00003C42 		.word	1111228416
+  74 00c4 00005C42 		.word	1113325568
+  75 00c8 00003042 		.word	1110441984
+  76 00cc 00002042 		.word	1109393408
+  77 00d0 0000C842 		.word	1120403456
+  78 00d4 0000BC42 		.word	1119617024
+  79 00d8 0000A842 		.word	1118306304
+  80 00dc 00001442 		.word	1108606976
+  81 00e0 00000042 		.word	1107296256
+  82 00e4 00008E42 		.word	1116602368
+  83 00e8 00003C42 		.word	1111228416
+  84 00ec 00009A42 		.word	1117388800
+  85 00f0 0000F841 		.word	1106771968
+  86 00f4 00004842 		.word	1112014848
+  87 00f8 00004442 		.word	1111752704
+  88 00fc 00000C42 		.word	1108082688
+  89 0100 00007C42 		.word	1115422720
+  90 0104 00008642 		.word	1116078080
+  91 0108 00002042 		.word	1109393408
+  92 010c 0000F841 		.word	1106771968
+  93 0110 0000E841 		.word	1105723392
+  94 0114 00008842 		.word	1116209152
+  95 0118 00007442 		.word	1114898432
+  96 011c 00001842 		.word	1108869120
+  97 0120 0000F841 		.word	1106771968
+  98 0124 0000E041 		.word	1105199104
+  99 0128 0000E041 		.word	1105199104
+ 100 012c 00009842 		.word	1117257728
+ 101 0130 00005C42 		.word	1113325568
+ 102 0134 00000442 		.word	1107558400
+ 103 0138 0000E841 		.word	1105723392
+ 104 013c 00001C42 		.word	1109131264
+ 105              		.global	testUnity_f32
+ 106              		.align	2
+ 109              	testUnity_f32:
+ 110 0140 0000803F 		.word	1065353216
+ 111 0144 0000803F 		.word	1065353216
+ 112 0148 0000803F 		.word	1065353216
+ 113 014c 0000803F 		.word	1065353216
+ 114              		.bss
+ 115              		.align	2
+ 116              	testOutput:
+ 117 0000 00000000 		.space	320
+ 117      00000000 
+ 117      00000000 
+ 117      00000000 
+ 117      00000000 
+ 118              		.global	numStudents
+ 119              		.data
+ 120              		.align	2
+ 123              	numStudents:
+ 124 0000 14000000 		.word	20
+ 125              		.global	numSubjects
+ 126              		.align	2
+ 129              	numSubjects:
+ 130 0004 04000000 		.word	4
+ 131              		.comm	max_marks,4,4
+ 132              		.comm	min_marks,4,4
+ 133              		.comm	mean,4,4
+ 134              		.comm	std,4,4
+ 135              		.comm	var,4,4
+ 136              		.comm	student_num,4,4
+ 137              		.section	.rodata
+ 138              		.align	2
+ 139              	.LC3:
+ 140 0150 1400     		.short	20
+ 141 0152 0400     		.short	4
+ 142 0154 00000000 		.word	testMarks_f32
+ 143              		.align	2
+ 144              	.LC4:
+ 145 0158 0400     		.short	4
+ 146 015a 0100     		.short	1
+ 147 015c 00000000 		.word	testUnity_f32
+ 148              		.align	2
+ 149              	.LC5:
+ 150 0160 1400     		.short	20
+ 151 0162 0100     		.short	1
+ 152 0164 00000000 		.word	testOutput
+ 153              		.section	.text.main,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	main
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	main:
+ 160              	.LFB128:
+ 161              		.file 1 "../arm_class_marks_example_f32.c"
+   1:../arm_class_marks_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_class_marks_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_class_marks_example_f32.c **** *
+   4:../arm_class_marks_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_class_marks_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_class_marks_example_f32.c **** *
+   7:../arm_class_marks_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_class_marks_example_f32.c **** * Title:         arm_class_marks_example_f32.c
+   9:../arm_class_marks_example_f32.c **** *
+  10:../arm_class_marks_example_f32.c **** * Description:   Example code to calculate Minimum, Maximum
+  11:../arm_class_marks_example_f32.c **** *                Mean, std and variance of marks obtained in a class
+  12:../arm_class_marks_example_f32.c **** *
+  13:../arm_class_marks_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  14:../arm_class_marks_example_f32.c **** *
+  15:../arm_class_marks_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  16:../arm_class_marks_example_f32.c **** * modification, are permitted provided that the following conditions
+  17:../arm_class_marks_example_f32.c **** * are met:
+  18:../arm_class_marks_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  19:../arm_class_marks_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  20:../arm_class_marks_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  21:../arm_class_marks_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  22:../arm_class_marks_example_f32.c **** *     the documentation and/or other materials provided with the
+  23:../arm_class_marks_example_f32.c **** *     distribution.
+  24:../arm_class_marks_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  25:../arm_class_marks_example_f32.c **** *     may be used to endorse or promote products derived from this
+  26:../arm_class_marks_example_f32.c **** *     software without specific prior written permission.
+  27:../arm_class_marks_example_f32.c **** *
+  28:../arm_class_marks_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  29:../arm_class_marks_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  30:../arm_class_marks_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  31:../arm_class_marks_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  32:../arm_class_marks_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  33:../arm_class_marks_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  34:../arm_class_marks_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  35:../arm_class_marks_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  36:../arm_class_marks_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  37:../arm_class_marks_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  38:../arm_class_marks_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  39:../arm_class_marks_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  40:../arm_class_marks_example_f32.c **** * -------------------------------------------------------------------- */
+  41:../arm_class_marks_example_f32.c **** 
+  42:../arm_class_marks_example_f32.c **** /**
+  43:../arm_class_marks_example_f32.c ****  * @ingroup groupExamples
+  44:../arm_class_marks_example_f32.c ****  */
+  45:../arm_class_marks_example_f32.c **** 
+  46:../arm_class_marks_example_f32.c **** /**
+  47:../arm_class_marks_example_f32.c ****  * @defgroup ClassMarks Class Marks Example
+  48:../arm_class_marks_example_f32.c ****  *
+  49:../arm_class_marks_example_f32.c ****  * \par Description:
+  50:../arm_class_marks_example_f32.c ****  * \par
+  51:../arm_class_marks_example_f32.c ****  * Demonstrates the use the Maximum, Minimum, Mean, Standard Deviation, Variance
+  52:../arm_class_marks_example_f32.c ****  * and Matrix functions to calculate statistical values of marks obtained in a class.
+  53:../arm_class_marks_example_f32.c ****  *
+  54:../arm_class_marks_example_f32.c ****  * \note This example also demonstrates the usage of static initialization.
+  55:../arm_class_marks_example_f32.c ****  *
+  56:../arm_class_marks_example_f32.c ****  * \par Variables Description:
+  57:../arm_class_marks_example_f32.c ****  * \par
+  58:../arm_class_marks_example_f32.c ****  * \li \c testMarks_f32 points to the marks scored by 20 students in 4 subjects
+  59:../arm_class_marks_example_f32.c ****  * \li \c max_marks     Maximum of all marks
+  60:../arm_class_marks_example_f32.c ****  * \li \c min_marks     Minimum of all marks
+  61:../arm_class_marks_example_f32.c ****  * \li \c mean          Mean of all marks
+  62:../arm_class_marks_example_f32.c ****  * \li \c var           Variance of the marks
+  63:../arm_class_marks_example_f32.c ****  * \li \c std           Standard deviation of the marks
+  64:../arm_class_marks_example_f32.c ****  * \li \c numStudents   Total number of students in the class
+  65:../arm_class_marks_example_f32.c ****  *
+  66:../arm_class_marks_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  67:../arm_class_marks_example_f32.c ****  * \par
+  68:../arm_class_marks_example_f32.c ****  * - arm_mat_init_f32()
+  69:../arm_class_marks_example_f32.c ****  * - arm_mat_mult_f32()
+  70:../arm_class_marks_example_f32.c ****  * - arm_max_f32()
+  71:../arm_class_marks_example_f32.c ****  * - arm_min_f32()
+  72:../arm_class_marks_example_f32.c ****  * - arm_mean_f32()
+  73:../arm_class_marks_example_f32.c ****  * - arm_std_f32()
+  74:../arm_class_marks_example_f32.c ****  * - arm_var_f32()
+  75:../arm_class_marks_example_f32.c ****  *
+  76:../arm_class_marks_example_f32.c ****  * <b> Refer  </b>
+  77:../arm_class_marks_example_f32.c ****  * \link arm_class_marks_example_f32.c \endlink
+  78:../arm_class_marks_example_f32.c ****  *
+  79:../arm_class_marks_example_f32.c ****  */
+  80:../arm_class_marks_example_f32.c **** 
+  81:../arm_class_marks_example_f32.c **** 
+  82:../arm_class_marks_example_f32.c **** /** \example arm_class_marks_example_f32.c
+  83:../arm_class_marks_example_f32.c ****   */
+  84:../arm_class_marks_example_f32.c **** #include "arm_math.h"
+  85:../arm_class_marks_example_f32.c **** 
+  86:../arm_class_marks_example_f32.c **** #define USE_STATIC_INIT
+  87:../arm_class_marks_example_f32.c **** 
+  88:../arm_class_marks_example_f32.c ****  /* ----------------------------------------------------------------------
+  89:../arm_class_marks_example_f32.c **** ** Global defines
+  90:../arm_class_marks_example_f32.c **** ** ------------------------------------------------------------------- */
+  91:../arm_class_marks_example_f32.c **** 
+  92:../arm_class_marks_example_f32.c **** #define TEST_LENGTH_SAMPLES   (20*4)
+  93:../arm_class_marks_example_f32.c **** 
+  94:../arm_class_marks_example_f32.c **** /* ----------------------------------------------------------------------
+  95:../arm_class_marks_example_f32.c **** ** List of Marks scored by 20 students for 4 subjects
+  96:../arm_class_marks_example_f32.c **** ** ------------------------------------------------------------------- */
+  97:../arm_class_marks_example_f32.c **** const float32_t testMarks_f32[TEST_LENGTH_SAMPLES] =
+  98:../arm_class_marks_example_f32.c **** {
+  99:../arm_class_marks_example_f32.c ****   42.000000,  37.000000,  81.000000,  28.000000,
+ 100:../arm_class_marks_example_f32.c ****   83.000000,  72.000000,  36.000000,  38.000000,
+ 101:../arm_class_marks_example_f32.c ****   32.000000,  51.000000,  63.000000,  64.000000,
+ 102:../arm_class_marks_example_f32.c ****   97.000000,  82.000000,  95.000000,  90.000000,
+ 103:../arm_class_marks_example_f32.c ****   66.000000,  51.000000,  54.000000,  42.000000,
+ 104:../arm_class_marks_example_f32.c ****   67.000000,  56.000000,  45.000000,  57.000000,
+ 105:../arm_class_marks_example_f32.c ****   67.000000,  69.000000,  35.000000,  52.000000,
+ 106:../arm_class_marks_example_f32.c ****   29.000000,  81.000000,  58.000000,  47.000000,
+ 107:../arm_class_marks_example_f32.c ****   38.000000,  76.000000, 100.000000,  29.000000,
+ 108:../arm_class_marks_example_f32.c ****   33.000000,  47.000000,  29.000000,  50.000000,
+ 109:../arm_class_marks_example_f32.c ****   34.000000,  41.000000,  61.000000,  46.000000,
+ 110:../arm_class_marks_example_f32.c ****   52.000000,  50.000000,  48.000000,  36.000000,
+ 111:../arm_class_marks_example_f32.c ****   47.000000,  55.000000,  44.000000,  40.000000,
+ 112:../arm_class_marks_example_f32.c ****  100.000000,  94.000000,  84.000000,  37.000000,
+ 113:../arm_class_marks_example_f32.c ****   32.000000,  71.000000,  47.000000,  77.000000,
+ 114:../arm_class_marks_example_f32.c ****   31.000000,  50.000000,  49.000000,  35.000000,
+ 115:../arm_class_marks_example_f32.c ****   63.000000,  67.000000,  40.000000,  31.000000,
+ 116:../arm_class_marks_example_f32.c ****   29.000000,  68.000000,  61.000000,  38.000000,
+ 117:../arm_class_marks_example_f32.c ****   31.000000,  28.000000,  28.000000,  76.000000,
+ 118:../arm_class_marks_example_f32.c ****   55.000000,  33.000000,  29.000000,  39.000000
+ 119:../arm_class_marks_example_f32.c **** };
+ 120:../arm_class_marks_example_f32.c **** 
+ 121:../arm_class_marks_example_f32.c **** 
+ 122:../arm_class_marks_example_f32.c **** /* ----------------------------------------------------------------------
+ 123:../arm_class_marks_example_f32.c **** * Number of subjects X 1
+ 124:../arm_class_marks_example_f32.c **** * ------------------------------------------------------------------- */
+ 125:../arm_class_marks_example_f32.c **** const float32_t testUnity_f32[4] =
+ 126:../arm_class_marks_example_f32.c **** {
+ 127:../arm_class_marks_example_f32.c ****   1.000,  1.000,   1.000,  1.000
+ 128:../arm_class_marks_example_f32.c **** };
+ 129:../arm_class_marks_example_f32.c **** 
+ 130:../arm_class_marks_example_f32.c **** 
+ 131:../arm_class_marks_example_f32.c **** /* ----------------------------------------------------------------------
+ 132:../arm_class_marks_example_f32.c **** ** f32 Output buffer
+ 133:../arm_class_marks_example_f32.c **** ** ------------------------------------------------------------------- */
+ 134:../arm_class_marks_example_f32.c **** static float32_t testOutput[TEST_LENGTH_SAMPLES];
+ 135:../arm_class_marks_example_f32.c **** 
+ 136:../arm_class_marks_example_f32.c **** 
+ 137:../arm_class_marks_example_f32.c **** /* ------------------------------------------------------------------
+ 138:../arm_class_marks_example_f32.c **** * Global defines
+ 139:../arm_class_marks_example_f32.c **** *------------------------------------------------------------------- */
+ 140:../arm_class_marks_example_f32.c **** #define   NUMSTUDENTS  20
+ 141:../arm_class_marks_example_f32.c **** #define     NUMSUBJECTS  4
+ 142:../arm_class_marks_example_f32.c **** 
+ 143:../arm_class_marks_example_f32.c **** /* ------------------------------------------------------------------
+ 144:../arm_class_marks_example_f32.c **** * Global variables
+ 145:../arm_class_marks_example_f32.c **** *------------------------------------------------------------------- */
+ 146:../arm_class_marks_example_f32.c **** 
+ 147:../arm_class_marks_example_f32.c ****  uint32_t    numStudents = 20;
+ 148:../arm_class_marks_example_f32.c ****  uint32_t    numSubjects = 4;
+ 149:../arm_class_marks_example_f32.c **** float32_t    max_marks, min_marks, mean, std, var;
+ 150:../arm_class_marks_example_f32.c ****  uint32_t    student_num;
+ 151:../arm_class_marks_example_f32.c **** 
+ 152:../arm_class_marks_example_f32.c **** /* ----------------------------------------------------------------------------------
+ 153:../arm_class_marks_example_f32.c **** * Main f32 test function.  It returns maximum marks secured and student number
+ 154:../arm_class_marks_example_f32.c **** * ------------------------------------------------------------------------------- */
+ 155:../arm_class_marks_example_f32.c **** 
+ 156:../arm_class_marks_example_f32.c **** int32_t main()
+ 157:../arm_class_marks_example_f32.c **** {
+ 162              		.loc 1 157 0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 24
+ 165              		@ frame_needed = 1, uses_anonymous_args = 0
+ 166 0000 80B5     		push	{r7, lr}
+ 167              	.LCFI0:
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 7, -8
+ 170              		.cfi_offset 14, -4
+ 171 0002 86B0     		sub	sp, sp, #24
+ 172              	.LCFI1:
+ 173              		.cfi_def_cfa_offset 32
+ 174 0004 00AF     		add	r7, sp, #0
+ 175              	.LCFI2:
+ 176              		.cfi_def_cfa_register 7
+ 158:../arm_class_marks_example_f32.c **** 
+ 159:../arm_class_marks_example_f32.c **** #ifndef  USE_STATIC_INIT
+ 160:../arm_class_marks_example_f32.c **** 
+ 161:../arm_class_marks_example_f32.c ****   arm_matrix_instance_f32 srcA;
+ 162:../arm_class_marks_example_f32.c ****   arm_matrix_instance_f32 srcB;
+ 163:../arm_class_marks_example_f32.c ****   arm_matrix_instance_f32 dstC;
+ 164:../arm_class_marks_example_f32.c **** 
+ 165:../arm_class_marks_example_f32.c ****   /* Input and output matrices initializations */
+ 166:../arm_class_marks_example_f32.c ****   arm_mat_init_f32(&srcA, numStudents, numSubjects, (float32_t *)testMarks_f32);
+ 167:../arm_class_marks_example_f32.c ****   arm_mat_init_f32(&srcB, numSubjects, 1, (float32_t *)testUnity_f32);
+ 168:../arm_class_marks_example_f32.c ****   arm_mat_init_f32(&dstC, numStudents, 1, testOutput);
+ 169:../arm_class_marks_example_f32.c **** 
+ 170:../arm_class_marks_example_f32.c **** #else
+ 171:../arm_class_marks_example_f32.c **** 
+ 172:../arm_class_marks_example_f32.c ****   /* Static Initializations of Input and output matrix sizes and array */
+ 173:../arm_class_marks_example_f32.c ****   arm_matrix_instance_f32 srcA = {NUMSTUDENTS, NUMSUBJECTS, (float32_t *)testMarks_f32};
+ 177              		.loc 1 173 0
+ 178 0006 40F20003 		movw	r3, #:lower16:.LC3
+ 179 000a C0F20003 		movt	r3, #:upper16:.LC3
+ 180 000e 07F11002 		add	r2, r7, #16
+ 181 0012 93E80300 		ldmia	r3, {r0, r1}
+ 182 0016 82E80300 		stmia	r2, {r0, r1}
+ 174:../arm_class_marks_example_f32.c ****   arm_matrix_instance_f32 srcB = {NUMSUBJECTS, 1, (float32_t *)testUnity_f32};
+ 183              		.loc 1 174 0
+ 184 001a 40F20003 		movw	r3, #:lower16:.LC4
+ 185 001e C0F20003 		movt	r3, #:upper16:.LC4
+ 186 0022 07F10802 		add	r2, r7, #8
+ 187 0026 93E80300 		ldmia	r3, {r0, r1}
+ 188 002a 82E80300 		stmia	r2, {r0, r1}
+ 175:../arm_class_marks_example_f32.c ****   arm_matrix_instance_f32 dstC = {NUMSTUDENTS, 1, testOutput};
+ 189              		.loc 1 175 0
+ 190 002e 40F20003 		movw	r3, #:lower16:.LC5
+ 191 0032 C0F20003 		movt	r3, #:upper16:.LC5
+ 192 0036 3A46     		mov	r2, r7
+ 193 0038 93E80300 		ldmia	r3, {r0, r1}
+ 194 003c 82E80300 		stmia	r2, {r0, r1}
+ 176:../arm_class_marks_example_f32.c **** 
+ 177:../arm_class_marks_example_f32.c **** #endif
+ 178:../arm_class_marks_example_f32.c **** 
+ 179:../arm_class_marks_example_f32.c **** 
+ 180:../arm_class_marks_example_f32.c ****   /* ----------------------------------------------------------------------
+ 181:../arm_class_marks_example_f32.c ****   *Call the Matrix multiplication process function
+ 182:../arm_class_marks_example_f32.c ****   * ------------------------------------------------------------------- */
+ 183:../arm_class_marks_example_f32.c ****   arm_mat_mult_f32(&srcA, &srcB, &dstC);
+ 195              		.loc 1 183 0
+ 196 0040 07F11001 		add	r1, r7, #16
+ 197 0044 07F10802 		add	r2, r7, #8
+ 198 0048 3B46     		mov	r3, r7
+ 199 004a 0846     		mov	r0, r1
+ 200 004c 1146     		mov	r1, r2
+ 201 004e 1A46     		mov	r2, r3
+ 202 0050 FFF7FEFF 		bl	arm_mat_mult_f32
+ 184:../arm_class_marks_example_f32.c **** 
+ 185:../arm_class_marks_example_f32.c ****   /* ----------------------------------------------------------------------
+ 186:../arm_class_marks_example_f32.c ****   ** Call the Max function to calculate max marks among numStudents
+ 187:../arm_class_marks_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 188:../arm_class_marks_example_f32.c ****   arm_max_f32(testOutput, numStudents, &max_marks, &student_num);
+ 203              		.loc 1 188 0
+ 204 0054 40F20003 		movw	r3, #:lower16:numStudents
+ 205 0058 C0F20003 		movt	r3, #:upper16:numStudents
+ 206 005c 1B68     		ldr	r3, [r3, #0]
+ 207 005e 40F20000 		movw	r0, #:lower16:testOutput
+ 208 0062 C0F20000 		movt	r0, #:upper16:testOutput
+ 209 0066 1946     		mov	r1, r3
+ 210 0068 40F20002 		movw	r2, #:lower16:max_marks
+ 211 006c C0F20002 		movt	r2, #:upper16:max_marks
+ 212 0070 40F20003 		movw	r3, #:lower16:student_num
+ 213 0074 C0F20003 		movt	r3, #:upper16:student_num
+ 214 0078 FFF7FEFF 		bl	arm_max_f32
+ 189:../arm_class_marks_example_f32.c **** 
+ 190:../arm_class_marks_example_f32.c ****   /* ----------------------------------------------------------------------
+ 191:../arm_class_marks_example_f32.c ****   ** Call the Min function to calculate min marks among numStudents
+ 192:../arm_class_marks_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 193:../arm_class_marks_example_f32.c ****   arm_min_f32(testOutput, numStudents, &min_marks, &student_num);
+ 215              		.loc 1 193 0
+ 216 007c 40F20003 		movw	r3, #:lower16:numStudents
+ 217 0080 C0F20003 		movt	r3, #:upper16:numStudents
+ 218 0084 1B68     		ldr	r3, [r3, #0]
+ 219 0086 40F20000 		movw	r0, #:lower16:testOutput
+ 220 008a C0F20000 		movt	r0, #:upper16:testOutput
+ 221 008e 1946     		mov	r1, r3
+ 222 0090 40F20002 		movw	r2, #:lower16:min_marks
+ 223 0094 C0F20002 		movt	r2, #:upper16:min_marks
+ 224 0098 40F20003 		movw	r3, #:lower16:student_num
+ 225 009c C0F20003 		movt	r3, #:upper16:student_num
+ 226 00a0 FFF7FEFF 		bl	arm_min_f32
+ 194:../arm_class_marks_example_f32.c **** 
+ 195:../arm_class_marks_example_f32.c ****   /* ----------------------------------------------------------------------
+ 196:../arm_class_marks_example_f32.c ****   ** Call the Mean function to calculate mean
+ 197:../arm_class_marks_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 198:../arm_class_marks_example_f32.c ****   arm_mean_f32(testOutput, numStudents, &mean);
+ 227              		.loc 1 198 0
+ 228 00a4 40F20003 		movw	r3, #:lower16:numStudents
+ 229 00a8 C0F20003 		movt	r3, #:upper16:numStudents
+ 230 00ac 1B68     		ldr	r3, [r3, #0]
+ 231 00ae 40F20000 		movw	r0, #:lower16:testOutput
+ 232 00b2 C0F20000 		movt	r0, #:upper16:testOutput
+ 233 00b6 1946     		mov	r1, r3
+ 234 00b8 40F20002 		movw	r2, #:lower16:mean
+ 235 00bc C0F20002 		movt	r2, #:upper16:mean
+ 236 00c0 FFF7FEFF 		bl	arm_mean_f32
+ 199:../arm_class_marks_example_f32.c **** 
+ 200:../arm_class_marks_example_f32.c ****   /* ----------------------------------------------------------------------
+ 201:../arm_class_marks_example_f32.c ****   ** Call the std function to calculate standard deviation
+ 202:../arm_class_marks_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 203:../arm_class_marks_example_f32.c ****   arm_std_f32(testOutput, numStudents, &std);
+ 237              		.loc 1 203 0
+ 238 00c4 40F20003 		movw	r3, #:lower16:numStudents
+ 239 00c8 C0F20003 		movt	r3, #:upper16:numStudents
+ 240 00cc 1B68     		ldr	r3, [r3, #0]
+ 241 00ce 40F20000 		movw	r0, #:lower16:testOutput
+ 242 00d2 C0F20000 		movt	r0, #:upper16:testOutput
+ 243 00d6 1946     		mov	r1, r3
+ 244 00d8 40F20002 		movw	r2, #:lower16:std
+ 245 00dc C0F20002 		movt	r2, #:upper16:std
+ 246 00e0 FFF7FEFF 		bl	arm_std_f32
+ 204:../arm_class_marks_example_f32.c **** 
+ 205:../arm_class_marks_example_f32.c ****   /* ----------------------------------------------------------------------
+ 206:../arm_class_marks_example_f32.c ****   ** Call the var function to calculate variance
+ 207:../arm_class_marks_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 208:../arm_class_marks_example_f32.c ****   arm_var_f32(testOutput, numStudents, &var);
+ 247              		.loc 1 208 0
+ 248 00e4 40F20003 		movw	r3, #:lower16:numStudents
+ 249 00e8 C0F20003 		movt	r3, #:upper16:numStudents
+ 250 00ec 1B68     		ldr	r3, [r3, #0]
+ 251 00ee 40F20000 		movw	r0, #:lower16:testOutput
+ 252 00f2 C0F20000 		movt	r0, #:upper16:testOutput
+ 253 00f6 1946     		mov	r1, r3
+ 254 00f8 40F20002 		movw	r2, #:lower16:var
+ 255 00fc C0F20002 		movt	r2, #:upper16:var
+ 256 0100 FFF7FEFF 		bl	arm_var_f32
+ 257              	.L2:
+ 209:../arm_class_marks_example_f32.c **** 
+ 210:../arm_class_marks_example_f32.c ****   while(1);                             /* main function does not return */
+ 258              		.loc 1 210 0 discriminator 1
+ 259 0104 FEE7     		b	.L2
+ 260              		.cfi_endproc
+ 261              	.LFE128:
+ 263 0106 00BF     		.text
+ 264              	.Letext0:
+ 265              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 266              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_class_marks_example_f32.c
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:24     .rodata:00000000 testMarks_f32
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:21     .rodata:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:109    .rodata:00000140 testUnity_f32
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:115    .bss:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:116    .bss:00000000 testOutput
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:123    .data:00000000 numStudents
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:120    .data:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:129    .data:00000004 numSubjects
+                            *COM*:00000004 max_marks
+                            *COM*:00000004 min_marks
+                            *COM*:00000004 mean
+                            *COM*:00000004 std
+                            *COM*:00000004 var
+                            *COM*:00000004 student_num
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:139    .rodata:00000150 .LC3
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:144    .rodata:00000158 .LC4
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:149    .rodata:00000160 .LC5
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:154    .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccDd8qbn.s:159    .text.main:00000000 main
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.250eef6c7a6ea7970222e5d8b37d2f0a
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm4.h.47.5b17071cb0e0984e786cc7d50cfa4aef
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.297.9b8078faaef2b2639f9d65032d7e0d70
+
+UNDEFINED SYMBOLS
+arm_mat_mult_f32
+arm_max_f32
+arm_min_f32
+arm_mean_f32
+arm_std_f32
+arm_var_f32

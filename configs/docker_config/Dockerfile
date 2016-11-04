@@ -1,0 +1,114 @@
+# ------------------------------------------------------------------------------
+# Cloud9 Dockerfile
+# 
+# Author:    Jürgen Hausladen
+# Copyright: 2016, SAT, FH Technikum Wien
+# License:   AGPL <http://www.gnu.org/licenses/agpl.txt>
+# ------------------------------------------------------------------------------
+FROM    ubuntu:16.04
+MAINTAINER Juergen Hausladen <juergen.hausladen@technikum-wien.at>
+
+# ------------------------------------------------------------------------------
+# Set PATH environment variable for the GCC toolchain
+#ENV PATH /GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/bin:$PATH
+ENV TERM xterm
+ENV CONTAINER docker
+ENV TZ=Europe/Vienna
+# Set the timezone.
+RUN echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+# ------------------------------------------------------------------------------
+# Install base
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    build-essential \
+    g++ \
+    gdb \
+    curl \
+    libssl-dev \
+    git \
+    graphviz \
+    libxml2-dev \
+    supervisor \
+    nano \
+    lib32ncurses5 \
+    xdg-utils \
+    libgtk2.0-0 \
+    usbutils \
+    unzip \
+    p7zip-full \
+    python \
+    libxslt1.1 \
+    sudo
+RUN add-apt-repository ppa:team-gcc-arm-embedded/ppa
+RUN apt-get update && apt-get install -y gcc-arm-embedded
+# gcc-arm-none-eabi
+#RUN apt-get -o Dpkg::Options::="--force-overwrite" install gdb-arm-none-eabi
+RUN mkdir -p /var/log/supervisor /cloud9 /cloud9workspace /OCDS_Software /Binaries /analysis_tools /usr/share/desktop-directories /cloud9/.sessions
+
+# ------------------------------------------------------------------------------
+# Install Node.js and npm
+RUN     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN     apt-get install -y nodejs
+RUN     npm install -g n
+RUN     n v4.5.0
+
+# ------------------------------------------------------------------------------
+# Bundle app source
+COPY cloud9 /cloud9
+COPY Binaries /Binaries
+COPY configs/debugport.conf /cloud9/debugport.conf
+COPY configs/wsport.conf /cloud9/wsport.conf
+COPY configs/httpdownload.conf /cloud9/httpdownload.conf
+COPY configs/noob.conf /cloud9/noob.conf
+COPY cloud9workspace /cloud9workspace
+COPY cloud9workspace/.settings /cloud9workspace/.settings
+
+# ------------------------------------------------------------------------------
+# Add restricted user
+RUN adduser --disabled-password --gecos '' cloud
+RUN chown -R cloud:cloud /cloud9workspace
+RUN chown -R cloud:cloud /cloud9
+
+# ------------------------------------------------------------------------------
+# Setup Cloud9
+RUN su - cloud -c "cd /cloud9; npm install"
+# Tempfix for qs module dependency errors
+# RUN cd cloud9/node_modules/connect; sed -i 's/\"qs\": \">= 0.4.0\"/\"qs\": \"5.2.0\"/' package.json; npm install
+
+# ------------------------------------------------------------------------------
+# Bundle tools
+COPY OCDS_Software /OCDS_Software
+COPY analysis_tools /analysis_tools
+
+# ------------------------------------------------------------------------------
+# Add supervisord config files
+COPY configs/supervisor_config/cloud9.conf /etc/supervisor/conf.d/
+COPY configs/supervisor_config/debugcontrolservice.conf /etc/supervisor/conf.d/
+
+# ------------------------------------------------------------------------------
+# Add volumes
+VOLUME /cloud9workspace
+
+# ------------------------------------------------------------------------------
+# Install debug-control service
+RUN sudo dpkg -E -G -i /Binaries/Linux/64-Bit/debugcontrolserviceheadless-1.0.deb
+RUN sudo dpkg -E -G -i /OCDS_Software/jlink_4.98.1_x86_64.deb
+RUN sudo dpkg -E -G -i /OCDS_Software/openocd_0.9.0rc1-1_amd64.deb
+RUN sudo dpkg -E -G -i /analysis_tools/ARMv7t-WCET-Analysis/install/otawa-armv7_0.1ubuntu-1_amd64.deb
+RUN sudo dpkg -E -G -i /analysis_tools/dot2json/release/dot2json-1.30.deb
+
+# ------------------------------------------------------------------------------
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# ------------------------------------------------------------------------------
+# Expose ports (For container shared objects only, As we specify forwarded ports to the hosz
+# this will be done aoutomatically).
+# EXPOSE 22 80 3131
+
+# ------------------------------------------------------------------------------
+# Start supervisor, define default command.
+CMD ["/usr/bin/supervisord","-n", "-c", "/etc/supervisor/supervisord.conf"]
+#CMD ["/bin/bash", "-c", "/Cloud9/bin/cloud9.sh -l 0.0.0.0 --username sat --password embsys -w /Cloud9/cloud9workspace"]

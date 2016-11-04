@@ -1,0 +1,5 @@
+arm_graphic_equalizer_data.o
+arm_graphic_equalizer_example_q31.o
+Startup/startup_XMC4500.o
+Startup/system_XMC4500.o
+Common/Source/math_helper.o

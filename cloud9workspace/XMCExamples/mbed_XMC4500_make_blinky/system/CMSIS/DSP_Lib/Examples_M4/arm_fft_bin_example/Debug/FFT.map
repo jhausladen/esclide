@@ -1,0 +1,1253 @@
+Archive member included because of file (symbol)
+
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+                              arm_fft_bin_example_f32.o (arm_cfft_radix4_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+                              arm_fft_bin_example_f32.o (arm_cfft_radix4_init_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+                              arm_fft_bin_example_f32.o (arm_max_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+                              arm_fft_bin_example_f32.o (arm_cmplx_mag_f32)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o) (twiddleCoef_4096)
+C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o) (arm_bitreversal_f32)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+                              C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o) (sqrtf)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__ieee754_sqrtf)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_lib_ver.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__fdlib_version)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (matherr)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__fpclassifyf)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__aeabi_f2d)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__aeabi_ddiv)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_truncdfsf2.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__aeabi_d2f)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubsf3.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o) (__aeabi_fsub)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivsf3.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o) (__aeabi_fmul)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_cmpsf2.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__aeabi_fcmplt)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o) (__errno)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o) (_impure_ptr)
+c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+                              Startup/startup_XMC4500.o (__libc_init_array)
+C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                              c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o) (_init)
+
+Discarded input sections
+
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_data.o
+ .comment       0x00000000       0x71 arm_fft_bin_data.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000      0x814 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x12 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x3b arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x3a arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x10 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x2e arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0xa3 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000      0x20e arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x2d arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x42 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x3a arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x52 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x19 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000      0x16d arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x89 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0x22 arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000      0x1da arm_fft_bin_example_f32.o
+ .debug_macro   0x00000000       0xa5 arm_fft_bin_example_f32.o
+ .comment       0x00000000       0x71 arm_fft_bin_example_f32.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 Startup/system_XMC4500.o
+ .debug_macro   0x00000000      0x814 Startup/system_XMC4500.o
+ .debug_macro   0x00000000       0x3a Startup/system_XMC4500.o
+ .debug_macro   0x00000000       0x10 Startup/system_XMC4500.o
+ .debug_macro   0x00000000       0x2e Startup/system_XMC4500.o
+ .debug_macro   0x00000000       0xa3 Startup/system_XMC4500.o
+ .debug_macro   0x00000000      0x20e Startup/system_XMC4500.o
+ .debug_macro   0x00000000       0x2d Startup/system_XMC4500.o
+ .debug_macro   0x00000000       0x42 Startup/system_XMC4500.o
+ .comment       0x00000000       0x71 Startup/system_XMC4500.o
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x3b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x2d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x42 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00000000       0xa5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000      0x820 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x3b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x2d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x42 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00000000       0xa5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000      0x820 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x3b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x2d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x42 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00000000       0xa5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000      0x820 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x3b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x2d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x42 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x00000000       0xa5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000      0x820 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x3b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x2d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x42 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0xa5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x00000000       0x40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .group         0x00000000        0x8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000      0x820 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x12 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x3b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x2e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0xa3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000      0x20e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x2d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x42 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x3a C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x52 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x19 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000      0x16d C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x89 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x22 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000      0x1da C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0xa5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_macro   0x00000000       0x40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .comment       0x00000000       0x71 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH_1_cached   0x08000000         0x00100000         xr
+FLASH_1_uncached 0x0c000000         0x00100000         xr
+PSRAM_1          0x10000000         0x00010000         !xr
+DSRAM_1_system   0x20000000         0x00010000         !xr
+DSRAM_2_comm     0x30000000         0x00008000         !xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD arm_fft_bin_data.o
+LOAD arm_fft_bin_example_f32.o
+LOAD Startup/startup_XMC4500.o
+LOAD Startup/system_XMC4500.o
+LOAD C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a
+START GROUP
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a
+LOAD c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libc.a
+END GROUP
+START GROUP
+LOAD C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a
+END GROUP
+                0x00000400                stack_size = 0x400
+
+.text           0x08000000     0x3724 load address 0x0c000000
+                0x08000000                sText = .
+ *(.Xmc4500.reset)
+ .Xmc4500.reset
+                0x08000000      0x21c Startup/startup_XMC4500.o
+                0x08000000                __Xmc4500_interrupt_vector_cortex_m
+                0x08000200                __Xmc4500_reset_cortex_m
+ *(.Xmc4500.postreset)
+ .Xmc4500.postreset
+                0x0800021c       0xa8 Startup/startup_XMC4500.o
+ *(.XmcStartup)
+ .XmcStartup    0x080002c4        0x4 Startup/startup_XMC4500.o
+                0x080002c4                SystemInit_DAVE3
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text          0x080002c8        0x0 arm_fft_bin_data.o
+ .text          0x080002c8        0x0 arm_fft_bin_example_f32.o
+ .text.main     0x080002c8       0xc0 arm_fft_bin_example_f32.o
+                0x080002c8                main
+ .text          0x08000388      0x82c Startup/startup_XMC4500.o
+                0x08000388                NMI_Handler
+                0x0800038a                NMI_Handler_Veneer
+                0x08000398                HardFault_Handler
+                0x0800039a                HardFault_Handler_Veneer
+                0x080003a8                MemManage_Handler
+                0x080003aa                MemManage_Handler_Veneer
+                0x080003b8                BusFault_Handler
+                0x080003ba                BusFault_Handler_Veneer
+                0x080003c8                UsageFault_Handler
+                0x080003ca                UsageFault_Handler_Veneer
+                0x080003d8                SVC_Handler
+                0x080003da                SVC_Handler_Veneer
+                0x080003e8                DebugMon_Handler
+                0x080003ea                DebugMon_Handler_Veneer
+                0x080003f8                PendSV_Handler
+                0x080003fa                PendSV_Handler_Veneer
+                0x08000408                SysTick_Handler
+                0x0800040a                SysTick_Handler_Veneer
+                0x08000418                SCU_0_IRQHandler
+                0x0800041a                SCU_0_IRQHandler_Veneer
+                0x08000428                ERU0_0_IRQHandler
+                0x0800042a                ERU0_0_IRQHandler_Veneer
+                0x08000438                ERU0_1_IRQHandler
+                0x0800043a                ERU0_1_IRQHandler_Veneer
+                0x08000448                ERU0_2_IRQHandler
+                0x0800044a                ERU0_2_IRQHandler_Veneer
+                0x08000458                ERU0_3_IRQHandler
+                0x0800045a                ERU0_3_IRQHandler_Veneer
+                0x08000468                ERU1_0_IRQHandler
+                0x0800046a                ERU1_0_IRQHandler_Veneer
+                0x08000478                ERU1_1_IRQHandler
+                0x0800047a                ERU1_1_IRQHandler_Veneer
+                0x08000488                ERU1_2_IRQHandler
+                0x0800048a                ERU1_2_IRQHandler_Veneer
+                0x08000498                ERU1_3_IRQHandler
+                0x0800049a                ERU1_3_IRQHandler_Veneer
+                0x080004a8                PMU0_0_IRQHandler
+                0x080004aa                PMU0_0_IRQHandler_Veneer
+                0x080004b8                VADC0_C0_0_IRQHandler
+                0x080004ba                VADC0_C0_0_IRQHandler_Veneer
+                0x080004c8                VADC0_C0_1_IRQHandler
+                0x080004ca                VADC0_C0_1_IRQHandler_Veneer
+                0x080004d8                VADC0_C0_2_IRQHandler
+                0x080004da                VADC0_C0_2_IRQHandler_Veneer
+                0x080004e8                VADC0_C0_3_IRQHandler
+                0x080004ea                VADC0_C0_3_IRQHandler_Veneer
+                0x080004f8                VADC0_G0_0_IRQHandler
+                0x080004fa                VADC0_G0_0_IRQHandler_Veneer
+                0x08000508                VADC0_G0_1_IRQHandler
+                0x0800050a                VADC0_G0_1_IRQHandler_Veneer
+                0x08000518                VADC0_G0_2_IRQHandler
+                0x0800051a                VADC0_G0_2_IRQHandler_Veneer
+                0x08000528                VADC0_G0_3_IRQHandler
+                0x0800052a                VADC0_G0_3_IRQHandler_Veneer
+                0x08000538                VADC0_G1_0_IRQHandler
+                0x0800053a                VADC0_G1_0_IRQHandler_Veneer
+                0x08000548                VADC0_G1_1_IRQHandler
+                0x0800054a                VADC0_G1_1_IRQHandler_Veneer
+                0x08000558                VADC0_G1_2_IRQHandler
+                0x0800055a                VADC0_G1_2_IRQHandler_Veneer
+                0x08000568                VADC0_G1_3_IRQHandler
+                0x0800056a                VADC0_G1_3_IRQHandler_Veneer
+                0x08000578                VADC0_G2_0_IRQHandler
+                0x0800057a                VADC0_G2_0_IRQHandler_Veneer
+                0x08000588                VADC0_G2_1_IRQHandler
+                0x0800058a                VADC0_G2_1_IRQHandler_Veneer
+                0x08000598                VADC0_G2_2_IRQHandler
+                0x0800059a                VADC0_G2_2_IRQHandler_Veneer
+                0x080005a8                VADC0_G2_3_IRQHandler
+                0x080005aa                VADC0_G2_3_IRQHandler_Veneer
+                0x080005b8                VADC0_G3_0_IRQHandler
+                0x080005ba                VADC0_G3_0_IRQHandler_Veneer
+                0x080005c8                VADC0_G3_1_IRQHandler
+                0x080005ca                VADC0_G3_1_IRQHandler_Veneer
+                0x080005d8                VADC0_G3_2_IRQHandler
+                0x080005da                VADC0_G3_2_IRQHandler_Veneer
+                0x080005e8                VADC0_G3_3_IRQHandler
+                0x080005ea                VADC0_G3_3_IRQHandler_Veneer
+                0x080005f8                DSD0_0_IRQHandler
+                0x080005fa                DSD0_0_IRQHandler_Veneer
+                0x08000608                DSD0_1_IRQHandler
+                0x0800060a                DSD0_1_IRQHandler_Veneer
+                0x08000618                DSD0_2_IRQHandler
+                0x0800061a                DSD0_2_IRQHandler_Veneer
+                0x08000628                DSD0_3_IRQHandler
+                0x0800062a                DSD0_3_IRQHandler_Veneer
+                0x08000638                DSD0_4_IRQHandler
+                0x0800063a                DSD0_4_IRQHandler_Veneer
+                0x08000648                DSD0_5_IRQHandler
+                0x0800064a                DSD0_5_IRQHandler_Veneer
+                0x08000658                DSD0_6_IRQHandler
+                0x0800065a                DSD0_6_IRQHandler_Veneer
+                0x08000668                DSD0_7_IRQHandler
+                0x0800066a                DSD0_7_IRQHandler_Veneer
+                0x08000678                DAC0_0_IRQHandler
+                0x0800067a                DAC0_0_IRQHandler_Veneer
+                0x08000688                DAC0_1_IRQHandler
+                0x0800068a                DAC0_1_IRQHandler_Veneer
+                0x08000698                CCU40_0_IRQHandler
+                0x0800069a                CCU40_0_IRQHandler_Veneer
+                0x080006a8                CCU40_1_IRQHandler
+                0x080006aa                CCU40_1_IRQHandler_Veneer
+                0x080006b8                CCU40_2_IRQHandler
+                0x080006ba                CCU40_2_IRQHandler_Veneer
+                0x080006c8                CCU40_3_IRQHandler
+                0x080006ca                CCU40_3_IRQHandler_Veneer
+                0x080006d8                CCU41_0_IRQHandler
+                0x080006da                CCU41_0_IRQHandler_Veneer
+                0x080006e6                CCU41_1_IRQHandler
+                0x080006e8                CCU41_1_IRQHandler_Veneer
+                0x080006f4                CCU41_2_IRQHandler
+                0x080006f6                CCU41_2_IRQHandler_Veneer
+                0x08000702                CCU41_3_IRQHandler
+                0x08000704                CCU41_3_IRQHandler_Veneer
+                0x08000710                CCU42_0_IRQHandler
+                0x08000712                CCU42_0_IRQHandler_Veneer
+                0x0800071e                CCU42_1_IRQHandler
+                0x08000720                CCU42_1_IRQHandler_Veneer
+                0x0800072c                CCU42_2_IRQHandler
+                0x0800072e                CCU42_2_IRQHandler_Veneer
+                0x0800073a                CCU42_3_IRQHandler
+                0x0800073c                CCU42_3_IRQHandler_Veneer
+                0x08000748                CCU43_0_IRQHandler
+                0x0800074a                CCU43_0_IRQHandler_Veneer
+                0x08000756                CCU43_1_IRQHandler
+                0x08000758                CCU43_1_IRQHandler_Veneer
+                0x08000764                CCU43_2_IRQHandler
+                0x08000766                CCU43_2_IRQHandler_Veneer
+                0x08000772                CCU43_3_IRQHandler
+                0x08000774                CCU43_3_IRQHandler_Veneer
+                0x08000780                CCU80_0_IRQHandler
+                0x08000782                CCU80_0_IRQHandler_Veneer
+                0x0800078e                CCU80_1_IRQHandler
+                0x08000790                CCU80_1_IRQHandler_Veneer
+                0x0800079c                CCU80_2_IRQHandler
+                0x0800079e                CCU80_2_IRQHandler_Veneer
+                0x080007aa                CCU80_3_IRQHandler
+                0x080007ac                CCU80_3_IRQHandler_Veneer
+                0x080007b8                CCU81_0_IRQHandler
+                0x080007ba                CCU81_0_IRQHandler_Veneer
+                0x080007c6                CCU81_1_IRQHandler
+                0x080007c8                CCU81_1_IRQHandler_Veneer
+                0x080007d4                CCU81_2_IRQHandler
+                0x080007d6                CCU81_2_IRQHandler_Veneer
+                0x080007e2                CCU81_3_IRQHandler
+                0x080007e4                CCU81_3_IRQHandler_Veneer
+                0x080007f0                POSIF0_0_IRQHandler
+                0x080007f2                POSIF0_0_IRQHandler_Veneer
+                0x080007fe                POSIF0_1_IRQHandler
+                0x08000800                POSIF0_1_IRQHandler_Veneer
+                0x0800080c                POSIF1_0_IRQHandler
+                0x0800080e                POSIF1_0_IRQHandler_Veneer
+                0x0800081a                POSIF1_1_IRQHandler
+                0x0800081c                POSIF1_1_IRQHandler_Veneer
+                0x08000828                CAN0_0_IRQHandler
+                0x0800082a                CAN0_0_IRQHandler_Veneer
+                0x08000836                CAN0_1_IRQHandler
+                0x08000838                CAN0_1_IRQHandler_Veneer
+                0x08000844                CAN0_2_IRQHandler
+                0x08000846                CAN0_2_IRQHandler_Veneer
+                0x08000852                CAN0_3_IRQHandler
+                0x08000854                CAN0_3_IRQHandler_Veneer
+                0x08000860                CAN0_4_IRQHandler
+                0x08000862                CAN0_4_IRQHandler_Veneer
+                0x0800086e                CAN0_5_IRQHandler
+                0x08000870                CAN0_5_IRQHandler_Veneer
+                0x0800087c                CAN0_6_IRQHandler
+                0x0800087e                CAN0_6_IRQHandler_Veneer
+                0x0800088a                CAN0_7_IRQHandler
+                0x0800088c                CAN0_7_IRQHandler_Veneer
+                0x08000898                USIC0_0_IRQHandler
+                0x0800089a                USIC0_0_IRQHandler_Veneer
+                0x080008a6                USIC0_1_IRQHandler
+                0x080008a8                USIC0_1_IRQHandler_Veneer
+                0x080008b4                USIC0_2_IRQHandler
+                0x080008b6                USIC0_2_IRQHandler_Veneer
+                0x080008c2                USIC0_3_IRQHandler
+                0x080008c4                USIC0_3_IRQHandler_Veneer
+                0x080008d0                USIC0_4_IRQHandler
+                0x080008d2                USIC0_4_IRQHandler_Veneer
+                0x080008de                USIC0_5_IRQHandler
+                0x080008e0                USIC0_5_IRQHandler_Veneer
+                0x080008ec                USIC1_0_IRQHandler
+                0x080008ee                USIC1_0_IRQHandler_Veneer
+                0x080008fa                USIC1_1_IRQHandler
+                0x080008fc                USIC1_1_IRQHandler_Veneer
+                0x08000908                USIC1_2_IRQHandler
+                0x0800090a                USIC1_2_IRQHandler_Veneer
+                0x08000916                USIC1_3_IRQHandler
+                0x08000918                USIC1_3_IRQHandler_Veneer
+                0x08000924                USIC1_4_IRQHandler
+                0x08000926                USIC1_4_IRQHandler_Veneer
+                0x08000932                USIC1_5_IRQHandler
+                0x08000934                USIC1_5_IRQHandler_Veneer
+                0x08000940                USIC2_0_IRQHandler
+                0x08000942                USIC2_0_IRQHandler_Veneer
+                0x0800094e                USIC2_1_IRQHandler
+                0x08000950                USIC2_1_IRQHandler_Veneer
+                0x0800095c                USIC2_2_IRQHandler
+                0x0800095e                USIC2_2_IRQHandler_Veneer
+                0x0800096a                USIC2_3_IRQHandler
+                0x0800096c                USIC2_3_IRQHandler_Veneer
+                0x08000978                USIC2_4_IRQHandler
+                0x0800097a                USIC2_4_IRQHandler_Veneer
+                0x08000986                USIC2_5_IRQHandler
+                0x08000988                USIC2_5_IRQHandler_Veneer
+                0x08000994                LEDTS0_0_IRQHandler
+                0x08000996                LEDTS0_0_IRQHandler_Veneer
+                0x080009a2                FCE0_0_IRQHandler
+                0x080009a4                FCE0_0_IRQHandler_Veneer
+                0x080009b0                GPDMA0_0_IRQHandler
+                0x080009b2                GPDMA0_0_IRQHandler_Veneer
+                0x080009be                SDMMC0_0_IRQHandler
+                0x080009c0                SDMMC0_0_IRQHandler_Veneer
+                0x080009cc                USB0_0_IRQHandler
+                0x080009ce                USB0_0_IRQHandler_Veneer
+                0x080009da                ETH0_0_IRQHandler
+                0x080009dc                ETH0_0_IRQHandler_Veneer
+                0x080009e8                GPDMA1_0_IRQHandler
+                0x080009ea                GPDMA1_0_IRQHandler_Veneer
+                0x080009f6                AllowPLLInitByStartup
+ .text          0x08000bb4        0x0 Startup/system_XMC4500.o
+ .text.SystemInit
+                0x08000bb4       0x9c Startup/system_XMC4500.o
+                0x08000bb4                SystemInit
+ .text.SystemCoreClockUpdate
+                0x08000c50      0x148 Startup/system_XMC4500.o
+                0x08000c50                SystemCoreClockUpdate
+ .text.SystemClockSetup
+                0x08000d98      0x4cc Startup/system_XMC4500.o
+ .text          0x08001264        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .text.arm_radix4_butterfly_f32
+                0x08001264      0x50c C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+                0x08001264                arm_radix4_butterfly_f32
+ .text.arm_radix4_butterfly_inverse_f32
+                0x08001770      0x388 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+                0x08001770                arm_radix4_butterfly_inverse_f32
+ .text.arm_cfft_radix4_f32
+                0x08001af8       0x4c C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+                0x08001af8                arm_cfft_radix4_f32
+ .text          0x08001b44        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .text.arm_cfft_radix4_init_f32
+                0x08001b44       0xb4 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+                0x08001b44                arm_cfft_radix4_init_f32
+ .text          0x08001bf8        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .text.arm_max_f32
+                0x08001bf8      0x27c C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+                0x08001bf8                arm_max_f32
+ .text          0x08001e74        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .text.arm_cmplx_mag_f32
+                0x08001e74      0x264 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+                0x08001e74                arm_cmplx_mag_f32
+ .text          0x080020d8        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .text          0x080020d8        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .text.arm_bitreversal_f32
+                0x080020d8       0xf0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+                0x080020d8                arm_bitreversal_f32
+ .text.arm_bitreversal_q31
+                0x080021c8      0x1d0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+                0x080021c8                arm_bitreversal_q31
+ .text.arm_bitreversal_q15
+                0x08002398      0x120 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+                0x08002398                arm_bitreversal_q15
+ .text          0x080024b8        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+ .text.sqrtf    0x080024b8       0x9c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+                0x080024b8                sqrtf
+ .text          0x08002554        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+ .text.__ieee754_sqrtf
+                0x08002554       0xd4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+                0x08002554                __ieee754_sqrtf
+ .text          0x08002628        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_lib_ver.o)
+ .text          0x08002628        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+ .text.matherr  0x08002628        0x4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+                0x08002628                matherr
+ .text          0x0800262c        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+ .text.__fpclassifyf
+                0x0800262c       0x58 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+                0x0800262c                __fpclassifyf
+ .text          0x08002684      0x370 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+                0x08002684                __aeabi_drsub
+                0x0800268c                __aeabi_dsub
+                0x0800268c                __subdf3
+                0x08002690                __aeabi_dadd
+                0x08002690                __adddf3
+                0x08002908                __floatunsidf
+                0x08002908                __aeabi_ui2d
+                0x08002928                __floatsidf
+                0x08002928                __aeabi_i2d
+                0x0800294c                __aeabi_f2d
+                0x0800294c                __extendsfdf2
+                0x08002988                __floatundidf
+                0x08002988                __aeabi_ul2d
+                0x08002998                __floatdidf
+                0x08002998                __aeabi_l2d
+ .text          0x080029f4      0x424 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+                0x080029f4                __aeabi_dmul
+                0x080029f4                __muldf3
+                0x08002c48                __divdf3
+                0x08002c48                __aeabi_ddiv
+ .text          0x08002e18       0xa0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_truncdfsf2.o)
+                0x08002e18                __truncdfsf2
+                0x08002e18                __aeabi_d2f
+ .text          0x08002eb8      0x21c c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubsf3.o)
+                0x08002eb8                __aeabi_frsub
+                0x08002ec0                __subsf3
+                0x08002ec0                __aeabi_fsub
+                0x08002ec4                __aeabi_fadd
+                0x08002ec4                __addsf3
+                0x08003024                __aeabi_ui2f
+                0x08003024                __floatunsisf
+                0x0800302c                __aeabi_i2f
+                0x0800302c                __floatsisf
+                0x08003048                __aeabi_ul2f
+                0x08003048                __floatundisf
+                0x08003058                __aeabi_l2f
+                0x08003058                __floatdisf
+ .text          0x080030d4      0x2a0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivsf3.o)
+                0x080030d4                __mulsf3
+                0x080030d4                __aeabi_fmul
+                0x0800323c                __aeabi_fdiv
+                0x0800323c                __divsf3
+ .text          0x08003374       0xec c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_cmpsf2.o)
+                0x08003374                __gesf2
+                0x08003374                __gtsf2
+                0x0800337c                __lesf2
+                0x0800337c                __ltsf2
+                0x08003384                __nesf2
+                0x08003384                __eqsf2
+                0x08003384                __cmpsf2
+                0x080033e4                __aeabi_cfrcmple
+                0x080033ec                __aeabi_cfcmpeq
+                0x080033ec                __aeabi_cfcmple
+                0x080033fc                __aeabi_fcmpeq
+                0x08003410                __aeabi_fcmplt
+                0x08003424                __aeabi_fcmple
+                0x08003438                __aeabi_fcmpge
+                0x0800344c                __aeabi_fcmpgt
+ .text          0x08003460        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .text.__errno  0x08003460        0xc c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+                0x08003460                __errno
+ .text          0x0800346c        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .text          0x0800346c        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .text.__libc_init_array
+                0x0800346c       0x94 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+                0x0800346c                __libc_init_array
+ .text          0x08003500        0x0 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+ .text._open    0x08003500       0x1c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003500                _open
+ .text._lseek   0x0800351c       0x1c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x0800351c                _lseek
+ .text._read    0x08003538       0x1c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003538                _read
+ .text._write   0x08003554       0x1c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003554                _write
+ .text._close   0x08003570       0x10 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003570                _close
+ .text._fstat   0x08003580       0x28 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003580                _fstat
+ .text._link    0x080035a8       0x28 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080035a8                _link
+ .text._unlink  0x080035d0       0x18 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080035d0                _unlink
+ .text._sbrk    0x080035e8       0xa0 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080035e8                _sbrk
+ .text._times   0x08003688       0x18 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003688                _times
+ .text._wait    0x080036a0       0x18 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080036a0                _wait
+ .text._kill    0x080036b8       0x1c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080036b8                _kill
+ .text._fork    0x080036d4       0x10 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080036d4                _fork
+ .text._getpid  0x080036e4       0x10 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080036e4                _getpid
+ .text._exit    0x080036f4        0xc C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x080036f4                _exit
+ .text._init    0x08003700        0xc C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x08003700                _init
+ .text._isatty  0x0800370c       0x18 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x0800370c                _isatty
+ *(.glue*)
+ .glue_7        0x00000000        0x0 linker stubs
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.v4*)
+ .v4_bx         0x00000000        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+ *(.init)
+                0x08003724                __preinit_array_start = .
+ *(.preinit_array)
+                0x08003724                __preinit_array_end = .
+                0x08003724                __init_array_start = .
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x08003724                __init_array_end = .
+ *crtbegin.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *crtend.o(.ctors)
+ *(.fini)
+                0x08003724                __fini_array_start = .
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x08003724                __fini_array_end = .
+ *crtbegin.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *crtend.o(.dtors)
+                0x08003724                __extab_start = .
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ .ARM.extab.Xmc4500.reset
+                0x08003724        0x0 Startup/startup_XMC4500.o
+ .ARM.extab.Xmc4500.postreset
+                0x08003724        0x0 Startup/startup_XMC4500.o
+                0x08003724                . = ALIGN (0x4)
+                0x08003724                __extab_end = ABSOLUTE (.)
+
+.iplt           0x08003724        0x0 load address 0x0c003724
+ .iplt          0x00000000        0x0 arm_fft_bin_data.o
+
+.ARM.exidx      0x08003724       0x10 load address 0x0c003724
+                0x08003724                __exidx_start = .
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx.Xmc4500.reset
+                0x08003724        0x8 Startup/startup_XMC4500.o
+ .ARM.exidx.Xmc4500.postreset
+                0x0800372c        0x8 Startup/startup_XMC4500.o
+                0x08003734                . = ALIGN (0x4)
+                0x08003734                __exidx_end = ABSOLUTE (.)
+
+.rodata         0x08003734    0x26d68 load address 0x0c003734
+ *(.rodata .rodata.*)
+ .rodata        0x08003734    0x26d58 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08003734                twiddleCoef_rfft_4096
+                0x08007734                twiddleCoef_rfft_2048
+                0x08009734                twiddleCoef_rfft_1024
+                0x0800a734                twiddleCoef_rfft_512
+                0x0800af34                twiddleCoef_rfft_256
+                0x0800b334                twiddleCoef_rfft_128
+                0x0800b534                twiddleCoef_rfft_64
+                0x0800b634                twiddleCoef_rfft_32
+                0x0800b6b4                armBitRevIndexTable4096
+                0x0800d634                armBitRevIndexTable2048
+                0x0800f3f4                armBitRevIndexTable1024
+                0x08010204                armBitRevIndexTable512
+                0x08010584                armBitRevIndexTable256
+                0x080108f4                armBitRevIndexTable128
+                0x08010a94                armBitRevIndexTable64
+                0x08010b04                armBitRevIndexTable32
+                0x08010b64                armBitRevIndexTable16
+                0x08010b8c                armRecipTableQ31
+                0x08010c8c                armRecipTableQ15
+                0x08010d0c                twiddleCoefQ15
+                0x08013d0c                twiddleCoefQ31
+                0x08019d0c                twiddleCoef_4096
+                0x08021d0c                twiddleCoef_2048
+                0x08025d0c                twiddleCoef_1024
+                0x08027d0c                twiddleCoef_512
+                0x08028d0c                twiddleCoef_256
+                0x0802950c                twiddleCoef_128
+                0x0802990c                twiddleCoef_64
+                0x08029b0c                twiddleCoef_32
+                0x08029c0c                twiddleCoef_16
+                0x08029c8c                armBitRevTable
+ .rodata.str1.4
+                0x0802a48c        0x6 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+                                  0x8 (size before relaxing)
+ *fill*         0x0802a492        0x2 00
+ .rodata.str1.4
+                0x0802a494        0x4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x0802a498        0x4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+                0x0802a498                _global_impure_ptr
+ *(.gnu.linkonce.r*)
+
+.rel.dyn        0x0802a49c        0x0 load address 0x0c02a49c
+ .rel.iplt      0x00000000        0x0 arm_fft_bin_data.o
+                0x0802a4a0                . = ALIGN (0x10)
+                0x0c02a4a0                eROData = (. | 0x4000000)
+
+Stack           0x20000000      0x400
+                0x20000400                . = (. + stack_size)
+ *fill*         0x20000000      0x400 00
+                0x20000400                __Xmc4500_stack = .
+
+Communication_Buffers
+ *DMA_Descriptors.o(COMMON)
+
+.bss            0x20000400     0x1014
+                0x20000400                __Xmc4500_sBSS = .
+ *(.bss)
+ .bss           0x20000400        0x0 arm_fft_bin_data.o
+ .bss           0x20000400     0x1008 arm_fft_bin_example_f32.o
+                0x20001400                ifftFlag
+                0x20001404                testIndex
+ .bss           0x20001408        0x0 Startup/startup_XMC4500.o
+ .bss           0x20001408        0x0 Startup/system_XMC4500.o
+ .bss           0x20001408        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .bss           0x20001408        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .bss           0x20001408        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .bss           0x20001408        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .bss           0x20001408        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .bss           0x20001408        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_lib_ver.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_truncdfsf2.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubsf3.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivsf3.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_cmpsf2.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .bss           0x20001408        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .bss           0x20001408        0xc C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                0x20001408                __dso_handle
+ *(.bss*)
+ *(EXCLUDE_FILE(*DMA_Descriptors.o) COMMON)
+ *(.gnu.linkonce.b*)
+                0x20001414                __Xmc4500_eBSS = ALIGN (0x4)
+                0x00001014                __Xmc4500_BSS_Size = (__Xmc4500_eBSS - __Xmc4500_sBSS)
+
+.data           0x20001420     0x2444 load address 0x0c02a4a0
+                0x20001420                __Xmc4500_sData = .
+ *(.data)
+ .data          0x20001420     0x2000 arm_fft_bin_data.o
+                0x20001420                testInput_f32_10khz
+ .data          0x20003420        0xc arm_fft_bin_example_f32.o
+                0x20003420                fftSize
+                0x20003424                doBitReverse
+                0x20003428                refIndex
+ .data          0x2000342c        0x0 Startup/startup_XMC4500.o
+ .data          0x2000342c        0x4 Startup/system_XMC4500.o
+                0x2000342c                SystemCoreClock
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_lib_ver.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_truncdfsf2.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubsf3.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivsf3.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_cmpsf2.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .data          0x20003430        0x0 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .data          0x20003430        0x0 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+ *(.data*)
+ .data.__fdlib_version
+                0x20003430        0x1 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_lib_ver.o)
+                0x20003430                __fdlib_version
+ *fill*         0x20003431        0x7 00
+ .data.impure_data
+                0x20003438      0x428 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x20003860        0x4 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+                0x20003860                _impure_ptr
+ *(*.data)
+ *(.gnu.linkonce.d*)
+                0x20003864                __Xmc4500_eData = ALIGN (0x4)
+                0x00002444                __Xmc4500_Data_Size = (__Xmc4500_eData - __Xmc4500_sData)
+                0x20003868                __Xmc4500_heap_start = ALIGN (0x8)
+                0x20010000                __Xmc4500_heap_end = (ORIGIN (DSRAM_1_system) + 0x10000)
+                0x20003868                Heap_Bank1_Start = __Xmc4500_heap_start
+                0x0000c798                Heap_Bank1_Size = (__Xmc4500_heap_end - __Xmc4500_heap_start)
+                0x20010000                Heap_Bank1_End = ABSOLUTE (__Xmc4500_heap_end)
+
+.igot.plt       0x20003864        0x0 load address 0x0c02c8e4
+ .igot.plt      0x00000000        0x0 arm_fft_bin_data.o
+
+DSRAM2_Heap     0x30000000        0x0
+                0x30000000                Heap_Bank2_Start = .
+                0x00008000                Heap_Bank2_Size = (0x8000 - (Heap_Bank2_Start - ORIGIN (DSRAM_2_comm)))
+
+PSRAM_Heap      0x10000000        0x0
+                0x10000000                Heap_Bank3_Start = .
+                0x00010000                Heap_Bank3_Size = (0x10000 - (Heap_Bank3_Start - ORIGIN (PSRAM_1)))
+
+/DISCARD/
+ *(.comment)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x218
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x18 arm_fft_bin_data.o
+ .debug_aranges
+                0x00000018       0x20 arm_fft_bin_example_f32.o
+ .debug_aranges
+                0x00000038       0x38 Startup/startup_XMC4500.o
+ .debug_aranges
+                0x00000070       0x30 Startup/system_XMC4500.o
+ .debug_aranges
+                0x000000a0       0x30 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_aranges
+                0x000000d0       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_aranges
+                0x000000f0       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_aranges
+                0x00000110       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_aranges
+                0x00000130       0x18 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_aranges
+                0x00000148       0x30 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_aranges
+                0x00000178       0xa0 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_info     0x00000000     0x2cf7
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0xba arm_fft_bin_data.o
+ .debug_info    0x000000ba      0x27f arm_fft_bin_example_f32.o
+ .debug_info    0x00000339       0x81 Startup/startup_XMC4500.o
+ .debug_info    0x000003ba      0xaf0 Startup/system_XMC4500.o
+ .debug_info    0x00000eaa      0x9c7 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_info    0x00001871      0x246 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_info    0x00001ab7      0x15f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_info    0x00001c16      0x291 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_info    0x00001ea7      0x533 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_info    0x000023da      0x2d6 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_info    0x000026b0      0x647 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_abbrev   0x00000000      0x9a5
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x59 arm_fft_bin_data.o
+ .debug_abbrev  0x00000059       0xf2 arm_fft_bin_example_f32.o
+ .debug_abbrev  0x0000014b       0x12 Startup/startup_XMC4500.o
+ .debug_abbrev  0x0000015d      0x154 Startup/system_XMC4500.o
+ .debug_abbrev  0x000002b1      0x194 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_abbrev  0x00000445       0xf7 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_abbrev  0x0000053c       0xb5 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_abbrev  0x000005f1      0x122 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_abbrev  0x00000713       0x87 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_abbrev  0x0000079a       0xcf C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_abbrev  0x00000869      0x13c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_line     0x00000000     0x2d41
+ *(.debug_line)
+ .debug_line    0x00000000      0x2c8 arm_fft_bin_data.o
+ .debug_line    0x000002c8      0x2f3 arm_fft_bin_example_f32.o
+ .debug_line    0x000005bb      0x1a4 Startup/startup_XMC4500.o
+ .debug_line    0x0000075f      0x3a5 Startup/system_XMC4500.o
+ .debug_line    0x00000b04      0xb40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_line    0x00001644      0x375 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_line    0x000019b9      0x357 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_line    0x00001d10      0x3c6 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_line    0x000020d6      0x2f4 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_line    0x000023ca      0x4eb C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_line    0x000028b5      0x48c C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_frame    0x00000000      0x568
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x30 arm_fft_bin_example_f32.o
+ .debug_frame   0x00000030       0x6c Startup/system_XMC4500.o
+ .debug_frame   0x0000009c       0xb8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_frame   0x00000154       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_frame   0x00000174       0x38 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_frame   0x000001ac       0x40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_frame   0x000001ec       0xa0 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_frame   0x0000028c       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+ .debug_frame   0x000002bc       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+ .debug_frame   0x000002ec       0x20 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+ .debug_frame   0x0000030c       0x20 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+ .debug_frame   0x0000032c       0x20 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .debug_frame   0x0000034c       0x30 c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .debug_frame   0x0000037c      0x1ec C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_str      0x00000000    0x93325
+ *(.debug_str)
+ .debug_str     0x00000000     0x5e43 arm_fft_bin_data.o
+                               0x5fc9 (size before relaxing)
+ .debug_str     0x00005e43      0x19f arm_fft_bin_example_f32.o
+                               0x6160 (size before relaxing)
+ .debug_str     0x00005fe2    0x8c83c Startup/system_XMC4500.o
+                              0x90480 (size before relaxing)
+ .debug_str     0x0009281e      0x202 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+                               0x61dc (size before relaxing)
+ .debug_str     0x00092a20      0x276 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+                               0x6377 (size before relaxing)
+ .debug_str     0x00092c96       0x77 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+                               0x6048 (size before relaxing)
+ .debug_str     0x00092d0d       0x7b C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+                               0x60ec (size before relaxing)
+ .debug_str     0x00092d88      0x26e C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                               0x6480 (size before relaxing)
+ .debug_str     0x00092ff6       0x7f C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+                               0x62c8 (size before relaxing)
+ .debug_str     0x00093075      0x2b0 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+                                0x362 (size before relaxing)
+
+.debug_loc      0x00000000     0x3ae9
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x38 arm_fft_bin_example_f32.o
+ .debug_loc     0x00000038       0xa8 Startup/system_XMC4500.o
+ .debug_loc     0x000000e0     0x25e3 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_loc     0x000026c3      0x380 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_loc     0x00002a43      0x3bb C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_loc     0x00002dfe      0x4b9 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_loc     0x000032b7      0x4aa C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_loc     0x00003761      0x388 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_macinfo  0x00000000     0x5ad0
+ *(.debug_macinfo)
+ .debug_macinfo
+                0x00000000     0x5ad0 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_ranges   0x00000000      0x238
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x10 arm_fft_bin_example_f32.o
+ .debug_ranges  0x00000010       0x30 Startup/startup_XMC4500.o
+ .debug_ranges  0x00000040       0x20 Startup/system_XMC4500.o
+ .debug_ranges  0x00000060       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_ranges  0x00000080       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_ranges  0x00000090       0x10 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_ranges  0x000000a0       0xe8 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_ranges  0x00000188       0x20 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .debug_ranges  0x000001a8       0x90 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.build_attributes
+                0x00000000      0x485
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x39 arm_fft_bin_data.o
+ .ARM.attributes
+                0x00000039       0x39 arm_fft_bin_example_f32.o
+ .ARM.attributes
+                0x00000072       0x27 Startup/startup_XMC4500.o
+ .ARM.attributes
+                0x00000099       0x39 Startup/system_XMC4500.o
+ .ARM.attributes
+                0x000000d2       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .ARM.attributes
+                0x0000010b       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .ARM.attributes
+                0x00000144       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .ARM.attributes
+                0x0000017d       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .ARM.attributes
+                0x000001b6       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .ARM.attributes
+                0x000001ef       0x39 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)
+ .ARM.attributes
+                0x00000228       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-wf_sqrt.o)
+ .ARM.attributes
+                0x00000256       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-ef_sqrt.o)
+ .ARM.attributes
+                0x00000284       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_lib_ver.o)
+ .ARM.attributes
+                0x000002b2       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-s_matherr.o)
+ .ARM.attributes
+                0x000002e0       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libm.a(lib_a-sf_fpclassify.o)
+ .ARM.attributes
+                0x0000030e       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x0000032c       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x0000034a       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x00000368       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_addsubsf3.o)
+ .ARM.attributes
+                0x00000386       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_muldivsf3.o)
+ .ARM.attributes
+                0x000003a4       0x1e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/armv7e-m\libgcc.a(_arm_cmpsf2.o)
+ .ARM.attributes
+                0x000003c2       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-errno.o)
+ .ARM.attributes
+                0x000003f0       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-impure.o)
+ .ARM.attributes
+                0x0000041e       0x2e c:/dave-3.1/arm-gcc/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib/armv7e-m\libg.a(lib_a-init.o)
+ .ARM.attributes
+                0x0000044c       0x39 C:\DAVE-3.1\eclipse\/../Examples/Lib\libxmclibcstubs.a(System_LibcStubs.o)
+OUTPUT(FFT.elf elf32-littlearm)
+
+.debug_macro    0x00000000    0x18362
+ .debug_macro   0x00000000      0x122 arm_fft_bin_data.o
+ .debug_macro   0x00000122      0x814 arm_fft_bin_data.o
+ .debug_macro   0x00000936       0x12 arm_fft_bin_data.o
+ .debug_macro   0x00000948       0x3b arm_fft_bin_data.o
+ .debug_macro   0x00000983       0x3a arm_fft_bin_data.o
+ .debug_macro   0x000009bd       0x10 arm_fft_bin_data.o
+ .debug_macro   0x000009cd       0x2e arm_fft_bin_data.o
+ .debug_macro   0x000009fb       0xa3 arm_fft_bin_data.o
+ .debug_macro   0x00000a9e      0x20e arm_fft_bin_data.o
+ .debug_macro   0x00000cac       0x2d arm_fft_bin_data.o
+ .debug_macro   0x00000cd9       0x42 arm_fft_bin_data.o
+ .debug_macro   0x00000d1b       0x3a arm_fft_bin_data.o
+ .debug_macro   0x00000d55       0x52 arm_fft_bin_data.o
+ .debug_macro   0x00000da7       0x19 arm_fft_bin_data.o
+ .debug_macro   0x00000dc0      0x16d arm_fft_bin_data.o
+ .debug_macro   0x00000f2d       0x89 arm_fft_bin_data.o
+ .debug_macro   0x00000fb6       0x22 arm_fft_bin_data.o
+ .debug_macro   0x00000fd8      0x1da arm_fft_bin_data.o
+ .debug_macro   0x000011b2       0xa5 arm_fft_bin_data.o
+ .debug_macro   0x00001257      0x128 arm_fft_bin_example_f32.o
+ .debug_macro   0x0000137f      0x17e Startup/system_XMC4500.o
+ .debug_macro   0x000014fd       0x6a Startup/system_XMC4500.o
+ .debug_macro   0x00001567       0x2d Startup/system_XMC4500.o
+ .debug_macro   0x00001594       0x3b Startup/system_XMC4500.o
+ .debug_macro   0x000015cf      0xd39 Startup/system_XMC4500.o
+ .debug_macro   0x00002308    0x150f5 Startup/system_XMC4500.o
+ .debug_macro   0x000173fd      0x122 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x0001751f      0x820 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_f32.o)
+ .debug_macro   0x00017d3f      0x135 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00017e74       0x40 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cfft_radix4_init_f32.o)
+ .debug_macro   0x00017eb4      0x122 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_max_f32.o)
+ .debug_macro   0x00017fd6      0x122 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_cmplx_mag_f32.o)
+ .debug_macro   0x000180f8      0x135 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_macro   0x0001822d      0x135 C:\DAVE-3.1\eclipse\/../CMSIS/Lib/GCC\libarm_cortexM4lf_math.a(arm_bitreversal.o)

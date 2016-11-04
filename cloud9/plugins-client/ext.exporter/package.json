@@ -1,0 +1,14 @@
+{
+    "name": "ext.exporter",
+    "version": "0.0.1",
+    "main": "exporter.js",
+    "private": true,
+    "plugin": {
+        "provides": [
+            "ext.exporter"
+        ],
+        "consumes": [
+            "client-plugins"
+        ]
+    }
+}

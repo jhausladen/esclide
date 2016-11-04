@@ -1,0 +1,12 @@
+{
+    "name": "cloud9.ide.archiver",
+    "version": "0.0.1",
+
+    "main": "./archiver.js",
+
+    "plugin": {
+        "consumes": [
+            "ide"
+        ]
+    }
+}

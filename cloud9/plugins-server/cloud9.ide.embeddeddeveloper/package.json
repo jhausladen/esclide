@@ -1,0 +1,12 @@
+{
+    "name": "cloud9.ide.embeddeddeveloper",
+    "version": "0.0.1",
+
+    "main": "./embeddeddevelopertools.js",
+
+    "plugin": {
+        "consumes": [
+            "ide"
+        ]
+    }
+}

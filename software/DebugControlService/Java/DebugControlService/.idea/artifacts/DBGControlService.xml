@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="DBGControlService">
+    <output-path>$PROJECT_DIR$/out/artifacts/DBGControlService</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="at.embsys.sat.Main" />
+        <option name="description" value="" />
+        <option name="htmlParamFile" value="" />
+        <option name="nativeBundle" value="deb" />
+        <option name="paramFile" value="" />
+        <option name="title" value="Debug-Control-Service" />
+        <option name="vendor" value="SAT" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="JavaFXApp.jar">
+        <element id="module-output" name="DebugControlService" />
+      </element>
+      <element id="library" level="project" name="jetty-alpn-client-9.2.1.v20140609" />
+      <element id="library" level="project" name="websocket-api-9.2.1.v20140609" />
+    </root>
+  </artifact>
+</component>

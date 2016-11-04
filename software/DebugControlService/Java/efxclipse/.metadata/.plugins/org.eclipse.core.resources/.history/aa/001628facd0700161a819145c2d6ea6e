@@ -1,0 +1,130 @@
+package at.embsys.sat.oocd;
+
+import at.embsys.sat.RemoteGDBConnector;
+import at.embsys.sat.websocket.WebSocketConnectionHandler;
+import javafx.application.Platform;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+import java.io.*;
+import java.net.Socket;
+
+public class RedirectToOOCD implements Runnable {
+
+    private final Circle oocdStateCircle;
+    private final String device;
+    private static boolean launchpad_connected = false;
+    private static OutputStream outToServer;
+    private OutputStream outToOOCDGDB;
+    private int timeoutCount=1;
+    private int retries = 5;
+    private final int timeoutms = 1000;
+    private int retriestmp, timeoutCountTmp;
+
+    public static boolean isLaunchpad_connected() {
+        return launchpad_connected;
+    }
+
+    public OutputStream getOutToOOCDGDB() {
+        return outToOOCDGDB;
+    }
+
+    public RedirectToOOCD(Circle oocdState, String device) {
+        oocdStateCircle = oocdState;
+        this.device = device;
+    }
+
+    public static void setOutToServer(OutputStream outToServer) {
+        RedirectToOOCD.outToServer = outToServer;
+    }
+
+    @Override
+    public void run() {
+        retriestmp = retries;
+        timeoutCountTmp = timeoutCount;
+        while(timeoutCount <= retries) {
+            timeoutCount++;
+            InputStream in;
+            // Create socket that is connected to server on specified port
+            try {
+
+                String server = "127.0.0.1";
+                Socket socket = new Socket(server, OnChipDebugSystemSoftwareOpenOCD.getOocdPort());
+
+                System.out.println("Connected to OOCD");
+                retries = 0;
+                in = socket.getInputStream();
+
+                outToOOCDGDB =
+                        socket.getOutputStream();
+
+                outToOOCDGDB.write("+".getBytes());
+
+                outToOOCDGDB.flush();
+
+                RemoteGDBConnector.setOutToOOCD(outToOOCDGDB);
+            /* Wird mit 0 initialisiert */
+                int anzahlZeichen;
+                byte[] buffer = new byte[200];
+                System.out.println("Wait@RedirectToOOCD");
+
+            /* UI updaten */
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        oocdStateCircle.setFill(Color.GREEN);
+                    }
+                });
+
+                if (device.equals("XMC4500")) WebSocketConnectionHandler.ws_sendMsg("xmc4500-online");
+                else WebSocketConnectionHandler.ws_sendMsg("tm4c1294xl-online");
+                launchpad_connected = true;
+                WebSocketConnectionHandler.ws_sendMsg("DBGControlServiceOOCD-ready");
+                while ((anzahlZeichen = in.read(buffer)) >= 0) {
+
+
+                    if (outToServer != null) {
+
+                        outToServer.write(buffer, 0, anzahlZeichen);
+                        outToServer.flush();
+                    }
+
+                }
+
+                socket.close();  // Close the socket and its streams
+                RemoteGDBConnector.setOutToOOCD(null);
+
+            /* UI updaten */
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        oocdStateCircle.setFill(Color.RED);
+                    }
+                });
+                WebSocketConnectionHandler.ws_sendMsg("launchpad-offline");
+                launchpad_connected = false;
+                System.out.println("OOCD server closed ");
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                RemoteGDBConnector.setOutToOOCD(null);
+                WebSocketConnectionHandler.ws_sendMsg("launchpad-offline");
+                launchpad_connected = false;
+
+            }
+            System.out.println("Could not connect to OOCD! Retry in "+timeoutms+"ms. Count: "+(timeoutCount-1)+":"+retries);
+            try {
+                Thread.sleep(timeoutms);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        retries=retriestmp;
+        timeoutCount=timeoutCountTmp;
+        System.out.println("OOCD redirect Thread ends!");
+
+    }
+}

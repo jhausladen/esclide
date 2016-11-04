@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<flowfacts>
+
+   <function name="main">
+      <loop offset="0x2c" maxcount="10"/>   <!-- src/main.c:31 -->
+   </function>
+
+   <function name="wait">
+      <loop offset="0xc" maxcount="10"/>   <!-- src/main.c:44 -->
+   </function>
+
+</flowfacts>

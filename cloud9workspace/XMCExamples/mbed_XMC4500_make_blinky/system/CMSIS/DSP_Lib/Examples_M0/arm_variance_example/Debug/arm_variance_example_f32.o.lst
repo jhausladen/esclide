@@ -1,0 +1,508 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"arm_variance_example_f32.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	wire1,128,4
+  18              		.comm	wire2,128,4
+  19              		.comm	wire3,128,4
+  20              		.global	testInput_f32
+  21              		.data
+  22              		.align	2
+  25              	testInput_f32:
+  26 0000 2379DDBE 		.word	-1092781789
+  27 0004 DE31D5BF 		.word	-1076547106
+  28 0008 1D57003E 		.word	1040209693
+  29 000c 534A933E 		.word	1049840211
+  30 0010 93BF92BF 		.word	-1080901741
+  31 0014 EB6F983F 		.word	1066954731
+  32 0018 8836983F 		.word	1066940040
+  33 001c 5A251ABD 		.word	-1122359974
+  34 0020 DD92A73E 		.word	1051169501
+  35 0024 9AD4323E 		.word	1043518618
+  36 0028 89303FBE 		.word	-1103155063
+  37 002c 69CD393F 		.word	1060752745
+  38 0030 EA9B16BF 		.word	-1089037334
+  39 0034 51B90B40 		.word	1074510161
+  40 0038 5DAB0BBE 		.word	-1106531491
+  41 003c D254E93D 		.word	1038701778
+  42 0040 DC8B883F 		.word	1065913308
+  43 0044 1ED1723D 		.word	1030934814
+  44 0048 50E3C3BD 		.word	-1111235760
+  45 004c DB1455BF 		.word	-1084943141
+  46 0050 04BD963E 		.word	1050066180
+  47 0054 0208ABBF 		.word	-1079310334
+  48 0058 F9DD363F 		.word	1060560377
+  49 005c E2D0CF3F 		.word	1070584034
+  50 0060 361831BF 		.word	-1087301578
+  51 0064 ACA55B3F 		.word	1062970796
+  52 0068 1E83A03F 		.word	1067483934
+  53 006c 55FFCBBF 		.word	-1077149867
+  54 0070 8671B8BF 		.word	-1078431354
+  55 0074 BB36123F 		.word	1058158267
+  56 0078 CDBDCCBE 		.word	-1093878323
+  57 007c ABA3303F 		.word	1060152235
+  58              		.global	blockSize
+  59              		.align	2
+  62              	blockSize:
+  63 0080 20000000 		.word	32
+  64              		.global	refVarianceOut
+  65              		.align	2
+  68              	refVarianceOut:
+  69 0084 BB68673F 		.word	1063741627
+  70              		.global	__aeabi_ui2d
+  71              		.global	__aeabi_ddiv
+  72              		.global	__aeabi_d2f
+  73              		.global	__aeabi_fsub
+  74              		.global	__aeabi_fcmpgt
+  75              		.section	.text.main,"ax",%progbits
+  76              		.align	2
+  77              		.global	main
+  78              		.code	16
+  79              		.thumb_func
+  81              	main:
+  82              	.LFB81:
+  83              		.file 1 "../arm_variance_example_f32.c"
+   1:../arm_variance_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_variance_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_variance_example_f32.c **** *
+   4:../arm_variance_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_variance_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_variance_example_f32.c **** *
+   7:../arm_variance_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_variance_example_f32.c **** * Title:         arm_variance_example_f32.c
+   9:../arm_variance_example_f32.c **** *
+  10:../arm_variance_example_f32.c **** * Description:   Example code demonstrating variance calculation of input sequence.
+  11:../arm_variance_example_f32.c **** *
+  12:../arm_variance_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  13:../arm_variance_example_f32.c **** *
+  14:../arm_variance_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  15:../arm_variance_example_f32.c **** * modification, are permitted provided that the following conditions
+  16:../arm_variance_example_f32.c **** * are met:
+  17:../arm_variance_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  18:../arm_variance_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  19:../arm_variance_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  20:../arm_variance_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  21:../arm_variance_example_f32.c **** *     the documentation and/or other materials provided with the
+  22:../arm_variance_example_f32.c **** *     distribution.
+  23:../arm_variance_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  24:../arm_variance_example_f32.c **** *     may be used to endorse or promote products derived from this
+  25:../arm_variance_example_f32.c **** *     software without specific prior written permission.
+  26:../arm_variance_example_f32.c **** *
+  27:../arm_variance_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  28:../arm_variance_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  29:../arm_variance_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  30:../arm_variance_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  31:../arm_variance_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  32:../arm_variance_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  33:../arm_variance_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  34:../arm_variance_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  35:../arm_variance_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  36:../arm_variance_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  37:../arm_variance_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  38:../arm_variance_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  39:../arm_variance_example_f32.c **** * -------------------------------------------------------------------- */
+  40:../arm_variance_example_f32.c **** 
+  41:../arm_variance_example_f32.c **** /**
+  42:../arm_variance_example_f32.c ****  * @ingroup groupExamples
+  43:../arm_variance_example_f32.c ****  */
+  44:../arm_variance_example_f32.c **** 
+  45:../arm_variance_example_f32.c **** /**
+  46:../arm_variance_example_f32.c ****  * @defgroup VarianceExample Variance Example
+  47:../arm_variance_example_f32.c ****  *
+  48:../arm_variance_example_f32.c ****  * \par Description:
+  49:../arm_variance_example_f32.c ****  * \par
+  50:../arm_variance_example_f32.c ****  * Demonstrates the use of Basic Math and Support Functions to calculate the variance of an
+  51:../arm_variance_example_f32.c ****  * input sequence with N samples. Uniformly distributed white noise is taken as input.
+  52:../arm_variance_example_f32.c ****  *
+  53:../arm_variance_example_f32.c ****  * \par Algorithm:
+  54:../arm_variance_example_f32.c ****  * \par
+  55:../arm_variance_example_f32.c ****  * The variance of a sequence is the mean of the squared deviation of the sequence from its mean.
+  56:../arm_variance_example_f32.c ****  * \par
+  57:../arm_variance_example_f32.c ****  * This is denoted by the following equation:
+  58:../arm_variance_example_f32.c ****  * <pre> variance = ((x[0] - x') * (x[0] - x') + (x[1] - x') * (x[1] - x') + ... + * (x[n-1] - x') 
+  59:../arm_variance_example_f32.c ****  * where, <code>x[n]</code> is the input sequence, <code>N</code> is the number of input samples, a
+  60:../arm_variance_example_f32.c ****  * <code>x'</code> is the mean value of the input sequence, <code>x[n]</code>.
+  61:../arm_variance_example_f32.c ****  * \par
+  62:../arm_variance_example_f32.c ****  * The mean value <code>x'</code> is defined as:
+  63:../arm_variance_example_f32.c ****  * <pre> x' = (x[0] + x[1] + ... + x[n-1]) / N</pre>
+  64:../arm_variance_example_f32.c ****  *
+  65:../arm_variance_example_f32.c ****  * \par Block Diagram:
+  66:../arm_variance_example_f32.c ****  * \par
+  67:../arm_variance_example_f32.c ****  * \image html Variance.gif
+  68:../arm_variance_example_f32.c ****  *
+  69:../arm_variance_example_f32.c ****  *
+  70:../arm_variance_example_f32.c ****  * \par Variables Description:
+  71:../arm_variance_example_f32.c ****  * \par
+  72:../arm_variance_example_f32.c ****  * \li \c testInput_f32 points to the input data
+  73:../arm_variance_example_f32.c ****  * \li \c wire1, \c wir2, \c wire3 temporary buffers
+  74:../arm_variance_example_f32.c ****  * \li \c blockSize number of samples processed at a time
+  75:../arm_variance_example_f32.c ****  * \li \c refVarianceOut reference variance value
+  76:../arm_variance_example_f32.c ****  *
+  77:../arm_variance_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  78:../arm_variance_example_f32.c ****  * \par
+  79:../arm_variance_example_f32.c ****  * - arm_dot_prod_f32()
+  80:../arm_variance_example_f32.c ****  * - arm_mult_f32()
+  81:../arm_variance_example_f32.c ****  * - arm_sub_f32()
+  82:../arm_variance_example_f32.c ****  * - arm_fill_f32()
+  83:../arm_variance_example_f32.c ****  * - arm_copy_f32()
+  84:../arm_variance_example_f32.c ****  *
+  85:../arm_variance_example_f32.c ****  * <b> Refer  </b>
+  86:../arm_variance_example_f32.c ****  * \link arm_variance_example_f32.c \endlink
+  87:../arm_variance_example_f32.c ****  *
+  88:../arm_variance_example_f32.c ****  */
+  89:../arm_variance_example_f32.c **** 
+  90:../arm_variance_example_f32.c **** 
+  91:../arm_variance_example_f32.c **** /** \example arm_variance_example_f32.c
+  92:../arm_variance_example_f32.c ****   */
+  93:../arm_variance_example_f32.c **** #include <math.h>
+  94:../arm_variance_example_f32.c **** #include "arm_math.h"
+  95:../arm_variance_example_f32.c **** 
+  96:../arm_variance_example_f32.c **** /* ----------------------------------------------------------------------
+  97:../arm_variance_example_f32.c **** * Defines each of the tests performed
+  98:../arm_variance_example_f32.c **** * ------------------------------------------------------------------- */
+  99:../arm_variance_example_f32.c **** #define MAX_BLOCKSIZE   32
+ 100:../arm_variance_example_f32.c **** #define DELTA           (0.000001f)
+ 101:../arm_variance_example_f32.c **** 
+ 102:../arm_variance_example_f32.c **** 
+ 103:../arm_variance_example_f32.c **** /* ----------------------------------------------------------------------
+ 104:../arm_variance_example_f32.c **** * Declare I/O buffers
+ 105:../arm_variance_example_f32.c **** * ------------------------------------------------------------------- */
+ 106:../arm_variance_example_f32.c **** float32_t wire1[MAX_BLOCKSIZE];
+ 107:../arm_variance_example_f32.c **** float32_t wire2[MAX_BLOCKSIZE];
+ 108:../arm_variance_example_f32.c **** float32_t wire3[MAX_BLOCKSIZE];
+ 109:../arm_variance_example_f32.c **** 
+ 110:../arm_variance_example_f32.c **** /* ----------------------------------------------------------------------
+ 111:../arm_variance_example_f32.c **** * Test input data for Floating point Variance example for 32-blockSize
+ 112:../arm_variance_example_f32.c **** * Generated by the MATLAB randn() function
+ 113:../arm_variance_example_f32.c **** * ------------------------------------------------------------------- */
+ 114:../arm_variance_example_f32.c **** 
+ 115:../arm_variance_example_f32.c **** float32_t testInput_f32[32] =
+ 116:../arm_variance_example_f32.c **** {
+ 117:../arm_variance_example_f32.c ****   -0.432564811528221,  -1.665584378238097,   0.125332306474831,   0.287676420358549,
+ 118:../arm_variance_example_f32.c ****   -1.146471350681464,   1.190915465642999,   1.189164201652103,  -0.037633276593318,
+ 119:../arm_variance_example_f32.c ****    0.327292361408654,   0.174639142820925,  -0.186708577681439,   0.725790548293303,
+ 120:../arm_variance_example_f32.c ****   -0.588316543014189,   2.183185818197101,  -0.136395883086596,   0.113931313520810,
+ 121:../arm_variance_example_f32.c ****    1.066768211359189,   0.059281460523605,  -0.095648405483669,  -0.832349463650022,
+ 122:../arm_variance_example_f32.c ****    0.294410816392640,  -1.336181857937804,   0.714324551818952,   1.623562064446271,
+ 123:../arm_variance_example_f32.c ****   -0.691775701702287,   0.857996672828263,   1.254001421602532,  -1.593729576447477,
+ 124:../arm_variance_example_f32.c ****   -1.440964431901020,   0.571147623658178,  -0.399885577715363,   0.689997375464345
+ 125:../arm_variance_example_f32.c **** 
+ 126:../arm_variance_example_f32.c **** };
+ 127:../arm_variance_example_f32.c **** 
+ 128:../arm_variance_example_f32.c **** /* ----------------------------------------------------------------------
+ 129:../arm_variance_example_f32.c **** * Declare Global variables
+ 130:../arm_variance_example_f32.c **** * ------------------------------------------------------------------- */
+ 131:../arm_variance_example_f32.c **** uint32_t blockSize = 32;
+ 132:../arm_variance_example_f32.c **** float32_t  refVarianceOut = 0.903941793931839;
+ 133:../arm_variance_example_f32.c **** 
+ 134:../arm_variance_example_f32.c **** /* ----------------------------------------------------------------------
+ 135:../arm_variance_example_f32.c **** * Variance calculation test
+ 136:../arm_variance_example_f32.c **** * ------------------------------------------------------------------- */
+ 137:../arm_variance_example_f32.c **** 
+ 138:../arm_variance_example_f32.c **** int32_t main(void)
+ 139:../arm_variance_example_f32.c **** {
+  84              		.loc 1 139 0
+  85              		.cfi_startproc
+  86 0000 90B5     		push	{r4, r7, lr}
+  87              	.LCFI0:
+  88              		.cfi_def_cfa_offset 12
+  89              		.cfi_offset 4, -12
+  90              		.cfi_offset 7, -8
+  91              		.cfi_offset 14, -4
+  92 0002 87B0     		sub	sp, sp, #28
+  93              	.LCFI1:
+  94              		.cfi_def_cfa_offset 40
+  95 0004 00AF     		add	r7, sp, #0
+  96              	.LCFI2:
+  97              		.cfi_def_cfa_register 7
+ 140:../arm_variance_example_f32.c ****   arm_status status;
+ 141:../arm_variance_example_f32.c ****   float32_t mean, oneByBlockSize;
+ 142:../arm_variance_example_f32.c ****   float32_t variance;
+ 143:../arm_variance_example_f32.c ****   float32_t diff;
+ 144:../arm_variance_example_f32.c **** 
+ 145:../arm_variance_example_f32.c ****   status = ARM_MATH_SUCCESS;
+  98              		.loc 1 145 0
+  99 0006 3B1C     		mov	r3, r7
+ 100 0008 1733     		add	r3, r3, #23
+ 101 000a 0022     		mov	r2, #0
+ 102 000c 1A70     		strb	r2, [r3]
+ 146:../arm_variance_example_f32.c **** 
+ 147:../arm_variance_example_f32.c ****   /* Calculation of mean value of input */
+ 148:../arm_variance_example_f32.c **** 
+ 149:../arm_variance_example_f32.c ****   /* x' = 1/blockSize * (x(0)* 1 + x(1) * 1 + ... + x(n-1) * 1) */
+ 150:../arm_variance_example_f32.c **** 
+ 151:../arm_variance_example_f32.c ****   /* Fill wire1 buffer with 1.0 value */
+ 152:../arm_variance_example_f32.c ****   arm_fill_f32(1.0,  wire1, blockSize);
+ 103              		.loc 1 152 0
+ 104 000e 4A4B     		ldr	r3, .L7+8
+ 105 0010 1B68     		ldr	r3, [r3]
+ 106 0012 FE21     		mov	r1, #254
+ 107 0014 8905     		lsl	r1, r1, #22
+ 108 0016 494A     		ldr	r2, .L7+12
+ 109 0018 081C     		add	r0, r1, #0
+ 110 001a 111C     		mov	r1, r2
+ 111 001c 1A1C     		mov	r2, r3
+ 112 001e FFF7FEFF 		bl	arm_fill_f32
+ 153:../arm_variance_example_f32.c **** 
+ 154:../arm_variance_example_f32.c ****   /* Calculate the dot product of wire1 and wire2 */
+ 155:../arm_variance_example_f32.c ****   /* (x(0)* 1 + x(1) * 1 + ...+ x(n-1) * 1) */
+ 156:../arm_variance_example_f32.c ****   arm_dot_prod_f32(testInput_f32, wire1, blockSize, &mean);
+ 113              		.loc 1 156 0
+ 114 0022 454B     		ldr	r3, .L7+8
+ 115 0024 1A68     		ldr	r2, [r3]
+ 116 0026 4648     		ldr	r0, .L7+16
+ 117 0028 4449     		ldr	r1, .L7+12
+ 118 002a 3B1C     		mov	r3, r7
+ 119 002c 0C33     		add	r3, r3, #12
+ 120 002e FFF7FEFF 		bl	arm_dot_prod_f32
+ 157:../arm_variance_example_f32.c **** 
+ 158:../arm_variance_example_f32.c ****   /* Calculation of 1/blockSize */
+ 159:../arm_variance_example_f32.c ****   oneByBlockSize = 1.0 / (blockSize);
+ 121              		.loc 1 159 0
+ 122 0032 414B     		ldr	r3, .L7+8
+ 123 0034 1B68     		ldr	r3, [r3]
+ 124 0036 181C     		mov	r0, r3
+ 125 0038 FFF7FEFF 		bl	__aeabi_ui2d
+ 126 003c 031C     		mov	r3, r0
+ 127 003e 0C1C     		mov	r4, r1
+ 128 0040 3C49     		ldr	r1, .L7+4
+ 129 0042 3B48     		ldr	r0, .L7
+ 130 0044 1A1C     		mov	r2, r3
+ 131 0046 231C     		mov	r3, r4
+ 132 0048 FFF7FEFF 		bl	__aeabi_ddiv
+ 133 004c 031C     		mov	r3, r0
+ 134 004e 0C1C     		mov	r4, r1
+ 135 0050 181C     		mov	r0, r3
+ 136 0052 211C     		mov	r1, r4
+ 137 0054 FFF7FEFF 		bl	__aeabi_d2f
+ 138 0058 031C     		add	r3, r0, #0
+ 139 005a BB60     		str	r3, [r7, #8]
+ 160:../arm_variance_example_f32.c **** 
+ 161:../arm_variance_example_f32.c ****   /* 1/blockSize * (x(0)* 1 + x(1) * 1 + ... + x(n-1) * 1)  */
+ 162:../arm_variance_example_f32.c ****   arm_mult_f32(&mean, &oneByBlockSize, &mean, 1);
+ 140              		.loc 1 162 0
+ 141 005c 391C     		mov	r1, r7
+ 142 005e 0C31     		add	r1, r1, #12
+ 143 0060 3A1C     		mov	r2, r7
+ 144 0062 0832     		add	r2, r2, #8
+ 145 0064 3B1C     		mov	r3, r7
+ 146 0066 0C33     		add	r3, r3, #12
+ 147 0068 081C     		mov	r0, r1
+ 148 006a 111C     		mov	r1, r2
+ 149 006c 1A1C     		mov	r2, r3
+ 150 006e 0123     		mov	r3, #1
+ 151 0070 FFF7FEFF 		bl	arm_mult_f32
+ 163:../arm_variance_example_f32.c **** 
+ 164:../arm_variance_example_f32.c **** 
+ 165:../arm_variance_example_f32.c ****   /* Calculation of variance value of input */
+ 166:../arm_variance_example_f32.c **** 
+ 167:../arm_variance_example_f32.c ****   /* (1/blockSize) * (x(0) - x') * (x(0) - x') + (x(1) - x') * (x(1) - x') + ... + (x(n-1) - x') * 
+ 168:../arm_variance_example_f32.c **** 
+ 169:../arm_variance_example_f32.c ****   /* Fill wire2 with mean value x' */
+ 170:../arm_variance_example_f32.c ****   arm_fill_f32(mean,  wire2, blockSize);
+ 152              		.loc 1 170 0
+ 153 0074 F968     		ldr	r1, [r7, #12]
+ 154 0076 304B     		ldr	r3, .L7+8
+ 155 0078 1B68     		ldr	r3, [r3]
+ 156 007a 324A     		ldr	r2, .L7+20
+ 157 007c 081C     		add	r0, r1, #0
+ 158 007e 111C     		mov	r1, r2
+ 159 0080 1A1C     		mov	r2, r3
+ 160 0082 FFF7FEFF 		bl	arm_fill_f32
+ 171:../arm_variance_example_f32.c **** 
+ 172:../arm_variance_example_f32.c ****   /* wire3 contains (x-x') */
+ 173:../arm_variance_example_f32.c ****   arm_sub_f32(testInput_f32, wire2, wire3, blockSize);
+ 161              		.loc 1 173 0
+ 162 0086 2C4B     		ldr	r3, .L7+8
+ 163 0088 1B68     		ldr	r3, [r3]
+ 164 008a 2D48     		ldr	r0, .L7+16
+ 165 008c 2D49     		ldr	r1, .L7+20
+ 166 008e 2E4A     		ldr	r2, .L7+24
+ 167 0090 FFF7FEFF 		bl	arm_sub_f32
+ 174:../arm_variance_example_f32.c **** 
+ 175:../arm_variance_example_f32.c ****   /* wire2 contains (x-x') */
+ 176:../arm_variance_example_f32.c ****   arm_copy_f32(wire3, wire2, blockSize);
+ 168              		.loc 1 176 0
+ 169 0094 284B     		ldr	r3, .L7+8
+ 170 0096 1B68     		ldr	r3, [r3]
+ 171 0098 2B49     		ldr	r1, .L7+24
+ 172 009a 2A4A     		ldr	r2, .L7+20
+ 173 009c 081C     		mov	r0, r1
+ 174 009e 111C     		mov	r1, r2
+ 175 00a0 1A1C     		mov	r2, r3
+ 176 00a2 FFF7FEFF 		bl	arm_copy_f32
+ 177:../arm_variance_example_f32.c **** 
+ 178:../arm_variance_example_f32.c ****   /* (x(0) - x') * (x(0) - x') + (x(1) - x') * (x(1) - x') + ... + (x(n-1) - x') * (x(n-1) - x') */
+ 179:../arm_variance_example_f32.c ****   arm_dot_prod_f32(wire2, wire3, blockSize, &variance);
+ 177              		.loc 1 179 0
+ 178 00a6 244B     		ldr	r3, .L7+8
+ 179 00a8 1A68     		ldr	r2, [r3]
+ 180 00aa 2648     		ldr	r0, .L7+20
+ 181 00ac 2649     		ldr	r1, .L7+24
+ 182 00ae 3B1D     		add	r3, r7, #4
+ 183 00b0 FFF7FEFF 		bl	arm_dot_prod_f32
+ 180:../arm_variance_example_f32.c **** 
+ 181:../arm_variance_example_f32.c ****     /* Calculation of 1/blockSize */
+ 182:../arm_variance_example_f32.c ****   oneByBlockSize = 1.0 / (blockSize - 1);
+ 184              		.loc 1 182 0
+ 185 00b4 204B     		ldr	r3, .L7+8
+ 186 00b6 1B68     		ldr	r3, [r3]
+ 187 00b8 013B     		sub	r3, r3, #1
+ 188 00ba 181C     		mov	r0, r3
+ 189 00bc FFF7FEFF 		bl	__aeabi_ui2d
+ 190 00c0 031C     		mov	r3, r0
+ 191 00c2 0C1C     		mov	r4, r1
+ 192 00c4 1B49     		ldr	r1, .L7+4
+ 193 00c6 1A48     		ldr	r0, .L7
+ 194 00c8 1A1C     		mov	r2, r3
+ 195 00ca 231C     		mov	r3, r4
+ 196 00cc FFF7FEFF 		bl	__aeabi_ddiv
+ 197 00d0 031C     		mov	r3, r0
+ 198 00d2 0C1C     		mov	r4, r1
+ 199 00d4 181C     		mov	r0, r3
+ 200 00d6 211C     		mov	r1, r4
+ 201 00d8 FFF7FEFF 		bl	__aeabi_d2f
+ 202 00dc 031C     		add	r3, r0, #0
+ 203 00de BB60     		str	r3, [r7, #8]
+ 183:../arm_variance_example_f32.c **** 
+ 184:../arm_variance_example_f32.c ****   /* Calculation of variance */
+ 185:../arm_variance_example_f32.c ****   arm_mult_f32(&variance, &oneByBlockSize, &variance, 1);
+ 204              		.loc 1 185 0
+ 205 00e0 391D     		add	r1, r7, #4
+ 206 00e2 3A1C     		mov	r2, r7
+ 207 00e4 0832     		add	r2, r2, #8
+ 208 00e6 3B1D     		add	r3, r7, #4
+ 209 00e8 081C     		mov	r0, r1
+ 210 00ea 111C     		mov	r1, r2
+ 211 00ec 1A1C     		mov	r2, r3
+ 212 00ee 0123     		mov	r3, #1
+ 213 00f0 FFF7FEFF 		bl	arm_mult_f32
+ 186:../arm_variance_example_f32.c **** 
+ 187:../arm_variance_example_f32.c ****   /* absolute value of difference between ref and test */
+ 188:../arm_variance_example_f32.c ****   diff = fabsf(refVarianceOut - variance);
+ 214              		.loc 1 188 0
+ 215 00f4 154B     		ldr	r3, .L7+28
+ 216 00f6 1A68     		ldr	r2, [r3]
+ 217 00f8 7B68     		ldr	r3, [r7, #4]
+ 218 00fa 101C     		add	r0, r2, #0
+ 219 00fc 191C     		add	r1, r3, #0
+ 220 00fe FFF7FEFF 		bl	__aeabi_fsub
+ 221 0102 031C     		add	r3, r0, #0
+ 222 0104 5B00     		lsl	r3, r3, #1
+ 223 0106 5B08     		lsr	r3, r3, #1
+ 224 0108 3B61     		str	r3, [r7, #16]
+ 189:../arm_variance_example_f32.c **** 
+ 190:../arm_variance_example_f32.c ****   /* Comparison of variance value with reference */
+ 191:../arm_variance_example_f32.c ****   if(diff > DELTA)
+ 225              		.loc 1 191 0
+ 226 010a 3869     		ldr	r0, [r7, #16]
+ 227 010c 1049     		ldr	r1, .L7+32
+ 228 010e FFF7FEFF 		bl	__aeabi_fcmpgt
+ 229 0112 031C     		mov	r3, r0
+ 230 0114 002B     		cmp	r3, #0
+ 231 0116 03D0     		beq	.L2
+ 232              	.L6:
+ 192:../arm_variance_example_f32.c ****   {
+ 193:../arm_variance_example_f32.c ****     status = ARM_MATH_TEST_FAILURE;
+ 233              		.loc 1 193 0
+ 234 0118 3B1C     		mov	r3, r7
+ 235 011a 1733     		add	r3, r3, #23
+ 236 011c FA22     		mov	r2, #250
+ 237 011e 1A70     		strb	r2, [r3]
+ 238              	.L2:
+ 194:../arm_variance_example_f32.c ****   }
+ 195:../arm_variance_example_f32.c **** 
+ 196:../arm_variance_example_f32.c ****   if( status != ARM_MATH_SUCCESS)
+ 239              		.loc 1 196 0
+ 240 0120 3B1C     		mov	r3, r7
+ 241 0122 1733     		add	r3, r3, #23
+ 242 0124 1B78     		ldrb	r3, [r3]
+ 243 0126 5BB2     		sxtb	r3, r3
+ 244 0128 002B     		cmp	r3, #0
+ 245 012a 00D0     		beq	.L4
+ 246              	.L5:
+ 197:../arm_variance_example_f32.c ****   {
+ 198:../arm_variance_example_f32.c ****     while(1);
+ 247              		.loc 1 198 0 discriminator 1
+ 248 012c FEE7     		b	.L5
+ 249              	.L4:
+ 199:../arm_variance_example_f32.c ****   }
+ 200:../arm_variance_example_f32.c **** 
+ 201:../arm_variance_example_f32.c ****   while(1);                             /* main function does not return */
+ 250              		.loc 1 201 0 discriminator 1
+ 251 012e FEE7     		b	.L4
+ 252              	.L8:
+ 253              		.align	3
+ 254              	.L7:
+ 255 0130 00000000 		.word	0
+ 256 0134 0000F03F 		.word	1072693248
+ 257 0138 00000000 		.word	blockSize
+ 258 013c 00000000 		.word	wire1
+ 259 0140 00000000 		.word	testInput_f32
+ 260 0144 00000000 		.word	wire2
+ 261 0148 00000000 		.word	wire3
+ 262 014c 00000000 		.word	refVarianceOut
+ 263 0150 BD378635 		.word	897988541
+ 264              		.cfi_endproc
+ 265              	.LFE81:
+ 267 0154 C046C046 		.text
+ 268              	.Letext0:
+ 269              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 270              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_variance_example_f32.c
+                            *COM*:00000080 wire1
+                            *COM*:00000080 wire2
+                            *COM*:00000080 wire3
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:25     .data:00000000 testInput_f32
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:22     .data:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:62     .data:00000080 blockSize
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:68     .data:00000084 refVarianceOut
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:76     .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:81     .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:255    .text.main:00000130 $d
+                     .debug_frame:00000010 $d
+C:\Users\wangguan\AppData\Local\Temp\ccv3X5Js.s:267    .text.main:00000154 $t
+                           .group:00000000 wm4.1.e2c96d5a5488b60ca900a5e0ea7772ef
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.arm_math.h.275.48de47ab2bd311f0657ea6a8c1abb55a
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.arm_math.h.297.1d5f7b8b87e168258299acd0bbe0005e
+
+UNDEFINED SYMBOLS
+__aeabi_ui2d
+__aeabi_ddiv
+__aeabi_d2f
+__aeabi_fsub
+__aeabi_fcmpgt
+arm_fill_f32
+arm_dot_prod_f32
+arm_mult_f32
+arm_sub_f32
+arm_copy_f32

@@ -1,0 +1,7 @@
+.git
+.gitmodules
+Documentation
+OCDS_Software/openocd
+software/OpenJFX_Monocle
+software/DebugControlService/C
+software/DebugControlService/Java/DebugControlService

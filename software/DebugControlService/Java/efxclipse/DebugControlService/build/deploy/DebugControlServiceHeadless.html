@@ -1,0 +1,45 @@
+<html><head>
+  <SCRIPT src="http://java.com/js/dtjava.js"></SCRIPT>
+<script>
+    function launchApplication(jnlpfile) {
+        dtjava.launch(            {
+                url : 'DebugControlServiceHeadless.jnlp'
+            },
+            {
+                javafx : '8.0+',
+                jvmargs : '-Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw '
+            },
+            {}
+        );
+        return false;
+    }
+</script>
+
+<script>
+    function javafxEmbed_fxApplication() {
+        dtjava.embed(
+            {
+                id : 'fxApplication',
+                url : 'DebugControlServiceHeadless.jnlp',
+                placeholder : 'javafx-app-placeholder',
+                width : 0,
+                height : 0
+            },
+            {
+                javafx : '8.0+',
+                jvmargs : '-Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw '
+            },
+            {}
+        );
+    }
+    <!-- Embed FX application into web page once page is loaded -->
+    dtjava.addOnloadCallback(javafxEmbed_fxApplication);
+</script>
+
+</head><body>
+<h2>Test page for <b>DebugControlServiceHeadless</b></h2>
+  <b>Webstart:</b> <a href='DebugControlServiceHeadless.jnlp' onclick="return launchApplication('DebugControlServiceHeadless.jnlp');">click to launch this app as webstart</a><br><hr><br>
+
+  <!-- Applet will be inserted here -->
+  <div id='javafx-app-placeholder'></div>
+</body></html>

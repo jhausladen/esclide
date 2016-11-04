@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="DebugControlServiceHeadless.jnlp">
+  <information>
+    <title>DebugControlServiceHeadless</title>
+    <vendor>SAT</vendor>
+    <description>Sample JavaFX 2.0 application.</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" java-vm-args="-Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw "  href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="DebugControlService.jar" size="66531" download="eager" />
+    <jar href="libs/controlsfx-8.0.6.jar" size="848492" download="eager" />
+    <jar href="libs/jetty-alpn-client-9.2.3.v20140905.jar" size="6429" download="eager" />
+    <jar href="libs/jetty-alpn-server-9.2.3.v20140905.jar" size="7134" download="eager" />
+    <jar href="libs/jetty-annotations-9.2.3.v20140905.jar" size="80103" download="eager" />
+    <jar href="libs/jetty-client-9.2.3.v20140905.jar" size="225491" download="eager" />
+    <jar href="libs/jetty-continuation-9.2.3.v20140905.jar" size="15988" download="eager" />
+    <jar href="libs/jetty-deploy-9.2.3.v20140905.jar" size="49743" download="eager" />
+    <jar href="libs/jetty-http-9.2.3.v20140905.jar" size="105235" download="eager" />
+    <jar href="libs/jetty-io-9.2.3.v20140905.jar" size="105037" download="eager" />
+    <jar href="libs/jetty-jaas-9.2.3.v20140905.jar" size="37642" download="eager" />
+    <jar href="libs/jetty-jaspi-9.2.3.v20140905.jar" size="37443" download="eager" />
+    <jar href="libs/jetty-jmx-9.2.3.v20140905.jar" size="22346" download="eager" />
+    <jar href="libs/jetty-jndi-9.2.3.v20140905.jar" size="41261" download="eager" />
+    <jar href="libs/jetty-plus-9.2.3.v20140905.jar" size="54075" download="eager" />
+    <jar href="libs/jetty-proxy-9.2.3.v20140905.jar" size="50304" download="eager" />
+    <jar href="libs/jetty-quickstart-9.2.3.v20140905.jar" size="26837" download="eager" />
+    <jar href="libs/jetty-rewrite-9.2.3.v20140905.jar" size="28394" download="eager" />
+    <jar href="libs/jetty-schemas-3.1.jar" size="188164" download="eager" />
+    <jar href="libs/jetty-security-9.2.3.v20140905.jar" size="95921" download="eager" />
+    <jar href="libs/jetty-server-9.2.3.v20140905.jar" size="412649" download="eager" />
+    <jar href="libs/jetty-servlet-9.2.3.v20140905.jar" size="113771" download="eager" />
+    <jar href="libs/jetty-servlets-9.2.3.v20140905.jar" size="120952" download="eager" />
+    <jar href="libs/jetty-util-9.2.3.v20140905.jar" size="346634" download="eager" />
+    <jar href="libs/jetty-webapp-9.2.3.v20140905.jar" size="107338" download="eager" />
+    <jar href="libs/jetty-xml-9.2.3.v20140905.jar" size="44316" download="eager" />
+    <jar href="libs/servlet-api-3.1.jar" size="95806" download="eager" />
+    <jar href="libs/websocket-api-9.2.3.v20140905.jar" size="43753" download="eager" />
+    <jar href="libs/websocket-client-9.2.3.v20140905.jar" size="35620" download="eager" />
+    <jar href="libs/websocket-common-9.2.3.v20140905.jar" size="179179" download="eager" />
+    <jar href="libs/websocket-server-9.2.3.v20140905.jar" size="36115" download="eager" />
+    <jar href="libs/websocket-servlet-9.2.3.v20140905.jar" size="18045" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="0" height="0" main-class="at.embsys.sat.Main"  name="DebugControlServiceHeadless" />
+  <update check="background"/>
+</jnlp>

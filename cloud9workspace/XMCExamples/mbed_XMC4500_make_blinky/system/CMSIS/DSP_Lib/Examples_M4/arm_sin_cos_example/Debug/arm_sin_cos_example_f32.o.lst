@@ -1,0 +1,411 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"arm_sin_cos_example_f32.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	testInput_f32
+  20              		.section	.rodata
+  21              		.align	2
+  24              	testInput_f32:
+  25 0000 70599FBF 		.word	-1080075920
+  26 0004 A16499C0 		.word	-1063689055
+  27 0008 54AEB83E 		.word	1052290644
+  28 000c 32F3533F 		.word	1062466354
+  29 0010 892B53C0 		.word	-1068291191
+  30 0014 355B5B40 		.word	1079728949
+  31 0018 A1085B40 		.word	1079707809
+  32 001c ACD0DDBD 		.word	-1109536596
+  33 0020 3C23713F 		.word	1064379196
+  34 0024 05AB003F 		.word	1057008389
+  35 0028 768F09BF 		.word	-1089892490
+  36 002c 2FAF0540 		.word	1074114351
+  37 0030 C0B9D8BF 		.word	-1076315712
+  38 0034 DB0FC940 		.word	1086918619
+  39 0038 C6FBC8BE 		.word	-1094124602
+  40 003c 9BE1A73E 		.word	1051189659
+  41 0040 4C7D4440 		.word	1078230348
+  42 0044 C2B42E3E 		.word	1043248322
+  43 0048 DBF08CBE 		.word	-1098059557
+  44 004c C14F19C0 		.word	-1072083007
+  45 0050 62E9583F 		.word	1062791522
+  46 0054 F31C76C0 		.word	-1066001165
+  47 0058 87920340 		.word	1073975943
+  48 005c E4859540 		.word	1083540964
+  49 0060 91D6FEBF 		.word	-1073817967
+  50 0064 19091E40 		.word	1075710233
+  51 0068 E6F96640 		.word	1080490470
+  52 006c 8CC692C0 		.word	-1064122740
+  53 0070 E1B484C0 		.word	-1065044767
+  54 0074 9F66D23F 		.word	1070753439
+  55 0078 974F93BF 		.word	-1080864873
+  56 007c DC2EFE3F 		.word	1073622748
+  57              		.global	testRefOutput_f32
+  58              		.align	2
+  61              	testRefOutput_f32:
+  62 0080 0000803F 		.word	1065353216
+  63              		.global	blockSize
+  64              		.data
+  65              		.align	2
+  68              	blockSize:
+  69 0000 20000000 		.word	32
+  70              		.comm	testOutput,4,4
+  71              		.comm	cosOutput,4,4
+  72              		.comm	sinOutput,4,4
+  73              		.comm	cosSquareOutput,4,4
+  74              		.comm	sinSquareOutput,4,4
+  75              		.comm	status,1,1
+  76              		.section	.text.main,"ax",%progbits
+  77              		.align	2
+  78              		.global	main
+  79              		.thumb
+  80              		.thumb_func
+  82              	main:
+  83              	.LFB128:
+  84              		.file 1 "../arm_sin_cos_example_f32.c"
+   1:../arm_sin_cos_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_sin_cos_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_sin_cos_example_f32.c **** *
+   4:../arm_sin_cos_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_sin_cos_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_sin_cos_example_f32.c **** *
+   7:../arm_sin_cos_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_sin_cos_example_f32.c **** * Title:         arm_sin_cos_example_f32.c
+   9:../arm_sin_cos_example_f32.c **** *
+  10:../arm_sin_cos_example_f32.c **** * Description:   Example code demonstrating sin and cos calculation of input signal.
+  11:../arm_sin_cos_example_f32.c **** *
+  12:../arm_sin_cos_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  13:../arm_sin_cos_example_f32.c **** *
+  14:../arm_sin_cos_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  15:../arm_sin_cos_example_f32.c **** * modification, are permitted provided that the following conditions
+  16:../arm_sin_cos_example_f32.c **** * are met:
+  17:../arm_sin_cos_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  18:../arm_sin_cos_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  19:../arm_sin_cos_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  20:../arm_sin_cos_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  21:../arm_sin_cos_example_f32.c **** *     the documentation and/or other materials provided with the
+  22:../arm_sin_cos_example_f32.c **** *     distribution.
+  23:../arm_sin_cos_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  24:../arm_sin_cos_example_f32.c **** *     may be used to endorse or promote products derived from this
+  25:../arm_sin_cos_example_f32.c **** *     software without specific prior written permission.
+  26:../arm_sin_cos_example_f32.c **** *
+  27:../arm_sin_cos_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  28:../arm_sin_cos_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  29:../arm_sin_cos_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  30:../arm_sin_cos_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  31:../arm_sin_cos_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  32:../arm_sin_cos_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  33:../arm_sin_cos_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  34:../arm_sin_cos_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  35:../arm_sin_cos_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  36:../arm_sin_cos_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  37:../arm_sin_cos_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  38:../arm_sin_cos_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  39:../arm_sin_cos_example_f32.c **** * -------------------------------------------------------------------- */
+  40:../arm_sin_cos_example_f32.c **** 
+  41:../arm_sin_cos_example_f32.c **** /**
+  42:../arm_sin_cos_example_f32.c ****  * @ingroup groupExamples
+  43:../arm_sin_cos_example_f32.c ****  */
+  44:../arm_sin_cos_example_f32.c **** 
+  45:../arm_sin_cos_example_f32.c **** /**
+  46:../arm_sin_cos_example_f32.c ****  * @defgroup SinCosExample SineCosine Example
+  47:../arm_sin_cos_example_f32.c ****  *
+  48:../arm_sin_cos_example_f32.c ****  * \par Description:
+  49:../arm_sin_cos_example_f32.c ****  * \par
+  50:../arm_sin_cos_example_f32.c ****  * Demonstrates the Pythagorean trignometric identity with the use of Cosine, Sine, Vector
+  51:../arm_sin_cos_example_f32.c ****  * Multiplication, and Vector Addition functions.
+  52:../arm_sin_cos_example_f32.c ****  *
+  53:../arm_sin_cos_example_f32.c ****  * \par Algorithm:
+  54:../arm_sin_cos_example_f32.c ****  * \par
+  55:../arm_sin_cos_example_f32.c ****  * Mathematically, the Pythagorean trignometric identity is defined by the following equation:
+  56:../arm_sin_cos_example_f32.c ****  *  <pre>sin(x) * sin(x) + cos(x) * cos(x) = 1</pre>
+  57:../arm_sin_cos_example_f32.c ****  * where \c x is the angle in radians.
+  58:../arm_sin_cos_example_f32.c ****  *
+  59:../arm_sin_cos_example_f32.c ****  * \par Block Diagram:
+  60:../arm_sin_cos_example_f32.c ****  * \par
+  61:../arm_sin_cos_example_f32.c ****  * \image html sinCos.gif
+  62:../arm_sin_cos_example_f32.c ****  *
+  63:../arm_sin_cos_example_f32.c ****  * \par Variables Description:
+  64:../arm_sin_cos_example_f32.c ****  * \par
+  65:../arm_sin_cos_example_f32.c ****  * \li \c testInput_f32 array of input angle in radians
+  66:../arm_sin_cos_example_f32.c ****  * \li \c testOutput stores sum of the squares of sine and cosine values of input angle
+  67:../arm_sin_cos_example_f32.c ****  *
+  68:../arm_sin_cos_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  69:../arm_sin_cos_example_f32.c ****  * \par
+  70:../arm_sin_cos_example_f32.c ****  * - arm_cos_f32()
+  71:../arm_sin_cos_example_f32.c ****  * - arm_sin_f32()
+  72:../arm_sin_cos_example_f32.c ****  * - arm_mult_f32()
+  73:../arm_sin_cos_example_f32.c ****  * - arm_add_f32()
+  74:../arm_sin_cos_example_f32.c ****  *
+  75:../arm_sin_cos_example_f32.c ****  * <b> Refer  </b>
+  76:../arm_sin_cos_example_f32.c ****  * \link arm_sin_cos_example_f32.c \endlink
+  77:../arm_sin_cos_example_f32.c ****  *
+  78:../arm_sin_cos_example_f32.c ****  */
+  79:../arm_sin_cos_example_f32.c **** 
+  80:../arm_sin_cos_example_f32.c **** 
+  81:../arm_sin_cos_example_f32.c **** /** \example arm_sin_cos_example_f32.c
+  82:../arm_sin_cos_example_f32.c ****   */
+  83:../arm_sin_cos_example_f32.c **** 
+  84:../arm_sin_cos_example_f32.c **** #include <math.h>
+  85:../arm_sin_cos_example_f32.c **** #include "arm_math.h"
+  86:../arm_sin_cos_example_f32.c **** 
+  87:../arm_sin_cos_example_f32.c **** /* ----------------------------------------------------------------------
+  88:../arm_sin_cos_example_f32.c **** * Defines each of the tests performed
+  89:../arm_sin_cos_example_f32.c **** * ------------------------------------------------------------------- */
+  90:../arm_sin_cos_example_f32.c **** #define MAX_BLOCKSIZE   32
+  91:../arm_sin_cos_example_f32.c **** #define DELTA           (0.000001f)
+  92:../arm_sin_cos_example_f32.c **** 
+  93:../arm_sin_cos_example_f32.c **** 
+  94:../arm_sin_cos_example_f32.c **** /* ----------------------------------------------------------------------
+  95:../arm_sin_cos_example_f32.c **** * Test input data for Floating point sin_cos example for 32-blockSize
+  96:../arm_sin_cos_example_f32.c **** * Generated by the MATLAB randn() function
+  97:../arm_sin_cos_example_f32.c **** * ------------------------------------------------------------------- */
+  98:../arm_sin_cos_example_f32.c **** 
+  99:../arm_sin_cos_example_f32.c **** const float32_t testInput_f32[MAX_BLOCKSIZE] =
+ 100:../arm_sin_cos_example_f32.c **** {
+ 101:../arm_sin_cos_example_f32.c ****   -1.244916875853235400,  -4.793533929171324800,   0.360705030233248850,   0.827929644170887320,  -
+ 102:../arm_sin_cos_example_f32.c ****    0.941943896490312180,   0.502609575000365850,  -0.537345278736373500,   2.088817392965764500,  -
+ 103:../arm_sin_cos_example_f32.c ****    3.070147440456292300,   0.170611405884662230,  -0.275275082396073010,  -2.395492805446796300,   
+ 104:../arm_sin_cos_example_f32.c ****   -1.990923030266425800,   2.469305197656249500,   3.609002606064021000,  -4.586736582331667500,  -
+ 105:../arm_sin_cos_example_f32.c **** 
+ 106:../arm_sin_cos_example_f32.c **** 
+ 107:../arm_sin_cos_example_f32.c **** };
+ 108:../arm_sin_cos_example_f32.c **** 
+ 109:../arm_sin_cos_example_f32.c **** const float32_t testRefOutput_f32 = 1.000000000;
+ 110:../arm_sin_cos_example_f32.c **** 
+ 111:../arm_sin_cos_example_f32.c **** /* ----------------------------------------------------------------------
+ 112:../arm_sin_cos_example_f32.c **** * Declare Global variables
+ 113:../arm_sin_cos_example_f32.c **** * ------------------------------------------------------------------- */
+ 114:../arm_sin_cos_example_f32.c **** uint32_t blockSize = 32;
+ 115:../arm_sin_cos_example_f32.c **** float32_t  testOutput;
+ 116:../arm_sin_cos_example_f32.c **** float32_t  cosOutput;
+ 117:../arm_sin_cos_example_f32.c **** float32_t  sinOutput;
+ 118:../arm_sin_cos_example_f32.c **** float32_t  cosSquareOutput;
+ 119:../arm_sin_cos_example_f32.c **** float32_t  sinSquareOutput;
+ 120:../arm_sin_cos_example_f32.c **** 
+ 121:../arm_sin_cos_example_f32.c **** /* ----------------------------------------------------------------------
+ 122:../arm_sin_cos_example_f32.c **** * Max magnitude FFT Bin test
+ 123:../arm_sin_cos_example_f32.c **** * ------------------------------------------------------------------- */
+ 124:../arm_sin_cos_example_f32.c **** 
+ 125:../arm_sin_cos_example_f32.c **** arm_status status;
+ 126:../arm_sin_cos_example_f32.c **** 
+ 127:../arm_sin_cos_example_f32.c **** int32_t main(void)
+ 128:../arm_sin_cos_example_f32.c **** {
+  85              		.loc 1 128 0
+  86              		.cfi_startproc
+  87              		@ args = 0, pretend = 0, frame = 8
+  88              		@ frame_needed = 1, uses_anonymous_args = 0
+  89 0000 80B5     		push	{r7, lr}
+  90              	.LCFI0:
+  91              		.cfi_def_cfa_offset 8
+  92              		.cfi_offset 7, -8
+  93              		.cfi_offset 14, -4
+  94 0002 82B0     		sub	sp, sp, #8
+  95              	.LCFI1:
+  96              		.cfi_def_cfa_offset 16
+  97 0004 00AF     		add	r7, sp, #0
+  98              	.LCFI2:
+  99              		.cfi_def_cfa_register 7
+ 129:../arm_sin_cos_example_f32.c ****   float32_t diff;
+ 130:../arm_sin_cos_example_f32.c ****   uint32_t i;
+ 131:../arm_sin_cos_example_f32.c **** 
+ 132:../arm_sin_cos_example_f32.c ****   for(i=0; i< blockSize; i++)
+ 100              		.loc 1 132 0
+ 101 0006 4FF00003 		mov	r3, #0
+ 102 000a 7B60     		str	r3, [r7, #4]
+ 103 000c 83E0     		b	.L2
+ 104              	.L7:
+ 133:../arm_sin_cos_example_f32.c ****   {
+ 134:../arm_sin_cos_example_f32.c ****     cosOutput = arm_cos_f32(testInput_f32[i]);
+ 105              		.loc 1 134 0
+ 106 000e 40F20003 		movw	r3, #:lower16:testInput_f32
+ 107 0012 C0F20003 		movt	r3, #:upper16:testInput_f32
+ 108 0016 7A68     		ldr	r2, [r7, #4]
+ 109 0018 4FEA8202 		lsl	r2, r2, #2
+ 110 001c 9B18     		adds	r3, r3, r2
+ 111 001e 1B68     		ldr	r3, [r3, #0]	@ float
+ 112 0020 1846     		mov	r0, r3	@ float
+ 113 0022 FFF7FEFF 		bl	arm_cos_f32
+ 114 0026 0246     		mov	r2, r0	@ float
+ 115 0028 40F20003 		movw	r3, #:lower16:cosOutput
+ 116 002c C0F20003 		movt	r3, #:upper16:cosOutput
+ 117 0030 1A60     		str	r2, [r3, #0]	@ float
+ 135:../arm_sin_cos_example_f32.c ****     sinOutput = arm_sin_f32(testInput_f32[i]);
+ 118              		.loc 1 135 0
+ 119 0032 40F20003 		movw	r3, #:lower16:testInput_f32
+ 120 0036 C0F20003 		movt	r3, #:upper16:testInput_f32
+ 121 003a 7A68     		ldr	r2, [r7, #4]
+ 122 003c 4FEA8202 		lsl	r2, r2, #2
+ 123 0040 9B18     		adds	r3, r3, r2
+ 124 0042 1B68     		ldr	r3, [r3, #0]	@ float
+ 125 0044 1846     		mov	r0, r3	@ float
+ 126 0046 FFF7FEFF 		bl	arm_sin_f32
+ 127 004a 0246     		mov	r2, r0	@ float
+ 128 004c 40F20003 		movw	r3, #:lower16:sinOutput
+ 129 0050 C0F20003 		movt	r3, #:upper16:sinOutput
+ 130 0054 1A60     		str	r2, [r3, #0]	@ float
+ 136:../arm_sin_cos_example_f32.c **** 
+ 137:../arm_sin_cos_example_f32.c ****     arm_mult_f32(&cosOutput, &cosOutput, &cosSquareOutput, 1);
+ 131              		.loc 1 137 0
+ 132 0056 40F20000 		movw	r0, #:lower16:cosOutput
+ 133 005a C0F20000 		movt	r0, #:upper16:cosOutput
+ 134 005e 40F20001 		movw	r1, #:lower16:cosOutput
+ 135 0062 C0F20001 		movt	r1, #:upper16:cosOutput
+ 136 0066 40F20002 		movw	r2, #:lower16:cosSquareOutput
+ 137 006a C0F20002 		movt	r2, #:upper16:cosSquareOutput
+ 138 006e 4FF00103 		mov	r3, #1
+ 139 0072 FFF7FEFF 		bl	arm_mult_f32
+ 138:../arm_sin_cos_example_f32.c ****     arm_mult_f32(&sinOutput, &sinOutput, &sinSquareOutput, 1);
+ 140              		.loc 1 138 0
+ 141 0076 40F20000 		movw	r0, #:lower16:sinOutput
+ 142 007a C0F20000 		movt	r0, #:upper16:sinOutput
+ 143 007e 40F20001 		movw	r1, #:lower16:sinOutput
+ 144 0082 C0F20001 		movt	r1, #:upper16:sinOutput
+ 145 0086 40F20002 		movw	r2, #:lower16:sinSquareOutput
+ 146 008a C0F20002 		movt	r2, #:upper16:sinSquareOutput
+ 147 008e 4FF00103 		mov	r3, #1
+ 148 0092 FFF7FEFF 		bl	arm_mult_f32
+ 139:../arm_sin_cos_example_f32.c **** 
+ 140:../arm_sin_cos_example_f32.c ****     arm_add_f32(&cosSquareOutput, &sinSquareOutput, &testOutput, 1);
+ 149              		.loc 1 140 0
+ 150 0096 40F20000 		movw	r0, #:lower16:cosSquareOutput
+ 151 009a C0F20000 		movt	r0, #:upper16:cosSquareOutput
+ 152 009e 40F20001 		movw	r1, #:lower16:sinSquareOutput
+ 153 00a2 C0F20001 		movt	r1, #:upper16:sinSquareOutput
+ 154 00a6 40F20002 		movw	r2, #:lower16:testOutput
+ 155 00aa C0F20002 		movt	r2, #:upper16:testOutput
+ 156 00ae 4FF00103 		mov	r3, #1
+ 157 00b2 FFF7FEFF 		bl	arm_add_f32
+ 141:../arm_sin_cos_example_f32.c **** 
+ 142:../arm_sin_cos_example_f32.c ****     /* absolute value of difference between ref and test */
+ 143:../arm_sin_cos_example_f32.c ****     diff = fabsf(testRefOutput_f32 - testOutput);
+ 158              		.loc 1 143 0
+ 159 00b6 40F20003 		movw	r3, #:lower16:testRefOutput_f32
+ 160 00ba C0F20003 		movt	r3, #:upper16:testRefOutput_f32
+ 161 00be 93ED007A 		flds	s14, [r3, #0]
+ 162 00c2 40F20003 		movw	r3, #:lower16:testOutput
+ 163 00c6 C0F20003 		movt	r3, #:upper16:testOutput
+ 164 00ca D3ED007A 		flds	s15, [r3, #0]
+ 165 00ce 77EE677A 		fsubs	s15, s14, s15
+ 166 00d2 F0EEE77A 		fabss	s15, s15
+ 167 00d6 C7ED007A 		fsts	s15, [r7, #0]
+ 144:../arm_sin_cos_example_f32.c **** 
+ 145:../arm_sin_cos_example_f32.c ****     /* Comparison of sin_cos value with reference */
+ 146:../arm_sin_cos_example_f32.c ****     if(diff > DELTA)
+ 168              		.loc 1 146 0
+ 169 00da 97ED007A 		flds	s14, [r7, #0]
+ 170 00de DFED137A 		flds	s15, .L10
+ 171 00e2 B4EEE77A 		fcmpes	s14, s15
+ 172 00e6 F1EE10FA 		fmstat
+ 173 00ea 06DD     		ble	.L3
+ 174              	.L9:
+ 147:../arm_sin_cos_example_f32.c ****     {
+ 148:../arm_sin_cos_example_f32.c ****      status = ARM_MATH_TEST_FAILURE;
+ 175              		.loc 1 148 0
+ 176 00ec 40F20003 		movw	r3, #:lower16:status
+ 177 00f0 C0F20003 		movt	r3, #:upper16:status
+ 178 00f4 4FF0FA02 		mov	r2, #250
+ 179 00f8 1A70     		strb	r2, [r3, #0]
+ 180              	.L3:
+ 149:../arm_sin_cos_example_f32.c ****     }
+ 150:../arm_sin_cos_example_f32.c **** 
+ 151:../arm_sin_cos_example_f32.c ****     if( status == ARM_MATH_TEST_FAILURE)
+ 181              		.loc 1 151 0
+ 182 00fa 40F20003 		movw	r3, #:lower16:status
+ 183 00fe C0F20003 		movt	r3, #:upper16:status
+ 184 0102 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 185 0104 5BB2     		sxtb	r3, r3
+ 186 0106 13F1060F 		cmn	r3, #6
+ 187 010a 00D1     		bne	.L5
+ 188              	.L6:
+ 152:../arm_sin_cos_example_f32.c ****     {
+ 153:../arm_sin_cos_example_f32.c ****        while(1);
+ 189              		.loc 1 153 0 discriminator 1
+ 190 010c FEE7     		b	.L6
+ 191              	.L5:
+ 132:../arm_sin_cos_example_f32.c ****   for(i=0; i< blockSize; i++)
+ 192              		.loc 1 132 0
+ 193 010e 7B68     		ldr	r3, [r7, #4]
+ 194 0110 03F10103 		add	r3, r3, #1
+ 195 0114 7B60     		str	r3, [r7, #4]
+ 196              	.L2:
+ 132:../arm_sin_cos_example_f32.c ****   for(i=0; i< blockSize; i++)
+ 197              		.loc 1 132 0 is_stmt 0 discriminator 1
+ 198 0116 40F20003 		movw	r3, #:lower16:blockSize
+ 199 011a C0F20003 		movt	r3, #:upper16:blockSize
+ 200 011e 1B68     		ldr	r3, [r3, #0]
+ 201 0120 7A68     		ldr	r2, [r7, #4]
+ 202 0122 9A42     		cmp	r2, r3
+ 203 0124 FFF473AF 		bcc	.L7
+ 204              	.L8:
+ 154:../arm_sin_cos_example_f32.c ****     }
+ 155:../arm_sin_cos_example_f32.c **** 
+ 156:../arm_sin_cos_example_f32.c ****   }
+ 157:../arm_sin_cos_example_f32.c **** 
+ 158:../arm_sin_cos_example_f32.c ****   while(1);                             /* main function does not return */
+ 205              		.loc 1 158 0 is_stmt 1 discriminator 1
+ 206 0128 FEE7     		b	.L8
+ 207              	.L11:
+ 208 012a 00BF     		.align	2
+ 209              	.L10:
+ 210 012c BD378635 		.word	897988541
+ 211              		.cfi_endproc
+ 212              	.LFE128:
+ 214              		.text
+ 215              	.Letext0:
+ 216              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 217              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_sin_cos_example_f32.c
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:24     .rodata:00000000 testInput_f32
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:21     .rodata:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:61     .rodata:00000080 testRefOutput_f32
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:68     .data:00000000 blockSize
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:65     .data:00000000 $d
+                            *COM*:00000004 testOutput
+                            *COM*:00000004 cosOutput
+                            *COM*:00000004 sinOutput
+                            *COM*:00000004 cosSquareOutput
+                            *COM*:00000004 sinSquareOutput
+                            *COM*:00000001 status
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:77     .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:82     .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\ccd48Di6.s:210    .text.main:0000012c $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.250eef6c7a6ea7970222e5d8b37d2f0a
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm4.h.47.5b17071cb0e0984e786cc7d50cfa4aef
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.arm_math.h.297.9b8078faaef2b2639f9d65032d7e0d70
+
+UNDEFINED SYMBOLS
+arm_cos_f32
+arm_sin_f32
+arm_mult_f32
+arm_add_f32

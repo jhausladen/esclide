@@ -1,0 +1,14 @@
+{
+    "name": "ext.embedded_developer",
+    "version": "0.0.1",
+    "main": "embedded_developer.js",
+    "private": true,
+    "plugin": {
+        "provides": [
+            "ext.embedded_developer"
+        ],
+        "consumes": [
+            "client-plugins"
+        ]
+    }
+}

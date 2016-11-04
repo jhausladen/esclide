@@ -1,0 +1,14 @@
+{
+    "name": "ext.embedded_debugger",
+    "version": "0.0.1",
+    "main": "embedded_debugger.js",
+    "private": true,
+    "plugin": {
+        "provides": [
+            "ext.embedded_debugger"
+        ],
+        "consumes": [
+            "client-plugins"
+        ]
+    }
+}

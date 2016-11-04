@@ -1,0 +1,570 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"arm_matrix_example_f32.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	B_f32
+  18              		.section	.rodata
+  19              		.align	2
+  22              	B_f32:
+  23 0000 00804344 		.word	1145274368
+  24 0004 00C8EC45 		.word	1173145600
+  25 0008 0000EB43 		.word	1139474432
+  26 000c 00C88C45 		.word	1166854144
+  27              		.global	A_f32
+  28              		.align	2
+  31              	A_f32:
+  32 0010 0000803F 		.word	1065353216
+  33 0014 00000042 		.word	1107296256
+  34 0018 00008040 		.word	1082130432
+  35 001c 00000043 		.word	1124073472
+  36 0020 0000803F 		.word	1065353216
+  37 0024 00000042 		.word	1107296256
+  38 0028 00008042 		.word	1115684864
+  39 002c 00000045 		.word	1157627904
+  40 0030 0000803F 		.word	1065353216
+  41 0034 00008041 		.word	1098907648
+  42 0038 00008040 		.word	1082130432
+  43 003c 00008042 		.word	1115684864
+  44 0040 0000803F 		.word	1065353216
+  45 0044 00008041 		.word	1098907648
+  46 0048 00008042 		.word	1115684864
+  47 004c 00008044 		.word	1149239296
+  48              		.comm	AT_f32,64,4
+  49              		.comm	ATMA_f32,64,4
+  50              		.comm	ATMAI_f32,64,4
+  51              		.comm	X_f32,16,4
+  52              		.global	xRef_f32
+  53              		.align	2
+  56              	xRef_f32:
+  57 0050 00009242 		.word	1116864512
+  58 0054 00000041 		.word	1090519040
+  59 0058 0000AA41 		.word	1101660160
+  60 005c 00003840 		.word	1077411840
+  61              		.comm	snr,4,4
+  62              		.global	__aeabi_fcmpgt
+  63              		.section	.text.main,"ax",%progbits
+  64              		.align	2
+  65              		.global	main
+  66              		.code	16
+  67              		.thumb_func
+  69              	main:
+  70              	.LFB81:
+  71              		.file 1 "../arm_matrix_example_f32.c"
+   1:../arm_matrix_example_f32.c **** /* ----------------------------------------------------------------------
+   2:../arm_matrix_example_f32.c **** * Copyright (C) 2010-2012 ARM Limited. All rights reserved.
+   3:../arm_matrix_example_f32.c **** *
+   4:../arm_matrix_example_f32.c **** * $Date:         17. January 2013
+   5:../arm_matrix_example_f32.c **** * $Revision:     V1.4.0
+   6:../arm_matrix_example_f32.c **** *
+   7:../arm_matrix_example_f32.c **** * Project:       CMSIS DSP Library
+   8:../arm_matrix_example_f32.c **** * Title:         arm_matrix_example_f32.c
+   9:../arm_matrix_example_f32.c **** *
+  10:../arm_matrix_example_f32.c **** * Description:   Example code demonstrating least square fit to data
+  11:../arm_matrix_example_f32.c **** *                using matrix functions
+  12:../arm_matrix_example_f32.c **** *
+  13:../arm_matrix_example_f32.c **** * Target Processor: Cortex-M4/Cortex-M3
+  14:../arm_matrix_example_f32.c **** *
+  15:../arm_matrix_example_f32.c **** * Redistribution and use in source and binary forms, with or without
+  16:../arm_matrix_example_f32.c **** * modification, are permitted provided that the following conditions
+  17:../arm_matrix_example_f32.c **** * are met:
+  18:../arm_matrix_example_f32.c **** *   - Redistributions of source code must retain the above copyright
+  19:../arm_matrix_example_f32.c **** *     notice, this list of conditions and the following disclaimer.
+  20:../arm_matrix_example_f32.c **** *   - Redistributions in binary form must reproduce the above copyright
+  21:../arm_matrix_example_f32.c **** *     notice, this list of conditions and the following disclaimer in
+  22:../arm_matrix_example_f32.c **** *     the documentation and/or other materials provided with the
+  23:../arm_matrix_example_f32.c **** *     distribution.
+  24:../arm_matrix_example_f32.c **** *   - Neither the name of ARM LIMITED nor the names of its contributors
+  25:../arm_matrix_example_f32.c **** *     may be used to endorse or promote products derived from this
+  26:../arm_matrix_example_f32.c **** *     software without specific prior written permission.
+  27:../arm_matrix_example_f32.c **** *
+  28:../arm_matrix_example_f32.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  29:../arm_matrix_example_f32.c **** * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  30:../arm_matrix_example_f32.c **** * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  31:../arm_matrix_example_f32.c **** * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  32:../arm_matrix_example_f32.c **** * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  33:../arm_matrix_example_f32.c **** * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  34:../arm_matrix_example_f32.c **** * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  35:../arm_matrix_example_f32.c **** * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  36:../arm_matrix_example_f32.c **** * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  37:../arm_matrix_example_f32.c **** * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  38:../arm_matrix_example_f32.c **** * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  39:../arm_matrix_example_f32.c **** * POSSIBILITY OF SUCH DAMAGE.
+  40:../arm_matrix_example_f32.c ****  * -------------------------------------------------------------------- */
+  41:../arm_matrix_example_f32.c **** 
+  42:../arm_matrix_example_f32.c **** /**
+  43:../arm_matrix_example_f32.c ****  * @ingroup groupExamples
+  44:../arm_matrix_example_f32.c ****  */
+  45:../arm_matrix_example_f32.c **** 
+  46:../arm_matrix_example_f32.c **** /**
+  47:../arm_matrix_example_f32.c ****  * @defgroup MatrixExample Matrix Example
+  48:../arm_matrix_example_f32.c ****  *
+  49:../arm_matrix_example_f32.c ****  * \par Description:
+  50:../arm_matrix_example_f32.c ****  * \par
+  51:../arm_matrix_example_f32.c ****  * Demonstrates the use of Matrix Transpose, Matrix Muliplication, and Matrix Inverse
+  52:../arm_matrix_example_f32.c ****  * functions to apply least squares fitting to input data. Least squares fitting is
+  53:../arm_matrix_example_f32.c ****  * the procedure for finding the best-fitting curve that minimizes the sum of the
+  54:../arm_matrix_example_f32.c ****  * squares of the offsets (least square error) from a given set of data.
+  55:../arm_matrix_example_f32.c ****  *
+  56:../arm_matrix_example_f32.c ****  * \par Algorithm:
+  57:../arm_matrix_example_f32.c ****  * \par
+  58:../arm_matrix_example_f32.c ****  * The linear combination of parameters considered is as follows:
+  59:../arm_matrix_example_f32.c ****  * \par
+  60:../arm_matrix_example_f32.c ****  * <code>A * X = B</code>, where \c X is the unknown value and can be estimated
+  61:../arm_matrix_example_f32.c ****  * from \c A & \c B.
+  62:../arm_matrix_example_f32.c ****  * \par
+  63:../arm_matrix_example_f32.c ****  * The least squares estimate \c X is given by the following equation:
+  64:../arm_matrix_example_f32.c ****  * \par
+  65:../arm_matrix_example_f32.c ****  * <code>X = Inverse(A<sup>T</sup> * A) *  A<sup>T</sup> * B</code>
+  66:../arm_matrix_example_f32.c ****  *
+  67:../arm_matrix_example_f32.c ****  * \par Block Diagram:
+  68:../arm_matrix_example_f32.c ****  * \par
+  69:../arm_matrix_example_f32.c ****  * \image html matrixExample.gif
+  70:../arm_matrix_example_f32.c ****  *
+  71:../arm_matrix_example_f32.c ****  * \par Variables Description:
+  72:../arm_matrix_example_f32.c ****  * \par
+  73:../arm_matrix_example_f32.c ****  * \li \c A_f32 input matrix in the linear combination equation
+  74:../arm_matrix_example_f32.c ****  * \li \c B_f32 output matrix in the linear combination equation
+  75:../arm_matrix_example_f32.c ****  * \li \c X_f32 unknown matrix estimated using \c A_f32 & \c B_f32 matrices
+  76:../arm_matrix_example_f32.c ****  *
+  77:../arm_matrix_example_f32.c ****  * \par CMSIS DSP Software Library Functions Used:
+  78:../arm_matrix_example_f32.c ****  * \par
+  79:../arm_matrix_example_f32.c ****  * - arm_mat_init_f32()
+  80:../arm_matrix_example_f32.c ****  * - arm_mat_trans_f32()
+  81:../arm_matrix_example_f32.c ****  * - arm_mat_mult_f32()
+  82:../arm_matrix_example_f32.c ****  * - arm_mat_inverse_f32()
+  83:../arm_matrix_example_f32.c ****  *
+  84:../arm_matrix_example_f32.c ****  * <b> Refer  </b>
+  85:../arm_matrix_example_f32.c ****  * \link arm_matrix_example_f32.c \endlink
+  86:../arm_matrix_example_f32.c ****  *
+  87:../arm_matrix_example_f32.c ****  */
+  88:../arm_matrix_example_f32.c **** 
+  89:../arm_matrix_example_f32.c **** 
+  90:../arm_matrix_example_f32.c **** /** \example arm_matrix_example_f32.c
+  91:../arm_matrix_example_f32.c ****   */
+  92:../arm_matrix_example_f32.c **** 
+  93:../arm_matrix_example_f32.c **** #include "arm_math.h"
+  94:../arm_matrix_example_f32.c **** #include "math_helper.h"
+  95:../arm_matrix_example_f32.c **** 
+  96:../arm_matrix_example_f32.c **** #define SNR_THRESHOLD   90
+  97:../arm_matrix_example_f32.c **** 
+  98:../arm_matrix_example_f32.c **** /* --------------------------------------------------------------------------------
+  99:../arm_matrix_example_f32.c **** * Test input data(Cycles) taken from FIR Q15 module for differant cases of blockSize
+ 100:../arm_matrix_example_f32.c **** * and tapSize
+ 101:../arm_matrix_example_f32.c **** * --------------------------------------------------------------------------------- */
+ 102:../arm_matrix_example_f32.c **** 
+ 103:../arm_matrix_example_f32.c **** const float32_t B_f32[4] =
+ 104:../arm_matrix_example_f32.c **** {
+ 105:../arm_matrix_example_f32.c ****   782.0, 7577.0, 470.0, 4505.0
+ 106:../arm_matrix_example_f32.c **** };
+ 107:../arm_matrix_example_f32.c **** 
+ 108:../arm_matrix_example_f32.c **** /* --------------------------------------------------------------------------------
+ 109:../arm_matrix_example_f32.c **** * Formula to fit is  C1 + C2 * numTaps + C3 * blockSize + C4 * numTaps * blockSize
+ 110:../arm_matrix_example_f32.c **** * -------------------------------------------------------------------------------- */
+ 111:../arm_matrix_example_f32.c **** 
+ 112:../arm_matrix_example_f32.c **** const float32_t A_f32[16] =
+ 113:../arm_matrix_example_f32.c **** {
+ 114:../arm_matrix_example_f32.c ****   /* Const,   numTaps,   blockSize,   numTaps*blockSize */
+ 115:../arm_matrix_example_f32.c ****   1.0,     32.0,      4.0,     128.0,
+ 116:../arm_matrix_example_f32.c ****   1.0,     32.0,     64.0,    2048.0,
+ 117:../arm_matrix_example_f32.c ****   1.0,     16.0,      4.0,      64.0,
+ 118:../arm_matrix_example_f32.c ****   1.0,     16.0,     64.0,    1024.0,
+ 119:../arm_matrix_example_f32.c **** };
+ 120:../arm_matrix_example_f32.c **** 
+ 121:../arm_matrix_example_f32.c **** 
+ 122:../arm_matrix_example_f32.c **** /* ----------------------------------------------------------------------
+ 123:../arm_matrix_example_f32.c **** * Temporary buffers  for storing intermediate values
+ 124:../arm_matrix_example_f32.c **** * ------------------------------------------------------------------- */
+ 125:../arm_matrix_example_f32.c **** /* Transpose of A Buffer */
+ 126:../arm_matrix_example_f32.c **** float32_t AT_f32[16];
+ 127:../arm_matrix_example_f32.c **** /* (Transpose of A * A) Buffer */
+ 128:../arm_matrix_example_f32.c **** float32_t ATMA_f32[16];
+ 129:../arm_matrix_example_f32.c **** /* Inverse(Transpose of A * A)  Buffer */
+ 130:../arm_matrix_example_f32.c **** float32_t ATMAI_f32[16];
+ 131:../arm_matrix_example_f32.c **** /* Test Output Buffer */
+ 132:../arm_matrix_example_f32.c **** float32_t X_f32[4];
+ 133:../arm_matrix_example_f32.c **** 
+ 134:../arm_matrix_example_f32.c **** /* ----------------------------------------------------------------------
+ 135:../arm_matrix_example_f32.c **** * Reference ouput buffer C1, C2, C3 and C4 taken from MATLAB
+ 136:../arm_matrix_example_f32.c **** * ------------------------------------------------------------------- */
+ 137:../arm_matrix_example_f32.c **** const float32_t xRef_f32[4] = {73.0, 8.0, 21.25, 2.875};
+ 138:../arm_matrix_example_f32.c **** 
+ 139:../arm_matrix_example_f32.c **** float32_t snr;
+ 140:../arm_matrix_example_f32.c **** 
+ 141:../arm_matrix_example_f32.c **** 
+ 142:../arm_matrix_example_f32.c **** /* ----------------------------------------------------------------------
+ 143:../arm_matrix_example_f32.c **** * Max magnitude FFT Bin test
+ 144:../arm_matrix_example_f32.c **** * ------------------------------------------------------------------- */
+ 145:../arm_matrix_example_f32.c **** 
+ 146:../arm_matrix_example_f32.c **** int32_t main(void)
+ 147:../arm_matrix_example_f32.c **** {
+  72              		.loc 1 147 0
+  73              		.cfi_startproc
+  74 0000 90B5     		push	{r4, r7, lr}
+  75              	.LCFI0:
+  76              		.cfi_def_cfa_offset 12
+  77              		.cfi_offset 4, -12
+  78              		.cfi_offset 7, -8
+  79              		.cfi_offset 14, -4
+  80 0002 91B0     		sub	sp, sp, #68
+  81              	.LCFI1:
+  82              		.cfi_def_cfa_offset 80
+  83 0004 00AF     		add	r7, sp, #0
+  84              	.LCFI2:
+  85              		.cfi_def_cfa_register 7
+ 148:../arm_matrix_example_f32.c **** 
+ 149:../arm_matrix_example_f32.c ****   arm_matrix_instance_f32 A;      /* Matrix A Instance */
+ 150:../arm_matrix_example_f32.c ****   arm_matrix_instance_f32 AT;     /* Matrix AT(A transpose) instance */
+ 151:../arm_matrix_example_f32.c ****   arm_matrix_instance_f32 ATMA;   /* Matrix ATMA( AT multiply with A) instance */
+ 152:../arm_matrix_example_f32.c ****   arm_matrix_instance_f32 ATMAI;  /* Matrix ATMAI(Inverse of ATMA) instance */
+ 153:../arm_matrix_example_f32.c ****   arm_matrix_instance_f32 B;      /* Matrix B instance */
+ 154:../arm_matrix_example_f32.c ****   arm_matrix_instance_f32 X;      /* Matrix X(Unknown Matrix) instance */
+ 155:../arm_matrix_example_f32.c **** 
+ 156:../arm_matrix_example_f32.c ****   uint32_t srcRows, srcColumns;  /* Temporary variables */
+ 157:../arm_matrix_example_f32.c ****   arm_status status;
+ 158:../arm_matrix_example_f32.c **** 
+ 159:../arm_matrix_example_f32.c ****   /* Initialise A Matrix Instance with numRows, numCols and data array(A_f32) */
+ 160:../arm_matrix_example_f32.c ****   srcRows = 4;
+  86              		.loc 1 160 0
+  87 0006 0423     		mov	r3, #4
+  88 0008 BB63     		str	r3, [r7, #56]
+ 161:../arm_matrix_example_f32.c ****   srcColumns = 4;
+  89              		.loc 1 161 0
+  90 000a 0423     		mov	r3, #4
+  91 000c 7B63     		str	r3, [r7, #52]
+ 162:../arm_matrix_example_f32.c ****   arm_mat_init_f32(&A, srcRows, srcColumns, (float32_t *)A_f32);
+  92              		.loc 1 162 0
+  93 000e BB6B     		ldr	r3, [r7, #56]
+  94 0010 99B2     		uxth	r1, r3
+  95 0012 7B6B     		ldr	r3, [r7, #52]
+  96 0014 9AB2     		uxth	r2, r3
+  97 0016 381C     		mov	r0, r7
+  98 0018 2C30     		add	r0, r0, #44
+  99 001a 554B     		ldr	r3, .L9
+ 100 001c FFF7FEFF 		bl	arm_mat_init_f32
+ 163:../arm_matrix_example_f32.c **** 
+ 164:../arm_matrix_example_f32.c ****   /* Initialise Matrix Instance AT with numRows, numCols and data array(AT_f32) */
+ 165:../arm_matrix_example_f32.c ****   srcRows = 4;
+ 101              		.loc 1 165 0
+ 102 0020 0423     		mov	r3, #4
+ 103 0022 BB63     		str	r3, [r7, #56]
+ 166:../arm_matrix_example_f32.c ****   srcColumns = 4;
+ 104              		.loc 1 166 0
+ 105 0024 0423     		mov	r3, #4
+ 106 0026 7B63     		str	r3, [r7, #52]
+ 167:../arm_matrix_example_f32.c ****   arm_mat_init_f32(&AT, srcRows, srcColumns, AT_f32);
+ 107              		.loc 1 167 0
+ 108 0028 BB6B     		ldr	r3, [r7, #56]
+ 109 002a 99B2     		uxth	r1, r3
+ 110 002c 7B6B     		ldr	r3, [r7, #52]
+ 111 002e 9AB2     		uxth	r2, r3
+ 112 0030 381C     		mov	r0, r7
+ 113 0032 2430     		add	r0, r0, #36
+ 114 0034 4F4B     		ldr	r3, .L9+4
+ 115 0036 FFF7FEFF 		bl	arm_mat_init_f32
+ 168:../arm_matrix_example_f32.c **** 
+ 169:../arm_matrix_example_f32.c ****   /* calculation of A transpose */
+ 170:../arm_matrix_example_f32.c ****   status = arm_mat_trans_f32(&A, &AT);
+ 116              		.loc 1 170 0
+ 117 003a 3C1C     		mov	r4, r7
+ 118 003c 3F34     		add	r4, r4, #63
+ 119 003e 3A1C     		mov	r2, r7
+ 120 0040 2C32     		add	r2, r2, #44
+ 121 0042 3B1C     		mov	r3, r7
+ 122 0044 2433     		add	r3, r3, #36
+ 123 0046 101C     		mov	r0, r2
+ 124 0048 191C     		mov	r1, r3
+ 125 004a FFF7FEFF 		bl	arm_mat_trans_f32
+ 126 004e 031C     		mov	r3, r0
+ 127 0050 2370     		strb	r3, [r4]
+ 171:../arm_matrix_example_f32.c **** 
+ 172:../arm_matrix_example_f32.c **** 
+ 173:../arm_matrix_example_f32.c ****   /* Initialise ATMA Matrix Instance with numRows, numCols and data array(ATMA_f32) */
+ 174:../arm_matrix_example_f32.c ****   srcRows = 4;
+ 128              		.loc 1 174 0
+ 129 0052 0423     		mov	r3, #4
+ 130 0054 BB63     		str	r3, [r7, #56]
+ 175:../arm_matrix_example_f32.c ****   srcColumns = 4;
+ 131              		.loc 1 175 0
+ 132 0056 0423     		mov	r3, #4
+ 133 0058 7B63     		str	r3, [r7, #52]
+ 176:../arm_matrix_example_f32.c ****   arm_mat_init_f32(&ATMA, srcRows, srcColumns, ATMA_f32);
+ 134              		.loc 1 176 0
+ 135 005a BB6B     		ldr	r3, [r7, #56]
+ 136 005c 99B2     		uxth	r1, r3
+ 137 005e 7B6B     		ldr	r3, [r7, #52]
+ 138 0060 9AB2     		uxth	r2, r3
+ 139 0062 381C     		mov	r0, r7
+ 140 0064 1C30     		add	r0, r0, #28
+ 141 0066 444B     		ldr	r3, .L9+8
+ 142 0068 FFF7FEFF 		bl	arm_mat_init_f32
+ 177:../arm_matrix_example_f32.c **** 
+ 178:../arm_matrix_example_f32.c ****   /* calculation of AT Multiply with A */
+ 179:../arm_matrix_example_f32.c ****   status = arm_mat_mult_f32(&AT, &A, &ATMA);
+ 143              		.loc 1 179 0
+ 144 006c 3C1C     		mov	r4, r7
+ 145 006e 3F34     		add	r4, r4, #63
+ 146 0070 391C     		mov	r1, r7
+ 147 0072 2431     		add	r1, r1, #36
+ 148 0074 3A1C     		mov	r2, r7
+ 149 0076 2C32     		add	r2, r2, #44
+ 150 0078 3B1C     		mov	r3, r7
+ 151 007a 1C33     		add	r3, r3, #28
+ 152 007c 081C     		mov	r0, r1
+ 153 007e 111C     		mov	r1, r2
+ 154 0080 1A1C     		mov	r2, r3
+ 155 0082 FFF7FEFF 		bl	arm_mat_mult_f32
+ 156 0086 031C     		mov	r3, r0
+ 157 0088 2370     		strb	r3, [r4]
+ 180:../arm_matrix_example_f32.c **** 
+ 181:../arm_matrix_example_f32.c ****   /* Initialise ATMAI Matrix Instance with numRows, numCols and data array(ATMAI_f32) */
+ 182:../arm_matrix_example_f32.c ****   srcRows = 4;
+ 158              		.loc 1 182 0
+ 159 008a 0423     		mov	r3, #4
+ 160 008c BB63     		str	r3, [r7, #56]
+ 183:../arm_matrix_example_f32.c ****   srcColumns = 4;
+ 161              		.loc 1 183 0
+ 162 008e 0423     		mov	r3, #4
+ 163 0090 7B63     		str	r3, [r7, #52]
+ 184:../arm_matrix_example_f32.c ****   arm_mat_init_f32(&ATMAI, srcRows, srcColumns, ATMAI_f32);
+ 164              		.loc 1 184 0
+ 165 0092 BB6B     		ldr	r3, [r7, #56]
+ 166 0094 99B2     		uxth	r1, r3
+ 167 0096 7B6B     		ldr	r3, [r7, #52]
+ 168 0098 9AB2     		uxth	r2, r3
+ 169 009a 381C     		mov	r0, r7
+ 170 009c 1430     		add	r0, r0, #20
+ 171 009e 374B     		ldr	r3, .L9+12
+ 172 00a0 FFF7FEFF 		bl	arm_mat_init_f32
+ 185:../arm_matrix_example_f32.c **** 
+ 186:../arm_matrix_example_f32.c ****   /* calculation of Inverse((Transpose(A) * A) */
+ 187:../arm_matrix_example_f32.c ****   status = arm_mat_inverse_f32(&ATMA, &ATMAI);
+ 173              		.loc 1 187 0
+ 174 00a4 3C1C     		mov	r4, r7
+ 175 00a6 3F34     		add	r4, r4, #63
+ 176 00a8 3A1C     		mov	r2, r7
+ 177 00aa 1C32     		add	r2, r2, #28
+ 178 00ac 3B1C     		mov	r3, r7
+ 179 00ae 1433     		add	r3, r3, #20
+ 180 00b0 101C     		mov	r0, r2
+ 181 00b2 191C     		mov	r1, r3
+ 182 00b4 FFF7FEFF 		bl	arm_mat_inverse_f32
+ 183 00b8 031C     		mov	r3, r0
+ 184 00ba 2370     		strb	r3, [r4]
+ 188:../arm_matrix_example_f32.c **** 
+ 189:../arm_matrix_example_f32.c ****   /* calculation of (Inverse((Transpose(A) * A)) *  Transpose(A)) */
+ 190:../arm_matrix_example_f32.c ****   status = arm_mat_mult_f32(&ATMAI, &AT, &ATMA);
+ 185              		.loc 1 190 0
+ 186 00bc 3C1C     		mov	r4, r7
+ 187 00be 3F34     		add	r4, r4, #63
+ 188 00c0 391C     		mov	r1, r7
+ 189 00c2 1431     		add	r1, r1, #20
+ 190 00c4 3A1C     		mov	r2, r7
+ 191 00c6 2432     		add	r2, r2, #36
+ 192 00c8 3B1C     		mov	r3, r7
+ 193 00ca 1C33     		add	r3, r3, #28
+ 194 00cc 081C     		mov	r0, r1
+ 195 00ce 111C     		mov	r1, r2
+ 196 00d0 1A1C     		mov	r2, r3
+ 197 00d2 FFF7FEFF 		bl	arm_mat_mult_f32
+ 198 00d6 031C     		mov	r3, r0
+ 199 00d8 2370     		strb	r3, [r4]
+ 191:../arm_matrix_example_f32.c **** 
+ 192:../arm_matrix_example_f32.c ****   /* Initialise B Matrix Instance with numRows, numCols and data array(B_f32) */
+ 193:../arm_matrix_example_f32.c ****   srcRows = 4;
+ 200              		.loc 1 193 0
+ 201 00da 0423     		mov	r3, #4
+ 202 00dc BB63     		str	r3, [r7, #56]
+ 194:../arm_matrix_example_f32.c ****   srcColumns = 1;
+ 203              		.loc 1 194 0
+ 204 00de 0123     		mov	r3, #1
+ 205 00e0 7B63     		str	r3, [r7, #52]
+ 195:../arm_matrix_example_f32.c ****   arm_mat_init_f32(&B, srcRows, srcColumns, (float32_t *)B_f32);
+ 206              		.loc 1 195 0
+ 207 00e2 BB6B     		ldr	r3, [r7, #56]
+ 208 00e4 99B2     		uxth	r1, r3
+ 209 00e6 7B6B     		ldr	r3, [r7, #52]
+ 210 00e8 9AB2     		uxth	r2, r3
+ 211 00ea 381C     		mov	r0, r7
+ 212 00ec 0C30     		add	r0, r0, #12
+ 213 00ee 244B     		ldr	r3, .L9+16
+ 214 00f0 FFF7FEFF 		bl	arm_mat_init_f32
+ 196:../arm_matrix_example_f32.c **** 
+ 197:../arm_matrix_example_f32.c ****   /* Initialise X Matrix Instance with numRows, numCols and data array(X_f32) */
+ 198:../arm_matrix_example_f32.c ****   srcRows = 4;
+ 215              		.loc 1 198 0
+ 216 00f4 0423     		mov	r3, #4
+ 217 00f6 BB63     		str	r3, [r7, #56]
+ 199:../arm_matrix_example_f32.c ****   srcColumns = 1;
+ 218              		.loc 1 199 0
+ 219 00f8 0123     		mov	r3, #1
+ 220 00fa 7B63     		str	r3, [r7, #52]
+ 200:../arm_matrix_example_f32.c ****   arm_mat_init_f32(&X, srcRows, srcColumns, X_f32);
+ 221              		.loc 1 200 0
+ 222 00fc BB6B     		ldr	r3, [r7, #56]
+ 223 00fe 99B2     		uxth	r1, r3
+ 224 0100 7B6B     		ldr	r3, [r7, #52]
+ 225 0102 9AB2     		uxth	r2, r3
+ 226 0104 381D     		add	r0, r7, #4
+ 227 0106 1F4B     		ldr	r3, .L9+20
+ 228 0108 FFF7FEFF 		bl	arm_mat_init_f32
+ 201:../arm_matrix_example_f32.c **** 
+ 202:../arm_matrix_example_f32.c ****   /* calculation ((Inverse((Transpose(A) * A)) *  Transpose(A)) * B) */
+ 203:../arm_matrix_example_f32.c ****   status = arm_mat_mult_f32(&ATMA, &B, &X);
+ 229              		.loc 1 203 0
+ 230 010c 3C1C     		mov	r4, r7
+ 231 010e 3F34     		add	r4, r4, #63
+ 232 0110 391C     		mov	r1, r7
+ 233 0112 1C31     		add	r1, r1, #28
+ 234 0114 3A1C     		mov	r2, r7
+ 235 0116 0C32     		add	r2, r2, #12
+ 236 0118 3B1D     		add	r3, r7, #4
+ 237 011a 081C     		mov	r0, r1
+ 238 011c 111C     		mov	r1, r2
+ 239 011e 1A1C     		mov	r2, r3
+ 240 0120 FFF7FEFF 		bl	arm_mat_mult_f32
+ 241 0124 031C     		mov	r3, r0
+ 242 0126 2370     		strb	r3, [r4]
+ 204:../arm_matrix_example_f32.c **** 
+ 205:../arm_matrix_example_f32.c ****   /* Comparison of reference with test output */
+ 206:../arm_matrix_example_f32.c ****   snr = arm_snr_f32((float32_t *)xRef_f32, X_f32, 4);
+ 243              		.loc 1 206 0
+ 244 0128 174A     		ldr	r2, .L9+24
+ 245 012a 164B     		ldr	r3, .L9+20
+ 246 012c 101C     		mov	r0, r2
+ 247 012e 191C     		mov	r1, r3
+ 248 0130 0422     		mov	r2, #4
+ 249 0132 FFF7FEFF 		bl	arm_snr_f32
+ 250 0136 021C     		add	r2, r0, #0
+ 251 0138 144B     		ldr	r3, .L9+28
+ 252 013a 1A60     		str	r2, [r3]
+ 207:../arm_matrix_example_f32.c **** 
+ 208:../arm_matrix_example_f32.c ****   /*------------------------------------------------------------------------------
+ 209:../arm_matrix_example_f32.c ****   *            Initialise status depending on SNR calculations
+ 210:../arm_matrix_example_f32.c ****   *------------------------------------------------------------------------------*/
+ 211:../arm_matrix_example_f32.c ****   if( snr > SNR_THRESHOLD)
+ 253              		.loc 1 211 0
+ 254 013c 134B     		ldr	r3, .L9+28
+ 255 013e 1B68     		ldr	r3, [r3]
+ 256 0140 181C     		add	r0, r3, #0
+ 257 0142 1349     		ldr	r1, .L9+32
+ 258 0144 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 259 0148 031C     		mov	r3, r0
+ 260 014a 002B     		cmp	r3, #0
+ 261 014c 04D0     		beq	.L8
+ 262              	.L7:
+ 212:../arm_matrix_example_f32.c ****   {
+ 213:../arm_matrix_example_f32.c ****     status = ARM_MATH_SUCCESS;
+ 263              		.loc 1 213 0
+ 264 014e 3B1C     		mov	r3, r7
+ 265 0150 3F33     		add	r3, r3, #63
+ 266 0152 0022     		mov	r2, #0
+ 267 0154 1A70     		strb	r2, [r3]
+ 268 0156 03E0     		b	.L4
+ 269              	.L8:
+ 214:../arm_matrix_example_f32.c ****   }
+ 215:../arm_matrix_example_f32.c ****   else
+ 216:../arm_matrix_example_f32.c ****   {
+ 217:../arm_matrix_example_f32.c ****     status = ARM_MATH_TEST_FAILURE;
+ 270              		.loc 1 217 0
+ 271 0158 3B1C     		mov	r3, r7
+ 272 015a 3F33     		add	r3, r3, #63
+ 273 015c FA22     		mov	r2, #250
+ 274 015e 1A70     		strb	r2, [r3]
+ 275              	.L4:
+ 218:../arm_matrix_example_f32.c ****   }
+ 219:../arm_matrix_example_f32.c **** 
+ 220:../arm_matrix_example_f32.c **** 
+ 221:../arm_matrix_example_f32.c ****   /* ----------------------------------------------------------------------
+ 222:../arm_matrix_example_f32.c ****   ** Loop here if the signals fail the PASS check.
+ 223:../arm_matrix_example_f32.c ****   ** This denotes a test failure
+ 224:../arm_matrix_example_f32.c ****   ** ------------------------------------------------------------------- */
+ 225:../arm_matrix_example_f32.c ****   if( status != ARM_MATH_SUCCESS)
+ 276              		.loc 1 225 0
+ 277 0160 3B1C     		mov	r3, r7
+ 278 0162 3F33     		add	r3, r3, #63
+ 279 0164 1B78     		ldrb	r3, [r3]
+ 280 0166 5BB2     		sxtb	r3, r3
+ 281 0168 002B     		cmp	r3, #0
+ 282 016a 00D0     		beq	.L5
+ 283              	.L6:
+ 226:../arm_matrix_example_f32.c ****   {
+ 227:../arm_matrix_example_f32.c ****     while(1);
+ 284              		.loc 1 227 0 discriminator 1
+ 285 016c FEE7     		b	.L6
+ 286              	.L5:
+ 228:../arm_matrix_example_f32.c ****   }
+ 229:../arm_matrix_example_f32.c **** 
+ 230:../arm_matrix_example_f32.c ****   while(1);                             /* main function does not return */
+ 287              		.loc 1 230 0 discriminator 1
+ 288 016e FEE7     		b	.L5
+ 289              	.L10:
+ 290              		.align	2
+ 291              	.L9:
+ 292 0170 00000000 		.word	A_f32
+ 293 0174 00000000 		.word	AT_f32
+ 294 0178 00000000 		.word	ATMA_f32
+ 295 017c 00000000 		.word	ATMAI_f32
+ 296 0180 00000000 		.word	B_f32
+ 297 0184 00000000 		.word	X_f32
+ 298 0188 00000000 		.word	xRef_f32
+ 299 018c 00000000 		.word	snr
+ 300 0190 0000B442 		.word	1119092736
+ 301              		.cfi_endproc
+ 302              	.LFE81:
+ 304              		.text
+ 305              	.Letext0:
+ 306              		.file 2 "c:\\dave-3.1\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/incl
+ 307              		.file 3 "C:\\DAVE-3.1\\eclipse\\/../CMSIS/Include/arm_math.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_matrix_example_f32.c
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:22     .rodata:00000000 B_f32
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:19     .rodata:00000000 $d
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:31     .rodata:00000010 A_f32
+                            *COM*:00000040 AT_f32
+                            *COM*:00000040 ATMA_f32
+                            *COM*:00000040 ATMAI_f32
+                            *COM*:00000010 X_f32
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:56     .rodata:00000050 xRef_f32
+                            *COM*:00000004 snr
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:64     .text.main:00000000 $t
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:69     .text.main:00000000 main
+C:\Users\wangguan\AppData\Local\Temp\ccNQzJC1.s:292    .text.main:00000170 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.e2c96d5a5488b60ca900a5e0ea7772ef
+                           .group:00000000 wm4.arm_math.h.265.70d56e5033e2760c278cbebe073db4fc
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.arm_math.h.275.48de47ab2bd311f0657ea6a8c1abb55a
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.297.1d5f7b8b87e168258299acd0bbe0005e
+
+UNDEFINED SYMBOLS
+__aeabi_fcmpgt
+arm_mat_init_f32
+arm_mat_trans_f32
+arm_mat_mult_f32
+arm_mat_inverse_f32
+arm_snr_f32

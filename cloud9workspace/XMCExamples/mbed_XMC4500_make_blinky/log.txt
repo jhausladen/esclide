@@ -1,0 +1,80 @@
+python ../mbed/workspace_tools/build.py -m XMC4500 -t GCC_ARM
+[INFO] Using private settings!
+Building library CMSIS (XMC4500, GCC_ARM)
+Copy: uc_id.h
+Building library MBED (XMC4500, GCC_ARM)
+Compile: CLK001.c
+[Error] CLK001.c@343: In function 'CLK001_SetMainPLLClkSrc': 'CLK001_OSC_HP_MODE' undeclared (first use in this function)
+[Error] CLK001.c@354: 353:42: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_SOSCWDG_FREF' undeclared (first use in this function)
+[Error] CLK001.c@361: 353:42: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'timeout_count' undeclared (first use in this function)
+[Error] CLK001.c@367: 353:42: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLLSTAT_OSC_USABLE_MASK' undeclared (first use in this function)
+[Error] CLK001.c@415: 414:16: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_PDIV' undeclared (first use in this function)
+[Error] CLK001.c@415: 414:16: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_NDIV' undeclared (first use in this function)
+[Error] CLK001.c@423: 414:16: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_FREQ_STEP1' undeclared (first use in this function)
+[Error] CLK001.c@430: 414:16: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_K1DIV' undeclared (first use in this function)
+[Error] CLK001.c@516: 515:14: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_PDIV' undeclared (first use in this function)
+[Error] CLK001.c@516: 515:14: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_NDIV' undeclared (first use in this function)
+[Error] CLK001.c@573: 515:14: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_K1DIV' undeclared (first use in this function)
+[Error] CLK001.c@575: 515:14: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function) 'CLK001_PLL_K2DIV' undeclared (first use in this function)
+[Warning] CLK001.c@388: 317:17: warning: 'CLK001_SetMainPLLClkSrc' defined but not used [-Wunused-function] 'CLK001_ConfigMainPLL' defined but not used [-Wunused-function]
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c: In function 'CLK001_SetMainPLLClkSrc':
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:343:20: error: 'CLK001_OSC_HP_MODE' undeclared (first use in this function)
+         ((uint32_t)CLK001_OSC_HP_MODE << SCU_OSC_OSCHPCTRL_MODE_Pos))
+                    ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:343:20: note: each undeclared identifier is reported only once for each function it appears in
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:353:42: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function)
+       SCU_OSC->OSCHPCTRL |= ((uint32_t)((CLK001_CLOCK_CRYSTAL_FREQUENCY /
+                                          ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:354:22: error: 'CLK001_SOSCWDG_FREF' undeclared (first use in this function)
+                      CLK001_SOSCWDG_FREF)-1UL) << SCU_OSC_OSCHPCTRL_OSCVAL_Pos);
+                      ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:361:7: error: 'timeout_count' undeclared (first use in this function)
+       timeout_count = CLK001_LOOP_CNT_150MS; 
+       ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:367:37: error: 'CLK001_PLLSTAT_OSC_USABLE_MASK' undeclared (first use in this function)
+       }while((((SCU_PLL->PLLSTAT) & CLK001_PLLSTAT_OSC_USABLE_MASK) != 
+                                     ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c: In function 'CLK001_ConfigMainPLL':
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:414:16: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function)
+         VCO = (CLK001_CLOCK_CRYSTAL_FREQUENCY/ 
+                ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:415:16: error: 'CLK001_PLL_PDIV' undeclared (first use in this function)
+               (CLK001_PLL_PDIV+1UL))*(CLK001_PLL_NDIV+1UL);
+                ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:415:39: error: 'CLK001_PLL_NDIV' undeclared (first use in this function)
+               (CLK001_PLL_PDIV+1UL))*(CLK001_PLL_NDIV+1UL);
+                                       ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:423:29: error: 'CLK001_PLL_FREQ_STEP1' undeclared (first use in this function)
+       stepping_K2DIV = (VCO/CLK001_PLL_FREQ_STEP1)-1UL;
+                             ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:430:37: error: 'CLK001_PLL_K1DIV' undeclared (first use in this function)
+       SCU_PLL->PLLCON1 =(((uint32_t)CLK001_PLL_K1DIV) | 
+                                     ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c: In function 'CLK001_FreqStepupMainPLL':
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:515:14: error: 'CLK001_CLOCK_CRYSTAL_FREQUENCY' undeclared (first use in this function)
+       VCO = (CLK001_CLOCK_CRYSTAL_FREQUENCY/ 
+              ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:516:14: error: 'CLK001_PLL_PDIV' undeclared (first use in this function)
+             (CLK001_PLL_PDIV+1UL))*(CLK001_PLL_NDIV+1UL);
+              ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:516:37: error: 'CLK001_PLL_NDIV' undeclared (first use in this function)
+             (CLK001_PLL_PDIV+1UL))*(CLK001_PLL_NDIV+1UL);
+                                     ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:573:35: error: 'CLK001_PLL_K1DIV' undeclared (first use in this function)
+    SCU_PLL->PLLCON1 = (((uint32_t)CLK001_PLL_K1DIV) | 
+                                   ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:575:25: error: 'CLK001_PLL_K2DIV' undeclared (first use in this function)
+              ((uint32_t)CLK001_PLL_K2DIV<<SCU_PLL_PLLCON1_K2DIV_Pos)| 
+                         ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c: At top level:
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:317:17: warning: 'CLK001_SetMainPLLClkSrc' defined but not used [-Wunused-function]
+ static uint32_t CLK001_SetMainPLLClkSrc(void)
+                 ^
+/home/juergen/mbedSDK/mbed/libraries/mbed/targets/hal/TARGET_Infineon/DAVE/src/CLK001/CLK001.c:388:17: warning: 'CLK001_ConfigMainPLL' defined but not used [-Wunused-function]
+ static uint32_t CLK001_ConfigMainPLL (void)
+                 ^
+
+Completed in: (0.04)s
+
+  Build failures:
+  * GCC_ARM::XMC4500

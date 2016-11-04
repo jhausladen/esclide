@@ -1,0 +1,155 @@
+package at.embsys.sat;
+
+import at.embsys.sat.jlink.RedirectToJLink;
+import at.embsys.sat.oocd.RedirectToOOCD;
+import at.embsys.sat.websocket.WebSocketConnectionHandler;
+import at.embsys.sat.websocket.WebSocketServer;
+import javafx.application.Platform;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+import java.io.*;
+import java.net.ConnectException;
+import java.net.Socket;
+
+public class RemoteGDBConnector implements Runnable {
+
+    private String server = "127.0.0.1";
+    private OutputStream outToServer;
+    private final Circle serverStateCircle;
+    private final WebSocketServer websocketServer;
+    private final int startOOCD;
+    private final String targetPlatform;
+    private boolean end = false;
+
+    private static Socket socket;
+    private static OutputStream outToJLink = null;
+    private static OutputStream outToOOCD = null;
+
+    public RemoteGDBConnector(Circle crc, WebSocketServer wsserver, int startOOCD, String targetPlatform) {
+        serverStateCircle = crc;
+        websocketServer = wsserver;
+        this.startOOCD = startOOCD;
+        this.targetPlatform = targetPlatform;
+    }
+
+    public static void closeSocket() throws IOException {
+        socket.close();
+    }
+
+    public static void setOutToOOCD(OutputStream outToOOCD) {
+        RemoteGDBConnector.outToOOCD = outToOOCD;
+    }
+
+    public static void setOutToJLink(OutputStream outToJLink) {
+        RemoteGDBConnector.outToJLink = outToJLink;
+    }
+
+    public void setEnd(boolean end) {
+        this.end = end;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public OutputStream getOutToServer() {
+        return outToServer;
+    }
+
+    @Override
+    public void run() {
+
+        while (!end) {
+            // Create socket that is connected to server on specified port
+        	InputStream in = null;
+            try {
+
+                if (Main.deviceInfo.get(1).contains("universal")) server = websocketServer.getIp();
+                int port = websocketServer.getDebugport();
+                socket = new Socket(server, port);
+                System.out.println("Connected to server...");
+                /* UI updaten */
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                            /* entsprechende UI Komponente updaten */
+                        serverStateCircle.setFill(Color.GREEN);
+                    }
+                });
+
+                in = socket.getInputStream();
+
+                outToServer = socket.getOutputStream();
+
+                RedirectToJLink.setOutToServer(outToServer);
+
+                RedirectToOOCD.setOutToServer(outToServer);
+
+                /* Wird mit 0 initialisiert */
+                int anzahlZeichen;
+
+                byte[] buffer = new byte[200];
+
+                System.out.println("Wait@RemoteGDBConnector");
+                while ((anzahlZeichen = in.read(buffer)) >= 0) {
+
+                    if (targetPlatform.matches("XMC4500") && startOOCD == 1 && outToOOCD != null) {
+                        try {
+                            outToOOCD.write(buffer, 0, anzahlZeichen);
+                            outToOOCD.flush();
+                        } catch (Exception e) {
+                            break;
+                        }
+                    } else {
+
+                        if (WebSocketServer.getDebugHardware().matches("XMC4500") && outToJLink != null) {
+
+                            outToJLink.write(buffer, 0, anzahlZeichen);
+                            outToJLink.flush();
+
+                        }
+                        if (WebSocketServer.getDebugHardware().matches("TM4C1294XL") && outToOOCD != null) {
+                            try {
+                                outToOOCD.write(buffer, 0, anzahlZeichen);
+                                outToOOCD.flush();
+                            } catch (Exception e) {
+                                break;
+                            }
+
+                        }
+
+                    }
+
+                }
+                 /* UI updaten */
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                            /* entsprechende UI Komponente updaten */
+                        serverStateCircle.setFill(Color.RED);
+                    }
+                });
+                /* Close the socket and its streams */
+                socket.close();
+
+            } catch (ConnectException ce) {
+                System.out.println("Retry in 2 seconds");
+                WebSocketConnectionHandler.ws_sendMsg("restart-redirection-server");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally{
+            	in.close();
+            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Exit RemoteGDBConnector!");
+
+    }
+}
