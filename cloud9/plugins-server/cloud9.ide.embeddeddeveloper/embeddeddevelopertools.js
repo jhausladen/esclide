@@ -1193,7 +1193,6 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
                     spawn = require('child_process').spawn,
                         gdb = spawn('arm-none-eabi-gdb', [pathtobin, '-ex', 'target remote :' + TCP_GDB_EMULATION_PORT, '-ex', 'monitor reset', '-ex', 'load', '-ex', 'monitor reset', '-ex', 'monitor go']);
 
-                    gdb.stdin.write("monitor shutdown\n");
                     gdb.stdin.write("quit\n");
                 }
                 else {

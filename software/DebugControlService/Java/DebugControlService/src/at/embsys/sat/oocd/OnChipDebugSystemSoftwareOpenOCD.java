@@ -130,6 +130,8 @@ public class OnChipDebugSystemSoftwareOpenOCD implements Runnable {
                 });
                 /* read any errors from the attempted command */
                 while ((processInput = stdErrorOOCD.readLine()) != null) {
+                    logger.debug("OpenOCD: " + processInput);
+
                     cal = Calendar.getInstance();
                     logOOCDStream.write((cal.get(Calendar.DAY_OF_MONTH) +
                             "." + (cal.get(Calendar.MONTH) + 1) +
@@ -182,7 +184,6 @@ public class OnChipDebugSystemSoftwareOpenOCD implements Runnable {
                             debugConsole.positionCaret(tmp.length() - 1);
                         }
                     });
-                    logger.debug("OpenOCD: " + processInput);
 
                     /* Sleep 100ms to do not flood the UI */
                     try {

@@ -37,6 +37,7 @@ public class OnChipDebugSystemSoftwareJLink implements Runnable {
     private static boolean NewJLinkExecSelected = false;
     private static ch.qos.logback.classic.Logger logger;
     private String processInput;
+    private boolean readRegistersFailed = false;
 
     /* Set flag if JLink GDB server executable has changed */
     public static void setNewJLinkExecSelected(boolean newJLinkExecSelected) {
@@ -119,6 +120,8 @@ public class OnChipDebugSystemSoftwareJLink implements Runnable {
 
                 /* read the output from the command */
                 while ((processInput = stdInputJLink.readLine()) != null) {
+                    logger.debug("JLink(1): " + processInput);
+
                     cal = Calendar.getInstance();
                     logJlinkStream.write((cal.get(Calendar.DAY_OF_MONTH) +
                             "." + (cal.get(Calendar.MONTH) + 1) +
@@ -163,24 +166,31 @@ public class OnChipDebugSystemSoftwareJLink implements Runnable {
                     /* Reset reboot flag */
                     if (processInput.contains("Connected to") && !processInput.contains("Connected to target") && rebootRequired)
                         rebootRequired = false;
-
-                    /* UI updaten */
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            String tmp = debugConsole.getText() + (processInput + "\n");
-                            if (tmp.length() > 1000) tmp = tmp.substring(tmp.length() - 1000, tmp.length());
-
-                            debugConsole.setText(tmp);
-                            debugConsole.positionCaret(tmp.length() - 1);
+                    if (processInput.matches(".*ERROR: Can not read register.*while CPU is running")) {
+                        readRegistersFailed = true;
+                    } else {
+                        if (readRegistersFailed) {
+                            processInput = "WARNING: Some registers can not be read while CPU is running\n" + processInput;
+                            readRegistersFailed = false;
                         }
-                    });
-                    logger.debug("JLink(1): " + processInput);
-                    /* Sleep 100ms to do not flood the UI */
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        logger.debug("An InterruptedException was thrown @ Thread.sleep()", e);
+                        /* UI updaten */
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                String tmp = debugConsole.getText() + (processInput + "\n");
+                                if (tmp.length() > 1000) tmp = tmp.substring(tmp.length() - 1000, tmp.length());
+
+                                debugConsole.setText(tmp);
+                                debugConsole.positionCaret(tmp.length() - 1);
+                            }
+                        });
+
+                        /* Sleep 100ms to do not flood the UI */
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            logger.debug("An InterruptedException was thrown @ Thread.sleep()", e);
+                        }
                     }
                 }
                /* UI updaten */
