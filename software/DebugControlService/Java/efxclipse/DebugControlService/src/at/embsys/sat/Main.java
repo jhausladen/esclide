@@ -24,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -44,6 +45,7 @@ public class Main extends Application {
     private OnChipDebugSystemSoftwareOpenOCD ocdssOOCD;
     private PlatformDetector platformDetector;
     private RemoteGDBConnector remotegdbconnector;
+    private double prefHeight = 400;
     //private static String hwPlatform, serialNumber;
     private static int wsPort;
     private static int jlinkPort;
@@ -69,7 +71,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("debugcontrolservice.fxml"));
         primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("DebugControlService.png")));
         primaryStage.setTitle("Debug-Control Service");
-        primaryStage.setScene(new Scene(root, 670, 275));
+        primaryStage.setScene(new Scene(root, 675, 170));
         primaryStage.show();
 
         /* Retrieve UI components */
@@ -88,7 +90,18 @@ public class Main extends Application {
         RadioButton radiobtnOOCD = (RadioButton) primaryStage.getScene().lookup("#radiobtnOOCD");
         final ComboBox comboBoxHardware = (ComboBox) primaryStage.getScene().lookup("#comboBoxPlatformList");
         final ComboBox comboBoxDeviceList = (ComboBox) primaryStage.getScene().lookup("#comboBoxDevPlatform");
+        TitledPane tpAdvanced = (TitledPane) primaryStage.getScene().lookup("#titledPaneAdvanced");
 
+        /* Check if advanced menu should be made visible and resize the height according to last known state*/
+        tpAdvanced.expandedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue == false) {
+                    prefHeight = primaryStage.getHeight();
+                    primaryStage.setHeight(200);
+                } else primaryStage.setHeight(prefHeight);
+            }
+        });
 
          /* Check OS and set appropriate default path for the GDB servers */
         if ((OS.contains("linux"))) {

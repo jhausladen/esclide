@@ -11,6 +11,7 @@ import at.embsys.sat.oocd.OnChipDebugSystemSoftwareOpenOCD;
 import at.embsys.sat.websocket.WebSocketConnectionHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -35,6 +36,9 @@ public class Controller {
     public Button selectoocd;
     public ComboBox comboBoxPlatformList;
     public ComboBox comboBoxDevPlatform;
+    public TitledPane titledPaneAdvanced;
+    public Accordion accordionAdvanced;
+    public GridPane gridPaneAdvanced;
 
 
     /* Clears the console history */

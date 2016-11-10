@@ -45,7 +45,7 @@ public class RemoteGDBConnector implements Runnable {
     /* Close the socket connected to the server */
     public static void closeSocket() {
         try {
-            socket.close();
+            if (socket != null) socket.close();
             logger.debug("Socket to server closed...");
         } catch (IOException e) {
             logger.debug("Socket to server still open...");
