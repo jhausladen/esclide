@@ -85,10 +85,10 @@ public class Main extends Application {
         Label platform = (Label) primaryStage.getScene().lookup("#developmentPlatform");
         final Label labelJlinkPath = (Label) primaryStage.getScene().lookup("#jlinkpath");
         final Label labelOOCDPath = (Label) primaryStage.getScene().lookup("#oocdpath");
-        TextArea debugConsoleJlink = (TextArea) primaryStage.getScene().lookup("#debugConsoleJlink");
-        TextArea debugConsoleOOCD = (TextArea) primaryStage.getScene().lookup("#debugConsoleOOCD");
-        RadioButton radiobtnJlink = (RadioButton) primaryStage.getScene().lookup("#radiobtnJlink");
-        RadioButton radiobtnOOCD = (RadioButton) primaryStage.getScene().lookup("#radiobtnOOCD");
+        final TextArea debugConsoleJlink = (TextArea) primaryStage.getScene().lookup("#debugConsoleJlink");
+        final TextArea debugConsoleOOCD = (TextArea) primaryStage.getScene().lookup("#debugConsoleOOCD");
+        final RadioButton radiobtnJlink = (RadioButton) primaryStage.getScene().lookup("#radiobtnJlink");
+        final RadioButton radiobtnOOCD = (RadioButton) primaryStage.getScene().lookup("#radiobtnOOCD");
         final ComboBox comboBoxHardware = (ComboBox) primaryStage.getScene().lookup("#comboBoxPlatformList");
         final ComboBox comboBoxDeviceList = (ComboBox) primaryStage.getScene().lookup("#comboBoxDevPlatform");
         TitledPane tpAdvanced = (TitledPane) primaryStage.getScene().lookup("#titledPaneAdvanced");
@@ -179,17 +179,22 @@ public class Main extends Application {
                 if (platformDetector.getProcess() != null && t != null && t1 != null && !t.equals(t1)) {
 
                     if (t1.equals("Infineon")) {
-                        /* Enable JLink GDB server VBox & disable OOCD VBox */
+                        /* Enable JLink GDB server VBox */
                         vBoxJLink.setVisible(true);
                         vBoxJLink.setMinHeight(Control.USE_COMPUTED_SIZE);
                         vBoxJLink.setMinWidth(Control.USE_COMPUTED_SIZE);
                         vBoxJLink.setPrefHeight(Control.USE_COMPUTED_SIZE);
                         vBoxJLink.setPrefWidth(Control.USE_COMPUTED_SIZE);
+                        /* Disable OOCD VBox */
                         vBoxOOCD.setVisible(false);
                         vBoxOOCD.setMinHeight(0);
                         vBoxOOCD.setMinWidth(0);
                         vBoxOOCD.setPrefHeight(0);
                         vBoxOOCD.setPrefWidth(0);
+                        /* Manage console output visibility */
+                        radiobtnJlink.setSelected(true);
+                        debugConsoleJlink.setVisible(true);
+                        debugConsoleOOCD.setVisible(false);
                         /* Set available devices & send a message to the web IDE */
                         comboBoxHardware.setItems(platformDetector.getAvailableDevices("Infineon"));
                         WebSocketConnectionHandler.ws_sendMsg("xmc4500-selection-changed");
@@ -198,17 +203,22 @@ public class Main extends Application {
                         else WebSocketConnectionHandler.ws_sendMsg("xmc4500-offline");
                     }
                     if (t1.equals("TI")) {
-                        /* Enable OpenOCD VBox & disable JLink GDB server VBox */
+                        /* Enable OpenOCD VBox */
                         vBoxOOCD.setVisible(true);
                         vBoxOOCD.setMinHeight(Control.USE_COMPUTED_SIZE);
                         vBoxOOCD.setMinWidth(Control.USE_COMPUTED_SIZE);
                         vBoxOOCD.setPrefHeight(Control.USE_COMPUTED_SIZE);
                         vBoxOOCD.setPrefWidth(Control.USE_COMPUTED_SIZE);
+                        /* Disable JLink GDB server VBox */
                         vBoxJLink.setVisible(false);
                         vBoxJLink.setMinHeight(0);
                         vBoxJLink.setMinWidth(0);
                         vBoxJLink.setPrefHeight(0);
                         vBoxJLink.setPrefWidth(0);
+                        /* Manage console output visibility */
+                        radiobtnOOCD.setSelected(true);
+                        debugConsoleJlink.setVisible(false);
+                        debugConsoleOOCD.setVisible(true);
                         /* Set available devices & send a message to the web IDE */
                         comboBoxHardware.setItems(platformDetector.getAvailableDevices("TI"));
                         WebSocketConnectionHandler.ws_sendMsg("tm4c1294xl-selection-changed");

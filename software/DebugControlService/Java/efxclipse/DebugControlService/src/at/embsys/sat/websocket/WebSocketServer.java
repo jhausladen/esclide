@@ -172,19 +172,9 @@ public class WebSocketServer implements Runnable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
                 platformLabel.setText(debugHardware);
-                if (debugHardware.matches("XMC4500")) {
-                    radioBtnJlink.setSelected(true);
-                    debugConsoleJlink.setVisible(true);
-                    debugConsoleOOCD.setVisible(false);
-                    comboboxDeviceList.getSelectionModel().select("Infineon");
-                } else {
-                    radioBtnOOCD.setSelected(true);
-                    debugConsoleJlink.setVisible(false);
-                    debugConsoleOOCD.setVisible(true);
-                    comboboxDeviceList.getSelectionModel().select("TI");
-                }
+                if (debugHardware.matches("XMC4500")) comboboxDeviceList.getSelectionModel().select("Infineon");
+                else comboboxDeviceList.getSelectionModel().select("TI");
             }
         });
 
