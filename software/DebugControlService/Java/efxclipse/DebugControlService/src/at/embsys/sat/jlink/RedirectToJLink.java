@@ -10,6 +10,7 @@ import at.embsys.sat.Main;
 import at.embsys.sat.RemoteGDBConnector;
 import at.embsys.sat.websocket.WebSocketConnectionHandler;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import java.net.Socket;
 public class RedirectToJLink implements Runnable {
 
     private final Circle xmc4500StateCircle;
+    private final Label jLinkPath;
     private static boolean xmc4500_connected = false;
     private static OutputStream outToServer;
     private OutputStream outToJLinkGDB;
@@ -40,10 +42,11 @@ public class RedirectToJLink implements Runnable {
         return outToJLinkGDB;
     }
 
-    public RedirectToJLink(Circle jlinkState, OnChipDebugSystemSoftwareJLink ocdssj) {
+    public RedirectToJLink(Circle jlinkState, OnChipDebugSystemSoftwareJLink ocdssj, Label jlinkPath) {
 
         xmc4500StateCircle = jlinkState;
         onChipDebugSystemSoftwareJLink = ocdssj;
+        jLinkPath = jlinkPath;
 
     }
 
@@ -94,6 +97,7 @@ public class RedirectToJLink implements Runnable {
                     public void run() {
 
                         xmc4500StateCircle.setFill(Color.GREEN);
+                        jLinkPath.setTextFill(Color.BLACK);
                     }
                 });
                 /* Notify web interface */

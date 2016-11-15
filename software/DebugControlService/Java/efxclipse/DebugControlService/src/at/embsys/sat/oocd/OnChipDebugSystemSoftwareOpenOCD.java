@@ -141,7 +141,7 @@ public class OnChipDebugSystemSoftwareOpenOCD implements Runnable {
                     if (processInput.contains("tm4c1294ncpdt.cpu: hardware has 6 breakpoints, 4 watchpoints") || processInput.contains("xmc4500.cpu: hardware has 6 breakpoints, 4 watchpoints")) {
 
                           /* Start the TCP/IP JLink connection Thread*/
-                        redirecttooocd = new RedirectToOOCD(oocdState, device, this);
+                        redirecttooocd = new RedirectToOOCD(oocdState, device, this, oocdPath);
                         redirectToOOCDThread = new Thread(redirecttooocd);
                         redirectToOOCDThread.start();
 

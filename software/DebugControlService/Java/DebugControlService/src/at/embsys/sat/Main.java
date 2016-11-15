@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -71,7 +72,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("debugcontrolservice.fxml"));
         primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("DebugControlService.png")));
         primaryStage.setTitle("Debug-Control Service");
-        primaryStage.setScene(new Scene(root, 675, 170));
+        primaryStage.setScene(new Scene(root, 550, 170));
         primaryStage.show();
 
         /* Retrieve UI components */
@@ -91,6 +92,8 @@ public class Main extends Application {
         final ComboBox comboBoxHardware = (ComboBox) primaryStage.getScene().lookup("#comboBoxPlatformList");
         final ComboBox comboBoxDeviceList = (ComboBox) primaryStage.getScene().lookup("#comboBoxDevPlatform");
         TitledPane tpAdvanced = (TitledPane) primaryStage.getScene().lookup("#titledPaneAdvanced");
+        final VBox vBoxJLink = (VBox) primaryStage.getScene().lookup("#vBoxJLink");
+        final VBox vBoxOOCD = (VBox) primaryStage.getScene().lookup("#vBoxOOCD");
 
         /* Check if advanced menu should be made visible and resize the height according to last known state*/
         tpAdvanced.expandedProperty().addListener(new ChangeListener<Boolean>() {
@@ -176,6 +179,18 @@ public class Main extends Application {
                 if (platformDetector.getProcess() != null && t != null && t1 != null && !t.equals(t1)) {
 
                     if (t1.equals("Infineon")) {
+                        /* Enable JLink GDB server VBox & disable OOCD VBox */
+                        vBoxJLink.setVisible(true);
+                        vBoxJLink.setMinHeight(Control.USE_COMPUTED_SIZE);
+                        vBoxJLink.setMinWidth(Control.USE_COMPUTED_SIZE);
+                        vBoxJLink.setPrefHeight(Control.USE_COMPUTED_SIZE);
+                        vBoxJLink.setPrefWidth(Control.USE_COMPUTED_SIZE);
+                        vBoxOOCD.setVisible(false);
+                        vBoxOOCD.setMinHeight(0);
+                        vBoxOOCD.setMinWidth(0);
+                        vBoxOOCD.setPrefHeight(0);
+                        vBoxOOCD.setPrefWidth(0);
+                        /* Set available devices & send a message to the web IDE */
                         comboBoxHardware.setItems(platformDetector.getAvailableDevices("Infineon"));
                         WebSocketConnectionHandler.ws_sendMsg("xmc4500-selection-changed");
                         if (RedirectToJLink.isXmc4500_connected())
@@ -183,6 +198,18 @@ public class Main extends Application {
                         else WebSocketConnectionHandler.ws_sendMsg("xmc4500-offline");
                     }
                     if (t1.equals("TI")) {
+                        /* Enable OpenOCD VBox & disable JLink GDB server VBox */
+                        vBoxOOCD.setVisible(true);
+                        vBoxOOCD.setMinHeight(Control.USE_COMPUTED_SIZE);
+                        vBoxOOCD.setMinWidth(Control.USE_COMPUTED_SIZE);
+                        vBoxOOCD.setPrefHeight(Control.USE_COMPUTED_SIZE);
+                        vBoxOOCD.setPrefWidth(Control.USE_COMPUTED_SIZE);
+                        vBoxJLink.setVisible(false);
+                        vBoxJLink.setMinHeight(0);
+                        vBoxJLink.setMinWidth(0);
+                        vBoxJLink.setPrefHeight(0);
+                        vBoxJLink.setPrefWidth(0);
+                        /* Set available devices & send a message to the web IDE */
                         comboBoxHardware.setItems(platformDetector.getAvailableDevices("TI"));
                         WebSocketConnectionHandler.ws_sendMsg("tm4c1294xl-selection-changed");
                         if (RedirectToOOCD.isLaunchpad_connected())

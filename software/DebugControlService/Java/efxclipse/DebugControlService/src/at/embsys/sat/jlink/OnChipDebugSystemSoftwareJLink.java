@@ -134,7 +134,7 @@ public class OnChipDebugSystemSoftwareJLink implements Runnable {
                     if (processInput.contains("Connected to target")) {
 
                         /* Start the TCP/IP JLink connection Thread*/
-                        redirecttojlink = new RedirectToJLink(jlinkState, this);
+                        redirecttojlink = new RedirectToJLink(jlinkState, this, jlinkPath);
                         redirectToJlinkThread = new Thread(redirecttojlink);
                         redirectToJlinkThread.start();
 

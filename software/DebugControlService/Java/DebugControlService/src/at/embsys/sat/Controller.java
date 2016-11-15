@@ -12,6 +12,7 @@ import at.embsys.sat.websocket.WebSocketConnectionHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -39,6 +40,8 @@ public class Controller {
     public TitledPane titledPaneAdvanced;
     public Accordion accordionAdvanced;
     public GridPane gridPaneAdvanced;
+    public VBox vBoxJLink;
+    public VBox vBoxOOCD;
 
 
     /* Clears the console history */

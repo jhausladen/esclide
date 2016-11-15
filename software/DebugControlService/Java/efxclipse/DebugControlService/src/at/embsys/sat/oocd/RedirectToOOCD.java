@@ -10,6 +10,7 @@ import at.embsys.sat.Main;
 import at.embsys.sat.RemoteGDBConnector;
 import at.embsys.sat.websocket.WebSocketConnectionHandler;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import java.net.Socket;
 public class RedirectToOOCD implements Runnable {
 
     private final Circle oocdStateCircle;
+    private final Label OpenOCDPath;
     private final String device;
     private static boolean launchpad_connected = false;
     private static OutputStream outToServer;
@@ -41,10 +43,11 @@ public class RedirectToOOCD implements Runnable {
         return outToOOCDGDB;
     }
 
-    public RedirectToOOCD(Circle oocdState, String device, OnChipDebugSystemSoftwareOpenOCD ocdss) {
+    public RedirectToOOCD(Circle oocdState, String device, OnChipDebugSystemSoftwareOpenOCD ocdss, Label oocdPath) {
         oocdStateCircle = oocdState;
         this.device = device;
         onChipDebugSystemSoftware = ocdss;
+        OpenOCDPath = oocdPath;
     }
 
     /* Sets the outputstream for the redirect thread to forward raw OpenOCD data to the server GDB (TCP) */
@@ -100,6 +103,7 @@ public class RedirectToOOCD implements Runnable {
                     public void run() {
 
                         oocdStateCircle.setFill(Color.GREEN);
+                        OpenOCDPath.setTextFill(Color.BLACK);
                     }
                 });
 
