@@ -93,7 +93,7 @@ define(function (require, exports, module) {
                 hint: "stop the debugging process",
                 bindKey: { mac: "Shift-F7", win: "Ctrl-F7" },
                 exec: function () {
-                    _self.embedded_stop();
+                    _self.embedded_stop(true);
                 }
             });
 
@@ -263,24 +263,24 @@ define(function (require, exports, module) {
 
                 /* Returns a message when GDB is running */
                 if (e.message.type == "result" && e.message.subtype == "gdb-ready") {
-                    c9console.log("<div class='item console_log' style='font-weight:bold;color:#00ff00'>" + apf.escapeXML("GDB is ready!") + "</div>");
+                    c9console.log("<div class='item console_log' style='font-weight:bold;color:#00ff00'>" + apf.escapeXML("Debugger is ready!") + "</div>");
 
                 }
                 /* Returns a message when GDB is not running */
                 if (e.message.type == "result" && e.message.subtype == "gdb-not-running") {
-                    c9console.log("<div class='item console_log' style='font-weight:bold;color:#ff0000'>" + apf.escapeXML("GDB is not running! ==> Run debug command.") + "</div>");
+                    c9console.log("<div class='item console_log' style='font-weight:bold;color:#ff0000'>" + apf.escapeXML("Debugger is not running!") + "<br />" + apf.escapeXML("Run C-Developer/Embedded Developer ==> Debug.") + "</div>");
                     _self.manageDebugcontrols(true, true, true, true, true);
                 }
 
                 /* Returns a message when the GDB exits */
                 if (e.message.type == "result" && e.message.subtype == "gdb-exited") {
-                    c9console.log("<div class='item console_log' style='font-weight:bold;color:#ff0000'>" + apf.escapeXML("GDB exited!") + "</div>");
+                    c9console.log("<div class='item console_log' style='font-weight:bold;color:#ff0000'>" + apf.escapeXML("Debugger exited!") + "</div>");
                     _self.manageDebugcontrols(true, true, true, true, true);
-                    _self.embedded_stop();
+                    _self.embedded_stop(false);
                 }
 
                 /* Firmware flashing successful */
-                if (e.message.type == "result" && e.message.subtype == "firmware-flashing-success") _self.embedded_stop();
+                if (e.message.type == "result" && e.message.subtype == "firmware-flashing-success") _self.embedded_stop(false);
 
                 /* Gets the result about the next line when stepping through the code */
                 if (e.message.type == "result" && e.message.subtype[0] == "atFileLine") {
@@ -519,12 +519,20 @@ define(function (require, exports, module) {
         },
 
         /* Stops the HW */
-        embedded_stop: function () {
+        embedded_stop: function (fromUi) {
             var data = {
                 command: "firmware",
                 "operation": "stop",
                 requireshandling: true
             };
+            if (fromUi == true) {
+                data = {
+                    command: "firmware",
+                    "operation": "stop",
+                    "fromui": fromUi,
+                    requireshandling: true
+                };
+            }
             ide.send(data);
             data = {
                 command: "firmware",

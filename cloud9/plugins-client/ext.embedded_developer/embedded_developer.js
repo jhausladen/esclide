@@ -608,8 +608,8 @@ define(function (require, exports, module) {
                      * embedded controller occured */
                     if (evt.data == "restart-required") {
 
-                        _self.errormsg.setValue("The communication from the embedded controller <==> GDB server encountered a Problem!<br> The debug service is restarted automatically.");
-                        _self.winEmbeddedDeveloper.setTitle("Error: Connection from HW <==> GDB server.");
+                        _self.errormsg.setValue("The communication between the embedded controller <==> GDB server encountered a Problem!<br> The debug service is restarted automatically.");
+                        _self.winEmbeddedDeveloper.setTitle("Error: Connection between HW <==> GDB server.");
                         _self.winEmbeddedDeveloper.show();
                     }
 
@@ -777,7 +777,7 @@ define(function (require, exports, module) {
                 /* Function that declares the onClick behaviour */
                 exec: function () {
                     if (flashItem.disabled == false) {
-                        require("ext/embedded_debugger/embedded_debugger").embedded_stop();
+                        require("ext/embedded_debugger/embedded_debugger").embedded_stop(false);
                         setTimeout(function () { compile(false, true, false, false, false) }, 2000);
                     }
                 }
@@ -824,7 +824,7 @@ define(function (require, exports, module) {
                 /* Function that declares the onClick behaviour */
                 exec: function () {
                     if (debugItem.disabled == false) {
-                        require("ext/embedded_debugger/embedded_debugger").embedded_stop();
+                        require("ext/embedded_debugger/embedded_debugger").embedded_stop(false);
 
                         if (startDebuggerOOCD == false && startDebuggerJLink == false && startStdDebugger == false) {
                             setTimeout(function () {
@@ -851,7 +851,7 @@ define(function (require, exports, module) {
                 /* Function that declares the onClick behaviour */
                 exec: function () {
 
-                    require("ext/embedded_debugger/embedded_debugger").embedded_stop();
+                    require("ext/embedded_debugger/embedded_debugger").embedded_stop(false);
 
                     if (startDebuggerOOCD == false && startDebuggerJLink == false && startStdDebugger == false) {
                         setTimeout(function () {
@@ -1257,7 +1257,7 @@ define(function (require, exports, module) {
                         flashItem.disable();
                         debugItem.disable();
                     }
-                    //require("ext/embedded_debugger/embedded_debugger").embedded_stop();
+                    //require("ext/embedded_debugger/embedded_debugger").embedded_stop(false);
                     /* Load debug configuration */
                     platform = "TM4C1294XL";
                     var data = {
@@ -1280,7 +1280,7 @@ define(function (require, exports, module) {
                         flashItem.disable();
                         debugItem.disable();
                     }
-                    //require("ext/embedded_debugger/embedded_debugger").embedded_stop();
+                    //require("ext/embedded_debugger/embedded_debugger").embedded_stop(false);
                     /* Load debug configuration */
                     platform = "XMC4500";
                     var data = {

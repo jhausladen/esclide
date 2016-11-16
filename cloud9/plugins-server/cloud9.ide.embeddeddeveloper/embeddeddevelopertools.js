@@ -529,7 +529,7 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
         }
         /* Debug stop */
         if (message.operation == "stop") {
-            if (gdbProcess == null) _self.sendResult(0, "gdb-not-running");
+            if (gdbProcess == null && message.fromui) _self.sendResult(0, "gdb-not-running");
             if (gdbProcess != null) {
                 gdbProcess.stdin.write("monitor reset\n");
 
@@ -1231,8 +1231,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
                 //else spawn = require('child_process').spawn,
                 //gdb = spawn('arm-none-eabi-gdb',[pathtobin, 'target remote :'+TCP_GDB_EMULATION_PORT, 'monitor halt', 'load', 'break main']);
                 else {
-                spawn = require('child_process').spawn,
-                    gdb = spawn('arm-none-eabi-gdb', [pathtobin]);
+                    spawn = require('child_process').spawn,
+                        gdb = spawn('arm-none-eabi-gdb', [pathtobin]);
 
                     /* Connect GDB to OOCD */
                     gdb.stdin.write("target remote :" + TCP_GDB_EMULATION_PORT + "\n");
