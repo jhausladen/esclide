@@ -4,9 +4,26 @@ var router = require("urlrouter");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var query = require("./middleware/query");
+var https = require("https");
+var fs = require("fs");
 
 module.exports = function startup(options, imports, register) {
     imports.log.info("connect plugin start");
+
+    /* Read config file which holds UID & GID of the process running cloud9 */
+    var id = fs.readFileSync('/cloud9/id.conf').toString().split(":",2);
+    var uid = id[0];
+    var gid = id[1];
+
+    /* Create https options holding the certificates */
+    var httpsoptions = {
+        key:    fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/privkey.pem'),
+        cert:   fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/fullchain.pem'),
+    };
+
+    /* Drop root privileges as we don't need them anymore */
+    process.setgid(uid);
+    process.setuid(gid);
 
     var server = connect();
 
@@ -77,7 +94,7 @@ module.exports = function startup(options, imports, register) {
             return host;
         };
 
-        var getListen = server.listen(port, host, function(err) {
+        var getListen = https.createServer(httpsoptions,server).listen(port, host, function(err) {
             if (err)
                 return register(err);
 

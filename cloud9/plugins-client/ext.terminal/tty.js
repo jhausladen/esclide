@@ -53,8 +53,9 @@ tty.open = function() {
     var parts = document.location.pathname.split('/')
       , base = parts.slice(0, parts.length - 1).join('/') + '/'
       , resource = base.substring(1) + 'engine.io';
-
-    var server = "ws://" + window.location.href.split("\/")[2];
+    
+    /* Use secure websocket connection */
+    var server = "wss://" + window.location.href.split("\/")[2];
     tty.socket = new ENGINE_IO.Socket(server, { resource: resource });
   } else {
     tty.socket = new ENGINE_IO.Socket();

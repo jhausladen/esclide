@@ -60,6 +60,7 @@ COPY cloud9 /cloud9
 COPY Binaries /Binaries
 COPY configs/debugport.conf /cloud9/debugport.conf
 COPY configs/wsport.conf /cloud9/wsport.conf
+COPY configs/id.conf /cloud9/id.conf
 COPY configs/httpdownload.conf /cloud9/httpdownload.conf
 COPY configs/noob.conf /cloud9/noob.conf
 COPY cloud9workspace /cloud9workspace
@@ -76,6 +77,12 @@ RUN chown -R cloud:cloud /cloud9
 RUN su - cloud -c "cd /cloud9; npm install"
 # Tempfix for qs module dependency errors
 # RUN cd cloud9/node_modules/connect; sed -i 's/\"qs\": \">= 0.4.0\"/\"qs\": \"5.2.0\"/' package.json; npm install
+
+# ------------------------------------------------------------------------------
+# Restrict permissions on whole cloud9 folder but transfer ownership of the
+# .session folder to the restricted user running cloud9
+RUN chown -R root:root /cloud9
+RUN chown -R cloud:cloud /cloud9/.sessions
 
 # ------------------------------------------------------------------------------
 # Bundle tools

@@ -174,6 +174,11 @@ def main(argv):
        if port == '' or name == '' or workstationname == '' or username == '' or password == '':
           print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -t <HTTP-Download Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
           sys.exit()
+       
+       # Check if letsencrypt folder exists
+       if not os.path.isdir('/etc/letsencrypt'):
+          print 'The folder /etc/letsencrypt does not exist! Please create valid Let’s Encrypt certificates first https://certbot.eff.org/'
+          sys.exit()
 
        # Set default values for unspecified options
        if sn == '':
@@ -340,6 +345,7 @@ def main(argv):
        tmpCfg = tmpCfg.replace("RUN adduser --disabled-password --gecos '' cloud","RUN adduser --disabled-password --gecos '' "+name);
        tmpCfg = tmpCfg.replace("RUN chown -R cloud:cloud "+name,"RUN chown -R "+name+":"+name+" /"+name);
        tmpCfg = tmpCfg.replace("RUN chown -R cloud:cloud /cloud9","RUN chown -R "+name+":"+name+" /cloud9");
+       tmpCfg = tmpCfg.replace("RUN chown -R cloud:cloud /cloud9/.sessions","RUN chown -R "+name+":"+name+" /cloud9/.sessions");
        tmpCfg = tmpCfg.replace("RUN su - cloud -c \"cd /cloud9; npm install\"","RUN su - "+name+" -c \"cd /cloud9; npm install\"");
        
        # Create Dockerfile
@@ -396,6 +402,15 @@ def main(argv):
        fo.write(wsport);
        # Close open file
        fo.close()
+
+       # Open/Create/Update the UID/GID configuration file
+       try:
+        fo = open("configs/id.conf", "wb")
+       except IOError:
+           print "The file does not exist!"
+       fo.write(name+":"+name);
+       # Close open file
+       fo.close()
        
        # Open/Create/Update the supervisor configuration file for cloud9
        try:
@@ -403,7 +418,7 @@ def main(argv):
        except IOError:
            print "The file does not exist!"
        fo.write("[program:cloud9]\n"+ "command = /cloud9/bin/cloud9.sh -l 0.0.0.0 -p "+ port +" --username "+ username +" --password "+ password +" -w /"+name+"\n"+
-                 "directory = /cloud9\n"+ "user = "+name+"\n" + "autostart = true\n" + "autorestart = true\n"+ 
+                 "directory = /cloud9\n"+ "user = root\n" + "autostart = true\n" + "autorestart = true\n"+ 
                  "stdout_logfile = /var/log/supervisor/cloud9.log\n"+ "stderr_logfile = /var/log/supervisor/cloud9_errors.log\n"+
                  "environment = NODE_ENV=\"production\", HOME=\"/home/"+name+"\"");
        # Close open file
@@ -441,10 +456,10 @@ def main(argv):
        
        # Run docker 'run' command specifying forwarded ports, machine name and workinggroup
        if sn == 'universal':
-        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+debugport+":"+debugport+" -p "+httpdownloadport+":"+httpdownloadport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -d "+workstationname+"/ubuntu-cloud9-"+name
+        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+debugport+":"+debugport+" -p "+httpdownloadport+":"+httpdownloadport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -v /etc/letsencrypt:/etc/letsencrypt:ro -d "+workstationname+"/ubuntu-cloud9-"+name
         pDockerRun = subprocess.Popen(runcmd.split(), stdout=subprocess.PIPE)
        else: 
-        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+httpdownloadport+":"+httpdownloadport+" -p "+wsport+":"+wsport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -d "+workstationname+"/ubuntu-cloud9-"+name
+        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+httpdownloadport+":"+httpdownloadport+" -p "+wsport+":"+wsport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -v /etc/letsencrypt:/etc/letsencrypt:ro -d "+workstationname+"/ubuntu-cloud9-"+name
         pDockerRun = subprocess.Popen(runcmd.split(), stdout=subprocess.PIPE)
        # Grab stdout line by line as it becomes available.  This will loop until 
        # p terminates.

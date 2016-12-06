@@ -18,6 +18,15 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 
   * Server setup (Tested on Debian-based systems: Debian 8, Ubuntu 14.04 LTS, Ubuntu 16.04 LTS)
   * Debug-Control Service (Independent)
+  * Valid [Let’s Encrypt](https://letsencrypt.org/) certificates at `/etc/letsencrypt` to be mounted by each docker container with, e.g., [certbot](https://certbot.eff.org/)
+    
+        sudo apt-get install certbot [-t jessie-backports]
+        certbot certonly --standalone -d example.com
+
+  * Regularly update the certificates with a Cron job issued by root:
+
+        sudo crontab -e
+        0 0 */31 * * /usr/bin/certbot renew --post-hook "docker restart $(docker ps -a -q)" > /var/log/certbot/certbot.log 2>&1 
 
 ### Build Tools ([Debug-Control Service](software/README.md)):
 
