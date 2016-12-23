@@ -52,7 +52,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 ### Additional components for Docker setup:
 
   * docker
-  * python
+  * python, python-pip & wget module (pip install wget)
   * usbutils (Linux)
 
 ### Supported development platforms:

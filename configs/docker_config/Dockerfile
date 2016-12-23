@@ -10,7 +10,7 @@ MAINTAINER Juergen Hausladen <juergen.hausladen@technikum-wien.at>
 
 # ------------------------------------------------------------------------------
 # Set PATH environment variable for the GCC toolchain
-#ENV PATH /GNU_ARM_Compiler/gcc-arm-none-eabi-4_8-2014q3/bin:$PATH
+ENV PATH /gcc_arm_embedded/bin:$PATH
 ENV TERM xterm
 ENV CONTAINER docker
 ENV TZ=Europe/Vienna
@@ -41,21 +41,24 @@ RUN apt-get update && apt-get install -y \
     python \
     libxslt1.1 \
     sudo
-RUN add-apt-repository ppa:team-gcc-arm-embedded/ppa
-RUN apt-get update && apt-get install -y gcc-arm-embedded
+# Previously ARM GCC was distributed through a PPA
+#RUN add-apt-repository ppa:team-gcc-arm-embedded/ppa
+#RUN apt-get update && apt-get install -y gcc-arm-embedded
+
 # gcc-arm-none-eabi
 #RUN apt-get -o Dpkg::Options::="--force-overwrite" install gdb-arm-none-eabi
-RUN mkdir -p /var/log/supervisor /cloud9 /cloud9workspace /OCDS_Software /Binaries /analysis_tools /usr/share/desktop-directories /cloud9/.sessions
+RUN mkdir -p /var/log/supervisor /cloud9 /cloud9workspace /OCDS_Software /Binaries /analysis_tools /usr/share/desktop-directories /cloud9/.sessions /gcc_arm_embedded
 
 # ------------------------------------------------------------------------------
 # Install Node.js and npm
-RUN     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN     apt-get install -y nodejs
 RUN     npm install -g n
 RUN     n v4.5.0
 
 # ------------------------------------------------------------------------------
 # Bundle app source
+COPY compiler/gcc_arm_embedded /gcc_arm_embedded
 COPY cloud9 /cloud9
 COPY Binaries /Binaries
 COPY configs/debugport.conf /cloud9/debugport.conf
@@ -69,6 +72,7 @@ COPY cloud9workspace/.settings /cloud9workspace/.settings
 # ------------------------------------------------------------------------------
 # Add restricted user
 RUN adduser --disabled-password --gecos '' cloud
+RUN chmod -R 755 /gcc_arm_embedded
 RUN chown -R cloud:cloud /cloud9workspace
 RUN chown -R cloud:cloud /cloud9
 

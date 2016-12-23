@@ -13,7 +13,7 @@ License:   AGPL <http://www.gnu.org/licenses/agpl.txt>
 """
 
 # Imports
-import sys, getopt, os, subprocess, shutil, glob, re
+import sys, getopt, os, subprocess, shutil, glob, re, wget, tarfile
 
 # Main module
 def main(argv):
@@ -75,6 +75,7 @@ def main(argv):
        projectpath = ''
        noob = False
        target = ''
+       compilerfolder = ''
          
        # Loop through parameters and check their validity
        for opt, arg in instance:
@@ -233,6 +234,28 @@ def main(argv):
           print 'NOOB Mode ON'
        else:
           print 'NOOB Mode OFF'
+       
+       # Download ARM GCC (GCC ARM Embedded) as its not distributed through the PPA anymore
+       # Clean up compiler folder
+       if os.path.isdir('compiler'):
+        print 'Clean up compiler directory!'
+        shutil.rmtree('compiler')
+
+       # Check if compiler folder exists & create it
+       if not os.path.isdir('compiler'):
+        print 'Create folder for compiler!'
+        os.makedirs("compiler")
+
+       # Download compiler from ARM website 
+       print 'Download compiler...'
+       url = 'https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2?product=GNU%20ARM%20Embedded%20Toolchain,64-bit,,Linux,6-2016-q4-major'
+       filename = wget.download(url,"compiler/")
+
+       # Untar archive
+       tar = tarfile.open(filename, "r:bz2")
+       compilerfolder = "compiler/"+os.path.commonprefix(tar.getnames())  
+       tar.extractall("compiler/")
+       tar.close()
 
        # Add OpenJFX Monocle to JDK
        path = os.environ.get('JAVA_HOME')
@@ -347,6 +370,7 @@ def main(argv):
        tmpCfg = tmpCfg.replace("RUN chown -R cloud:cloud /cloud9","RUN chown -R "+name+":"+name+" /cloud9");
        tmpCfg = tmpCfg.replace("RUN chown -R cloud:cloud /cloud9/.sessions","RUN chown -R "+name+":"+name+" /cloud9/.sessions");
        tmpCfg = tmpCfg.replace("RUN su - cloud -c \"cd /cloud9; npm install\"","RUN su - "+name+" -c \"cd /cloud9; npm install\"");
+       tmpCfg = tmpCfg.replace("COPY compiler/gcc_arm_embedded /gcc_arm_embedded","COPY "+compilerfolder+" /gcc_arm_embedded");
        
        # Create Dockerfile
        try:
