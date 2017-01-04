@@ -31,6 +31,7 @@
         "engine.io": "~1.6.9",
         "engine.io-client": "~1.6.9",
         "dryice": "0.4.11",
+        "httpolyglot": "0.1.2",
 
         "amd-loader": "~0.0.5",
         "http-error": "~0.0.6",

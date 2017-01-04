@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var query = require("./middleware/query");
 var https = require("https");
 var fs = require("fs");
+var httpolyglot = require('httpolyglot');
 
 module.exports = function startup(options, imports, register) {
     imports.log.info("connect plugin start");
@@ -26,6 +27,17 @@ module.exports = function startup(options, imports, register) {
     process.setuid(gid);
 
     var server = connect();
+    /* Check that all requests are secure https connections */
+    server.use(function(req, res, next){
+        if (!req.socket.encrypted) {
+            /* Modify header to redirect to https version and end request */
+            res.writeHead(301, { 'Location': 'https://'+req.headers.host});
+            return res.end();
+        }
+        /* Process next request */
+        next();
+    });
+
 
     var hookNames = [
         "Start",
@@ -94,7 +106,7 @@ module.exports = function startup(options, imports, register) {
             return host;
         };
 
-        var getListen = https.createServer(httpsoptions,server).listen(port, host, function(err) {
+        var getListen = httpolyglot.createServer(httpsoptions,server).listen(port, host, function(err) {
             if (err)
                 return register(err);
 
