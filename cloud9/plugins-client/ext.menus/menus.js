@@ -105,8 +105,6 @@ module.exports = ext.register("ext/menus/menus", {
             }
         });
 
-        this.addItemByPath("File/~", new apf.divider(), 1000000);
-
         this.addItemByPath("View/~", new apf.divider(), 9999);
 
         apf.button.prototype.$propHandlers["hotkey"] = function(value){
