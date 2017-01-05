@@ -106,11 +106,6 @@ module.exports = ext.register("ext/menus/menus", {
         });
 
         this.addItemByPath("File/~", new apf.divider(), 1000000);
-        this.addItemByPath("File/Exit SAT Cloud IDE", new apf.item({
-            onclick : function(){
-                location.href = "http://";
-            }
-        }), 2000000);
 
         this.addItemByPath("View/~", new apf.divider(), 9999);
 
