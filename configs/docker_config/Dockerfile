@@ -64,7 +64,6 @@ COPY Binaries /Binaries
 COPY configs/debugport.conf /cloud9/debugport.conf
 COPY configs/wsport.conf /cloud9/wsport.conf
 COPY configs/id.conf /cloud9/id.conf
-COPY configs/httpdownload.conf /cloud9/httpdownload.conf
 COPY configs/noob.conf /cloud9/noob.conf
 COPY cloud9workspace /cloud9workspace
 COPY cloud9workspace/.settings /cloud9workspace/.settings

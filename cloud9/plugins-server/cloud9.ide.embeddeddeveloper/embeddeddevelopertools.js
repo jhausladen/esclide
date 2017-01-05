@@ -10,11 +10,8 @@
 
 var Plugin = require("../cloud9.core/plugin");
 var util = require("util");
-var http = require("http");
-var https = require("https");
 var fs = require("fs");
 var path = require("path");
-var mime = require('mime');
 var net = require('net');
 
 var workspacepath;
@@ -22,7 +19,6 @@ var TCP_HOST_LOCAL = "127.0.0.1";
 var TCP_PORT = 4445;
 var NOOB_CONF = 0;
 var TCP_GDB_EMULATION_PORT = 5556;
-var HTTP_SERVER_PORT = 3000;
 var WEBSOCKET_SERVER_PORT = 8080;
 var TCP_PORT_OOCD = 4444;
 var TCP_PORT_GDB = 3333;
@@ -43,11 +39,6 @@ var exitDebugger;
 var cmdLineStdCParams;
 var amd64param;
 var lockGDB = 0;
-/* Reads the certificates for the https server */
-/*var options = {
-  key: fs.readFileSync('/home/juergen/Cloud9/certs/key.pem'),
-  cert: fs.readFileSync('/home/juergen/Cloud9/certs/cert.pem')
-};*/
 
 /* Get the time and date for log outputs */
 function getDateTime() {
@@ -111,24 +102,6 @@ else {
     }
 }
 
-/* Reads the http port config for the connection between the target-side
- * and server */
-if (process.env.CONTAINER == "docker") {
-    try {
-        HTTP_SERVER_PORT = fs.readFileSync("/cloud9/httpdownload.conf", 'utf8');
-    }
-    catch (err) {
-        console.log("ERROR(" + getDateTime() + "): " + err);
-    }
-}
-else {
-    try {
-        HTTP_SERVER_PORT = fs.readFileSync(__dirname + "/../../../configs/httpdownload.conf", 'utf8');
-    }
-    catch (err) {
-        console.log("ERROR(" + getDateTime() + "): " + err);
-    }
-}
 /* Reads the Websocket port config for the connection between the target-side
  * and browser */
 if (process.env.CONTAINER == "docker") {
@@ -147,73 +120,6 @@ else {
         console.log("ERROR(" + getDateTime() + "): " + err);
     }
 }
-/* Open the https server, for http (https==>http,rm options) client plugin https ==> http */
-http.createServer(function (req, res) {
-
-    /* If the URL includes the download string, look for the file and pipe it back */
-    if (req.url.indexOf("/download?") > -1) {
-        var binary = req.url.replace("/download?", '');
-
-        /* Get the path to the main workspace folder */
-        var pathtobinary = workspacepath + "/"; //+"/bin/" for standard C, remove "/"
-
-        /* Set path to the bin file*/
-        var file = pathtobinary + binary + "/bin/firmware.elf";
-
-        var filename = path.basename(file);
-        /* Get mimetype of file */
-        var mimetype = mime.lookup(file);
-        /* Set response headers */
-        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-        res.setHeader('Content-type', mimetype);
-        /* Create filestream of file and pipe back to client */
-        var filestream = fs.createReadStream(file);
-        /* This will wait until we know the readable stream is actually valid before piping */
-        filestream.on('open', function () {
-            /* This just pipes the read stream to the response object (which goes to the client) */
-            filestream.pipe(res);
-        });
-        /* This catches any errors that happen while creating the readable stream (usually invalid names) */
-        filestream.on('error', function (err) {
-            console.log(getDateTime() + ': Firmware download error: ' + err);
-        });
-    }
-    /* If the URL includes the export string, look for the file and pipe it back */
-    else if (req.url.indexOf("/export?") > -1) {
-        var file = req.url.replace("/export?/workspace/", '');
-
-        /* Get the path to the main workspace folder */
-        var pathtoworkspace = workspacepath + "/"; //+"/bin/" for standard C, remove "/"
-
-        /* Get the full path to the file */
-        file = pathtoworkspace + file;
-
-        var filename = path.basename(file);
-        /* Get mimetype of file */
-        var mimetype = mime.lookup(file);
-        /* Set response headers */
-        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-        res.setHeader('Content-type', mimetype);
-        /* Create filestream of file and pipe back to client */
-        var filestream = fs.createReadStream(file);
-        /* This will wait until we know the readable stream is actually valid before piping */
-        filestream.on('open', function () {
-            /* This just pipes the read stream to the response object (which goes to the client) */
-            filestream.pipe(res);
-        });
-        /* This catches any errors that happen while creating the readable stream (usually invalid names) */
-        filestream.on('error', function (err) {
-            console.log(getDateTime() + ': File download error: ' + err);
-        });
-    }
-    /* If there was a false request output an access denied message */
-    else {
-        console.log(getDateTime() + ': Access denied error (Download): ' + req.url);
-        res.writeHead(403, { 'Content-Type': 'text/html' });
-        res.end('<b><big>HTTP Status 403 Forbidden - Access denied</big></b><br>You do not have permissions to access this page!');
-    }
-}).listen(HTTP_SERVER_PORT);
-
 
 /* Start the GDB emulation TCP Server
  * This server is waiting for a connection of the GDB
@@ -398,13 +304,6 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             _self.sendResult(0, noobconf);
         }
 
-        /* Get the port number for the HTTP service */
-        if (message.publichttpport == true) {
-            var httpportconf = new Array();
-            httpportconf[0] = "httpportconf";
-            httpportconf[1] = HTTP_SERVER_PORT;
-            _self.sendResult(0, httpportconf);
-        }
         /* Get the port number for the Websocket service */
         if (message.publicwsport == true) {
             var wsportconf = new Array();

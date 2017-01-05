@@ -68,7 +68,7 @@ Clone the repository recursively:
 
 The automatic install-script will use Docker for creating independent containers (recommended). Simply run:
 
-    python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -t <HTTP-Download Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]
+    python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]
 
 The following options are given:
 
@@ -79,7 +79,6 @@ The following options are given:
     -s/--serial               Serial number of hardware connected to container
     -p/--port                 Cloud IDE port (default: 3131/[configs/supervisor_config/cloud9.conf])
     -d/--debugport            Debug Port for GDB data (default: 4445/[configs/debugport.conf])
-    -t/--httpdownloadport     Port for firmware download (default: 3000/[configs/httpdownload.conf])
     -c/--config               Configuration file to autonomously set up several cloud IDE instances (configs/cloudsetup_config/)
     -e/--websocket            WebSocket port for the client-side connection to the target-side (default: 8080/[configs/wsport.conf])
     -m/--target               Target platform (XMC4500/TM4C1294XL)
@@ -99,11 +98,11 @@ One can easily setup the cloud IDE with the help of configuration files:
 
 In case of a HaaS setup the development platform is connected to the server and the debug-control service will be ran directly within the docker container beside the cloud IDE. The following command sets up a HaaS setup for the XMC4500:
 
-    python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -t <HTTP-Download Port> -e <Websocket Port> -s <Serial> -j ON -m XMC4500
+    python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -e <Websocket Port> -s <Serial> -j ON -m XMC4500
 
 If the debug-control service is supposed to run on any suitable computational device with a connected development board, a simple setup would look like this:
 
-    python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -d <Debug Port> -t <HTTP-Download Port>
+    python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -d <Debug Port>
 
 This setup also requires the corresponding OCDS software to be installed on the host running the Debug-Control Service and a suitable development-platform attached.
 

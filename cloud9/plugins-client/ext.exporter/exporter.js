@@ -21,8 +21,6 @@ define(function (require, exports, module) {
     var fs = require("ext/filesystem/filesystem");
     var markup = require("text!ext/exporter/exporter.xml");
 
-    var httpPort = 3000;
-
     /* Begin declaring module */
     module.exports = ext.register("ext/exporter/exporter", {
         name: "Exporter",
@@ -48,11 +46,6 @@ define(function (require, exports, module) {
             /* EventListener for IDE messages */
             ide.addEventListener("socketMessage", function (e) {
 
-                /* Gets the result about the HTTP download Port */
-                if (e.message.type == "result" && e.message.subtype[0] == "httpportconf") {
-                    httpPort = e.message.subtype[1];
-                }
-
                 /* Checks when the archiving process has finished */
                 if (e.message.type == "result" && e.message.subtype[0] == "archivepath") {
                     if (e.message.subtype[1] == null) {
@@ -63,7 +56,7 @@ define(function (require, exports, module) {
 
                     else {
                         /* Download file! */
-                        var popUp = window.open("http://" + window.location.hostname + ":" + httpPort + "/export?" + e.message.subtype[1], '_blank');
+                        var popUp = window.open(window.location.href + "/export?" + e.message.subtype[1], '_blank');
                         window.setTimeout(function () {
                             popUp.close();
                         }, 1000);
@@ -90,7 +83,7 @@ define(function (require, exports, module) {
                             var suffix = archivePath.match(/\..*/, '')
                             if (suffix != null) {
                                 /* Download file! */
-                                var popUp = window.open("http://" + window.location.hostname + ":" + httpPort + "/export?" + archivePath, '_blank');
+                                var popUp = window.open(window.location.href + "/export?" + archivePath, '_blank');
                                 window.setTimeout(function () {
                                     popUp.close();
                                 }, 1000);

@@ -22,9 +22,9 @@ def main(argv):
 
    # Check for commandline parameters 
    try:
-      opts, args = getopt.getopt(argv,"hn:w:u:k:p:t:c:d:e:m:s:r:j:o:b",["help","name=","workstationname=","user=","password=","port=","httpdownloadport=","config=","debugport=","websocket=","target=","serial=","projects=","jlinkport=","oocdport=","noob"])
+      opts, args = getopt.getopt(argv,"hn:w:u:k:p:c:d:e:m:s:r:j:o:b",["help","name=","workstationname=","user=","password=","port=","config=","debugport=","websocket=","target=","serial=","projects=","jlinkport=","oocdport=","noob"])
    except getopt.GetoptError:
-      print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -t <HTTP-Download Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
+      print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
       sys.exit(2)
    instances = []
    instances.append(opts)
@@ -60,7 +60,6 @@ def main(argv):
        # Initialize build properties
        port = ''
        debugport = ''
-       httpdownloadport = ''
        name = ''
        workstationname = ''
        username =''
@@ -80,7 +79,7 @@ def main(argv):
        # Loop through parameters and check their validity
        for opt, arg in instance:
           if opt in ("-h", "--help"):
-             print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -t <HTTP-Download Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
+             print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
              sys.exit()
           elif opt in ("-p", "--port"):
              port = arg
@@ -120,26 +119,6 @@ def main(argv):
                if oocdport == port or oocdport == debugport or oocdport == wsport or oocdport == jlinkport:
                 print 'OOCD Port has to be different from IDE Port, Debug Port, Websocket Port and JLink Port'
                 sys.exit()
-          elif opt in ("-t", "--httpdownloadport"):
-             httpdownloadport = arg
-             if httpdownloadport.isdigit() == False or int(httpdownloadport) > 65535 or int(httpdownloadport) < 1:
-              print 'Port (-t) has to be a number in range of 1-65535'
-              sys.exit()
-             if httpdownloadport == port: 
-              print 'IDE Port and HTTP-Download Port have to be different'
-              sys.exit()
-             if httpdownloadport == debugport:
-              print 'Debug Port and HTTP-Download Port have to be different'
-              sys.exit()
-             if httpdownloadport == wsport:
-              print 'Websocket Port and HTTP-Download Port have to be different'
-              sys.exit()
-             if httpdownloadport == jlinkport:
-              print 'Websocket Port and JLink Port have to be different'
-              sys.exit()
-             if httpdownloadport == oocdport:
-              print 'Websocket Port and OOCD Port have to be different'
-              sys.exit()
           elif opt in ("-n", "--name"):
              name = arg
              if not re.match("^[a-zA-Z0-9_]*$", name):
@@ -173,7 +152,7 @@ def main(argv):
        
        # Check if every parameter is given, otherwise exit
        if port == '' or name == '' or workstationname == '' or username == '' or password == '':
-          print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -t <HTTP-Download Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
+          print 'python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> [Optional: -c <Setup Configuration> -d <Debug Port> -e <Websocket Port> -m <Target> -s <Serial> -r <Projects> -j <ON/JLink Port> -o <ON/OOCD Port> -b <Enable NOOB Mode>]'
           sys.exit()
        
        # Check if letsencrypt folder exists
@@ -222,7 +201,6 @@ def main(argv):
        print 'Username:', username
        print 'Password:', passwordlen
        print 'Port:', port
-       print 'HTTPport:', httpdownloadport
        print 'Debugport:', debugport
        print 'Websocketport:', wsport
        print 'JLinkport:', jlinkport
@@ -408,15 +386,6 @@ def main(argv):
        fo.write(debugport);
        # Close open file
        fo.close()
-       
-       # Open/Create/Update the HTTP/Port configuration file
-       try:
-        fo = open("configs/httpdownload.conf", "wb")
-       except IOError:
-           print "The file does not exist!"
-       fo.write(httpdownloadport);
-       # Close open file
-       fo.close()
 
        # Open/Create/Update the Websocket/Port configuration file
        try:
@@ -480,10 +449,10 @@ def main(argv):
        
        # Run docker 'run' command specifying forwarded ports, machine name and workinggroup
        if sn == 'universal':
-        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+debugport+":"+debugport+" -p "+httpdownloadport+":"+httpdownloadport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -v /etc/letsencrypt:/etc/letsencrypt:ro -d "+workstationname+"/ubuntu-cloud9-"+name
+        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+debugport+":"+debugport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -v /etc/letsencrypt:/etc/letsencrypt:ro -d "+workstationname+"/ubuntu-cloud9-"+name
         pDockerRun = subprocess.Popen(runcmd.split(), stdout=subprocess.PIPE)
        else: 
-        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+httpdownloadport+":"+httpdownloadport+" -p "+wsport+":"+wsport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -v /etc/letsencrypt:/etc/letsencrypt:ro -d "+workstationname+"/ubuntu-cloud9-"+name
+        runcmd = "docker run --name "+name+" --restart=always -p "+port+":"+port+" -p "+wsport+":"+wsport+" --privileged --cap-drop=ALL -v /dev/bus/usb:/dev/bus/usb -v /etc/letsencrypt:/etc/letsencrypt:ro -d "+workstationname+"/ubuntu-cloud9-"+name
         pDockerRun = subprocess.Popen(runcmd.split(), stdout=subprocess.PIPE)
        # Grab stdout line by line as it becomes available.  This will loop until 
        # p terminates.

@@ -7,9 +7,20 @@ var query = require("./middleware/query");
 var https = require("https");
 var fs = require("fs");
 var httpolyglot = require('httpolyglot');
+var path = require("path");
+var mime = require('mime');
 
 module.exports = function startup(options, imports, register) {
     imports.log.info("connect plugin start");
+
+    /* Retrieve location of cloud9 workspace */
+    var cloud9workspace;
+    process.argv.forEach(function (val, index, array) {
+        console.log(index + ': ' + val);
+        if(val == '-w'){
+            cloud9workspace = array[index+1];
+        }
+    });
 
     /* Read config file which holds UID & GID of the process running cloud9 */
     var id = fs.readFileSync('/cloud9/id.conf').toString().split(":",2);
@@ -33,6 +44,34 @@ module.exports = function startup(options, imports, register) {
             /* Modify header to redirect to https version and end request */
             res.writeHead(301, { 'Location': 'https://'+req.headers.host});
             return res.end();
+        }
+        /* If the URL includes the export/download string, look for the file and pipe it back */
+        if (req.url.indexOf("/export?") > -1) {
+            var file = req.url.replace("/export?/workspace/", '');
+
+            /* Get the path to the main workspace folder */
+            var pathtoworkspace = cloud9workspace + "/"; //+"/bin/" for standard C, remove "/"
+
+            /* Get the full path to the file */
+            file = pathtoworkspace + file;
+
+            var filename = path.basename(file);
+            /* Get mimetype of file */
+            var mimetype = mime.lookup(file);
+            /* Set response headers */
+            res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+            res.setHeader('Content-type', mimetype);
+            /* Create filestream and pipe to client */
+            var filestream = fs.createReadStream(file);
+            /* Wait until we know the readable stream is actually valid before piping */
+            filestream.on('open', function () {
+                /* Pipes the read stream to the response object (which goes to the client) */
+                filestream.pipe(res);
+            });
+            /* Catch any errors that happen while creating the readable stream (usually invalid names) */
+            filestream.on('error', function (err) {
+                console.log(getDateTime() + ': File download error: ' + err);
+            });
         }
         /* Process next request */
         next();

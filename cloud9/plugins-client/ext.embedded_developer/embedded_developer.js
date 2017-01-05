@@ -41,7 +41,6 @@ define(function (require, exports, module) {
     var objectFileNameWithSuffix;
     var sourceFolderPath;
     var debugPort;
-    var httpPort = 3000;
     var startDebuggerJLink = false;
     var startDebuggerOOCD = false;
     var startStdDebugger = false;
@@ -88,14 +87,6 @@ define(function (require, exports, module) {
             var data = {
                 command: "firmware",
                 "publicdebugport": true,
-                requireshandling: true
-            };
-            ide.send(data);
-
-            /* Send request for restoring http port */
-            data = {
-                command: "firmware",
-                "publichttpport": true,
                 requireshandling: true
             };
             ide.send(data);
@@ -152,10 +143,6 @@ define(function (require, exports, module) {
                     //debugPort = e.message.subtype[1]2.toString().trim();
                     if (e.message.subtype[1] == 1) setNoobConf(true);
                     else setNoobConf(false);
-                }
-                /* Gets the result about the HTTP download Port */
-                if (e.message.type == "result" && e.message.subtype[0] == "httpportconf") {
-                    httpPort = e.message.subtype[1];
                 }
                 /* Gets the result about the Websocket Port */
                 if (e.message.type == "result" && e.message.subtype[0] == "wsportconf") {
@@ -291,7 +278,7 @@ define(function (require, exports, module) {
                             fs.exists((ide.davPrefix + "/" + pathtomake + "bin/firmware.elf").replace(/\/+/, "/"), function (exists) {
                                 if (exists) {
                                     /* Download file! */
-                                    var popUp = window.open("http://" + window.location.hostname + ":" + httpPort + "/download?" + pathtomake, '_blank');
+                                    var popUp = window.open(window.location.href + "export?/workspace/" + pathtomake + "bin/firmware.elf", '_blank');
                                     window.setTimeout(function () {
                                         popUp.close();
                                     }, 1000);
