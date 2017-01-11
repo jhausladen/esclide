@@ -18,7 +18,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 
   * Server setup (Tested on Debian-based systems: Debian 8, Ubuntu 14.04 LTS, Ubuntu 16.04 LTS)
   * Debug-Control Service (Independent)
-  * Valid [Let’s Encrypt](https://letsencrypt.org/) certificates at `/etc/letsencrypt` to be mounted by each docker container with, e.g., [certbot](https://certbot.eff.org/)
+  * Valid [Let’s Encrypt](https://letsencrypt.org/) certificates at `/etc/letsencrypt/` to be mounted by each docker container with, e.g., [certbot](https://certbot.eff.org/)
     
         sudo apt-get install certbot [-t jessie-backports]
         certbot certonly --standalone -d example.com
@@ -33,7 +33,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
   * Ant
     * On Mac OS X install via Homebrew (Requires XCode & Command Line Tools)
   * JDK `>= 1.8` (Add to `JAVA_HOME` path)
-    * Recommended: Oracle JDK (http://www.oracle.com/technetwork/java/javase/downloads/index.html) as long as JavaFX is not distributed with OpenJDK
+    * Recommended: Oracle JDK ([http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)) as long as JavaFX is not distributed with OpenJDK
   * Monocle (Headless mode for HaaS setup)
     * The headless mode implementation for JavaFX is not included in the current JDK releases and has therefore to be added manually
     * Copy `software/OpenJFX_Monocle/openjfx-monocle-8uXX-XXX.jar` to `JDK/jre/lib/ext/` directory
@@ -43,10 +43,10 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 ### Embedded Tools:
 
   * Depending on the target platform, respective On-Chip Debug System software (OpenOCD, JLink GDB Server) is required. While a
-    patched version of OpenOCD for the "TI TM4C1294XL" is distributed with this repository (64-Bit deb & rpm packages), other options have to be built from source. 
-    In this case follow the README in the OCDS_Software/openocd-VERSION directory. Replace the "make install" command with "checkinstall" if you want to create a package 
+    patched version of OpenOCD for the "TI TM4C1294XL" is distributed with this repository (64-Bit debian package), other options have to be built from source. 
+    In this case follow the README(s) in the ["OCDS_Software"](OCDS_Software/README.md) and ["OCDS_Software/openocd"](OCDS_Software/openocd/README) directory. Replace the "make install" command with "checkinstall" if you want to create a package 
     instead of directly copying the files into the system folders for easier removal.
-  * JLink GDB Server can be downloaded from https://www.segger.com/jlink-software.html 
+  * JLink GDB Server can be downloaded from [https://www.segger.com/jlink-software.html](https://www.segger.com/jlink-software.html) 
   * For HaaS setups place the 64-Bit DEB installer in the "OCDS_Software" folder.
 
 ### Additional components for Docker setup:
@@ -88,11 +88,9 @@ The following options are given:
     -b/--noob                 Enable NOOB Mode (default: 0/[configs/noob.conf])
     -h/--help                 Show command line options (optional)
 
-For building, installation an usage of the debug-control service outside of the HaaS setup (needed for the second example) please refer to the [Debug-Control Service README.](software/README.md)
-
 ## Example Setup
 
-One can easily setup the cloud IDE with the help of configuration files:
+One can easily setup the cloud IDE with the help of [configuration files](configs/cloudsetup_config/README.md):
 
     python docker_container.py -c <Setup Configuration>
 
@@ -105,5 +103,6 @@ If the debug-control service is supposed to run on any suitable computational de
     python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -d <Debug Port>
 
 This setup also requires the corresponding OCDS software to be installed on the host running the Debug-Control Service and a suitable development-platform attached.
+For building, installation an usage of the debug-control service outside of the HaaS setup please refer to the [Debug-Control Service README.](software/README.md)
 
 WARNING: If the JLink Port & OOCD Port are not turned off, the debug-control service within the container could establish a connection to the cloud IDE before the local debug-control service that is used for debugging the local hardware!
