@@ -26,7 +26,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
   * Regularly update the certificates with a Cron job issued by root:
 
         sudo crontab -e
-        0 0 */31 * * /usr/bin/certbot renew --post-hook "docker restart $(docker ps -a -q)" > /var/log/certbot/certbot.log 2>&1 
+        0 0 * * * /usr/bin/certbot renew --post-hook "docker restart $(docker ps -a -q)" > /var/log/certbot/certbot.log 2>&1 
 
 ### Build Tools ([Debug-Control Service](software/README.md)):
 
@@ -54,6 +54,11 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
   * docker
   * python, python-pip & wget module (pip install wget)
   * usbutils (Linux)
+
+### Network Infrastructure:
+
+  * One free port per cloud IDE instance for standard C development
+  * One additional free port per cloud IDE instance for embedded development platform support
 
 ### Supported development platforms:
 
