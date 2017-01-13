@@ -6,7 +6,7 @@ All the development tools (compiler, version management, debugger) are hosted on
 
 ### HaaS
 
-One way to set up the IDE is to provide the development platform as a service in a cloud environment. In this case the user just logs into the IDE with the help of a modern web-browser and can program the development board connected to the server hosting the IDE instance. The OCDS software as well as the debug-control service used for interacting with the hardware are both set up automatically within the corresponding docker container. In our setup the development platform is tied directly to the IDE instance based on the serial number of the hardware. The WebSocket address specified in the cloud IDE has to be set to the address of the server. For every project these addresses can be set in the appropriate [configuration file](cloud9workspace/README.md) or from the UI if the "NOOB" mode is not explicitly enabled.
+One way to set up the IDE is to provide the development platform as a service in a cloud environment. In this case the user just logs into the IDE with the help of a modern web-browser and can program the development board connected to the server hosting the IDE instance. The OCDS software as well as the debug-control service used for interacting with the hardware are both set up automatically within the corresponding Docker container. In our setup the development platform is tied directly to the IDE instance based on the serial number of the hardware. The WebSocket address specified in the cloud IDE has to be set to the address of the server. For every project these addresses can be set in the appropriate [configuration file](cloud9workspace/README.md) or from the UI if the "NOOB" mode is not explicitly enabled.
 
 ### Universal
 
@@ -18,7 +18,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 
   * Server setup (Tested on Debian-based systems: Debian 8, Ubuntu 14.04 LTS, Ubuntu 16.04 LTS)
   * Debug-Control Service (Independent)
-  * Valid [Let’s Encrypt](https://letsencrypt.org/) certificates at `/etc/letsencrypt/` to be mounted by each docker container with, e.g., [certbot](https://certbot.eff.org/)
+  * Valid [Let’s Encrypt](https://letsencrypt.org/) certificates at `/etc/letsencrypt/` to be mounted by each Docker container with, e.g., [certbot](https://certbot.eff.org/)
     
         sudo apt-get install certbot [-t jessie-backports]
         certbot certonly --standalone -d example.com
@@ -77,7 +77,7 @@ The automatic install-script will use Docker for creating independent containers
 
 The following options are given:
 
-    -n/--name                 Name of docker container
+    -n/--name                 Name of Docker container
     -w/--workstationname      Name of the workstation hosting the service 
     -u/--user                 Username for the created workspace
     -k/--password             Password for the created workspace
@@ -87,11 +87,13 @@ The following options are given:
     -c/--config               Configuration file to autonomously set up several cloud IDE instances (configs/cloudsetup_config/)
     -e/--websocket            WebSocket port for the client-side connection to the target-side (default: 8080/[configs/wsport.conf])
     -m/--target               Target platform (XMC4500/TM4C1294XL)
-    -r/--projects             Specifies projects that are copied to the workspace during setup (projects must reside within the build context of the dockerfile)
+    -r/--projects             Specifies projects that are copied to the workspace during setup (projects must reside within the build context of the Dockerfile)
     -j/--jlinkport            Enable JLink/Custom JLink GDB server port (default: 2331/[configs/supervisor_config/debugcontrolservice.conf])
     -o/--oocdport             Enable OpenOCD/Custom OpenOCD port (default: 3333/[configs/supervisor_config/debugcontrolservice.conf])
     -b/--noob                 Enable NOOB Mode (default: 0/[configs/noob.conf])
     -h/--help                 Show command line options (optional)
+
+The structure and management of cloud IDE instances is described in the [configs](configs/README.md)/[docker_config](configs/docker_config/README.md) README.
 
 ## Example Setup
 
@@ -99,7 +101,7 @@ One can easily setup the cloud IDE with the help of [configuration files](config
 
     python docker_container.py -c <Setup Configuration>
 
-In case of a HaaS setup the development platform is connected to the server and the debug-control service will be ran directly within the docker container beside the cloud IDE. The following command sets up a HaaS setup for the XMC4500:
+In case of a HaaS setup the development platform is connected to the server and the debug-control service will be ran directly within the Docker container beside the cloud IDE. The following command sets up a HaaS setup for the XMC4500:
 
     python docker_container.py -n <Name> -w <Workstationname> -u <Username> -k <Password> -p <IDE Port> -e <Websocket Port> -s <Serial> -j ON -m XMC4500
 

@@ -1,16 +1,32 @@
 # Manage Docker Containers
 
-Build the image
+List all running containers
     
-    sudo docker build -t $USER/ubuntu-cloud9-testuser1 .
+    docker ps
+    
+List all containers
+    
+    docker ps -a
+    
+List images & exclude intermediate ones 
+    
+    docker images
+    
+List all images
+    
+    docker images -a
 
-Run a container (-it)
-
-    sudo docker run -p 3131:3131 -p 4445:4445 -d $USER/ubuntu-cloud9-testuser1
+Start all containers
+    
+    sudo docker start $(sudo docker ps -a -q)
 
 Stop all containers
     
     sudo docker stop $(sudo docker ps -a -q)
+  
+Restart all containers
+    
+    sudo docker restart $(sudo docker ps -a -q)
 
 Remove all containers and their respective volumes
     
@@ -20,9 +36,7 @@ Remove all images
     
     sudo docker rmi $(sudo docker images -q)
 
-Open bash in container
+Open bash in specified container
 
     sudo docker exec -it <id> /bin/bash
-
-VOLUMES ar located in /var/lib/docker/vfs and /var/lib/docker/volumes (rm -rf ...)
 

@@ -34,7 +34,7 @@ When it comes to the deployment of the native software packages this project use
 
 The output format such as ".exe", ".dmg", ".deb", ".rpm" can be changed within the XML file. The program version can be changed by adjusting the version option of the fx:application id="fxApplication" attribute. The application icon is located in the build/package/\<platform\> directory. Resulting packages are located in the "build/deploy/bundles" directory.
 
-The build.xml file uses the default build options which include the UI. This configuration is used for programing/debugging on a local computer. The build_headless.xml option is used for docker containers ran as HaaS setup on the server within the container. Therefore no UI components are necessary as required information such as serial numbers, ports are predefined in config files. As the current docker setup uses a LTS version of Ubuntu (64-Bit as everything in docker is x86_64) the native package for the headless mode requires a 64-Bit Debian package (.deb). 
+The build.xml file uses the default build options which include the UI. This configuration is used for programing/debugging on a local computer. The build_headless.xml option is used for Docker containers ran as HaaS setup on the server within the container. Therefore no UI components are necessary as required information such as serial numbers, ports are predefined in config files. As the current Docker setup uses a LTS version of Ubuntu (64-Bit as everything in Docker is x86_64) the native package for the headless mode requires a 64-Bit Debian package (.deb). 
 
 ## Installation and Usage
 

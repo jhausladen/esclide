@@ -17,7 +17,7 @@ This configuration creates a cloud IDE instance for debugging local or remote ta
     debugport = 5002
 
 
-This configuration creates a cloud IDE instance when debugging platforms that are connected directly to the server. In this case, the debug-control service runs directly in the docker setup.
+This configuration creates a cloud IDE instance when debugging platforms that are connected directly to the server. In this case, the debug-control service runs directly in the Docker setup.
 
     [cloudinstance:bleedingti1]
     name = bleedingti1

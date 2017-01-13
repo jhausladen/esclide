@@ -1,0 +1,9 @@
+# Managing cloud IDE instances
+
+Every cloud IDE instance is an isolated Docker container, running the IDE process as an unprivileged user. The unprivileged user is created and named after the Docker container's name during the setup process. As for the reason of mounting the required HTTPS certificates (read only) to the container, which can only be accessed by `root`, the IDE process is generally started as the `root` user. However, as soon as the required certificates are read, right before any connections are made available, the IDE process drops the `root` privilege and starts the internal HTTPS server as the restricted cloud IDE user. 
+
+The cloud IDE process itself as well as the debug-control service are managed by the supervisor process control system. This subsystem takes care that in case of an error or a reboot of the server, the cloud IDE and its services stay/become available. Configuration files for the supervisor process control system can be found in `configs/supervisor_config/`. Log messages of the IDE and debug-control service can be found in `/var/log/supervisor/cloud9.log`, `/var/log/supervisor/cloud9_errors.log`, `/var/log/supervisor/debugcontrolservice[serial number].log` and `/var/log/supervisor/debugcontrolservice[serial number]_errors.log` within the Docker container.
+
+The list in ["configs/docker_config/README.md"](docker_config/README.md) is an excerpt of the most used Docker commands to manage cloud IDE instances:
+In general, all Docker VOLUMES are located in `/var/lib/docker/vfs/` and `/var/lib/docker/volumes/`.
+Backups of containers can be created/restored with the help of the corresponding python script `backup_container.py` and `restore_container.py`, both located within the `scripts` folder.
