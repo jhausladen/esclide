@@ -18,7 +18,8 @@ import sys, getopt, os, subprocess, shutil, glob, re, wget, tarfile
 # Main module
 def main(argv):
    
-   ant = True 
+   ant = True
+   compiler = True 
 
    # Check for commandline parameters 
    try:
@@ -212,28 +213,30 @@ def main(argv):
           print 'NOOB Mode ON'
        else:
           print 'NOOB Mode OFF'
-       
-       # Download ARM GCC (GCC ARM Embedded) as its not distributed through the PPA anymore
-       # Clean up compiler folder
-       if os.path.isdir('compiler'):
-        print 'Clean up compiler directory!'
-        shutil.rmtree('compiler')
+       if compiler == True:
+        # Download ARM GCC (GCC ARM Embedded) as its not distributed through the PPA anymore
+        # Clean up compiler folder
+        if os.path.isdir('compiler'):
+            print 'Clean up compiler directory!'
+            shutil.rmtree('compiler')
 
-       # Check if compiler folder exists & create it
-       if not os.path.isdir('compiler'):
-        print 'Create folder for compiler!'
-        os.makedirs("compiler")
+        # Check if compiler folder exists & create it
+        if not os.path.isdir('compiler'):
+            print 'Create folder for compiler!'
+            os.makedirs("compiler")
 
-       # Download compiler from ARM website 
-       print 'Download compiler...'
-       url = 'https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2?product=GNU%20ARM%20Embedded%20Toolchain,64-bit,,Linux,6-2016-q4-major'
-       filename = wget.download(url,"compiler/")
+        # Download compiler from ARM website 
+        print 'Download compiler...'
+        url = 'https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2016q4/gcc-arm-none-eabi-6_2-2016q4-20161216-linux.tar.bz2?product=GNU%20ARM%20Embedded%20Toolchain,64-bit,,Linux,6-2016-q4-major'
+        filename = wget.download(url,"compiler/")
 
-       # Untar archive
-       tar = tarfile.open(filename, "r:bz2")
-       compilerfolder = "compiler/"+os.path.commonprefix(tar.getnames())  
-       tar.extractall("compiler/")
-       tar.close()
+        # Untar archive
+        tar = tarfile.open(filename, "r:bz2")
+        compilerfolder = "compiler/"+os.path.commonprefix(tar.getnames())  
+        tar.extractall("compiler/")
+        tar.close()
+        
+        compiler = False
 
        # Add OpenJFX Monocle to JDK
        path = os.environ.get('JAVA_HOME')
