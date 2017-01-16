@@ -19,7 +19,8 @@ import sys, getopt, os, subprocess, shutil, glob, re, wget, tarfile
 def main(argv):
    
    ant = True
-   compiler = True 
+   compiler = True
+   compilerfolder = ''
 
    # Check for commandline parameters 
    try:
@@ -75,7 +76,6 @@ def main(argv):
        projectpath = ''
        noob = False
        target = ''
-       compilerfolder = ''
          
        # Loop through parameters and check their validity
        for opt, arg in instance:
