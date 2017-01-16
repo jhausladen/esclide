@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
@@ -89,7 +90,8 @@ public class RemoteGDBConnector implements Runnable {
                 /* Connect to server */
                 if (Main.deviceInfo.get(1).contains("universal")) server = websocketServer.getIp();
                 int port = websocketServer.getDebugport();
-                socket = new Socket(server, port);
+                SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+                socket = ssf.createSocket(server, port);
                 logger.info("Connected to server...");
 
                 /* Update UI */

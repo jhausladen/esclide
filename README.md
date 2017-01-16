@@ -32,7 +32,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 
   * Ant
     * On Mac OS X install via Homebrew (Requires XCode & Command Line Tools)
-  * JDK `>= 1.8` (Add to `JAVA_HOME` path)
+  * JDK `Java 8 >= 8u101` (Add to `JAVA_HOME` path)
     * Recommended: Oracle JDK ([http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)) as long as JavaFX is not distributed with OpenJDK
   * Monocle (Headless mode for HaaS setup)
     * The headless mode implementation for JavaFX is not included in the current JDK releases and has therefore to be added manually

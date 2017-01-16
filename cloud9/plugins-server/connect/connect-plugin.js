@@ -30,7 +30,7 @@ module.exports = function startup(options, imports, register) {
     /* Create https options holding the certificates */
     var httpsoptions = {
         key:    fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/privkey.pem'),
-        cert:   fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/fullchain.pem'),
+        cert:   fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/fullchain.pem')
     };
 
     /* Drop root privileges as we don't need them anymore */

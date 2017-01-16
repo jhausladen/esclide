@@ -13,6 +13,7 @@ var util = require("util");
 var fs = require("fs");
 var path = require("path");
 var net = require('net');
+var tls = require('tls');
 
 var workspacepath;
 var TCP_HOST_LOCAL = "127.0.0.1";
@@ -64,6 +65,12 @@ function getDateTime() {
 
     return year + "-" + month + "-" + day + "-" + hour + ":" + min + ":" + sec;
 }
+
+/* Create tls options holding the certificates */
+var tlsoptions = {
+    key:    fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/privkey.pem'),
+    cert:   fs.readFileSync('/etc/letsencrypt/live/cloud-emb.technikum-wien.at/fullchain.pem')
+};
 
 /* Reads the debug port config for the connection between the target-side
  * and server */
@@ -176,13 +183,13 @@ function closeGDBServer() {
 /* Start the GDB emulation TCP Server */
 createGDBServer();
 
-/* Start the Client/Server TCP Server
+/* Start the secure Client/Server TCP Server (TLS/SSL)
  * This server communicates with the client and forwards
  * all GDB traffic in both directions*/
 var gdbTransserver;
 function createTransmissionServer() {
 
-    gdbTransserver = net.createServer(function (socket) {
+    gdbTransserver = tls.createServer(tlsoptions, function (socket) {
 
         /* Identify this client */
         socket.name = socket.remoteAddress + ":" + socket.remotePort

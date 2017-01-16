@@ -6,7 +6,7 @@ This part of the repository hosts the source code of the Debug-Control Service u
 
   * Ant
     * On Mac OS X install via Homebrew (Requires XCode & Command Line Tools)
-  * JDK `>= 1.8` (Add to `JAVA_HOME` path)
+  * JDK `Java 8 >= 8u101` (Add to `JAVA_HOME` path)
     * Recommended: Oracle JDK (http://www.oracle.com/technetwork/java/javase/downloads/index.html) as long as JavaFX is not distributed with OpenJDK
   * usbutils (Linux)
   * Monocle (Headless mode for HaaS setup)
