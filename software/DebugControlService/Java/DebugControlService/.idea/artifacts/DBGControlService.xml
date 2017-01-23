@@ -5,11 +5,18 @@
       <options>
         <option name="appClass" value="at.embsys.sat.Main" />
         <option name="description" value="" />
-        <option name="htmlParamFile" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="linuxIcon" value="$PROJECT_DIR$/src/at/embsys/sat/DebugControlService.png" />
+            <option name="macIcon" value="$PROJECT_DIR$/src/at/embsys/sat/DebugControlService.png" />
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/at/embsys/sat/DebugControlService.png" />
+          </JavaFxApplicationIcons>
+        </option>
         <option name="nativeBundle" value="deb" />
-        <option name="paramFile" value="" />
-        <option name="title" value="Debug-Control-Service" />
+        <option name="title" value="DebugControlService" />
         <option name="vendor" value="SAT" />
+        <option name="version" value="2.1" />
       </options>
     </properties>
     <root id="root">
@@ -18,6 +25,8 @@
       </element>
       <element id="library" level="project" name="jetty-alpn-client-9.2.1.v20140609" />
       <element id="library" level="project" name="websocket-api-9.2.1.v20140609" />
+      <element id="library" level="project" name="logback-classic-1.1.7" />
+      <element id="library" level="project" name="slf4j-api-1.7.21" />
     </root>
   </artifact>
 </component>
