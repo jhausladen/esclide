@@ -1,8 +1,8 @@
 /**
  * Archiver Plugin for Cloud9 IDE
  * 
- * Is used to extract archives (tar.gz,7z and zip). Intended to be used when importing
- * projects to Cloud9
+ * Is used to extract archives (tar.gz/tgz,7z and zip). 
+ * Intended to be used for importing projects to Cloud9.
  * 
  * @author Jürgen Hausladen
  * @copyright 2016, SAT, FH Technikum Wien
@@ -83,11 +83,11 @@ define(function (require, exports, module) {
                             var suffix = archivePath.match(/\..*/, '');
                             var workdir = archivePath.match(/^.*\/(?=[^\/]*$)/);
                             if (workdir == null) workdir = ".";
-                            if (suffix != null && archivePath.match(/\..*/, '').indexOf(".zip") > -1) c9console.evalInputCommand("sh -c 'cd " + ide.workspaceDir + "/" + workdir + " && unzip " + archiveName + "'");
-                            else if (suffix != null && archivePath.match(/\..*/, '').indexOf(".tar.gz") > -1) c9console.evalInputCommand("sh -c 'cd " + ide.workspaceDir + "/" + workdir + " && tar -xzf " + archiveName + "'");
-                            else if (suffix != null && archivePath.match(/\..*/, '').indexOf(".7z") > -1) c9console.evalInputCommand("sh -c 'cd " + ide.workspaceDir + "/" + workdir + " && 7z e " + archiveName + "'");
+                            if (suffix != null && suffix.toString().indexOf(".zip") > -1) c9console.evalInputCommand("sh -c 'cd " + ide.workspaceDir + "/" + workdir + " && unzip \"" + archiveName + "\"'");
+                            else if (suffix != null && (suffix.toString().indexOf(".tar.gz") > -1 || suffix.toString().indexOf(".tgz") > -1)) c9console.evalInputCommand("sh -c 'cd " + ide.workspaceDir + "/" + workdir + " && tar -xzf \"" + archiveName + "\"'");
+                            else if (suffix != null && suffix.toString().indexOf(".7z") > -1) c9console.evalInputCommand("sh -c 'cd " + ide.workspaceDir + "/" + workdir + " && 7z e \"" + archiveName + "\"'");
                             else {
-                                _self.errormsgarchiver.setValue("The target archive type is not supported!<br> Please use one of the following archive types \".zip, .tar.gz, .7z\".");
+                                _self.errormsgarchiver.setValue("The target archive type is not supported!<br> Please use one of the following archive types \".zip, .tar.gz/tgz, .7z\".");
                                 _self.winArchiver.setTitle("Error: Archive type is not supported!");
                                 _self.winArchiver.show();
                             }
