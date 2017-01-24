@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y \
     usbutils \
     unzip \
     p7zip-full \
+    unar \
     python \
     libxslt1.1 \
     sudo
