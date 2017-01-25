@@ -113,3 +113,6 @@ This setup also requires the corresponding OCDS software to be installed on the 
 For building, installation an usage of the debug-control service outside of the HaaS setup please refer to the [Debug-Control Service README.](software/README.md)
 
 WARNING: If the JLink Port & OOCD Port are not turned off, the debug-control service within the container could establish a connection to the cloud IDE before the local debug-control service that is used for debugging the local hardware!
+
+## Acknowledgment
+This work has been conducted in the context of the public funded R&D project Software Analysis Toolbox managed by the Vienna City Council MA23.

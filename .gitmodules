@@ -6,7 +6,7 @@
 	url = https://github.com/jerabek/ARMv7t-WCET-Analysis.git
 [submodule "analysis_tools/dot2json"]
 	path = analysis_tools/dot2json
-	url = https://github.com/fgerstmayer/dot2json.git
+	url = https://github.com/uastw-sat/dot2json.git
 [submodule "software/OpenJFX_Monocle/Monocle"]
 	path = software/OpenJFX_Monocle/Monocle
 	url = https://github.com/jhausladen/Monocle.git
