@@ -1,0 +1,146 @@
+Getting Started - Embedded Systems Software Development
+=======================================================
+:author: Juergen Hausladen
+:doctype: article
+:toc: right
+:icons: font
+:data-uri:
+:lang: en
+:date: 27.02.2017
+:encoding: iso-8859-1
+:nofooter:
+:source-highlighter: pygments
+
+== Setup
+
+The following steps are required when the hardware the be flashed and debugged is connected to the local computer. In case the 
+development board resides on the server, everything is pre-configured to proceed with step <<Login>>
+
+. Unless you haven't already installed it, install the J-Link software &
+documentation pack for your platform
+(https://www.segger.com/jlink-software.html).
+. Install the Debug-Control-Service: link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[DEB -
+Ubuntu, Debian | RPM - Fedora,
+OpenSuse | DMG - Mac OSX | EXE/MSI - Windows]
+. Connect the XMC4500 development board to your computer via the Debug port
++
+image::img/connect.jpg[]
++
+. Run the Debug-Control-Service by from your applications menu or by issuing the
+command `DebugControlService`
++
+image::img/cloud_dbg-ctrl-service-online.png[]
++
+TIP: To make the command `DegubControlService` work, modify the `PATH` variable by adding an entry to your `$HOME/.bashrc`
+configuration file: `export PATH=$PATH:/opt/DebugControlService`
++
+TIP: If the status circle for the `JLink GDB Server` does not turn green, the
+Debug-Control Service could not find a valid executable. Click on `Select JLink
+GDB Server` and select the previously installed JLinkGDBServer executable by
+hand. Eventually, you'll need to unplug and reconnect the USB connection to the
+board. Additionally, you may use a different USB port. Sometimes, firewall rules
+and/or power-saving rules also inhibit proper operation.
++
+WARNING: Windows users should choose the `JLinkGDBServerCL` executable instead.
+
+== Login
+
+. Start a WEB browser and point it to the `cloud-emb.technikum-wien.at:YourPort`
+URL. `YourPort` is specific as well as the login data. [red]#Ask your instructor
+in order to obtain access to this cloud service.#
+
+TIP: Supported browsers are Google Chrome, Mozilla Firefox, Safari and Opera.
+
+image::img/cloud1.png[]
+
+[NOTE]
+======
+The `Browser` and `Server` status circle should also turn green as well as both
+indicators in the top right corner of the cloud IDE.
+image:img/cloud_indicators.png[] The same is true for the two indicators in
+the `DebugControlService` (see below).
+======
+
+image::img/cloud_dbg-ctrl-service-connected.png[]
+
+Now using drag and drop - grab a project in your file explorer (e.g.
+link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[XMC4500_Blinky.tar.gz]) and drop it onto the top most
+symbol in under `WORKSPACE FILES` - in this way the compressed archive is added
+to your workspace. Next, right click the compressed archive and select
+`Extract`. Then expand the folder `src` and click on `main.c` to open up the
+top-level source file.
+
+image::img/add2cide.jpg[]
+
+
+== Flashing
+
+When flashing a program onto the development platform open up the main "C" file
+of the project you wish to flash and select `Flash` from the `Embedded
+Developer` menu.
+
+image::img/cloud_embedded.png[]
+
+This invokes the build process and flashes the resulting image onto the target
+platform. The results of the flash procedure are shown in the console tab of the
+IDE.
+
+image::img/flashconsole.png[]
+
+[NOTE]
+If the results show [green]`Flashing succeeded` the flash process was successful.
+
+== Debugging
+
+For Debugging a program open up the main "C" file of the project you wish to
+debug and select `Debug` from the `Embedded Developer` menu. This will invoke
+the build process and take the Cloud IDE into debug mode.
+
+image::img/cloud_debug.png[]
+
+The debug panel on the right side is used to control the debug process (step,
+run, stop), add variables for inspection and breakpoints. Variables can be added
+by typing their name in the textentry box above the watch variable listing and
+pressing the `Enter` key. Variables can be remove by selecting the appropriate
+item and pressing the "Delete" key. Breakpoints can be added/removed by clicking
+on the desired line number in the editor.  
+
+image::img/cloud_dock.png[]
+
+== FAQ
+
+Q: I cannot flash/debug my program because the appropriate entries in the
+`Embedded Developer` menu are disabled.
+
+A: There are various conditions that trigger this behaviour:
+
+. First check that your development board is connected to your computer and the
+`JLink GDB Server` circle within the Debug-Control Service is green. This also
+corresponds to the `Hardware` status indicator in the IDE. If not, your board is
+not properly recognized or the path to the `JLink GDB Server` executable is not
+valid. Also check if the hardware selected in the `Platform` menu is equal to
+your locally connected target.
+. Check the `Browser` state circle in the Debug-Control Service. This
+corresponds to the `Debug-Control Service` indicator in the cloud IDE. The the
+indicators are red, this means that the connection between the browser and the
+software is not established. Check the selected location in the `Target-Side`
+menu so that it's set to the location your embedded board is connected. If you
+are debugging locally the option selected should be "Local". Otherwise type the
+IP address of the computer, the Debug-Control Service is running and the
+hardware is connected.
+. Check the `Advanced` tab in the Debug-Control Service.
++
+image::img/cloud_dbg-ctrl-service-advanced.png[]
++
+This opens the diagnostics information for the JLinkGDBServer. The button `Reset Connection` 
+resets the communication channel of the cloud IDE. 
+
+Q: I have set breakpoints but they are ignored when debugging.
+
+A: Check if the breakpoints exist and are enabled in the breakpoint tab of the
+debug panel. A breakpoint which is ticked is enabled whilst a breakpoint without
+a tick is disabled.
+
+Q: When I switch to another project, my breakpoints and variables disappear.
+
+A: This is because breakpoints and inspected variables are saved separately for each project.

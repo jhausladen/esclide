@@ -15,6 +15,7 @@ define(function(require, exports, module) {
     var markup = require("text!ext/help/help.xml");
     var css = require("text!ext/help/style.css");
     var skin = require("text!ext/help/skin.xml");
+    var preview = require("ext/preview/preview");
 
     module.exports = ext.register("ext/help/help", {
         name: "Help Menu",
@@ -46,6 +47,11 @@ define(function(require, exports, module) {
             menus.addItemByPath("Help/About", new apf.item({ onclick : function(){ _self.showAbout(); }}), c += 100);
 
             menus.addItemByPath("Help/~", new apf.divider(), c += 100);
+
+            menus.addItemByPath("Help/Getting Started/", null, c += 100);
+            
+            menus.addItemByPath("Help/~", new apf.divider(), c += 100);
+            
             //menus.addItemByPath("Help/Documentation", new apf.item({ onclick : function(){ window.open('https://docs.c9.io') }}), c += 100);
             ide.addEventListener("hook.ext/keybindings_default/keybindings_default", function(c, e) {
                 menus.addItemByPath("Help/Keyboard Shortcuts", new apf.item({ onclick : function(){ e.ext.keybindings(); }}), c);
@@ -63,6 +69,10 @@ define(function(require, exports, module) {
             c = 0;
             menus.addItemByPath("Help/Support/Repository", new apf.item({ onclick : function(){ window.open('https://bitbucket.org/jhausladen/escloud.git'); }}), c += 100);
             menus.addItemByPath("Help/Support/Get in Touch", new apf.item({ onclick : function(){ window.open('https://embsys.technikum-wien.at/projects/sat/staff/staff.php'); }}), c += 100);
+
+             c = 0;
+            menus.addItemByPath("Help/Getting Started/Embedded Software Development", new apf.item({ onclick : function(){ preview.preview(window.location.href + 'workspace/.gs_embdev.html'); }}), c += 100);
+            menus.addItemByPath("Help/Getting Started/Embedded Software Analysis", new apf.item({ onclick : function(){ preview.preview(window.location.href + 'workspace/.gs_embanalysis.html'); }}), c += 100);
 
             if (window.cloud9config.hosted || (ide.local && ide.onLine)) {
                 var blogURL = window.location.protocol + "//" + window.location.host + "/site/?json=get_tag_posts&tag_slug=changelog&count=1";

@@ -1,0 +1,60 @@
+Getting Started - Embedded Systems Software Analysis
+====================================================
+:author: Juergen Hausladen
+:doctype: article
+:toc: right
+:icons: font
+:data-uri:
+:lang: en
+:date: 27.02.2017
+:encoding: iso-8859-1
+:nofooter:
+:source-highlighter: pygments
+
+== Introduction
+
+Embedded systems is hand over more and more responsibility, which in turn rises the need for verification, to develop reliable products that are checked as thoroughly as possible to not harm equipment or even human beings. For example, real-time systems are a type of embedded system where the correct operation is dependent of the logical correctness of the computations within given timing constraints. Hence, knowledge about the execution time, especially the worst-case execution time (WCET) and stack usage are mandatory to, e.g., guarantee deadlines or given memory boundaries. Generally, the execution time and stack usage of tasks scheduled in a real-time operating systems are not known in beforehand. In order to evaluate schedulability, accurate timing and stack analysis are of importance to get to know if an application meets the desired requirements.
+A different aspect, that is triggered by analyses such as the WCET or stack usage evaluation is to generate awareness for the performance of an embedded system and the applications it is running. The different metrics such as execution time and memory usage are made visible, so that developers get a perception for their implementation. Moreover, various problems in the implementation are highlighted, e.g., the memory consumption in parts of the implementation of an un-optimized algorithm to examine the essential places for improvement. This is also relevant from an educational point of view, to introduce students to the verification of timing constraints, so that they get a better insight, e.g., how much space is required on the target platform to implement a given functionality.
+
+
+== Run WCET & Stack Analysis
+
+. Open the (link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[XMC4500_Blinky.tar.gz]) example project. 
+Conduct the `Embedded Software Development` getting started guide from the help menu for more details.
+
+. Build the project with the `Build` command from the `Embedded Developer` menu.
++
+image::img/cloud_embedded.png[]
+
+. Generate the flowfacts for the project via the `Generate Flow Facts` entry in the Embedded Analysis menu.
++
+image::img/mnu_analysis.png[]
++
+[NOTE]
+The loop bounds of the analysed program are specified within the `flowfacts.ffx` file in the analysis folder and can be modified to reflect the 
+implementation's behavior for, e.g., infinite loops.
+
+. Run the WCET & stack analysis via the `Analyse` entry. The calculated analysis results are then shown in textual form and per function 
+in the console tab of the IDE.
++
+image::img/analysis_output.png[]
+
+== Visualization
+
+The analysis results can also be viewed in a visual representation within the cloud IDE. Therefore, a `<function>.cfg.html` file is created within the `bin` folder for each function that is analysed.
+
+. Double click a `<function>.cfg.html` file to view the visual representation.
++
+image::img/fm_visualization.png[]
+
+. The representation shows the critical path of the analysed application based on basic blocks. Each basic block contains information on WCET, stack usage as well as 
+the location in source code and the assembly listing. The visual representation can also be displayed in a new browser tab, by pressing the corrsponding button in the viewer.
++
+image::img/cloud_visualization.png[]
+
+== Configure Analysis settings
+
+In order to view/modify the analysis settings, click on the `Configure Analysis` menu entry.
+
+image::img/configure_analysis.png[]
+
