@@ -80,16 +80,16 @@ public class OnChipDebugSystemSoftwareJLink implements Runnable {
                 /* Check OS and run JLink GDB server */
                 if ((OS.contains("linux") || OS.contains("mac"))) {
                     if (deviceInfo.size() > 1 && !deviceInfo.get(1).equals("universal"))
-                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + deviceInfo.get(1) + " -Device XMC4500-1024 -if SWD" + " -port " + jLinkPort);
+                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + deviceInfo.get(1) + " -Device XMC4500-1024 -if SWD" + " -port " + jLinkPort + " -xc " + System.getProperty("user.home") + "/.debugcontrolservice/gdbinit");
                     else
-                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + comboBoxHWList.getSelectionModel().getSelectedItem() + " -Device XMC4500-1024 -if SWD -port " + jLinkPort);
+                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + comboBoxHWList.getSelectionModel().getSelectedItem() + " -Device XMC4500-1024 -if SWD -port " + jLinkPort + " -xc " + System.getProperty("user.home") + "/.debugcontrolservice/gdbinit");
                 } else if (OS.contains("windows")) {
                     //procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -Device XMC4500-1024 -if SWD");
                     //procOCDSeStick2 = Runtime.getRuntime().exec( "C:\\eStick2\\openocd\\bin\\openocd.exe -f scripts\\board\\estick2.cfg" );
                     if (deviceInfo.size() > 1 && !deviceInfo.get(1).equals("universal"))
-                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + deviceInfo.get(1) + " -Device XMC4500-1024 -if SWD" + " -port " + jLinkPort);
+                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + deviceInfo.get(1) + " -Device XMC4500-1024 -if SWD" + " -port " + jLinkPort + " -xc " + System.getProperty("user.home") + "/.debugcontrolservice/gdbinit");
                     else
-                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + comboBoxHWList.getSelectionModel().getSelectedItem() + " -Device XMC4500-1024 -if SWD" + " -port " + jLinkPort);
+                        procOCDSJlink = Runtime.getRuntime().exec(jlinkPath.getText() + " -select usb=" + comboBoxHWList.getSelectionModel().getSelectedItem() + " -Device XMC4500-1024 -if SWD" + " -port " + jLinkPort + " -xc " + System.getProperty("user.home") + "/.debugcontrolservice/gdbinit");
                 } else {
                     logger.error("Operating system not supported for JLink GDB server");
                 }
@@ -101,7 +101,7 @@ public class OnChipDebugSystemSoftwareJLink implements Runnable {
                 BufferedReader stdErrorJLink = new BufferedReader(new
                         InputStreamReader(procOCDSJlink.getErrorStream()));
 
-                 /* Create log directory */
+                /* Create log directory */
                 File logFile = new File(System.getProperty("user.home") + "/.debugcontrolservice");
                 if (!logFile.exists()) {
                     if (!logFile.mkdirs()) logger.warn("Could not create log directory for JLink GDB server");

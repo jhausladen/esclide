@@ -24,7 +24,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -32,9 +31,13 @@ import javafx.stage.WindowEvent;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Level;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 // -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw
@@ -53,6 +56,13 @@ public class Main extends Application {
     private static int oocdPort;
     private static int startJlink = 1;
     private static int startOOCD = 1;
+
+    /* Required for the flash download feature of the IDE. The downloaded program is ran once a
+     * network connection is established. Otherwise the GDB server halts the program every time
+     * the hardware is successfully recognized, e.g., if the GDB server is restarted. */
+    private static String jLinkGDBServerInitConfig = "go";
+
+    private static boolean jLinkInitConfigAvailable = true;
     private static String targetPlatform = "universal";
     public static String target = "Infineon";
 
@@ -62,6 +72,7 @@ public class Main extends Application {
 
 
     private final String OS = System.getProperty("os.name").toLowerCase();
+    private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     private static ch.qos.logback.classic.Logger logger;
 
@@ -74,6 +85,32 @@ public class Main extends Application {
         primaryStage.setTitle("Debug-Control Service");
         primaryStage.setScene(new Scene(root, 550, 170));
         primaryStage.show();
+
+        /* Show an information dialog in case the creation of the JLink GDB server
+         * initialization configuration failed at startup*/
+        if (!jLinkInitConfigAvailable) {
+            /* Update UI */
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    if (!alert.isShowing()) {
+                        alert.setTitle("JLink GDB server configuration failed!");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Could not create/write configuration file to " + System.getProperty("user.home") + "/.debugcontrolservice/gdbinit");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.isPresent() && result.get() == ButtonType.OK) {
+                            primaryStage.close();
+                            primaryStage.fireEvent(
+                                    new WindowEvent(
+                                            primaryStage,
+                                            WindowEvent.WINDOW_CLOSE_REQUEST
+                                    )
+                            );
+                        }
+                    }
+                }
+            });
+        }
 
         /* Retrieve UI components */
         Circle websocketState = (Circle) primaryStage.getScene().lookup("#browserStateCircle");
@@ -385,9 +422,22 @@ public class Main extends Application {
             }
         }
 
+        /* Create JLink GDB server config directory */
+        File gdbInitFile = new File(System.getProperty("user.home") + "/.debugcontrolservice/gdbinit");
+        if (!gdbInitFile.getParentFile().exists()) {
+            if (!gdbInitFile.getParentFile().mkdirs())
+                logger.warn("Could not create config directory for JLink GDB server");
+        }
+        /* Create/Write initialization configuration for JLink GDB server */
+        try {
+            gdbInitFile.createNewFile();
+            Files.write(Paths.get(System.getProperty("user.home") + "/.debugcontrolservice/gdbinit"), jLinkGDBServerInitConfig.getBytes());
+        } catch (IOException e) {
+            jLinkInitConfigAvailable = false;
+            logger.error("Could not create/write config file for JLink GDB server");
+        }
+
         launch(args);
         //new ToolkitApplicationLauncher().launch(Main.class,args);
     }
-
-
 }
