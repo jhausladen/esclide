@@ -49,10 +49,8 @@ define(function(require, exports, module) {
             menus.addItemByPath("Help/~", new apf.divider(), c += 100);
 
             menus.addItemByPath("Help/Getting Started/", null, c += 100);
-            
             menus.addItemByPath("Help/~", new apf.divider(), c += 100);
             
-            //menus.addItemByPath("Help/Documentation", new apf.item({ onclick : function(){ window.open('https://docs.c9.io') }}), c += 100);
             ide.addEventListener("hook.ext/keybindings_default/keybindings_default", function(c, e) {
                 menus.addItemByPath("Help/Keyboard Shortcuts", new apf.item({ onclick : function(){ e.ext.keybindings(); }}), c);
             }.bind(this, c += 100));
@@ -67,7 +65,7 @@ define(function(require, exports, module) {
             menus.addItemByPath("Help/Support/", null, c += 100);
 
             c = 0;
-            menus.addItemByPath("Help/Support/Repository", new apf.item({ onclick : function(){ window.open('https://bitbucket.org/jhausladen/escloud.git'); }}), c += 100);
+            menus.addItemByPath("Help/Support/Repository", new apf.item({ onclick : function(){ window.open('https://github.com/uastw-sat/esclide'); }}), c += 100);
             menus.addItemByPath("Help/Support/Get in Touch", new apf.item({ onclick : function(){ window.open('https://embsys.technikum-wien.at/projects/sat/staff/staff.php'); }}), c += 100);
 
              c = 0;

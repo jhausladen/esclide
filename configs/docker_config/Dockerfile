@@ -55,7 +55,7 @@ RUN mkdir -p /var/log/supervisor /cloud9 /cloud9workspace /OCDS_Software /Binari
 RUN     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN     apt-get install -y nodejs
 RUN     npm install -g n
-RUN     n v4.5.0
+RUN     n v6.10.0
 
 # ------------------------------------------------------------------------------
 # Bundle app source

@@ -70,6 +70,7 @@
         //<![CDATA[
 
             window.cloud9config = {
+                version: <%version%>,
                 startdate: new Date(),
                 davPrefix: <%davPrefix%>,
                 workspaceDir: <%workspaceDir%>,
@@ -109,7 +110,7 @@
 
             if (!cloud9config.packed) {
                 var RELEASE = "release";
-                var DEBUG   = "debug";
+                var DEBUG   = "release";
                 var FILES   = "files";
 
                 var VERSION = window.cloud9config.debug ? DEBUG : RELEASE;
