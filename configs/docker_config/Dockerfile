@@ -71,10 +71,13 @@ COPY cloud9workspace/settings /cloud9workspace/.settings
 COPY Documentation/Getting_Started/General/gs_embdev.html /cloud9workspace/.gs_embdev.html
 COPY Documentation/Getting_Started/General/gs_embanalysis.html /cloud9workspace/.gs_embanalysis.html
 
+RUN echo password | openssl enc -aes-256-cbc -a -salt -pass pass:phrase > /.secret && chmod 770 /.secret
+
 # ------------------------------------------------------------------------------
 # Add restricted user
 RUN adduser --disabled-password --gecos '' cloud
 RUN chmod -R 755 /gcc_arm_embedded
+RUN chmod -R 770 /cloud9/bin/cloud9.sh
 RUN chown -R cloud:cloud /cloud9workspace
 RUN chown -R cloud:cloud /cloud9
 

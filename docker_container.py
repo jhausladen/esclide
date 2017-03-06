@@ -352,6 +352,7 @@ def main(argv):
        tmpCfg = tmpCfg.replace("RUN chown -R cloud:cloud /cloud9/.sessions","RUN chown -R "+name+":"+name+" /cloud9/.sessions");
        tmpCfg = tmpCfg.replace("RUN su - cloud -c \"cd /cloud9; npm install\"","RUN su - "+name+" -c \"cd /cloud9; npm install\"");
        tmpCfg = tmpCfg.replace("COPY compiler/gcc_arm_embedded /gcc_arm_embedded","COPY "+compilerfolder+" /gcc_arm_embedded");
+       tmpCfg = tmpCfg.replace("RUN echo password | openssl enc -aes-256-cbc -a -salt -pass pass:phrase > /.secret && chmod 770 /.secret","RUN echo "+password+" | openssl enc -aes-256-cbc -a -salt -pass pass:"+username+" > /.secret && chmod 770 /.secret");
        
        # Create Dockerfile
        try:
@@ -413,7 +414,7 @@ def main(argv):
           fo = open("configs/supervisor_config/cloud9.conf", "wb")
        except IOError:
            print "The file does not exist!"
-       fo.write("[program:cloud9]\n"+ "command = /cloud9/bin/cloud9.sh -l 0.0.0.0 -p "+ port +" --username "+ username +" --password "+ password +" -w /"+name+"\n"+
+       fo.write("[program:cloud9]\n"+ "command = /cloud9/bin/cloud9.sh -l 0.0.0.0 -p "+ port +" --username "+ username +" -w /"+name+"\n"+
                  "directory = /cloud9\n"+ "user = root\n" + "autostart = true\n" + "autorestart = true\n"+ 
                  "stdout_logfile = /var/log/supervisor/cloud9.log\n"+ "stderr_logfile = /var/log/supervisor/cloud9_errors.log\n"+
                  "environment = NODE_ENV=\"production\", HOME=\"/home/"+name+"\"");
