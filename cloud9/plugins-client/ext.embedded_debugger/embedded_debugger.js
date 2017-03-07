@@ -597,7 +597,7 @@ define(function (require, exports, module) {
         },
         /* Removes all variables from the view */
         removeEmbeddedDebugVariablesFromView: function () {
-            dgEmbeddedVars.clear();
+            if(this.dgEmbeddedVars != undefined)this.dgEmbeddedVars.clear();
         }
 
     });
