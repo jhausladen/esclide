@@ -38,13 +38,39 @@ module.exports = function startup(options, imports, register) {
     process.setuid(gid);
 
     var server = connect();
+    var noSSL = 0;
     /* Check that all requests are secure https connections */
     server.use(function(req, res, next){
-        if (!req.socket.encrypted) {
-            /* Modify header to redirect to https version and end request */
-            res.writeHead(301, { 'Location': 'https://'+req.headers.host});
+        /* Check request URL to redirect to the appropriate site */
+        if (req.url.indexOf("/no-ssl") > -1){
+            /* Set flag to allow insecure requests */
+            noSSL=1;
+            /* Modify header to redirect to http version and end request */
+            res.writeHead(307, { 'Location': 'http://'+req.headers.host});
             return res.end();
         }
+        if (req.url.indexOf("/ssl") > -1){
+            /* Set flag to enforce secure requests */
+            noSSL=0;
+            /* Modify header to redirect to https version and end request */
+            res.writeHead(307, { 'Location': 'https://'+req.headers.host});
+            return res.end();
+        }
+        /* Load the appropriate website */
+        if (!req.socket.encrypted && noSSL == 0) {
+            /* Modify header to redirect to https version and end request */
+            res.writeHead(307, { 'Location': 'https://'+req.headers.host});
+            return res.end();
+        }
+        if (req.socket.encrypted && noSSL == 1) {
+            /* Modify header to redirect to http version and end request */
+            res.writeHead(307, { 'Location': 'http://'+req.headers.host});
+            return res.end();
+        }
+        /* Set appropriate flag in case the protocol of the request has changed */ 
+        if (req.socket.encrypted && noSSL == 1) noSSL=0;
+        if (!req.socket.encrypted && noSSL == 0) noSSL=1;
+        
         /* If the URL includes the export/download string, look for the file and pipe it back */
         if (req.url.indexOf("/export?") > -1) {
             var file = req.url.replace("/export?/workspace/", '');
