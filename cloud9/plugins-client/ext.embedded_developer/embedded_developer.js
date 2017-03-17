@@ -136,7 +136,7 @@ define(function (require, exports, module) {
                 if (e.message.type == "result" && e.message.subtype[0] == "debugportconf") {
                     debugPort = e.message.subtype[1].toString().trim();
                     buttonServerPort.setCaption("Port: " + debugPort);
-                    ws.send("Port=" + debugPort);
+                    if (typeof ws != "undefined") ws.send("Port=" + debugPort);
                 }
                 /* Gets the result about the noob config */
                 if (e.message.type == "result" && e.message.subtype[0] == "noobconf") {
@@ -234,12 +234,12 @@ define(function (require, exports, module) {
                 /* Gets the result about the JLink path in the config */
                 if (e.message.type == "result" && e.message.subtype[0] == "loadConfigJLink") {
 
-                    ws.send(e.message.subtype[1]);
+                    if (typeof ws != "undefined")ws.send(e.message.subtype[1]);
                 }
                 /* Gets the result about the JLink path in the config */
                 if (e.message.type == "result" && e.message.subtype[0] == "loadConfigOOCD") {
 
-                    ws.send(e.message.subtype[1]);
+                    if (typeof ws != "undefined")ws.send(e.message.subtype[1]);
                 }
 
                 /* Gets the result about the flash process of the HW */
@@ -250,12 +250,13 @@ define(function (require, exports, module) {
                 if (e.message.type == "result" && e.message.subtype == "gdb-exited") {
                     flashItem.disable();
                     debugItem.disable();
-                    ws.send("restart-redirection-service");
+                    if (typeof ws != "undefined")ws.send("restart-redirection-service");
                 }
                 /* Receives message from the server to restart OpenOCD service
                  * within the debug-control service */
-                if (e.message.type == "result" && e.message.subtype == "restart-OOCD-service") ws.send("restart-OOCD-service");
-
+                if (e.message.type == "result" && e.message.subtype == "restart-OOCD-service") {
+                    if (typeof ws != "undefined")ws.send("restart-OOCD-service");
+                }
                 /* Gets the result about the TCP server status when there is no connection */
                 if (e.message.type == "result" && e.message.subtype == "server-down") {
                     c9console.log("<div class='item console_log' style='font-weight:bold;color:#ff0000'>" + apf.escapeXML("Firmware transmission failed! ==> Server is down or port 4445 closed!") + "</div>");
@@ -307,8 +308,8 @@ define(function (require, exports, module) {
                                     };
                                     ide.send(data);
 
-                                    ws.send("flash");
-                                    ws.send("HW=" + platform);
+                                    if (typeof ws != "undefined")ws.send("flash");
+                                    if (typeof ws != "undefined")ws.send("HW=" + platform);
 
                                 }
                             });
@@ -366,8 +367,8 @@ define(function (require, exports, module) {
                                     };
                                     ide.send(data);
 
-                                    ws.send("debug");
-                                    ws.send("HW=" + platform);
+                                    if (typeof ws != "undefined")ws.send("debug");
+                                    if (typeof ws != "undefined")ws.send("HW=" + platform);
 
                                 }
                             });
@@ -1143,7 +1144,7 @@ define(function (require, exports, module) {
                     var prefixRegex = new RegExp("^" + ide.davPrefix);
                     var oldPathToMake = pathtomake;
                     pathTemp = page.$model.data.getAttribute("path").replace(prefixRegex, "");
-                    console.log(pathTemp);
+
                     /* Delete first "/" */
                     path = pathTemp.replace("/", "");
 
@@ -1255,7 +1256,7 @@ define(function (require, exports, module) {
                     };
                     ide.send(data);
                     /* Tell the debug-control service */
-                    ws.send("HW=" + platform);
+                    if (typeof ws != "undefined")ws.send("HW=" + platform);
                 }
                 if (device == "XMC4500") {
                     /* Enable/Disable debug controls */
@@ -1278,7 +1279,7 @@ define(function (require, exports, module) {
                     };
                     ide.send(data);
                     /* Tell the debug-control service */
-                    ws.send("HW=" + platform);
+                    if (typeof ws != "undefined")ws.send("HW=" + platform);
                 }
             }
             /* Register Event listener for getting the always active file */

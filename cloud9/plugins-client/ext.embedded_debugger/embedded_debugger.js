@@ -166,6 +166,16 @@ define(function (require, exports, module) {
         init: function (amlNode) {
             var _self = this;
 
+            /* Send additional request for restoring the debug variables, as this plug-in may be loaded after
+             * the embedded developer plug-in which results in missing debug variable entries when the IDE 
+             * is initially loaded */
+            var data = {
+                command: "firmware",
+                "operation": "recoverDebugVariables",
+                requireshandling: true
+            };
+            ide.send(data);
+
             /* Event Listener for added/activated/deactivated Breakpoints (also updates on file save !!!) */
             mdlDbgBreakpoints.addEventListener("update", function (e) {
 
@@ -597,7 +607,7 @@ define(function (require, exports, module) {
         },
         /* Removes all variables from the view */
         removeEmbeddedDebugVariablesFromView: function () {
-            if(this.dgEmbeddedVars != undefined)this.dgEmbeddedVars.clear();
+            if(typeof dgEmbeddedVars != "undefined")dgEmbeddedVars.clear();
         }
 
     });
