@@ -68,7 +68,8 @@ define(function(require, exports, module) {
             menus.addItemByPath("Help/Support/Repository", new apf.item({ onclick : function(){ window.open('https://github.com/uastw-sat/esclide'); }}), c += 100);
             menus.addItemByPath("Help/Support/Get in Touch", new apf.item({ onclick : function(){ window.open('https://embsys.technikum-wien.at/projects/sat/staff/staff.php'); }}), c += 100);
 
-             c = 0;
+            c = 0;
+            menus.addItemByPath("Help/Getting Started/C Programming", new apf.item({ onclick : function(){ preview.preview(window.location.href + 'workspace/.gs_cdev.html'); }}), c += 100);
             menus.addItemByPath("Help/Getting Started/Embedded Software Development", new apf.item({ onclick : function(){ preview.preview(window.location.href + 'workspace/.gs_embdev.html'); }}), c += 100);
             menus.addItemByPath("Help/Getting Started/Embedded Software Analysis", new apf.item({ onclick : function(){ preview.preview(window.location.href + 'workspace/.gs_embanalysis.html'); }}), c += 100);
 

@@ -127,7 +127,7 @@ The debug panel on the right side is used to control the debug process (step,
 run, stop), add variables for inspection and breakpoints. Variables can be added
 by typing their name in the textentry box above the watch variable listing and
 pressing the `Enter` key. Variables can be remove by selecting the appropriate
-item and pressing the "Delete" key. Breakpoints can be added/removed by clicking
+item and pressing the `Delete` key. Breakpoints can be added/removed by clicking
 on the desired line number in the editor.  
 
 image::img/cloud_dock.png[]

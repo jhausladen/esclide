@@ -1,0 +1,89 @@
+Getting Started - C Programming
+===============================
+:author: Juergen Hausladen
+:doctype: article
+:toc: right
+:icons: font
+:data-uri:
+:lang: en
+:date: 27.02.2017
+:encoding: iso-8859-1
+:nofooter:
+:source-highlighter: pygments
+
+== Login
+
+. Start a WEB browser and point it to the `cloud-emb.technikum-wien.at:YourPort`
+URL. `YourPort` is specific as well as the login data. [red]#Ask your instructor
+in order to obtain access to this cloud service.#
++
+TIP: Supported browsers are Google Chrome, Mozilla Firefox, Safari and Opera.
++
+. Now using drag and drop - grab a project in your file explorer (e.g.
+link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[C_Examples.tar.gz]) and drop it onto the top most
+symbol in under `WORKSPACE FILES` - in this way the compressed archive is added
+to your workspace. Next, right click the compressed archive and select
+`Extract`. Then expand the project of choice down to the `src` folder and click on, e.g., `hello.c` to open up the
+top-level source file.
+
+image::img/add2cide2.png[]
+
+
+== Build & Run programs
+
+In order to build a program open up the main "C" file
+of the project and select `Build` from the `C-Developer` menu.
+To execute a built program select `Run` from the `C-Developer` menu. This 
+checks/tracks changes in the project since the last build process, re-compiles the project if necessary and
+executes the program subsequently.
+
+image::img/menu_cdev.png[]
+
+The results of the build procedure, e.g., warnings or errors as well as the application's output are shown in the console 
+tab of the IDE.
+
+image::img/output_build_run.png[]
+
+== Debugging
+
+For Debugging a program open up the main "C" file of the project you wish to
+debug and select `Debug` from the `C-Developer` menu. This will invoke
+the build process and take the Cloud IDE into debug mode.
+
+image::img/cloud_c_debug.png[]
+
+The debug panel on the right side is used to control the debug process (step,
+run, stop), add variables for inspection and breakpoints. Variables can be added
+by typing their name in the textentry box above the watch variable listing and
+pressing the `Enter` key. Variables can be remove by selecting the appropriate
+item and pressing the `Delete` key. Breakpoints can be added/removed by clicking
+on the desired line number in the editor.  
+
+image::img/cloud_dock2.png[]
+
+== Manage infinite programs
+
+In case a program is ran infinitely or does not respond, one can either press the `Ctrl-C` key combo or select the
+`Kill running processes` entry from the `C-Developer` menu to force the application to quit.
+
+image::img/c_endless.png[]
+image::img/c_terminate.png[]
+
+== Set command line parameters
+
+To add additional command line arguments when running an application, select `Set cmdline parameter` from the `C-Developer` 
+menu, enter the respective arguments and activate these by pressing the `Set` button.
+
+image::img/c_arguments.png[]
+
+== FAQ
+
+Q: I have set breakpoints but they are ignored when debugging.
+
+A: Check if the breakpoints exist and are enabled in the breakpoint tab of the
+debug panel. A breakpoint which is ticked is enabled whilst a breakpoint without
+a tick is disabled.
+
+Q: When I switch to another project, my breakpoints and variables disappear.
+
+A: This is because breakpoints and inspected variables are saved separately for each project.

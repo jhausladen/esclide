@@ -68,6 +68,7 @@ COPY configs/id.conf /cloud9/id.conf
 COPY configs/noob.conf /cloud9/noob.conf
 COPY cloud9workspace /cloud9workspace
 COPY cloud9workspace/settings /cloud9workspace/.settings
+COPY Documentation/Getting_Started/General/gs_cdev.html /cloud9workspace/.gs_cdev.html
 COPY Documentation/Getting_Started/General/gs_embdev.html /cloud9workspace/.gs_embdev.html
 COPY Documentation/Getting_Started/General/gs_embanalysis.html /cloud9workspace/.gs_embanalysis.html
 
