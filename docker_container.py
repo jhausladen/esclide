@@ -338,6 +338,7 @@ def main(argv):
         tmpCfg = tmpCfg.replace("/Binaries/Linux/64-Bit/debugcontrolserviceheadless-1.0.deb","/Binaries/"+binaryName);
         tmpCfg = tmpCfg.replace("RUN sudo dpkg -E -G -i /OCDS_Software/jlink_4.98.1_x86_64.deb","RUN sudo dpkg -E -G -i /OCDS_Software/"+jBinaryName);
         tmpCfg = tmpCfg.replace("RUN sudo dpkg -E -G -i /OCDS_Software/openocd_0.9.0rc1-1_amd64.deb","RUN sudo dpkg -E -G -i /OCDS_Software/"+oBinaryName);
+        tmpCfg = tmpCfg.replace("COPY Documentation/Getting_Started/General/gs_embdev.html /cloud9workspace/.gs_embdev.html","COPY Documentation/Getting_Started/General/gs_embdevserver.html /cloud9workspace/.gs_embdev.html");
        else:
         tmpCfg = tmpCfg.replace("COPY Binaries /Binaries","");
         tmpCfg = tmpCfg.replace("RUN sudo dpkg -E -G -i /Binaries/Linux/64-Bit/debugcontrolserviceheadless-1.0.deb","");

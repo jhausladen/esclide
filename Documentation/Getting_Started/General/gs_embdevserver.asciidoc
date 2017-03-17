@@ -1,0 +1,127 @@
+Getting Started - Embedded Systems Software Development
+=======================================================
+:author: Juergen Hausladen
+:doctype: article
+:toc: right
+:icons: font
+:data-uri:
+:lang: en
+:date: 27.02.2017
+:encoding: iso-8859-1
+:nofooter:
+:source-highlighter: pygments
+
+== Login
+
+. Start a WEB browser and point it to the `cloud-emb.technikum-wien.at:YourPort`
+URL. `YourPort` is specific as well as the login data. [red]#Ask your instructor
+in order to obtain access to this cloud service.#
++
+TIP: Supported browsers are Google Chrome, Mozilla Firefox, Safari and Opera.
++
+image::img/cloud1.png[]
++
+[NOTE]
+======
+Both indicators in the top right corner of the cloud IDE should turn green.
+image:img/cloud_indicators.png[]
+======
++
+. By default the SSL secured version of the IDE (HTTPS) is loaded. In case the `Hardware` and `Debug-Control Service` state circle do not turn green, check if parts of the website are 
+blocked from within the browser console. image:img/mixed-content.png[]
++
+[NOTE]
+======
+In Google Chrome and Opera blocked content is allowed via an entry in the address bar. Running chrome with the `--allow-running-insecure-content` produces a similar result.
+image:img/chrome-block.png[]
+======
++
+[NOTE]
+======
+In Mozilla Firefox navigate to `about:config`, accept the WARNING and enable the `network.websocket.allowInsecureFromHTTPS` option. image:img/firefox_block.png[]
+======
++
+[WARNING]
+======
+Since Safari 9, mixed content can not be allowed anymore. For flashing/debugging hardware, one has to use the HTTP version of the IDE.
+======
++
+[NOTE]
+======
+In order to activate/deactivate the SSL secured version of the IDE, append `/ssl` or `/no-ssl` to the URL once. Every request to `cloud-emb.technikum-wien.at:YourPort` 
+is then processed accordingly to the previously selected option.
+======
++
+. Now using drag and drop - grab a project in your file explorer (e.g.
+link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[TI_TM4C1294XL.tar.gz]) and drop it onto the top most
+symbol in under `WORKSPACE FILES` - in this way the compressed archive is added
+to your workspace. Next, right click the compressed archive and select
+`Extract`. Then expand the folder `src` and click on `main.c` to open up the
+top-level source file.
++
+image::img/add2cide.jpg[]
++
+. Open another tab in the browser and navigate to `cloud-emb.technikum-wien.at:5000` to view your development board.
++
+image:img/haas_mixed.png[]
+
+== Flashing
+
+When flashing a program onto the development platform open up the main "C" file
+of the project you wish to flash and select `Flash` from the `Embedded
+Developer` menu.
+
+image::img/cloud_embedded.png[]
+
+This invokes the build process and flashes the resulting image onto the target
+platform. The results of the flash procedure are shown in the console tab of the
+IDE.
+
+image::img/flashconsole.png[]
+
+[NOTE]
+If the results show [green]`Flashing succeeded` the flash process was successful.
+
+== Debugging
+
+For Debugging a program open up the main "C" file of the project you wish to
+debug and select `Debug` from the `Embedded Developer` menu. This will invoke
+the build process and take the Cloud IDE into debug mode.
+
+image::img/cloud_debug.png[]
+
+The debug panel on the right side is used to control the debug process (step,
+run, stop), add variables for inspection and breakpoints. Variables can be added
+by typing their name in the textentry box above the watch variable listing and
+pressing the `Enter` key. Variables can be remove by selecting the appropriate
+item and pressing the `Delete` key. Breakpoints can be added/removed by clicking
+on the desired line number in the editor.  
+
+image::img/cloud_dock.png[]
+
+== FAQ
+
+Q: I cannot flash/debug my program because the appropriate entries in the
+`Embedded Developer` menu are disabled.
+
+A: There are various conditions that trigger this behaviour:
+
+. Check the `Debug-Control Service` indicator in the cloud IDE. If the
+indicator is red, this means that the connection between the browser and the
+software is not established. Check the selected location in the `Target-Side`
+menu so that it's set to the location your embedded board is connected, e.g., `cloud-emb.technikum-wien.at`. 
+. Check if your browser blocks content and in case allow access/execution. This is required, 
+as many browsers do not allow unencrypted websocket connections when initiated by a SSL secured (HTTPS) 
+website even tough the connection may only be local between the browser and the host. Moreover, 
+only commands to manage the Debug-Control Service, e.g.,
+restart the OCDS software and no user related or security relevant data is transferred.
+
+Q: I have set breakpoints but they are ignored when debugging.
+
+A: Check if the breakpoints exist and are enabled in the breakpoint tab of the
+debug panel. A breakpoint which is ticked is enabled whilst a breakpoint without
+a tick is disabled.
+
+Q: When I switch to another project, my breakpoints and variables disappear.
+
+A: This is because breakpoints and inspected variables are saved separately for each project.

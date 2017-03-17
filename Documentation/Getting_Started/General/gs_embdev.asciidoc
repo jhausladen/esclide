@@ -146,7 +146,7 @@ not properly recognized or the path to the `JLink GDB Server` executable is not
 valid. Also check if the hardware selected in the `Platform` menu is equal to
 your locally connected target.
 . Check the `Browser` state circle in the Debug-Control Service. This
-corresponds to the `Debug-Control Service` indicator in the cloud IDE. The the
+corresponds to the `Debug-Control Service` indicator in the cloud IDE. If the
 indicators are red, this means that the connection between the browser and the
 software is not established. Check the selected location in the `Target-Side`
 menu so that it's set to the location your embedded board is connected. If you
