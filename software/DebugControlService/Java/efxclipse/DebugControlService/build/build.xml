@@ -290,7 +290,7 @@
 		<fx:application id="fxApplication"
 			name="DebugControlService"
 			mainClass="at.embsys.sat.Main"
-			version="2.2"
+			version="2.3"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
@@ -306,7 +306,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="SAT"/>
 				<attribute name="Implementation-Title" value="DebugControlService"/>
-				<attribute name="Implementation-Version" value="2.2"/>
+				<attribute name="Implementation-Version" value="2.3"/>
 				<attribute name="JavaFX-Feature-Proxy" value="None"/>
 			</manifest>
 		</fx:jar>
