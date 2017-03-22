@@ -63,7 +63,7 @@ Build Debug-Control Service:
 
 The Debug-Control Service provides optional start-up parameters that can overwrite the default values:
 
-    DebugControlService -s <Serial/universal> -e <Websocketport> -j <JLinkport> -o <OOCDport> -sj <StartJLink[ON=1/OFF=0]> -so <StartOOCD[ON=1/OFF=0]> -m <Platform[XMC4500]/[TM4C1294XL]>
+    DebugControlService -s <Serial/universal> -e <Websocketport> -j <JLinkport> -o <OOCDport> -sj <StartJLink[ON=1/OFF=0]> -so <StartOOCD[ON=1/OFF=0]> -m <Platform[XMC4500]/[TM4C1294XL]> -wsscert <Keystorepath>
 
 Log files are saved in the user's home directory in:
 

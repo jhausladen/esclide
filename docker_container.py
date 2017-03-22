@@ -428,12 +428,12 @@ def main(argv):
          except IOError:
              print "The file does not exist!"
          if startjlink == "1" or startoocd == "1":
-             fo.write("[program:debugcontrolservice"+sn+"]\n"+ "command = /opt/DebugControlServiceHeadless/DebugControlServiceHeadless -s "+sn+" -e "+wsport+" -j "+jlinkport+" -o "+oocdport+" -sj "+startjlink+" -so "+startoocd+" -m "+target+"\n"+
+             fo.write("[program:debugcontrolservice"+sn+"]\n"+ "command = /opt/DebugControlServiceHeadless/DebugControlServiceHeadless -s "+sn+" -e "+wsport+" -j "+jlinkport+" -o "+oocdport+" -sj "+startjlink+" -so "+startoocd+" -m "+target+" -wsscert /etc/letsencrypt/keystore.jks"+"\n"+
                    "user = root\n" + "autostart = true\n" + "autorestart = true\n"+ 
                    "stdout_logfile = /var/log/supervisor/debugcontrolservice"+sn+".log\n"+ "stderr_logfile = /var/log/supervisor/debugcontrolservice"+sn+"_errors.log\n"+
                    "environment = NODE_ENV=\"production\"");
          else:
-             fo.write("[program:debugcontrolservice"+sn+"]\n"+ "command = /opt/DebugControlServiceHeadless/DebugControlServiceHeadless -s "+sn+" -e "+wsport+" -j "+jlinkport+" -o "+oocdport+" -sj "+startjlink+" -so "+startoocd+" -m "+target+"\n"+
+             fo.write("[program:debugcontrolservice"+sn+"]\n"+ "command = /opt/DebugControlServiceHeadless/DebugControlServiceHeadless -s "+sn+" -e "+wsport+" -j "+jlinkport+" -o "+oocdport+" -sj "+startjlink+" -so "+startoocd+" -m "+target+" -wsscert /etc/letsencrypt/keystore.jks"+"\n"+
                    "user = root\n" + "autostart = false\n" + "autorestart = false\n"+ 
                    "stdout_logfile = /var/log/supervisor/debugcontrolservice"+sn+".log\n"+ "stderr_logfile = /var/log/supervisor/debugcontrolservice"+sn+"_errors.log\n"+
                    "environment = NODE_ENV=\"production\"");

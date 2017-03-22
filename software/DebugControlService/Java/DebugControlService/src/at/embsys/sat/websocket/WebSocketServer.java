@@ -13,7 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.server.*;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,8 @@ public class WebSocketServer implements Runnable {
     private Server websocketServer;
     private final Stage primaryStage;
     private boolean overwriteWebsocketport = false;
+    private String keyStoreFilePath = "";
+    private String keyStorePassword = "cloud-emb";
     private int webSocketServerPort = 8080;
 
     private static ComboBox comboboxDeviceList;
@@ -61,7 +65,7 @@ public class WebSocketServer implements Runnable {
     }
 
     /* Konstruktor to pass the text area for displaying OOCD output */
-    public WebSocketServer(Circle crc, Label ip, Stage stage, Label devPlatform, RadioButton rdbtnJlink, RadioButton rdbtnOOCD, TextArea dbgconsoleJlink, TextArea dbgconsoleOOCD, Label jlinkpth, Label port, Label oocdpth, int wsport, ComboBox comboBoxDeviceList) {
+    public WebSocketServer(Circle crc, Label ip, Stage stage, Label devPlatform, RadioButton rdbtnJlink, RadioButton rdbtnOOCD, TextArea dbgconsoleJlink, TextArea dbgconsoleOOCD, Label jlinkpth, Label port, Label oocdpth, int wsport, ComboBox comboBoxDeviceList, String keystorefilepath) {
         websocketStateCircle = crc;
         labelIpAddr = ip;
         labelServerPort = port;
@@ -76,6 +80,7 @@ public class WebSocketServer implements Runnable {
         if (wsport != 0) webSocketServerPort = wsport;
         if (wsport != 0) overwriteWebsocketport = true;
         comboboxDeviceList = comboBoxDeviceList;
+        keyStoreFilePath = keystorefilepath;
     }
 
     /* Update IP address received from the web IDE  */
@@ -214,16 +219,51 @@ public class WebSocketServer implements Runnable {
             }
         }
 
-        /* Create websocket server */
-        websocketServer = new Server(webSocketServerPort);
-        WebSocketHandler wsHandler = new WebSocketHandler() {
-            @Override
-            public void configure(WebSocketServletFactory factory) {
-                factory.register(WebSocketConnectionHandler.class);
-            }
-        };
-        websocketServer.setHandler(wsHandler);
+        /* Create secure websocket server */
+        if (!keyStoreFilePath.isEmpty()) {
+            websocketServer = new Server();
+            WebSocketHandler wsHandler = new WebSocketHandler() {
+                @Override
+                public void configure(WebSocketServletFactory factory) {
+                    factory.register(WebSocketConnectionHandler.class);
+                }
+            };
+            websocketServer.setHandler(wsHandler);
 
+            HttpConfiguration http_config = new HttpConfiguration();
+            http_config.setSecureScheme("https");
+            http_config.setSecurePort(webSocketServerPort);
+
+            HttpConfiguration https_config = new HttpConfiguration(http_config);
+            https_config.addCustomizer(new SecureRequestCustomizer());
+
+            SslContextFactory sslContextFactory = new SslContextFactory();
+            sslContextFactory.setKeyStorePath(keyStoreFilePath);
+            sslContextFactory.setKeyStorePassword(keyStorePassword);
+
+            ServerConnector wsConnector = new ServerConnector(websocketServer);
+            wsConnector.setPort(webSocketServerPort + 1);
+            websocketServer.addConnector(wsConnector);
+
+            ServerConnector wssConnector = new ServerConnector(websocketServer,
+                    new SslConnectionFactory(sslContextFactory,
+                            HttpVersion.HTTP_1_1.asString()),
+                    new HttpConnectionFactory(https_config));
+
+            wssConnector.setPort(webSocketServerPort);
+            websocketServer.addConnector(wssConnector);
+        }
+        /* Create unsecure websocket server */
+        else {
+            websocketServer = new Server(webSocketServerPort);
+            WebSocketHandler wsHandler = new WebSocketHandler() {
+                @Override
+                public void configure(WebSocketServletFactory factory) {
+                    factory.register(WebSocketConnectionHandler.class);
+                }
+            };
+            websocketServer.setHandler(wsHandler);
+        }
         try {
             /* Start websocket server */
             websocketServer.start();

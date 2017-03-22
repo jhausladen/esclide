@@ -27,31 +27,6 @@ Both indicators in the top right corner of the cloud IDE should turn green.
 image:img/cloud_indicators.png[]
 ======
 +
-. By default the SSL secured version of the IDE (HTTPS) is loaded. In case the `Hardware` and `Debug-Control Service` state circle do not turn green, check if parts of the website are 
-blocked from within the browser console. image:img/mixed-content.png[]
-+
-[NOTE]
-======
-In Google Chrome and Opera blocked content is allowed via an entry in the address bar. Running chrome with the `--allow-running-insecure-content` produces a similar result.
-image:img/chrome-block.png[]
-======
-+
-[NOTE]
-======
-In Mozilla Firefox navigate to `about:config`, accept the WARNING and enable the `network.websocket.allowInsecureFromHTTPS` option. image:img/firefox_block.png[]
-======
-+
-[WARNING]
-======
-Since Safari 9, mixed content can not be allowed anymore. For flashing/debugging hardware, one has to use the HTTP version of the IDE.
-======
-+
-[NOTE]
-======
-In order to activate/deactivate the SSL secured version of the IDE, append `/ssl` or `/no-ssl` to the URL once. Every request to `cloud-emb.technikum-wien.at:YourPort` 
-is then processed accordingly to the previously selected option.
-======
-+
 . Now using drag and drop - grab a project in your file explorer (e.g.
 link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[TI_TM4C1294XL.tar.gz]) and drop it onto the top most
 symbol in under `WORKSPACE FILES` - in this way the compressed archive is added
@@ -104,17 +79,10 @@ image::img/cloud_dock.png[]
 Q: I cannot flash/debug my program because the appropriate entries in the
 `Embedded Developer` menu are disabled.
 
-A: There are various conditions that trigger this behaviour:
-
-. Check the `Debug-Control Service` indicator in the cloud IDE. If the
+A: Check the `Debug-Control Service` indicator in the cloud IDE. If the
 indicator is red, this means that the connection between the browser and the
 software is not established. Check the selected location in the `Target-Side`
 menu so that it's set to the location your embedded board is connected, e.g., `cloud-emb.technikum-wien.at`. 
-. Check if your browser blocks content and in case allow access/execution. This is required, 
-as many browsers do not allow unencrypted websocket connections when initiated by a SSL secured (HTTPS) 
-website even tough the connection may only be local between the browser and the host. Moreover, 
-only commands to manage the Debug-Control Service, e.g.,
-restart the OCDS software and no user related or security relevant data is transferred.
 
 Q: I have set breakpoints but they are ignored when debugging.
 

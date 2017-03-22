@@ -63,6 +63,7 @@ public class Main extends Application {
     private static String jLinkGDBServerInitConfig = "go";
 
     private static boolean jLinkInitConfigAvailable = true;
+    private static String keyStoreFilePath = "";
     private static String targetPlatform = "universal";
     public static String target = "Infineon";
 
@@ -182,7 +183,7 @@ public class Main extends Application {
             comboBoxDeviceList.getSelectionModel().select(0);
 
         /* Start the websocket server thread*/
-        websocketServer = new WebSocketServer(websocketState, ip, primaryStage, platform, radiobtnJlink, radiobtnOOCD, debugConsoleJlink, debugConsoleOOCD, labelJlinkPath, port, labelOOCDPath, wsPort, comboBoxDeviceList);
+        websocketServer = new WebSocketServer(websocketState, ip, primaryStage, platform, radiobtnJlink, radiobtnOOCD, debugConsoleJlink, debugConsoleOOCD, labelJlinkPath, port, labelOOCDPath, wsPort, comboBoxDeviceList, keyStoreFilePath);
         Thread websocketThread = new Thread(websocketServer);
         websocketThread.start();
 
@@ -360,7 +361,7 @@ public class Main extends Application {
 
                 /* Help */
                 if ((args[i].equals("-h") || args[0].equals("--help"))) {
-                    logger.info("DebugControlService -s <Serial/universal> -e <Websocketport> -j <JLinkport> -o <OOCDport> -sj <StartJLink[ON=1/OFF=0]> -so <StartOOCD[ON=1/OFF=0]> -m <Platform[XMC4500]/[TM4C1294XL]>");
+                    logger.info("DebugControlService -s <Serial/universal> -e <Websocketport> -j <JLinkport> -o <OOCDport> -sj <StartJLink[ON=1/OFF=0]> -so <StartOOCD[ON=1/OFF=0]> -m <Platform[XMC4500]/[TM4C1294XL]> -wsscert <Keystorepath>");
                     System.exit(1);
                 }
 
@@ -371,11 +372,12 @@ public class Main extends Application {
                 }
 
                 /* Device info & target platform */
-                if (args[i].equals("-m")) {
+                if (args[i].equals("-m") && i + 1 < args.length && !args[i + 1].startsWith("-")) {
                     deviceInfo.set(0, args[i + 1]);
                     targetPlatform = args[i + 1];
                 }
-                if (args[i].equals("-s")) deviceInfo.set(1, args[i + 1]);
+                if (args[i].equals("-s") && i + 1 < args.length && !args[i + 1].startsWith("-"))
+                    deviceInfo.set(1, args[i + 1]);
                 /* Websocket port */
                 if (args[i].equals("-e")) {
                     try {
@@ -419,6 +421,10 @@ public class Main extends Application {
                         logger.warn("StartOOCD parameter " + args[i + 1] + " can not be represented as an integer");
                     }
                 }
+                /* Enable secure WebSocket server */
+                if (args[i].equals("-wsscert") && i + 1 < args.length && !args[i + 1].startsWith("-"))
+                    keyStoreFilePath = args[i + 1];
+
             }
         }
 

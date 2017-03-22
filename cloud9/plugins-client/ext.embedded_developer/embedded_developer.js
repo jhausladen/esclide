@@ -147,7 +147,7 @@ define(function (require, exports, module) {
                 /* Gets the result about the Websocket Port */
                 if (e.message.type == "result" && e.message.subtype[0] == "wsportconf") {
                     wsport = e.message.subtype[1];
-                    startwebsocketclient("ws://127.0.0.1:" + wsport + "/");
+                    startwebsocketclient("127.0.0.1:" + wsport + "/");
                 }
                 /* Gets the result about all commandline ouput (Currently not in use) */
                 if (e.message.type == "result" && e.message.subtype[0] == "commandlineOutput") {
@@ -234,12 +234,12 @@ define(function (require, exports, module) {
                 /* Gets the result about the JLink path in the config */
                 if (e.message.type == "result" && e.message.subtype[0] == "loadConfigJLink") {
 
-                    if (typeof ws != "undefined")ws.send(e.message.subtype[1]);
+                    if (typeof ws != "undefined") ws.send(e.message.subtype[1]);
                 }
                 /* Gets the result about the JLink path in the config */
                 if (e.message.type == "result" && e.message.subtype[0] == "loadConfigOOCD") {
 
-                    if (typeof ws != "undefined")ws.send(e.message.subtype[1]);
+                    if (typeof ws != "undefined") ws.send(e.message.subtype[1]);
                 }
 
                 /* Gets the result about the flash process of the HW */
@@ -250,12 +250,12 @@ define(function (require, exports, module) {
                 if (e.message.type == "result" && e.message.subtype == "gdb-exited") {
                     flashItem.disable();
                     debugItem.disable();
-                    if (typeof ws != "undefined")ws.send("restart-redirection-service");
+                    if (typeof ws != "undefined") ws.send("restart-redirection-service");
                 }
                 /* Receives message from the server to restart OpenOCD service
                  * within the debug-control service */
                 if (e.message.type == "result" && e.message.subtype == "restart-OOCD-service") {
-                    if (typeof ws != "undefined")ws.send("restart-OOCD-service");
+                    if (typeof ws != "undefined") ws.send("restart-OOCD-service");
                 }
                 /* Gets the result about the TCP server status when there is no connection */
                 if (e.message.type == "result" && e.message.subtype == "server-down") {
@@ -308,8 +308,8 @@ define(function (require, exports, module) {
                                     };
                                     ide.send(data);
 
-                                    if (typeof ws != "undefined")ws.send("flash");
-                                    if (typeof ws != "undefined")ws.send("HW=" + platform);
+                                    if (typeof ws != "undefined") ws.send("flash");
+                                    if (typeof ws != "undefined") ws.send("HW=" + platform);
 
                                 }
                             });
@@ -367,8 +367,8 @@ define(function (require, exports, module) {
                                     };
                                     ide.send(data);
 
-                                    if (typeof ws != "undefined")ws.send("debug");
-                                    if (typeof ws != "undefined")ws.send("HW=" + platform);
+                                    if (typeof ws != "undefined") ws.send("debug");
+                                    if (typeof ws != "undefined") ws.send("HW=" + platform);
 
                                 }
                             });
@@ -491,9 +491,20 @@ define(function (require, exports, module) {
             /* Start Websocket client */
             function startwebsocketclient(websocketServerLocation) {
 
-                if (targetSideButton != null && targetSideButton.caption != "Target-Side: Local") targetSideWsAddress = "ws://" + targetSideButton.caption.replace("Target-Side: ", "") + ":" + wsport + "/";
-                else targetSideWsAddress = websocketServerLocation;
+                /* Set the appropriate protocol for the WebSocket connection
+                 * based upon the protocol the website is accessed */
+                var wsProtocol;
+                if (window.location.href.split(":")[0] === 'https') wsProtocol = "wss://";
+                else wsProtocol = "ws://";
 
+                /* Set the appropriate WebSocket address. Switch back to unsecure WebSockets
+                 * in case the connection is locally */
+                if (targetSideButton != null && targetSideButton.caption != "Target-Side: Local")
+                    targetSideWsAddress = wsProtocol + targetSideButton.caption.replace("Target-Side: ", "") + ":" + wsport + "/";
+                else {
+                    wsProtocol = "ws://";
+                    targetSideWsAddress = wsProtocol + websocketServerLocation;
+                }
                 ws = new WebSocket(targetSideWsAddress);
                 var alivetimer;
                 ws.onopen = function () {
@@ -1256,7 +1267,7 @@ define(function (require, exports, module) {
                     };
                     ide.send(data);
                     /* Tell the debug-control service */
-                    if (typeof ws != "undefined")ws.send("HW=" + platform);
+                    if (typeof ws != "undefined") ws.send("HW=" + platform);
                 }
                 if (device == "XMC4500") {
                     /* Enable/Disable debug controls */
@@ -1279,7 +1290,7 @@ define(function (require, exports, module) {
                     };
                     ide.send(data);
                     /* Tell the debug-control service */
-                    if (typeof ws != "undefined")ws.send("HW=" + platform);
+                    if (typeof ws != "undefined") ws.send("HW=" + platform);
                 }
             }
             /* Register Event listener for getting the always active file */

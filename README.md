@@ -22,11 +22,12 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
     
         sudo apt-get install certbot [-t jessie-backports]
         certbot certonly --standalone -d example.com
-
+  * Copy the `convert_letsencrypt_jks.sh` script to the `/usr/bin/` folder and adapt the configuration to your setup
+  * Run the `convert_letsencrypt_jks.sh` script to create the `keystore.jks` file in `/etc/letsencrypt/`
   * Regularly update the certificates with a Cron job issued by root:
 
         sudo crontab -e
-        0 0 * * * /usr/bin/certbot renew --post-hook "docker restart $(docker ps -a -q)" > /var/log/certbot/certbot.log 2>&1 
+        0 0 * * * /usr/bin/certbot renew --post-hook "/usr/bin/convert_letsencrypt_jks.sh && docker restart $(docker ps -a -q)" > /var/log/certbot/certbot.log 2>&1 
 
 ### Build Tools ([Debug-Control Service](software/README.md)):
 
