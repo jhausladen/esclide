@@ -79,8 +79,9 @@ void GetADCValues(uint16_t *values, uint16_t size)
 uint16_t mean(uint16_t values[], uint16_t count)
 {
     uint32_t sum=0;
+    uint16_t i;
     
-    for(uint16_t i=0; i<count; i++)
+    for(i=0; i<count; i++)
     {
         sum += values[i];
     }
