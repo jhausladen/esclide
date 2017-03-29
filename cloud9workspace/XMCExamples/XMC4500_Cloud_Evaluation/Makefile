@@ -68,4 +68,4 @@ flash: $(TARGET)
 	echo -e 'h\nloadbin bin/$(TARGET).bin,0xC000000\nr\ng\nq' | JLinkExe -Device XMC4500-1024 -if SWD
 	
 clean:
-	rm -f src/*.o src/*.d bin/* sys/*.o sys/*.d
+	rm -rf src/*.o src/*.d bin/* sys/*.o sys/*.d
