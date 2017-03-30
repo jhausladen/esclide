@@ -41,6 +41,8 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
     * The sources for building Monocle libraries reside in `software/OpenJFX_Monocle/Monocle/`
   * Debian packaging tools `build-essential` (DEB)
 
+Pre-built binaries for Linux, macOS and Windows can be obtained via [Google Drive](https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk)
+
 ### Embedded Tools:
 
   * Depending on the target platform, respective On-Chip Debug System software (OpenOCD, JLink GDB Server) is required. While a
@@ -70,7 +72,7 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 
 Clone the repository recursively:
     
-    git clone --recursive https://github.com/jhausladen/esclide.git
+    git clone --recursive git@bitbucket.org:jhausladen/escloud.git
 
 The automatic install-script will use Docker for creating independent containers (recommended). Simply run:
 
