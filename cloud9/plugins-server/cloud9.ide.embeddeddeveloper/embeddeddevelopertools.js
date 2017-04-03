@@ -26,6 +26,7 @@ var TCP_PORT_GDB = 3333;
 var gdbProcess, gdbProcessFlash;
 var platform;
 var binaryPath;
+var configPath;
 
 /* Keep track of the chat clients */
 var clients = [];
@@ -277,8 +278,10 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
         _self = this;
 
         /* Get the path to the "bin" folder */
-        if (message.path != null) binaryPath = workspacepath + "/" + message.path;
-
+        if (message.path != null) {
+            binaryPath = workspacepath + "/" + message.path;
+            configPath = binaryPath.replace("bin/firmware.elf","");
+        }
         /* Log date and time the user connects/disconnects */
         if (message.logging != null) console.log(getDateTime() + ": " + message.logging);
 
@@ -479,8 +482,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             /* Asynchronous file reading */
             var filePath;
 
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             var data = fs.readFile(filePath, 'utf8', function (err, data) {
                 if (err) {
@@ -505,8 +508,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -549,8 +552,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -582,8 +585,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             /* Asynchronous file reading */
             var filePath;
 
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             var data = fs.readFile(filePath, 'utf8', function (err, data) {
                 if (err) {
@@ -609,8 +612,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -653,8 +656,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -685,8 +688,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -716,8 +719,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -760,8 +763,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             /* Asynchronous file reading */
             var filePath;
 
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             var data = fs.readFile(filePath, 'utf8', function (err, data) {
                 if (err) {
@@ -804,8 +807,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             var data;
             /* Synchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             try {
                 data = fs.readFileSync(filePath, 'utf8');
@@ -866,8 +869,8 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             console.log(getDateTime() + ": Load ideconfig...");
             /* Asynchronous file reading */
             var filePath;
-            if (process.env.CONTAINER == "docker") filePath = binaryPath + ".config";
-            else filePath = process.env.HOME + binaryPath + ".config";
+            if (process.env.CONTAINER == "docker") filePath = configPath + ".config";
+            else filePath = process.env.HOME + configPath + ".config";
 
             var data = fs.readFile(filePath, 'utf8', function (err, data) {
                 if (err) {
