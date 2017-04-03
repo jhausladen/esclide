@@ -51,7 +51,7 @@ all: $(OBJS) $(TARGET).elf $(TARGET)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(TARGET).elf: $(OBJS)
-	rm -f bin/*
+	rm -rf bin/*
 	mkdir -p bin/
 	$(CC) -T $(LINKER_FILE) $(LFLAGS) $(CFLAGS) -o bin/$(TARGET).elf $(OBJS) $(LIBS)
 
