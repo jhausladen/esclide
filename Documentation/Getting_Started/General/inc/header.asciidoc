@@ -1,0 +1,36 @@
+:encoding: utf-8
+:brand: UAS Technikum Wien
+:doctype: article
+:sectanchors:
+:icons: font
+:linkcss!:
+:stylesheet: {osroot}/build-files/asciidoctor-common/inc/style.css
+:data-uri:
+// :toc:
+:toc2:
+:math:
+:source-highlighter: pygments
+:linenums:
+:pygments-style: borland
+//     autumn
+//     borland
+//     bw
+//     colorful
+//     default
+//     emacs
+//     friendly
+//     fruity
+//     manni
+//     monokai
+//     murphy
+//     native
+//     pastie
+//     perldoc
+//     tango
+//     trac
+//     vs
+:docinfo1:
+:revision: 0.1
+:!last-update-label:
+:lang: en:
+// :leveloffset: -1

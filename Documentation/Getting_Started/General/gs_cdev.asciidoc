@@ -5,6 +5,9 @@ Getting Started - C Programming
 :toc: right
 :icons: font
 :data-uri:
+:linkcss!:
+:stylesdir: inc/
+:stylesheet: style.css
 :lang: en
 :date: 27.02.2017
 :encoding: iso-8859-1
