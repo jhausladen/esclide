@@ -119,6 +119,7 @@ var c_cppHighlightRules = function() {
     var storageType = (
         "asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|" +
         "_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void|" +
+        "uint8_t|uint16_t|uint32_t|uint64_t|int8_t|int16_t|int32_t|int64_t|" +
         "class|wchar_t|template"
     );
 
