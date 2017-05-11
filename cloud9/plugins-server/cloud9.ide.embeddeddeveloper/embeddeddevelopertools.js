@@ -1257,7 +1257,7 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
 
                     /*If the splitted data matches "<space><variable><space>=<space><value>" (Inspect Variables) */
                     if (skip == false) {
-                        variableresult[1] = splitdata[i].match(/[A-Za-z0-9_]+\s=\s.+/);
+                        variableresult[1] = splitdata[i].match(/[A-Za-z0-9_\[\]]+\s=\s.+/);
                         //variableresult[1] = splitdata[i].match(/[0-9]+: ([A-Za-z0-9_]+) = ()/);
                         if (countOpen != countClosed) variableresult[1] = splitdata[i];
                         /* FIX: GDB Server may break up the response by \n
