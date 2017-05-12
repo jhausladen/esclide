@@ -568,6 +568,11 @@ define(function (require, exports, module) {
 
             var xml = mdlEmbeddedDebug.getXml();
             var vars = xml.getElementsByTagName("embeddedvars");
+            if (vars.length == 0){
+                /* Initialize model */
+                mdlEmbeddedDebug.load('<data>\
+                </data>');
+            }
             /* Flag when an entry matches */
             var matching = false;
             for (var i = 0; i < vars.length; i++) {
@@ -607,7 +612,12 @@ define(function (require, exports, module) {
         },
         /* Removes all variables from the view */
         removeEmbeddedDebugVariablesFromView: function () {
-            if(typeof dgEmbeddedVars != "undefined")dgEmbeddedVars.clear();
+            if(typeof dgEmbeddedVars != "undefined" && typeof mdlEmbeddedDebug != "undefined"){
+                dgEmbeddedVars.clear();
+                /* Initialize model */
+                mdlEmbeddedDebug.load('<data>\
+                </data>');
+            }
         }
 
     });
