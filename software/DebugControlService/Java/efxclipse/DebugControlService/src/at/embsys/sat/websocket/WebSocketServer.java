@@ -225,6 +225,7 @@ public class WebSocketServer implements Runnable {
             WebSocketHandler wsHandler = new WebSocketHandler() {
                 @Override
                 public void configure(WebSocketServletFactory factory) {
+                    factory.getPolicy().setIdleTimeout(0);
                     factory.register(WebSocketConnectionHandler.class);
                 }
             };
@@ -259,6 +260,7 @@ public class WebSocketServer implements Runnable {
             WebSocketHandler wsHandler = new WebSocketHandler() {
                 @Override
                 public void configure(WebSocketServletFactory factory) {
+                    factory.getPolicy().setIdleTimeout(0);
                     factory.register(WebSocketConnectionHandler.class);
                 }
             };

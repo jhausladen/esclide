@@ -114,10 +114,14 @@ public class WebSocketConnectionHandler {
         if (message.contains("flash")) {
             modeOfOperation = "flash";
         }
+
         /* Set mode of operation to debug as the next operation */
         if (message.contains("debug")) {
             modeOfOperation = "debug";
         }
+
+        /* Reply to keepalive message */
+        if (message.contains("alive")) ws_sendMsg("alive");
     }
 
     /* Send a message via websocket server */
