@@ -1,4 +1,8 @@
-# Creating configuration files
+# Generation of configuration files
+
+The most straightforward way of creating configuration files for new cloud IDE instances is to use the python script located in `scripts/generate_configuration.py`. More information can be found in the appropriate [README](../../scripts/README.md).
+
+# Creating configuration files manually
 
 In general config files can include a configuration of one or more cloud instances, which will be set up batchwise. Each cloud instance configration starts with a `[cloudinstance:<Name of the instance>]`, followed by the `docker_container.py` script's options listed in the overall [README](../../README.md).The first part is the written option name separated by a `=` and the value of the  option item (name=\<Name of the instance\>). Each option is separated by a newline character.
 
