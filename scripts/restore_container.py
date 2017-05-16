@@ -14,7 +14,7 @@ License:   AGPL <http://www.gnu.org/licenses/agpl.txt>
 import json, subprocess, shutil, errno, sys, os
 
 if len(sys.argv) > 3 or len(sys.argv) < 2:
-  print "backup_container.py <container> <source folder>"
+  print "restore_container.py <container> <source folder>"
   exit()
 # Run docker 'inspect' command to get the volume id
 buildinspect = "docker inspect "+sys.argv[1];
