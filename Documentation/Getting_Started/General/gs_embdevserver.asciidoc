@@ -13,23 +13,20 @@ Getting Started - Embedded Systems Software Development
 :encoding: iso-8859-1
 :nofooter:
 :source-highlighter: pygments
+#:full-doc:
 
 == Login
-
+ifdef::full-doc[]
 . Start a WEB browser and point it to the `cloud-emb.technikum-wien.at:YourPort`
 URL. `YourPort` is specific as well as the login data. [red]#Ask your instructor
 in order to obtain access to this cloud service.#
 +
+endif::[]
 TIP: Supported browsers are Google Chrome, Mozilla Firefox, Safari and Opera.
-+
+
+ifdef::full-doc[+]
 image::img/cloud1.png[]
-+
-[NOTE]
-======
-Both indicators in the top right corner of the cloud IDE should turn green.
-image:img/cloud_indicators.png[]
-======
-+
+ifdef::full-doc[+]
 . Now using drag and drop - grab a project in your file explorer (e.g.
 link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[TI_TM4C1294XL.tar.gz]) and drop it onto the top most
 symbol in under `WORKSPACE FILES` - in this way the compressed archive is added
@@ -38,6 +35,12 @@ to your workspace. Next, right click the compressed archive and select
 top-level source file.
 +
 image::img/add2cide.jpg[]
++
+[NOTE]
+======
+Both indicators in the top right corner of the cloud IDE should turn green.
+image:img/cloud_indicators.png[]
+======
 +
 . Open another tab in the browser and navigate to `cloud-emb.technikum-wien.at:5000` to view your development board.
 +

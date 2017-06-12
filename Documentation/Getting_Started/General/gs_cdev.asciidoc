@@ -13,15 +13,18 @@ Getting Started - C Programming
 :encoding: iso-8859-1
 :nofooter:
 :source-highlighter: pygments
+#:full-doc:
 
 == Login
-
+ifdef::full-doc[]
 . Start a WEB browser and point it to the `cloud-emb.technikum-wien.at:YourPort`
 URL. `YourPort` is specific as well as the login data. [red]#Ask your instructor
 in order to obtain access to this cloud service.#
 +
+endif::[]
 TIP: Supported browsers are Google Chrome, Mozilla Firefox, Safari and Opera.
-+
+
+ifdef::full-doc[+]
 . Now using drag and drop - grab a project in your file explorer (e.g.
 link:https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk[C_Examples.tar.gz]) and drop it onto the top most
 symbol in under `WORKSPACE FILES` - in this way the compressed archive is added

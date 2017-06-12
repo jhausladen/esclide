@@ -13,6 +13,7 @@ Getting Started - Embedded Systems Software Development
 :encoding: iso-8859-1
 :nofooter:
 :source-highlighter: pygments
+#:full-doc:
 
 == Setup
 
@@ -47,25 +48,17 @@ and/or power-saving rules also inhibit proper operation.
 WARNING: Windows users should choose the `JLinkGDBServerCL` executable instead.
 
 == Login
-
+ifdef::full-doc[]
 . Start a WEB browser and point it to the `cloud-emb.technikum-wien.at:YourPort`
 URL. `YourPort` is specific as well as the login data. [red]#Ask your instructor
 in order to obtain access to this cloud service.#
 +
+endif::[]
 TIP: Supported browsers are Google Chrome, Mozilla Firefox, Safari and Opera.
-+
+
+ifdef::full-doc[+]
 image::img/cloud1.png[]
-+
-[NOTE]
-======
-The `Browser` and `Server` state circle should also turn green as well as both
-indicators in the top right corner of the cloud IDE.
-image:img/cloud_indicators.png[] The same is true for the two indicators in
-the `DebugControlService` (see below).
-======
-+
-image::img/cloud_dbg-ctrl-service-connected.png[]
-+
+ifdef::full-doc[+]
 . By default the SSL secured version of the IDE (HTTPS) is loaded. In case the `Browser` and `Server` state circle do not turn green, check if parts of the website are 
 blocked from within the browser console. image:img/mixed-content.png[]
 +
@@ -97,9 +90,18 @@ symbol in under `WORKSPACE FILES` - in this way the compressed archive is added
 to your workspace. Next, right click the compressed archive and select
 `Extract`. Then expand the folder `src` and click on `main.c` to open up the
 top-level source file.
-
++
 image::img/add2cide.jpg[]
-
++
+[NOTE]
+======
+The `Browser` and `Server` state circle should also turn green as well as both
+indicators in the top right corner of the cloud IDE.
+image:img/cloud_indicators.png[] The same is true for the two indicators in
+the `DebugControlService` (see below).
+======
++
+image::img/cloud_dbg-ctrl-service-connected.png[]
 
 == Flashing
 
