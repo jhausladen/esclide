@@ -60,4 +60,5 @@ image::img/cloud_visualization.png[]
 In order to view/modify the analysis settings, click on the `Configure Analysis` menu entry.
 
 image::img/configure_analysis.png[]
-
+{empty} +
+{empty} +
