@@ -8,9 +8,13 @@ List all containers
     
     docker ps -a
 
-List all container IDs
+List all container by ID
     
     docker ps -a -q 
+
+List all container by name
+    
+    docker ps --format '{{.Names}}'
     
 List images & exclude intermediate ones 
     
