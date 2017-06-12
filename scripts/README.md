@@ -21,9 +21,9 @@ Modify the "Configuration options" section to your to fit your environment and r
 
     ./start-cloud9.sh
 
-## Update files/folders within all containers to, e.g., to apply upgrades  
+## Update files/folders within one, a group or all containers to, e.g., apply upgrades  
 
-    ./update_container_content.sh -f <file/folder> -p <path-in-container> [-r <delete-path-in-container>]
+    ./update_container_content.sh -f <file/folder> -p <path-in-container> [-r <delete-path-in-container> -c <container> -s <select-container-from-configurationfile> -w <change-to-workspace>]
 
 ## Generate configuration files for an autonomous setup procedure
 
