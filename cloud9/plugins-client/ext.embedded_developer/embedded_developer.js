@@ -112,7 +112,7 @@ define(function (require, exports, module) {
             /* Send information on login to the server */
             var data = {
                 command: "firmware",
-                "logging": "User connected! (" + _self.getDateTime() + ")",
+                "logging": "User connected!",
                 requireshandling: true
             };
             ide.send(data);
@@ -1502,6 +1502,7 @@ define(function (require, exports, module) {
                 requireshandling: true
             };
             ide.send(data);
+            return;
         }
     });
 
