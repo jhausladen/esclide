@@ -99,20 +99,10 @@ define(function (require, exports, module) {
             };
             ide.send(data);
 
-
             /* Send request for getting workspace path */
             data = {
                 command: "firmware",
                 "operation": "workspacepath",
-                requireshandling: true
-            };
-            ide.send(data);
-
-
-            /* Send information on login to the server */
-            var data = {
-                command: "firmware",
-                "logging": "User connected!",
                 requireshandling: true
             };
             ide.send(data);
@@ -1487,11 +1477,10 @@ define(function (require, exports, module) {
             return year + "-" + month + "-" + day + "-" + hour + ":" + min + ":" + sec;
         },
         onBeforeUnloadHandler: function () {
-            /* Kill running C-programs and send information on disconnect to the server */
+            /* Kill running C-programs */
             var data = {
                 command: "firmware",
                 "operation": "kill",
-                "logging": "User disconnected!",
                 requireshandling: true
             };
             ide.send(data);

@@ -18,6 +18,31 @@ var io = require('engine.io')
 
 var logger = require('./logger');
 
+/* Get the time and date for log outputs */
+function getDateTime() {
+
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var sec = date.getSeconds();
+    sec = (sec < 10 ? "0" : "") + sec;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+
+    var day = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return year + "-" + month + "-" + day + "-" + hour + ":" + min + ":" + sec;
+}
+
 /**
  * Server
  */
@@ -67,7 +92,8 @@ Server.prototype.initIO = function() {
 
 Server.prototype.handleConnection = function(socket) {
   var session = new Session(this, socket);
-
+  var address = socket.request.connection.remoteAddress
+  this.log(getDateTime() + " " + address+' Client connected.');
   // XXX Possibly wrap socket events from inside Session
   // constructor, and do: session.on('create')
   // or session.on('create term').
@@ -193,8 +219,8 @@ Session.prototype.warning = function() {
 
 Session.prototype._log = function(level, args) {
   if (typeof args[0] !== 'string') args.unshift('');
-  var id = this.id.split('|')[0];
-  args[0] = '\x1b[1m' + id + '\x1b[m ' + args[0];
+  var id = this.id.split('|')[0]; 
+  args[0] = getDateTime() + " " + '\x1b[1m' + id + '\x1b[m ' + args[0];
   return this.server._log(level, args);
 };
 
