@@ -30,3 +30,10 @@ Modify the "Configuration options" section to your to fit your environment and r
     python generate_configuration.py -p <Portrange> -l <List of Users> {-b <XMC4500/TM4C1294XL> or -u (Universal Setup)} [-o <Outputfile> -w <Copy Path to Workspace>]
 
 The list of the users has to be in the form of a simple text file, where, e.g., the last name of each student is separated by a line break.
+
+## Analyze logfiles in regard of user activity
+
+    ./analyze_logfile.sh [-n <last-X-entries> -c <container> -s <select-container-from-configurationfile> -f <logfile> -l <local-logfile> -o <legacy-logfile-support>]
+
+If no option is specified, the script iterates over all running containers on a system and tries to analyze the cloud IDE logfile. Otherwise one can select 
+a specific container, or a list of containers based on a cloud configuration file. Optionally one can also specify the number of entries that shall be listed and adjust the path where the logfile is located. Moreover the specification of a local file/folder containing exported cloud IDE logs is possible. The legacy mode is only required for old log files, where the logging logic was implemented on the client side.
