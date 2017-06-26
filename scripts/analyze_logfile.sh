@@ -20,6 +20,10 @@ readConfigFile() {
         fi
       fi
   done <"$1"
+  if [ "$CONTAINERLIST" == "" ] ; then
+    echo "Error (-s): File does not exist or is invalid!" 1>&2;
+    exit 1;
+  fi
 }
 
 # Check number of arguments
