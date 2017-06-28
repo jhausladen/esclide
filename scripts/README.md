@@ -33,7 +33,7 @@ The list of the users has to be in the form of a simple text file, where, e.g., 
 
 ## Analyze logfiles in regard of user activity
 
-    ./analyze_logfile.sh [-n <last-X-entries> -c <container> -s <select-container-from-configurationfile> -f <logfile> -l <local-logfile> -o <legacy-logfile-support>]
+    ./analyze_logfile.sh [-n <last-X-entries> -d <last-X-days> -c <container> -s <select-container-from-configurationfile> -f <container-logfile> -l <local-logfile> -o <legacy-logfile-support>]
 
 If no option is specified, the script iterates over all running containers on a system and tries to analyze the cloud IDE logfile. Otherwise one can select 
-a specific container, or a list of containers based on a cloud configuration file. Optionally one can also specify the number of entries that shall be listed and adjust the path where the logfile is located. Moreover the specification of a local file/folder containing exported cloud IDE logs is possible. The legacy mode is only required for old log files, where the logging logic was implemented on the client side.
+a specific container, or a list of containers based on a cloud configuration file. Optionally one can also specify the number of entries that shall be listed, the number of days to search in the history and adjust the path where the logfile is located. Moreover the specification of a local file/folder containing exported cloud IDE logs is possible. The legacy mode is only required for old log files, where the logging logic was implemented on the client side.
