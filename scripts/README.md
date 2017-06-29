@@ -23,7 +23,7 @@ Modify the "Configuration options" section to your to fit your environment and r
 
 ## Update files/folders within one, a group or all containers to, e.g., apply upgrades  
 
-    ./update_container_content.sh -f <file/folder> -p <path-in-container> [-r <delete-path-in-container> -c <container> -s <select-container-from-configurationfile> -w <change-to-workspace>]
+    ./update_container_content.sh -p <path-in-container> [-f <file/folder> -r <delete-path-in-container> -c <container> -s <select-container-from-configurationfile> -w <change-to-workspace>]
 
 ## Generate configuration files for an autonomous setup procedure
 
