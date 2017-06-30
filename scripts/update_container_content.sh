@@ -45,10 +45,10 @@ while getopts ':f:p:c:s:wrh' OPTION ; do
   esac
 done
 
-# Check if file/folder path as well as the path to place within the container is specified
+# Check if the base path used for the operations within the container is specified
 if [ "$CONTAINERPATH" == "" ] ; then usage ; exit 1 ; fi
 
-# Iterate through all containers, optionally remove a specified directory and copy over the file/folder
+# Iterate through all containers, and either copy/remove a specified file or directory
 if [ "$CONTAINER" == "" ] && [ "$CONTAINERLIST" == "" ] ; then
   for container in $(docker ps -a -q); do
     echo "Processing: $container"
@@ -62,7 +62,7 @@ if [ "$CONTAINER" == "" ] && [ "$CONTAINERLIST" == "" ] ; then
     fi
   done
 else
-  #  Copy a file/folder to a aspecific container and optionally remove a specified directory
+  # Copy/Remove a file or directory to/from a specific container
   if [ "$CONTAINER" != "" ] ; then
     echo "Processing: $CONTAINER"
     if [ $DELETEPATH == 1 ] ; then docker exec $CONTAINER rm -rf $CONTAINERPATH ; fi
@@ -73,8 +73,7 @@ else
         docker cp $FILEPATH $CONTAINER:$CONTAINERPATH
       fi
     fi
-  # Copy a file/folder to a list of containers obtained from a cloud configuration file 
-  # and optionally remove a specified directory
+  # Copy/Remove a fileor directory to/from a list of containers obtained from a cloud configuration file 
   else
     for container in $CONTAINERLIST ; do
       echo "Processing: $container"
