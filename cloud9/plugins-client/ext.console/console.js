@@ -26,6 +26,7 @@ var preview = require("ext/preview/preview");
 // Some constants used throughout the plugin
 var KEY_TAB = 9, KEY_CR = 13, KEY_UP = 38, KEY_ESC = 27, KEY_DOWN = 40;
 var actionCodes = [KEY_TAB, KEY_CR, KEY_UP, KEY_ESC, KEY_DOWN];
+var debugState="gdb-exited"
 
 /*global txtConsolePrompt tabEditors txtConsole btnCollapseConsole
          txtConsoleInput txtOutput consoleRow  tabConsole winDbgConsole cliBox
@@ -428,6 +429,10 @@ module.exports = ext.register("ext/console/console", {
             return;
 
         var message = e.message;
+
+        /* Receive GDB status */
+        if (message.type == "result" && message.subtype == "gdb-exited") debugState=message.subtype;
+        if (message.type == "result" && message.subtype == "gdb-ready") debugState=message.subtype;
         //console.log(message.type, message);
         var extra = message.extra;
         if (!extra && message.body)
@@ -858,7 +863,16 @@ module.exports = ext.register("ext/console/console", {
                 var inputVal = input.getValue().trim();
                 if (inputVal === "/?")
                     return false;
-                _self.evalInputCommand(inputVal);
+                /* Decide whether to send the command to the debugger or execute in shell */
+                if(debugState == "gdb-exited")_self.evalInputCommand(inputVal);
+                else {
+                    var data = {
+                        command: "firmware",
+                        operation: "pipeToGDB",
+                        gdbinput: inputVal
+                    };
+                    ide.send(data);
+                }
                 input.setValue("");
                 txtConsole.$container.scrollTop = txtConsole.$container.scrollHeight;
             }

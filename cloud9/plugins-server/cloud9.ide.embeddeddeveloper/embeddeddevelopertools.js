@@ -450,6 +450,12 @@ util.inherits(EmbeddedDeveloperToolsPlugin, Plugin);
             }
         }
 
+        /* Pipe input to GDB */
+        if (message.operation == "pipeToGDB") {
+            if (gdbProcess == null) _self.sendResult(0, "gdb-not-running");
+            if (gdbProcess != null) gdbProcess.stdin.write(message.gdbinput+"\n");
+        }
+
         /* Kill all running C-programs */
         if (message.operation == "kill") {
             console.log(workspacepath);
