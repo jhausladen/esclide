@@ -13,10 +13,6 @@ MAINTAINER Juergen Hausladen <juergen.hausladen@technikum-wien.at>
 ENV PATH /gcc_arm_embedded/bin:$PATH
 ENV TERM xterm
 ENV CONTAINER docker
-ENV TZ=Europe/Vienna
-# Set the timezone.
-RUN echo $TZ > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
 
 # ------------------------------------------------------------------------------
 # Install base
@@ -41,7 +37,14 @@ RUN apt-get update && apt-get install -y \
     unar \
     python \
     libxslt1.1 \
-    sudo
+    sudo \
+    tzdata
+
+# Set the timezone.
+ENV TZ=Europe/Vienna
+RUN echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 # Previously ARM GCC was distributed through a PPA
 #RUN add-apt-repository ppa:team-gcc-arm-embedded/ppa
 #RUN apt-get update && apt-get install -y gcc-arm-embedded
