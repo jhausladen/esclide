@@ -72,7 +72,7 @@ Pre-built binaries for Linux, macOS and Windows can be obtained via [Google Driv
 
 Clone the repository recursively:
     
-    git clone --recursive git@bitbucket.org:jhausladen/escloud.git
+    git clone --recursive https://github.com/jhausladen/esclide.git
 
 The automatic install-script will use Docker for creating independent containers (recommended). Simply run:
 
