@@ -18,10 +18,14 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
 
   * Server setup (Tested on Debian-based systems: Debian 8, Ubuntu 14.04 LTS, Ubuntu 16.04 LTS)
   * Debug-Control Service (Independent)
+
+#### Encryption using Let's Encrypt
+
   * Valid [Let’s Encrypt](https://letsencrypt.org/) certificates at `/etc/letsencrypt/` to be mounted by each Docker container with, e.g., [certbot](https://certbot.eff.org/)
     
         sudo apt-get install certbot [-t jessie-backports]
         certbot certonly --standalone -d example.com
+  * Adapt the path to the private key and certificate (`/etc/letsencrypt/live/<domain>/privkey.pem`) in `cloud9/plugins-server/connect/connect-plugin.js` and `cloud9/plugins-server/cloud9.ide.embeddeddeveloper/embeddeddevelopertools.js` to reflect your domain
   * Copy the `convert_letsencrypt_jks.sh` script to the `/usr/bin/` folder and adapt the configuration to your setup
   * Run the `convert_letsencrypt_jks.sh` script to create the `keystore.jks` file in `/etc/letsencrypt/`
   * Regularly update the certificates with a Cron job issued by root:
@@ -29,7 +33,26 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
         sudo crontab -e
         0 0 * * * /usr/bin/certbot renew --post-hook "/usr/bin/convert_letsencrypt_jks.sh && docker restart $(docker ps -a -q)" > /var/log/certbot/certbot.log 2>&1 
 
+#### Encryption using self-signed certificates (OpenSSL)
+
+Self-signed certificates should be used for testing without a valid domain or private use **ONLY**! 
+
+  * Create `/etc/letsencrypt` as root
+  * Create a private key and the self-signed certificate within `/etc/letsencrypt`:
+      
+        openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+  
+  * Adapt the path to the private key and certificate (`/etc/letsencrypt/live/<domain>/privkey.pem`) in `cloud9/plugins-server/connect/connect-plugin.js` and `cloud9/plugins-server/cloud9.ide.embeddeddeveloper/embeddeddevelopertools.js` to reflect the location of your certificates.
+  
+  * Add the OpenSSL certificate (`fullchain.pem`) to the truststore of the JDK (`$JAVA_HOME/jre/lib/security/cacerts`) that is used for building the debug-control service. The truststore password is `changeit` by default but should be modified for production use so no unauthorized certificates can be loaded into the application by third parties.
+
+        keytool -import -noprompt -trustcacerts -alias <AliasName> -file   <certificate> -keystore <KeystoreFile> -storepass <Password>
+
+  One can also add the certificate to an already installed debug-control service. E.g., on Debian-based Linux distributions the truststore of the JDK bundled with the debug-control service is located at `/opt/DebugControlService/runtime/lib/security/cacerts`.
+
 ### Build Tools ([Debug-Control Service](software/README.md)):
+
+Only reuired in case the debug-control service is built from source. Pre-built binaries for Linux, macOS and Windows can be obtained via [Google Drive](https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk)
 
   * Ant
     * On Mac OS X install via Homebrew (Requires XCode & Command Line Tools)
@@ -40,8 +63,6 @@ The second way the cloud IDE can be set up is in universal mode. As the name sug
     * Copy `software/OpenJFX_Monocle/openjfx-monocle-8uXX-XXX.jar` to `JDK/jre/lib/ext/` directory
     * The sources for building Monocle libraries reside in `software/OpenJFX_Monocle/Monocle/`
   * Debian packaging tools `build-essential` (DEB)
-
-Pre-built binaries for Linux, macOS and Windows can be obtained via [Google Drive](https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk)
 
 ### Embedded Tools:
 

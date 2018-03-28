@@ -1,6 +1,6 @@
 # Debug-Control Service
 
-This part of the repository hosts the source code of the Debug-Control Service used to handle various on-chip debug system software such as OpenOCD or JLink GDB server. Pre-built binaries for Linux, macOS and Windows can be obtained via [Google Drive](https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk). The service itself is written in Java and uses JavaFX for the UI components. Moreover it connects to the cloud server for debugging the embedded development boards as well as communicates with the Web IDE in the browser via WebSockets.
+This part of the repository hosts the source code of the Debug-Control Service used to handle various on-chip debug system software such as OpenOCD or JLink GDB server. Pre-built binaries for Linux, macOS and Windows can be obtained via [Google Drive](https://drive.google.com/open?id=0B5eRiAuqb80jcnRQdGpYOFVmdkk). The service itself is written in Java and uses JavaFX for the UI components. Moreover it connects to the cloud server for debugging the embedded development boards as well as communicates with the Web IDE in the browser via WebSockets. The default port for the WebSocket connection is `8080`.
 
 ## Requirements
 
