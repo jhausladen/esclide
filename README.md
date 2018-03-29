@@ -40,11 +40,11 @@ Self-signed certificates should be used for testing without a valid domain or pr
   * Create `/etc/letsencrypt` as root
   * Create a private key and the self-signed certificate within `/etc/letsencrypt`:
       
-        openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+        openssl req -newkey rsa:2048 -nodes -keyout privkey.pem -x509 -days 365 -out certificate.pem
   
   * Adapt the path to the private key and certificate (`/etc/letsencrypt/live/<domain>/privkey.pem`) in `cloud9/plugins-server/connect/connect-plugin.js` and `cloud9/plugins-server/cloud9.ide.embeddeddeveloper/embeddeddevelopertools.js` to reflect the location of your certificates.
   
-  * Add the OpenSSL certificate (`fullchain.pem`) to the truststore of the JDK (`$JAVA_HOME/jre/lib/security/cacerts`) that is used for building the debug-control service. The truststore password is `changeit` by default but should be modified for production use so no unauthorized certificates can be loaded into the application by third parties.
+  * Add the OpenSSL certificate (`certificate.pem`) to the truststore of the JDK (`$JAVA_HOME/jre/lib/security/cacerts`) that is used for building the debug-control service. The truststore password is `changeit` by default but should be modified for production use so no unauthorized certificates can be loaded into the application by third parties.
 
         keytool -import -noprompt -trustcacerts -alias <AliasName> -file   <certificate> -keystore <KeystoreFile> -storepass <Password>
 
